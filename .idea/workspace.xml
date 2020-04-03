@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2e85774b-c096-408f-8822-865a8d2f5cfa" name="Default Changelist" comment="" />
+    <list default="true" id="2e85774b-c096-408f-8822-865a8d2f5cfa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/20L2GR2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="ProjectId" id="1a2iiSmgpoL6y7YgPCsB5wgUOt3" />
   <component name="ProjectViewState">
@@ -15,13 +30,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
@@ -59,6 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1585940215610</updated>
       <workItem from="1585940219068" duration="277000" />
+      <workItem from="1585943385620" duration="196000" />
     </task>
     <servers />
   </component>
@@ -74,6 +91,10 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1230" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1585940362027" />
+    <state x="603" y="99" key="CommitChangelistDialog2" timestamp="1585943560969">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="603" y="99" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1585943560969" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1585940546830">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
@@ -90,9 +111,14 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1585940546829" />
-    <state x="-1480" y="94" key="SettingsEditor" timestamp="1585940494828">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state x="440" y="98" key="SettingsEditor" timestamp="1585943581597">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="-1480" y="94" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1585940494828" />
+    <state x="440" y="98" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1585943581597" />
+    <state x="671" y="338" key="com.intellij.ide.util.TipDialog" timestamp="1585943386108">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="671" y="338" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1585943386107" />
   </component>
 </project>
