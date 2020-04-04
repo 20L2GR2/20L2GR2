@@ -32,6 +32,5 @@ public class loginScreen extends Application {
         jMetro.setAutomaticallyColorPanes(true);
         jMetro.setScene(scene);
         root.setStyle("-fx-font: title");
-
     }
 }
