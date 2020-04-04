@@ -18,7 +18,7 @@ public class loginScreen extends Application {
     public void start(Stage stage) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/views/application.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/views/obslugaKlientaView.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

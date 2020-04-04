@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="42.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+               <image>
+                  <Image url="/img/logo.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Pane  prefWidth="40.0" HBox.hgrow="ALWAYS" />
+            <Button alignment="CENTER" mnemonicParsing="false" text="Logout">
+               <HBox.margin>
+                  <Insets right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="358.0" prefWidth="158.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Stwórz zlecenie" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/img/zlecenia.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Twój profil" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/img/profil.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <AnchorPane BorderPane.alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <children>
+            <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="104.0" layoutY="83.0" text="Imie" />
+                  <Label layoutX="104.0" layoutY="145.0" text="Nazwisko" />
+                  <Label layoutX="104.0" layoutY="216.0" text="Login:" />
+                  <Label layoutX="106.0" layoutY="279.0" text="Pesel" />
+                  <Label layoutX="289.0" layoutY="82.0" text="Label" />
+                  <Label layoutX="289.0" layoutY="144.0" text="Label" />
+                  <Label layoutX="289.0" layoutY="216.0" text="Label" />
+                  <Label layoutX="289.0" layoutY="278.0" text="Label" />
+               </children>
+            </Pane>
+            <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="43.0" layoutY="36.0" text="Klient" />
+                  <Label layoutX="43.0" layoutY="93.0" text="Auto" />
+                  <Label layoutX="43.0" layoutY="161.0" text="Opis" />
+                  <TextField layoutX="122.0" layoutY="32.0" />
+                  <TextField layoutX="122.0" layoutY="89.0" />
+                  <TextArea layoutX="122.0" layoutY="161.0" prefHeight="163.0" prefWidth="318.0" />
+                  <Button layoutX="43.0" layoutY="290" mnemonicParsing="false" text="Dodaj"/>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
