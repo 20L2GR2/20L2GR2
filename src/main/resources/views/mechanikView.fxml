@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<?import javafx.scene.image.Image?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="358.0" prefWidth="158.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Części" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/img/tools.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Zlecenia" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/img/zlecenia.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Twoje zlecenia" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/img/twojeZlecenie.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Twój profil" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/img/profil.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+         </children>
+      </VBox>
+   </left>
+   <top>
+         <HBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+               <ImageView fitHeight="42.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                  <image>
+                     <Image url="/img/logo.png" />
+                  </image>
+                  <HBox.margin>
+                     <Insets top="10.0" />
+                  </HBox.margin>
+               </ImageView>
+               <Pane  prefWidth="40.0" HBox.hgrow="ALWAYS" />
+               <Button alignment="CENTER" mnemonicParsing="false" text="Logout">
+                  <HBox.margin>
+                     <Insets right="10.0" top="10.0" />
+                  </HBox.margin>
+               </Button>
+            </children>
+         </HBox>
+   </top>
+   <center>
+      <AnchorPane  BorderPane.alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <children>
+            <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="104.0" layoutY="83.0" text="Imie" />
+                  <Label layoutX="104.0" layoutY="145.0" text="Nazwisko" />
+                  <Label layoutX="104.0" layoutY="216.0" text="Login:" />
+                  <Label layoutX="106.0" layoutY="279.0" text="Pesel" />
+                  <Label layoutX="289.0" layoutY="82.0" text="Label" />
+                  <Label layoutX="289.0" layoutY="144.0" text="Label" />
+                  <Label layoutX="289.0" layoutY="216.0" text="Label" />
+                  <Label layoutX="289.0" layoutY="278.0" text="Label" />
+               </children>
+            </Pane>
+            <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ListView layoutX="28.0" layoutY="21.0" prefHeight="280.0" prefWidth="381.0" />
+                  <Button layoutX="166.0" layoutY="317.0" mnemonicParsing="false" text="Zarezerwuj zlecenie" />
+               </children>
+            </Pane>
+            <Pane  prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="41.0" layoutY="44.0" text="Klient:" />
+                  <Label layoutX="38.0" layoutY="91.0" text="Nazwa:" />
+                  <Label layoutX="42.0" layoutY="127.0" text="Opis:" />
+                  <TextArea editable="false" layoutX="92.0" layoutY="127.0" prefHeight="158.0" prefWidth="307.0" />
+                  <Label layoutX="92.0" layoutY="44.0" text="Nie posiadasz zlecenia" />
+                  <Label layoutX="92.0" layoutY="91.0" text="Nie posiadasz zlecenia" />
+                  <Button layoutX="30.0" layoutY="302.0" mnemonicParsing="false" text="Zakończ zlecenie" />
+               </children>
+            </Pane>
+            <Pane  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button layoutX="196.0" layoutY="266.0" mnemonicParsing="false" text="Wyślij" />
+                  <TextArea layoutX="79.0" layoutY="92.0" prefHeight="155.0" prefWidth="284.0" promptText="Napisz jakich części potrzebujesz do magazyniera" />
+                  <Label layoutX="162.0" layoutY="51.0" text="Formularz kontaktowy" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
