@@ -8,7 +8,7 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import java.io.IOException;
 
-public class loginScreen extends Application {
+public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -23,7 +23,7 @@ public class loginScreen extends Application {
             e.printStackTrace();
         }
 
-        Scene scene = new Scene(root, 1000, 600);
+        Scene scene = new Scene(root, 1600, 800);
 
         stage.setTitle("AutoService");
         stage.setScene(scene);

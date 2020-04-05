@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class obslugaKlientaController implements Initializable {
+public class ObslugaKlientaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

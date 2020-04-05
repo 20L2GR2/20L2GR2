@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class mechanikController implements Initializable {
+public class MechanikController implements Initializable {
 
     @FXML
     private BorderPane borderPane;
