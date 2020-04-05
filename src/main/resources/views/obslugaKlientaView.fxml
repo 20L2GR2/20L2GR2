@@ -20,133 +20,133 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controllers.ObslugaKlientaController" fx:id="obslugaKlientaBorderPane">
-   <top>
-      <HBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="42.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true"
-                       HBox.hgrow="ALWAYS">
-               <image>
-                  <Image url="/img/logo.png"/>
-               </image>
-               <HBox.margin>
-                  <Insets top="10.0"/>
-               </HBox.margin>
-            </ImageView>
-            <Pane prefWidth="40.0" HBox.hgrow="ALWAYS"/>
-            <Button alignment="CENTER" mnemonicParsing="false" text="Logout" fx:id="buttonLogout">
-               <HBox.margin>
-                  <Insets right="10.0" top="10.0"/>
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-   </top>
-   <left>
-      <VBox prefHeight="358.0" prefWidth="158.0" BorderPane.alignment="CENTER">
-         <children>
-            <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
-                          maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Stwórz zlecenie"
-                          VBox.vgrow="ALWAYS" toggleGroup="$obslugaMenu" fx:id="toogleButtonUtworzZlecenie"
-                          onAction="#otworzUtworzZlecenie">
-               <graphic>
-                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="/img/zlecenia.png"/>
-                     </image>
-                  </ImageView>
-               </graphic>
-               <toggleGroup>
-                  <ToggleGroup fx:id="obslugaMenu"/>
-               </toggleGroup>
-            </ToggleButton>
-            <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
-                          maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Ukończone zlecenia"
-                          VBox.vgrow="ALWAYS" toggleGroup="$obslugaMenu" fx:id="toogleButtonUkonczoneZlecenia"
-                          onAction="#otworzUkonczoneZlecenia">
-               <graphic>
-                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="/img/twojeZlecenie.png"/>
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
-                          maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Twój profil"
-                          VBox.vgrow="ALWAYS" toggleGroup="$obslugaMenu" fx:id="toogleButtonTwojProfil"
-                          onAction="#otworzTwojProfil">
-               <graphic>
-                  <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="/img/profil.png"/>
-                     </image>
-                  </ImageView>
-               </graphic>
-            </ToggleButton>
-         </children>
-      </VBox>
-   </left>
-   <center>
-      <AnchorPane BorderPane.alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-         <children>
+    <top>
+        <HBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="42.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true"
+                           HBox.hgrow="ALWAYS">
+                    <image>
+                        <Image url="/img/logo.png"/>
+                    </image>
+                    <HBox.margin>
+                        <Insets top="10.0"/>
+                    </HBox.margin>
+                </ImageView>
+                <Pane prefWidth="40.0" HBox.hgrow="ALWAYS"/>
+                <Button alignment="CENTER" mnemonicParsing="false" text="Logout" fx:id="buttonLogout">
+                    <HBox.margin>
+                        <Insets right="10.0" top="10.0"/>
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <VBox prefHeight="358.0" prefWidth="158.0" BorderPane.alignment="CENTER">
+            <children>
+                <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Stwórz zlecenie"
+                              VBox.vgrow="ALWAYS" toggleGroup="$obslugaMenu" fx:id="toogleButtonUtworzZlecenie"
+                              onAction="#otworzUtworzZlecenie">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/zlecenia.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="obslugaMenu"/>
+                    </toggleGroup>
+                </ToggleButton>
+                <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Ukończone zlecenia"
+                              VBox.vgrow="ALWAYS" toggleGroup="$obslugaMenu" fx:id="toogleButtonUkonczoneZlecenia"
+                              onAction="#otworzUkonczoneZlecenia">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/twojeZlecenie.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Twój profil"
+                              VBox.vgrow="ALWAYS" toggleGroup="$obslugaMenu" fx:id="toogleButtonTwojProfil"
+                              onAction="#otworzTwojProfil">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/profil.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <AnchorPane BorderPane.alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+            <children>
 
-            <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                  AnchorPane.topAnchor="0.0" fx:id="utworzZleceniePane">
-               <children>
-                  <Label layoutX="40" layoutY="30" text="Imię klienta"/>
-                  <Label layoutX="40" layoutY="70" text="Nazwisko klienta"/>
-                  <Label layoutX="40" layoutY="110" text="Numer kontaktowy"/>
-                  <Label layoutX="40" layoutY="150" text="Marka i model samochodu"/>
-                  <Label layoutX="40" layoutY="190" text="Numer rejestracyjny"/>
-                  <Label layoutX="40" layoutY="230" text="Opis usterki"/>
-                  <TextField layoutX="200" layoutY="30" prefWidth="300"/>
-                  <TextField layoutX="200" layoutY="70" prefWidth="300"/>
-                  <TextField layoutX="200" layoutY="110" prefWidth="300"/>
-                  <TextField layoutX="200" layoutY="150" prefWidth="300"/>
-                  <TextField layoutX="200" layoutY="190" prefWidth="300"/>
-                  <TextArea layoutX="200" layoutY="230" prefHeight="150" prefWidth="300" wrapText="true"/>
-                  <Button layoutX="450" layoutY="410" mnemonicParsing="false" text="Dodaj"
-                          onAction="#dodajZlecenieButton"/>
-               </children>
-            </Pane>
+                <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" fx:id="utworzZleceniePane">
+                    <children>
+                        <Label layoutX="40" layoutY="30" text="Imię klienta"/>
+                        <Label layoutX="40" layoutY="70" text="Nazwisko klienta"/>
+                        <Label layoutX="40" layoutY="110" text="Numer kontaktowy"/>
+                        <Label layoutX="40" layoutY="150" text="Marka i model samochodu"/>
+                        <Label layoutX="40" layoutY="190" text="Numer rejestracyjny"/>
+                        <Label layoutX="40" layoutY="230" text="Opis usterki"/>
+                        <TextField layoutX="200" layoutY="30" prefWidth="300"/>
+                        <TextField layoutX="200" layoutY="70" prefWidth="300"/>
+                        <TextField layoutX="200" layoutY="110" prefWidth="300"/>
+                        <TextField layoutX="200" layoutY="150" prefWidth="300"/>
+                        <TextField layoutX="200" layoutY="190" prefWidth="300"/>
+                        <TextArea layoutX="200" layoutY="230" prefHeight="150" prefWidth="300" wrapText="true"/>
+                        <Button layoutX="450" layoutY="410" mnemonicParsing="false" text="Dodaj"
+                                onAction="#dodajZlecenieButton"/>
+                    </children>
+                </Pane>
 
-            <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                  AnchorPane.topAnchor="0.0" fx:id="ukonczoneZleceniaPane">
-               <children>
-                  <Label layoutX="160" layoutY="20" text="Lista ukończonych zleceń"/>
-                  <ListView layoutX="40.0" layoutY="40.0" prefHeight="280.0" prefWidth="400"/>
-                  <Button layoutX="375.0" layoutY="330.0" mnemonicParsing="false" text="Wybierz"
-                          onAction="#wybierzZlecenieButton"/>
-                  <Label layoutX="500" layoutY="50" text="Imię klienta"/>
-                  <Label layoutX="500" layoutY="90" text="Nazwisko klienta"/>
-                  <Label layoutX="500" layoutY="130" text="Marka i model samochodu"/>
-                  <Label layoutX="500" layoutY="170" text="Numer rejestracyjny"/>
-                  <Label layoutX="500" layoutY="210" text="Opis usterki"/>
-                  <Label layoutX="500" layoutY="250" text="Opis mechanika"/>
-                  <Label layoutX="500" layoutY="290" text="Użyte części"/>
-                  <Label layoutX="500" layoutY="400" text="Kwota do zapłaty"/>
-                  <TextField layoutX="610" layoutY="395" prefWidth="50"/>
-                  <Button layoutX="610" layoutY="440" mnemonicParsing="false" text="Zakończ"
-                          onAction="#wybierzZlecenieButton"/>
+                <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" fx:id="ukonczoneZleceniaPane">
+                    <children>
+                        <Label layoutX="160" layoutY="20" text="Lista ukończonych zleceń"/>
+                        <ListView layoutX="40.0" layoutY="40.0" prefHeight="280.0" prefWidth="400"/>
+                        <Button layoutX="375.0" layoutY="330.0" mnemonicParsing="false" text="Wybierz"
+                                onAction="#wybierzZlecenieButton"/>
+                        <Label layoutX="500" layoutY="50" text="Imię klienta"/>
+                        <Label layoutX="500" layoutY="90" text="Nazwisko klienta"/>
+                        <Label layoutX="500" layoutY="130" text="Marka i model samochodu"/>
+                        <Label layoutX="500" layoutY="170" text="Numer rejestracyjny"/>
+                        <Label layoutX="500" layoutY="210" text="Opis usterki"/>
+                        <Label layoutX="500" layoutY="250" text="Opis mechanika"/>
+                        <Label layoutX="500" layoutY="290" text="Użyte części"/>
+                        <Label layoutX="500" layoutY="400" text="Kwota do zapłaty"/>
+                        <TextField layoutX="610" layoutY="395" prefWidth="50"/>
+                        <Button layoutX="610" layoutY="440" mnemonicParsing="false" text="Zakończ"
+                                onAction="#wybierzZlecenieButton"/>
 
 
-               </children>
-            </Pane>
+                    </children>
+                </Pane>
 
-            <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                  AnchorPane.topAnchor="0.0" fx:id="twojProfilPane">
-               <children>
-                  <Label layoutX="104.0" layoutY="83.0" text="Imię"/>
-                  <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
-                  <Label layoutX="104.0" layoutY="216.0" text="Login:"/>
-                  <Label layoutX="106.0" layoutY="279.0" text="Pesel"/>
-                  <Label layoutX="289.0" layoutY="82.0" text="Label"/>
-                  <Label layoutX="289.0" layoutY="144.0" text="Label"/>
-                  <Label layoutX="289.0" layoutY="216.0" text="Label"/>
-                  <Label layoutX="289.0" layoutY="278.0" text="Label"/>
-               </children>
-            </Pane>
-         </children>
-      </AnchorPane>
-   </center>
+                <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" fx:id="twojProfilPane">
+                    <children>
+                        <Label layoutX="104.0" layoutY="83.0" text="Imię"/>
+                        <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
+                        <Label layoutX="104.0" layoutY="216.0" text="Login:"/>
+                        <Label layoutX="106.0" layoutY="279.0" text="Pesel"/>
+                        <Label layoutX="289.0" layoutY="82.0" text="Label"/>
+                        <Label layoutX="289.0" layoutY="144.0" text="Label"/>
+                        <Label layoutX="289.0" layoutY="216.0" text="Label"/>
+                        <Label layoutX="289.0" layoutY="278.0" text="Label"/>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </center>
 </BorderPane>

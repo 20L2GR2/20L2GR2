@@ -33,8 +33,8 @@ public class Main extends Application {
         jMetro.setScene(scene);
         root.setStyle("-fx-font: title");
 
-//        Button button = (Button) scene.lookup("#buttonLogout");
-//        button.setOnAction(e -> buttonLogout(stage));
+        Button button = (Button) scene.lookup("#buttonLogout");
+        button.setOnAction(e -> buttonLogout(stage));
     }
 
     public void buttonLogout(Stage stage) {
