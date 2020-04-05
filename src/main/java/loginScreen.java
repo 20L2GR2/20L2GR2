@@ -25,7 +25,7 @@ public class loginScreen extends Application {
 
         Scene scene = new Scene(root, 1000, 600);
 
-        stage.setTitle("FXML Welcomen");
+        stage.setTitle("AutoService");
         stage.setScene(scene);
         stage.show();
         JMetro jMetro = new JMetro(Style.DARK);
