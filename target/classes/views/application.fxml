@@ -17,7 +17,7 @@
         <AnchorPane minHeight="500.0" minWidth="450.0" prefHeight="320.0" prefWidth="500.0">
             <children>
                 <Button alignment="CENTER" mnemonicParsing="false" text="Logout" fx:id="buttonLogout"
-                        visible="false"></Button>
+                        visible="false" onAction="#logout"></Button>
                 <ImageView layoutX="-33.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="/img/carPhoto.jpg"/>

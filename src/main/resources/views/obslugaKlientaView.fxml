@@ -33,7 +33,7 @@
                     </HBox.margin>
                 </ImageView>
                 <Pane prefWidth="40.0" HBox.hgrow="ALWAYS"/>
-                <Button alignment="CENTER" mnemonicParsing="false" text="Logout" fx:id="buttonLogout">
+                <Button alignment="CENTER" mnemonicParsing="false" text="Logout" fx:id="buttonLogout" onAction="#logout">
                     <HBox.margin>
                         <Insets right="10.0" top="10.0"/>
                     </HBox.margin>

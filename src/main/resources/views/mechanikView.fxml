@@ -85,7 +85,7 @@
                     </HBox.margin>
                 </ImageView>
                 <Pane prefWidth="40.0" HBox.hgrow="ALWAYS"/>
-                <Button fx:id="buttonLogout" alignment="CENTER" mnemonicParsing="false" text="Logout">
+                <Button fx:id="buttonLogout" onAction="#logout" alignment="CENTER" mnemonicParsing="false" text="Logout">
                     <HBox.margin>
                         <Insets right="10.0" top="10.0"/>
                     </HBox.margin>

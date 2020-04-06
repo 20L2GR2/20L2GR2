@@ -36,6 +36,11 @@ public class LogowanieController {
         }
     }
 
+    public void logout(ActionEvent event) throws IOException {
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        openWindow("/views/application.fxml", window);
+    }
+
     private void openWindow(String name, Stage window) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource(name));
         Scene scene = new Scene(parent,1600,800);
