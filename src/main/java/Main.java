@@ -45,7 +45,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        Scene scene = new Scene(root, 1000, 600);
+        Scene scene = new Scene(root, 1600, 800);
 
         stage.setScene(scene);
         stage.show();

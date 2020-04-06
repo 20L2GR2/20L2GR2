@@ -12,7 +12,7 @@
 
 <SplitPane dividerPositions="0.5300829875518672" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
            minWidth="-Infinity" prefHeight="542.0" prefWidth="966.0" xmlns="http://javafx.com/javafx/10.0.2"
-           xmlns:fx="http://javafx.com/fxml/1">
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LogowanieController">
     <items>
         <AnchorPane minHeight="500.0" minWidth="450.0" prefHeight="320.0" prefWidth="500.0">
             <children>
@@ -29,12 +29,12 @@
                         <Image url="/img/logo.png"/>
                     </image>
                 </ImageView>
-                <Label layoutX="17.0" layoutY="219.0" text="AutoService" textFill="WHITE" id="title">
+                <Label layoutX="17.0" layoutY="619.0" text="AutoService" textFill="WHITE" id="title">
                     <font>
                         <Font name="Montserrat-Black" size="50.0"/>
                     </font>
                 </Label>
-                <Label layoutX="17.0" layoutY="303.0" text="Samochody to nasza pasja" textFill="WHITE" id="subtitle">
+                <Label layoutX="17.0" layoutY="703.0" text="Samochody to nasza pasja" textFill="WHITE" id="subtitle">
                     <font>
                         <Font name="Montserrat-Black" size="29.0"/>
                     </font>
@@ -43,12 +43,17 @@
         </AnchorPane>
         <AnchorPane minHeight="500.0" minWidth="400.0" prefHeight="489.0" prefWidth="403.0">
             <children>
-                <Button layoutX="217.0" layoutY="346.0" mnemonicParsing="false" text="Zaloguj"/>
-                <TextField layoutX="174.0" layoutY="263.0" promptText="Login"/>
-                <PasswordField id="password" layoutX="175.0" layoutY="300.0" promptText="Password"/>
-                <Label layoutX="174.0" layoutY="197.0" prefHeight="39.0" prefWidth="160.0" text="Zaloguj Się">
+                <Button layoutX="317.0" layoutY="346.0" mnemonicParsing="false" text="Zaloguj" onAction="#zaloguj"/>
+                <TextField layoutX="274.0" layoutY="263.0" promptText="Login" fx:id="loginTextField"/>
+                <PasswordField id="password" layoutX="275.0" layoutY="300.0" promptText="Password" fx:id="passwordField"/>
+                <Label layoutX="274.0" layoutY="197.0" prefHeight="39.0" prefWidth="160.0" text="Zaloguj Się">
                     <font>
                         <Font size="32.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="278.0" layoutY="370.0" prefHeight="47.0" prefWidth="160.0" text="Zły login lub hasło!" textFill="RED" fx:id="bladLogowaniaLabel" visible="false">
+                    <font>
+                        <Font name="System Bold Italic" size="15.0" />
                     </font>
                 </Label>
             </children>
