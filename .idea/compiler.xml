@@ -9,8 +9,5 @@
         <module name="20L2GR2" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="20L2GR2" target="" />
-    </bytecodeTargetLevel>
   </component>
 </project>
