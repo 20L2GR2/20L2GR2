@@ -63,6 +63,10 @@ Diagram aktywności
 
 ![Diagram aktywności](DiagramAktywnosci.jpg)
 
+Diagram ERD
+
+![Diagram ERD](DiagramERD.png)
+
 Wykorzystane narzędzia i technologie:
 
 - IntelliJ
