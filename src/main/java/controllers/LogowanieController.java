@@ -31,7 +31,11 @@ public class LogowanieController {
         } else if ((login.equals("obsluga") && haslo.equals("obsluga"))) {
             openWindow("/views/obslugaKlientaView.fxml", window);
             System.out.println("Zalogowano obsluga klienta");
-        } else {
+        } else if ((login.equals("magazynier") && haslo.equals("magazynier"))) {
+            openWindow("/views/magazynierView.fxml", window);
+            System.out.println("Zalogowano magazynier");
+        }
+        else {
             bladLogowaniaLabel.setVisible(true);
         }
     }

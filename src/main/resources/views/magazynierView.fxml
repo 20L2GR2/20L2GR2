@@ -15,52 +15,42 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.241"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MechanikController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MagazynierController">
     <left>
         <VBox prefHeight="358.0" prefWidth="158.0" BorderPane.alignment="CENTER">
             <children>
-                <ToggleButton fx:id="toggleButtonCzesci" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
-                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzCzesci"
-                              styleClass="buttons" text="Części" toggleGroup="$mechanikMenu" VBox.vgrow="ALWAYS">
+                <ToggleButton fx:id="toggleButtonZamowienia" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzZamowienia"
+                              styleClass="buttons" text="Zamowienia" toggleGroup="$magazynierMenu" VBox.vgrow="ALWAYS">
                     <graphic>
                         <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="/img/tools.png"/>
+                                <Image url="/img/zamowienia.png"/>
                             </image>
                         </ImageView>
                     </graphic>
                     <toggleGroup>
-                        <ToggleGroup fx:id="mechanikMenu"/>
+                        <ToggleGroup fx:id="magazynierMenu"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="toggleButtonZlecenia" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
-                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzZlecenia"
-                              styleClass="buttons" text="Zlecenia" toggleGroup="$mechanikMenu" VBox.vgrow="ALWAYS">
+                <ToggleButton fx:id="toggleButtonStanmagazyn" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzStanMagazyn"
+                              styleClass="buttons" text="Stan magazynu" toggleGroup="$magazynierMenu" VBox.vgrow="ALWAYS">
                     <graphic>
                         <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="/img/zlecenia.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </ToggleButton>
-                <ToggleButton fx:id="toggleButtonTwojeZlecenia" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
-                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzTwojeZlecenia"
-                              styleClass="buttons" text="Twoje zlecenia" toggleGroup="$mechanikMenu"
-                              VBox.vgrow="ALWAYS">
-                    <graphic>
-                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="/img/twojeZlecenie.png"/>
+                                <Image url="/img/stanmagazynu.png"/>
                             </image>
                         </ImageView>
                     </graphic>
                 </ToggleButton>
                 <ToggleButton fx:id="toggleButtonProfil" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
                               maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzProfil"
-                              styleClass="buttons" text="Twój profil" toggleGroup="$mechanikMenu" VBox.vgrow="ALWAYS">
+                              styleClass="buttons" text="Twój profil" toggleGroup="$magazynierMenu" VBox.vgrow="ALWAYS">
                     <graphic>
                         <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -110,35 +100,35 @@
                         <Label layoutX="289.0" layoutY="278.0" text="Label"/>
                     </children>
                 </Pane>
-                <Pane fx:id="zleceniaPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                <Pane fx:id="stanMagazynuPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <ListView layoutX="28.0" layoutY="21.0" prefHeight="280.0" prefWidth="381.0"/>
-                        <Button layoutX="166.0" layoutY="317.0" mnemonicParsing="false" onAction="#zlecenieRezerwacja"
-                                text="Zarezerwuj zlecenie"/>
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1100.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+                            <columns>
+                                <TableColumn prefWidth="700.0" text="Nazwa części" />
+                                <TableColumn prefWidth="400.0" text="Ilość sztuk" />
+                            </columns>
+                        </TableView>
+                        <Button layoutX="950" layoutY="500" fx:id="buttonDodajczesc" onAction="#dodajCzesc" alignment="CENTER" mnemonicParsing="false"
+                                text="Dodaj część">
+                        </Button>
+                        <Button layoutX="1050" layoutY="500" fx:id="buttonUsunczesc" onAction="#usunCzesc" alignment="CENTER" mnemonicParsing="false"
+                                text="Usuń część">
+                        </Button>
                     </children>
                 </Pane>
-                <Pane fx:id="mojeZleceniaPane" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <Label layoutX="41.0" layoutY="44.0" text="Klient:"/>
-                        <Label layoutX="38.0" layoutY="91.0" text="Nazwa:"/>
-                        <Label layoutX="42.0" layoutY="127.0" text="Opis:"/>
-                        <TextArea editable="false" layoutX="92.0" layoutY="127.0" prefHeight="158.0" prefWidth="307.0"/>
-                        <Label layoutX="92.0" layoutY="44.0" text="Nie posiadasz zlecenia"/>
-                        <Label layoutX="92.0" layoutY="91.0" text="Nie posiadasz zlecenia"/>
-                        <Button layoutX="30.0" layoutY="302.0" mnemonicParsing="false" onAction="#zlecenieZakoncz"
-                                text="Zakończ zlecenie"/>
-                    </children>
-                </Pane>
-                <Pane fx:id="czesciPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                <Pane fx:id="zamowieniaPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Button layoutX="196.0" layoutY="266.0" mnemonicParsing="false" onAction="#czesciWyslij"
-                                text="Wyślij"/>
-                        <TextArea layoutX="79.0" layoutY="92.0" prefHeight="155.0" prefWidth="284.0"
-                                  promptText="Napisz jakich części potrzebujesz do magazyniera"/>
-                        <Label layoutX="162.0" layoutY="51.0" text="Formularz kontaktowy"/>
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1100.0">
+                            <columns>
+                                <TableColumn prefWidth="400.0" text="Mechanik" />
+                                <TableColumn minWidth="4.0" prefWidth="700.0" text="Nazwa części" />
+                            </columns>
+                        </TableView>
+                        <Button layoutX="1050" layoutY="500" fx:id="buttonUsunZlecenie" onAction="#usunZlecenie" alignment="CENTER" mnemonicParsing="false"
+                                text="Usuń zlecenie">
+                        </Button>
                     </children>
                 </Pane>
             </children>
