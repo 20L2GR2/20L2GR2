@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Kwi 2020, 21:11
+-- Czas generowania: 18 Kwi 2020, 21:41
 -- Wersja serwera: 10.4.8-MariaDB
 -- Wersja PHP: 7.3.11
 
@@ -46,9 +46,10 @@ CREATE TABLE `klienci` (
 
 CREATE TABLE `magazyn` (
   `id_czesci` int(11) NOT NULL,
-  `nazwa_czesci` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
+  `nazwa_czesci` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
   `opis_czesci` text COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `ilosc` int(11) NOT NULL
+  `ilosc` int(11) NOT NULL,
+  `cena` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -77,8 +78,7 @@ CREATE TABLE `zamowienia` (
   `nazwa_czesci` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
   `kometarz` varchar(500) COLLATE utf8mb4_polish_ci NOT NULL,
   `stan_zamowienia` int(11) NOT NULL,
-  `id_mechanika` int(11) NOT NULL,
-  `id_czesci` int(11) NOT NULL
+  `id_mechanika` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -128,7 +128,6 @@ ALTER TABLE `pracownicy`
 --
 ALTER TABLE `zamowienia`
   ADD PRIMARY KEY (`id_zamowienia`),
-  ADD KEY `id_czesci` (`id_czesci`),
   ADD KEY `id_mechanika` (`id_mechanika`);
 
 --
@@ -149,31 +148,31 @@ ALTER TABLE `zlecenia`
 -- AUTO_INCREMENT dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `id_klienta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_klienta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `magazyn`
 --
 ALTER TABLE `magazyn`
-  MODIFY `id_czesci` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_czesci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  MODIFY `id_pracownika` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pracownika` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `zlecenia`
 --
 ALTER TABLE `zlecenia`
-  MODIFY `id_zlecenie` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_zlecenie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -183,7 +182,6 @@ ALTER TABLE `zlecenia`
 -- Ograniczenia dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  ADD CONSTRAINT `zamowienia_ibfk_1` FOREIGN KEY (`id_czesci`) REFERENCES `magazyn` (`id_czesci`),
   ADD CONSTRAINT `zamowienia_ibfk_2` FOREIGN KEY (`id_mechanika`) REFERENCES `pracownicy` (`id_pracownika`);
 
 --
