@@ -12,7 +12,7 @@
 
 <SplitPane dividerPositions="0.5300829875518672" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
            minWidth="-Infinity" prefHeight="542.0" prefWidth="966.0" xmlns="http://javafx.com/javafx/10.0.2"
-           xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LogowanieController">
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.LogowanieController">
     <items>
         <AnchorPane minHeight="500.0" minWidth="450.0" prefHeight="320.0" prefWidth="500.0">
             <children>

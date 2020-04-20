@@ -17,7 +17,7 @@
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.241"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MechanikController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.MechanikController">
     <left>
         <VBox prefHeight="358.0" prefWidth="158.0" BorderPane.alignment="CENTER">
             <children>
