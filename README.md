@@ -65,7 +65,7 @@ Diagram aktywności
 
 Diagram ERD
 
-![Diagram ERD](DiagramERD.png)
+![Diagram ERD](DiagramERD.jpg)
 
 Wykorzystane narzędzia i technologie:
 
