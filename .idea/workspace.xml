@@ -2,32 +2,57 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_6_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_19.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/DbQueries.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/MysqlConnect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/20l2gr2.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/dump.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_istack_istack_commons_runtime_3_0_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_xml_fastinfoset_FastInfoset_1_2_15.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_dom4j_dom4j_2_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jaxb_jaxb_runtime_2_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jaxb_txw2_2_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_1_0_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_4_14_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_24_0_GA.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_1_1_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_transaction_jboss_transaction_api_1_2_spec_1_1_1_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jvnet_staxex_stax_ex_1_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hibernate/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Klienci.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Magazyn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Pracownicy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zamowienia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zlecenia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hibernate/util/HibernateUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/20L2GR2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/20L2GR2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/LogowanieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/LogowanieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MagazynierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/MagazynierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/MechanikController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/MechanikController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ObslugaKlientaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/ObslugaKlientaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/adminView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/adminView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/application.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/application.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/magazynierView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/magazynierView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/mechanikView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/mechanikView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/obslugaKlientaView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/obslugaKlientaView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/DbQueries.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/MysqlConnect.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -55,6 +80,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -89,7 +115,13 @@
       <workItem from="1586117289441" duration="458000" />
       <workItem from="1586179712864" duration="6613000" />
       <workItem from="1587230415691" duration="651000" />
-      <workItem from="1587401287000" duration="1934000" />
+      <workItem from="1587401287000" duration="2860000" />
+      <workItem from="1587916896355" duration="185000" />
+      <workItem from="1587918703574" duration="11000" />
+      <workItem from="1588175536297" duration="115000" />
+      <workItem from="1588176324884" duration="32000" />
+      <workItem from="1588176472209" duration="1643000" />
+      <workItem from="1588185952599" duration="1413000" />
     </task>
     <task id="LOCAL-00001" summary="Fix i dodanie .idea">
       <created>1586115626288</created>
@@ -105,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586189521672</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ABBCK-19 #Dodanie f-cji czyszczenia bazy oraz ładowania dump'a -&gt; ładowanie dump'a chyba do poprawy, ale działa OK (czytać komenty w tej f-cji)">
+      <created>1587403477105</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587403477105</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,18 +164,24 @@
     <MESSAGE value="Fix i dodanie .idea" />
     <MESSAGE value="zmiana nazewnictwa klas i edycja wielkości widoków" />
     <MESSAGE value="Naprawa i przeniesienie funkcjonowania &quot;Logout&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Naprawa i przeniesienie funkcjonowania &quot;Logout&quot;" />
+    <MESSAGE value="ABBCK-19 #Dodanie f-cji czyszczenia bazy oraz ładowania dump'a -&gt; ładowanie dump'a chyba do poprawy, ale działa OK (czytać komenty w tej f-cji)" />
+    <option name="LAST_COMMIT_MESSAGE" value="ABBCK-19 #Dodanie f-cji czyszczenia bazy oraz ładowania dump'a -&gt; ładowanie dump'a chyba do poprawy, ale działa OK (czytać komenty w tej f-cji)" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="520" y="141" key="#Assign_Data_Sources" timestamp="1588178661248">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="520" y="141" key="#Assign_Data_Sources/0.0.1920.1080@0.0.1920.1080" timestamp="1588178661248" />
     <state x="552" y="177" key="#Notifications" timestamp="1586115676012">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="177" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1586115676012" />
-    <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586116873672">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="519" y="185" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588185997608">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586116873672" />
     <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586115381005" />
+    <state x="519" y="185" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588185997608" />
     <state x="784" y="239" key="#com.intellij.ide.util.MemberChooser" timestamp="1587403124805">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -145,12 +190,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="689" y="302" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586115368324" />
-    <state x="585" y="117" key="CommitChangelistDialog2" timestamp="1586189520251">
+    <state x="585" y="117" key="CommitChangelistDialog2" timestamp="1587403475630">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="585" y="113" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586116939162" />
     <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1586115760645" />
-    <state x="585" y="117" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1586189520251" />
+    <state x="585" y="117" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1587403475630" />
     <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1586190084427">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -184,21 +229,21 @@
     </state>
     <state x="440" y="93" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586115404202" />
     <state x="440" y="97" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1587401586930" />
-    <state x="552" y="261" key="Vcs.Push.Dialog.v2" timestamp="1586189526892">
+    <state x="552" y="261" key="Vcs.Push.Dialog.v2" timestamp="1587403482647">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="552" y="251" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586115773727" />
-    <state x="552" y="261" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1586189526892" />
-    <state x="656" y="357" key="com.intellij.ide.util.TipDialog" timestamp="1587230415687">
+    <state x="552" y="261" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1587403482647" />
+    <state x="656" y="357" key="com.intellij.ide.util.TipDialog" timestamp="1588185962303">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586179784591" />
-    <state x="656" y="357" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1587230415687" />
-    <state x="769" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587401293039">
+    <state x="656" y="357" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1588185962303" />
+    <state x="769" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588176487545">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="769" y="435" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586179799419" />
     <state x="769" y="435" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586115752213" />
-    <state x="769" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080@0.0.1920.1080" timestamp="1587401293039" />
+    <state x="769" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080@0.0.1920.1080" timestamp="1588176487545" />
   </component>
 </project>

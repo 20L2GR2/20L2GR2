@@ -7,6 +7,12 @@
     <groupId>pl.20L2GR2</groupId>
     <artifactId>20L2GR2</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -28,6 +34,11 @@
             <version>8.0.19</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.14.Final</version>
+        </dependency>
 
     </dependencies>
 
