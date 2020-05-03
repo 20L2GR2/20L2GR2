@@ -1,5 +1,7 @@
 package main.controllers;
 
+import hibernate.entity.Pracownicy;
+import hibernate.util.HibernateUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.io.IOException;
 
 public class LogowanieController {
@@ -25,22 +30,50 @@ public class LogowanieController {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         String login = loginTextField.getText();
         String haslo = passwordField.getText();
-        if (login.equals("mechanik") && haslo.equals("mechanik")) {
-            openWindow("/views/mechanikView.fxml", window);
-            System.out.println("Zalogowano mechanik");
-        } else if ((login.equals("obsluga") && haslo.equals("obsluga"))) {
-            openWindow("/views/obslugaKlientaView.fxml", window);
-            System.out.println("Zalogowano obsluga klienta");
-        } else if ((login.equals("magazynier") && haslo.equals("magazynier"))) {
-            openWindow("/views/magazynierView.fxml", window);
-            System.out.println("Zalogowano magazynier");
+        int stanowisko = -1;
+
+        try{
+            if(validate(login,haslo)){
+                Transaction transaction = null;
+                Pracownicy user = null;
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    transaction = session.beginTransaction();
+                    user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.login = :login").setParameter("login",login).uniqueResult();
+                    if ( user != null ) {
+                        stanowisko = user.getStanowisko();
+                        System.out.println(stanowisko);
+                    }
+                    transaction.commit();
+                } catch (Exception e) {
+                    if (transaction != null) {
+                        transaction.rollback();
+                    }
+                    e.printStackTrace();
+                }
+            }else{
+                bladLogowaniaLabel.setVisible(true);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
-        else if ((login.equals("admin") && haslo.equals("admin"))) {
-            openWindow("/views/adminView.fxml", window);
-            System.out.println("Zalogowano Admin");
-        }
-        else {
-            bladLogowaniaLabel.setVisible(true);
+        System.out.println(stanowisko);
+
+        switch (stanowisko){
+            case 0:
+                openWindow("/views/adminView.fxml", window);
+                break;
+            case 1:
+                openWindow("/views/obslugaKlientaView.fxml", window);
+                break;
+            case 2:
+                openWindow("/views/mechanikView.fxml", window);
+                break;
+            case 3:
+                openWindow("/views/magazynierView.fxml", window);
+                break;
+            default:
+                bladLogowaniaLabel.setVisible(true);
+                break;
         }
     }
 
@@ -61,5 +94,24 @@ public class LogowanieController {
         jMetro.setAutomaticallyColorPanes(true);
         jMetro.setScene(scene);
         parent.setStyle("-fx-font: title");
+    }
+
+    public boolean validate(String userName, String password) {
+        Transaction transaction = null;
+        Pracownicy user = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.login = :login").setParameter("login",userName).uniqueResult();
+            if (user != null && user.getHaslo().equals(password)) {
+                return true;
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return false;
     }
 }
