@@ -9,13 +9,6 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import hibernate.entity.*;
-import hibernate.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 public class Main extends Application {
 

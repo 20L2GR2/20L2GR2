@@ -1,7 +1,7 @@
 package hibernate.entity;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.List;
 
 @Entity
 @Table(name = "pracownicy")

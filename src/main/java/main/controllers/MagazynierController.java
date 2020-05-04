@@ -4,24 +4,22 @@ import hibernate.entity.Magazyn;
 import hibernate.entity.Pracownicy;
 import hibernate.entity.Zamowienia;
 import hibernate.util.HibernateUtil;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.ChoiceBoxTableCell;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.util.converter.FloatStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LongStringConverter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -39,12 +37,14 @@ public class MagazynierController implements Initializable {
     @FXML
     public TableView tableMagazyn, tableZamowienia;
     @FXML
-    // tableMagazyn
-    public TableColumn magazynNazwaCzesciColumn, magazynOpisCzesciColumn, magazynIloscCzesciColumn, magazynCenaCzesciColumn;
     private TableColumn<Magazyn, String> nazwaCzesciColumn, opisColumn;
+    @FXML
     private TableColumn<Magazyn, Long> iloscColumn;
+    @FXML
     private TableColumn<Magazyn, Float> cenaColumn;
-    // tableZamowienia
+    @FXML
+    private TableColumn nazwaColumn, komentarzColumn, mechanikColumn, stanColumn, idColumn;
+    @FXML
     public TableColumn zamowieniaNazwaCzesciColumn, zamowieniaKomentarzColumn, zamowieniaMechanikColumn;
     @FXML
     public Label imieLabel, nazwiskoLabel, loginLabel;
@@ -53,7 +53,7 @@ public class MagazynierController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         borderPane.setCenter(profilPane);
         toggleButtonProfil.setSelected(true);
-        //inicjalizujWidokMagazynieraZBazy();
+        inicjalizujWidokMagazynieraZBazy();
     }
 
     public void logout(ActionEvent event) throws IOException {
@@ -124,9 +124,9 @@ public class MagazynierController implements Initializable {
 
             List<Zamowienia> zamowienia = session.createQuery("SELECT z FROM Zamowienia z WHERE z.stanZamowienia = 0", Zamowienia.class).getResultList();
 
-            zamowieniaNazwaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
-            zamowieniaKomentarzColumn.setCellValueFactory(new PropertyValueFactory<>("komentarz"));
-            zamowieniaMechanikColumn.setCellValueFactory(new PropertyValueFactory<>("imieNazwisko"));
+            nazwaColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
+            komentarzColumn.setCellValueFactory(new PropertyValueFactory<>("komentarz"));
+            mechanikColumn.setCellValueFactory(new PropertyValueFactory<>("imieNazwisko"));
 
             for (Zamowienia z : zamowienia) {
                 tableZamowienia.getItems().add(z);
@@ -134,12 +134,35 @@ public class MagazynierController implements Initializable {
 
             //------------------------------------------------------------
 
-            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
+            nazwaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
+            nazwaCzesciColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+            nazwaCzesciColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setNazwaCzesci(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
 
-            magazynNazwaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
-            magazynOpisCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
-            magazynIloscCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
-            magazynCenaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
+            opisColumn.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
+            opisColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+            opisColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setOpisCzesci(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            iloscColumn.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+            iloscColumn.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+            iloscColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setIlosc(e.getNewValue().intValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            cenaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
+            cenaColumn.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
+            cenaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setCena(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
 
             for (Magazyn m : magazyn) {
                 tableMagazyn.getItems().add(m);
@@ -150,7 +173,6 @@ public class MagazynierController implements Initializable {
             imieLabel.setText(user.getImie());
             nazwiskoLabel.setText(user.getNazwisko());
             loginLabel.setText(user.getLogin());
-
 
             session.clear();
             session.disconnect();

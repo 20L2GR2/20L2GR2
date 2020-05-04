@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.241"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.MagazynierController">
@@ -108,17 +95,25 @@
                                    xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
                                    fx:id="tableMagazyn">
                             <columns>
-                                <TableColumn prefWidth="500.0" text="Nazwa części" fx:id="magazynNazwaCzesciColumn"/>
-                                <TableColumn prefWidth="500.0" text="Opis części" fx:id="magazynOpisCzesciColumn"/>
-                                <TableColumn prefWidth="100.0" text="Ilość sztuk" fx:id="magazynIloscCzesciColumn"/>
-                                <TableColumn prefWidth="90.0" text="Cena" fx:id="magazynCenaCzesciColumn"/>
+                                <TableColumn prefWidth="500.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
+                                <TableColumn prefWidth="500.0" text="Opis części" fx:id="opisColumn"/>
+                                <TableColumn prefWidth="100.0" text="Ilość" fx:id="iloscColumn"/>
+                                <TableColumn prefWidth="90.0" text="Cena" fx:id="cenaColumn"/>
                             </columns>
                         </TableView>
-                        <Button layoutX="950" layoutY="500" fx:id="buttonDodajczesc" onAction="#dodajCzesc"
+                        <Label layoutX="50.0" layoutY="500.0" text="Nazwa części"/>
+                        <Label layoutX="50.0" layoutY="530.0" text="Opis części"/>
+                        <Label layoutX="50.0" layoutY="560.0" text="Ilość"/>
+                        <Label layoutX="50.0" layoutY="590.0" text="Cena"/>
+                        <TextField layoutX="140.0" layoutY="495.0" fx:id="nowaNazwaCzesci"/>
+                        <TextField layoutX="140.0" layoutY="525.0" fx:id="nowaOpisCzesci"/>
+                        <TextField layoutX="140.0" layoutY="555.0" fx:id="nowaIloscCzesci"/>
+                        <TextField layoutX="140.0" layoutY="585.0" fx:id="nowaCenaCzesci"/>
+                        <Button layoutX="205" layoutY="620" fx:id="buttonDodajczesc" onAction="#dodajCzesc"
                                 alignment="CENTER" mnemonicParsing="false"
                                 text="Dodaj część">
                         </Button>
-                        <Button layoutX="1050" layoutY="500" fx:id="buttonUsunczesc" onAction="#usunCzesc"
+                        <Button layoutX="1170" layoutY="450" fx:id="buttonUsunczesc" onAction="#usunCzesc"
                                 alignment="CENTER" mnemonicParsing="false"
                                 text="Usuń część">
                         </Button>
@@ -133,9 +128,9 @@
                                    fx:id="tableZamowienia">
                             <columns>
                                 <TableColumn minWidth="4.0" prefWidth="400.0" text="Nazwa części"
-                                             fx:id="zamowieniaNazwaCzesciColumn"/>
-                                <TableColumn prefWidth="400.0" text="Komentarz" fx:id="zamowieniaKomentarzColumn"/>
-                                <TableColumn prefWidth="390.0" text="Mechanik" fx:id="zamowieniaMechanikColumn"/>
+                                             fx:id="nazwaColumn"/>
+                                <TableColumn prefWidth="400.0" text="Komentarz" fx:id="komentarzColumn"/>
+                                <TableColumn prefWidth="390.0" text="Mechanik" fx:id="mechanikColumn"/>
                             </columns>
                         </TableView>
                         <Button layoutX="1050" layoutY="500" fx:id="buttonUsunZlecenie" onAction="#usunZlecenie"
