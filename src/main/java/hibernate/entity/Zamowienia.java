@@ -80,5 +80,9 @@ public class Zamowienia {
         return pracownik.getImie();
     }
 
+    public String getImieNazwisko() {
+        return pracownik.getImie() + " " + pracownik.getNazwisko();
+    }
+
 
 }

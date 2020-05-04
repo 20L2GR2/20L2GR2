@@ -21,22 +21,39 @@
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <?import java.lang.Integer?>
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.AdminController">
-   <left>
-      <VBox alignment="CENTER" prefHeight="323.0" prefWidth="137.0" BorderPane.alignment="CENTER">
-         <children>
-             <fx:define>
-                 <ToggleGroup fx:id="adminMenu"/>
-             </fx:define>
-             <ToggleButton toggleGroup="$adminMenu" onAction="#otworzZlecenia" fx:id="toggleButtonZlecenia" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Zlecenia" VBox.vgrow="ALWAYS"/>
-            <ToggleButton toggleGroup="$adminMenu" onAction="#otworzProfil" fx:id="toggleButtonProfil" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Twój profil" VBox.vgrow="ALWAYS" />
-            <ToggleButton toggleGroup="$adminMenu" onAction="#otworzUtworzUzytkownika" fx:id="toggleButtonUtworzUrz" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Utwórz użytkownika" VBox.vgrow="ALWAYS" />
-            <ToggleButton toggleGroup="$adminMenu" onAction="#otworzUzytkownicy" fx:id="toggleButtonUzytkownicy" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Użytkownicy" VBox.vgrow="ALWAYS" />
-            <ToggleButton toggleGroup="$adminMenu" onAction="#otworzCzesci" fx:id="toggleButtonCzesci" layoutX="10.0" layoutY="283.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Części" VBox.vgrow="ALWAYS" />
-            <ToggleButton toggleGroup="$adminMenu" onAction="#otworzZamowienia" fx:id="toggleButtonZamowienia" layoutX="10.0" layoutY="283.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Zamówienia" VBox.vgrow="ALWAYS" />
-         </children>
-      </VBox>
-   </left>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.AdminController">
+    <left>
+        <VBox alignment="CENTER" prefHeight="323.0" prefWidth="137.0" BorderPane.alignment="CENTER">
+            <children>
+                <fx:define>
+                    <ToggleGroup fx:id="adminMenu"/>
+                </fx:define>
+                <ToggleButton toggleGroup="$adminMenu" onAction="#otworzZlecenia" fx:id="toggleButtonZlecenia"
+                              maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" text="Zlecenia" VBox.vgrow="ALWAYS"/>
+                <ToggleButton toggleGroup="$adminMenu" onAction="#otworzProfil" fx:id="toggleButtonProfil"
+                              maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" text="Twój profil" VBox.vgrow="ALWAYS"/>
+                <ToggleButton toggleGroup="$adminMenu" onAction="#otworzUtworzUzytkownika" fx:id="toggleButtonUtworzUrz"
+                              maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                              mnemonicParsing="false" text="Utwórz użytkownika" VBox.vgrow="ALWAYS"/>
+                <ToggleButton toggleGroup="$adminMenu" onAction="#otworzUzytkownicy" fx:id="toggleButtonUzytkownicy"
+                              layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Użytkownicy"
+                              VBox.vgrow="ALWAYS"/>
+                <ToggleButton toggleGroup="$adminMenu" onAction="#otworzCzesci" fx:id="toggleButtonCzesci"
+                              layoutX="10.0" layoutY="283.0" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Części"
+                              VBox.vgrow="ALWAYS"/>
+                <ToggleButton toggleGroup="$adminMenu" onAction="#otworzZamowienia" fx:id="toggleButtonZamowienia"
+                              layoutX="10.0" layoutY="283.0" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Zamówienia"
+                              VBox.vgrow="ALWAYS"/>
+            </children>
+        </VBox>
+    </left>
     <top>
         <HBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
@@ -50,7 +67,7 @@
                     </HBox.margin>
                 </ImageView>
                 <Pane prefWidth="40.0" HBox.hgrow="ALWAYS"/>
-                <Button fx:id="buttonLogout"  alignment="CENTER" mnemonicParsing="false"
+                <Button fx:id="buttonLogout" alignment="CENTER" mnemonicParsing="false"
                         text="Logout" onAction="#logout">
                     <HBox.margin>
                         <Insets right="10.0" top="10.0"/>
@@ -59,115 +76,130 @@
             </children>
         </HBox>
     </top>
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-             <Pane fx:id="czesciPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                 <children>
-                     <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:id="czesci">
-                         <columns>
-                             <TableColumn prefWidth="150.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
-                             <TableColumn prefWidth="100.0" text="Opis" fx:id="opisColumn"/>
-                             <TableColumn prefWidth="100.0" text="Ilość sztuk" fx:id="iloscColumn"/>
-                             <TableColumn prefWidth="100.0" text="Cena" fx:id="cenaColumn"/>
-                         </columns>
-                     </TableView>
-                     <Button layoutX="50" layoutY="500" fx:id="buttonUsunczesc"  alignment="CENTER" mnemonicParsing="false"
-                             text="Usuń część" onAction="#usunCzesc">
-                     </Button>
-                 </children>
-             </Pane>
-             <Pane fx:id="zleceniaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                 <children>
-                     <Label layoutX="14.0" layoutY="32.0" text="Zlecenia:" />
-                     <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="1100.0">
-                         <columns>
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Id zlecenia" />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Klient" />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Mechanik" />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa s" />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa e" />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Opis" />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Data rozp." />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Data zak." />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Opis napr." />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Użyte części" />
-                             <TableColumn minWidth="75.0" prefWidth="100" text="Cena" />
-                         </columns>
-                     </TableView>
-                     <Button layoutX="18.0" layoutY="274.0" mnemonicParsing="false" text="Usuń" onAction="#usunZlecenie" />
-                 </children>
-             </Pane>
-            <Pane fx:id="uzytkownicyPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label layoutX="14.0" layoutY="32.0" text="Użtkownicy:" />
-                  <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="432.0" fx:id="uzytkownicy">
-                    <columns>
-                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Imie" fx:id="imieColumn"/>
-                        <TableColumn minWidth="100.0" prefWidth="100.0" text="Nazwisko" fx:id="nazwiskoColumn"/>
-                      <TableColumn minWidth="100.0" prefWidth="73.0" text="Login" fx:id="loginColumn"/>
-                        <TableColumn minWidth="76.0" prefWidth="77.0" text="Rola" fx:id="rolaColumn"/>
-                    </columns>
-                  </TableView>
-                  <Button layoutX="18.0" layoutY="274.0" mnemonicParsing="false" text="Usuń" onAction="#usunUzytkownika"/>
-               </children>
-            </Pane>
-            <Pane fx:id="utworzUzytkownikaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <TextField layoutX="69.0" layoutY="65.0" fx:id="nowyLogin"/>
-                  <Label layoutX="14.0" layoutY="69.0" text="Login" />
-                   <Label layoutX="300.0" layoutY="69.0" text="Imie" />
-                   <Label layoutX="300.0" layoutY="131.0" text="Nazwisko" />
-                   <TextField layoutX="360.0" layoutY="65.0" fx:id="noweImie"/>
-                   <TextField layoutX="360.0" layoutY="126.0" fx:id="noweNazwisko"/>
-                  <Label layoutX="14.0" layoutY="131.0" text="Hasło" />
-                  <PasswordField layoutX="69.0" layoutY="126.0" fx:id="noweHaslo"/>
-                  <Label layoutX="15.0" layoutY="189.0" text="Rola" />
-                  <Accordion layoutX="69.0" layoutY="183.0" />
-                  <ChoiceBox layoutX="68.0" layoutY="183.0" prefWidth="150.0" fx:id="nowaRola">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <Integer fx:value="0"/>
-                            <Integer fx:value="1"/>
-                            <Integer fx:value="2"/>
-                            <Integer fx:value="3"/>
-                        </FXCollections>
-                    </items>
-                  </ChoiceBox>
-                  <Button layoutX="68.0" layoutY="238.0" mnemonicParsing="false" text="Dodaj" onAction="#utwórzUzytkownika"/>
-                  <Label layoutX="143.0" layoutY="243.0" text="Error (już istnieje o takim loginie) albo dodano message" fx:id="blad" />
-               </children>
-            </Pane>
-            <Pane fx:id="zamowieniaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <TableView layoutX="25.0" layoutY="51.0" prefHeight="200.0" prefWidth="600.0" fx:id="zamowienia">
-                    <columns>
-                        <TableColumn prefWidth="75.0" text="Id" fx:id="idColumn"/>
-                      <TableColumn prefWidth="75.0" text="Nazwa" fx:id="nazwaColumn"/>
-                      <TableColumn prefWidth="151.0" text="Komentarz" fx:id="komentarzColumn"/>
-                        <TableColumn prefWidth="151.0" text="Stan" fx:id="stanColumn"/>
-                        <TableColumn minWidth="7.0" prefWidth="96.0" text="Mechanik" fx:id="mechanikColumn"/>
-                    </columns>
-                  </TableView>
-                  <Button layoutX="25.0" layoutY="271.0" mnemonicParsing="false" text="Usuń" onAction="#usunZamowienie"/>
-                  <Label layoutX="25.0" layoutY="28.0" text="Zamówienia" />
-               </children>
-            </Pane>
-             <Pane fx:id="profilPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                 <children>
-                     <Label layoutX="104.0" layoutY="83.0" text="Imie"/>
-                     <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
-                     <Label layoutX="104.0" layoutY="216.0" text="Login:"/>
-                     <Label layoutX="106.0" layoutY="279.0" text="Pesel"/>
-                     <Label layoutX="289.0" layoutY="82.0" text="Label"/>
-                     <Label layoutX="289.0" layoutY="144.0" text="Label"/>
-                     <Label layoutX="289.0" layoutY="216.0" text="Label"/>
-                     <Label layoutX="289.0" layoutY="278.0" text="Label"/>
-                 </children>
-             </Pane>
-         </children>
-      </AnchorPane>
-   </center>
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Pane fx:id="czesciPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="czesci">
+                            <columns>
+                                <TableColumn prefWidth="150.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
+                                <TableColumn prefWidth="100.0" text="Opis" fx:id="opisColumn"/>
+                                <TableColumn prefWidth="100.0" text="Ilość sztuk" fx:id="iloscColumn"/>
+                                <TableColumn prefWidth="100.0" text="Cena" fx:id="cenaColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="50" layoutY="500" fx:id="buttonUsunczesc" alignment="CENTER"
+                                mnemonicParsing="false"
+                                text="Usuń część" onAction="#usunCzesc">
+                        </Button>
+                    </children>
+                </Pane>
+                <Pane fx:id="zleceniaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="32.0" text="Zlecenia:"/>
+                        <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="1100.0">
+                            <columns>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Id zlecenia"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Klient"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Mechanik"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa s"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa e"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Opis"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Data rozp."/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Data zak."/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Opis napr."/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Użyte części"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Cena"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="18.0" layoutY="274.0" mnemonicParsing="false" text="Usuń"
+                                onAction="#usunZlecenie"/>
+                    </children>
+                </Pane>
+                <Pane fx:id="uzytkownicyPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="32.0" text="Użtkownicy:"/>
+                        <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="432.0"
+                                   fx:id="uzytkownicy">
+                            <columns>
+                                <TableColumn minWidth="75.0" prefWidth="75.0" text="Imie" fx:id="imieColumn"/>
+                                <TableColumn minWidth="100.0" prefWidth="100.0" text="Nazwisko" fx:id="nazwiskoColumn"/>
+                                <TableColumn minWidth="100.0" prefWidth="73.0" text="Login" fx:id="loginColumn"/>
+                                <TableColumn minWidth="76.0" prefWidth="77.0" text="Rola" fx:id="rolaColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="18.0" layoutY="274.0" mnemonicParsing="false" text="Usuń"
+                                onAction="#usunUzytkownika"/>
+                    </children>
+                </Pane>
+                <Pane fx:id="utworzUzytkownikaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <TextField layoutX="69.0" layoutY="65.0" fx:id="nowyLogin"/>
+                        <Label layoutX="14.0" layoutY="69.0" text="Login"/>
+                        <Label layoutX="300.0" layoutY="69.0" text="Imie"/>
+                        <Label layoutX="300.0" layoutY="131.0" text="Nazwisko"/>
+                        <TextField layoutX="360.0" layoutY="65.0" fx:id="noweImie"/>
+                        <TextField layoutX="360.0" layoutY="126.0" fx:id="noweNazwisko"/>
+                        <Label layoutX="14.0" layoutY="131.0" text="Hasło"/>
+                        <PasswordField layoutX="69.0" layoutY="126.0" fx:id="noweHaslo"/>
+                        <Label layoutX="15.0" layoutY="189.0" text="Rola"/>
+                        <Accordion layoutX="69.0" layoutY="183.0"/>
+                        <ChoiceBox layoutX="68.0" layoutY="183.0" prefWidth="150.0" fx:id="nowaRola">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <Integer fx:value="0"/>
+                                    <Integer fx:value="1"/>
+                                    <Integer fx:value="2"/>
+                                    <Integer fx:value="3"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                        <Button layoutX="68.0" layoutY="238.0" mnemonicParsing="false" text="Dodaj"
+                                onAction="#utwórzUzytkownika"/>
+                        <Label layoutX="143.0" layoutY="243.0"
+                               text="Error (już istnieje o takim loginie) albo dodano message" fx:id="blad"/>
+                    </children>
+                </Pane>
+                <Pane fx:id="zamowieniaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <TableView layoutX="25.0" layoutY="51.0" prefHeight="200.0" prefWidth="600.0"
+                                   fx:id="zamowienia">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="Id" fx:id="idColumn"/>
+                                <TableColumn prefWidth="75.0" text="Nazwa" fx:id="nazwaColumn"/>
+                                <TableColumn prefWidth="151.0" text="Komentarz" fx:id="komentarzColumn"/>
+                                <TableColumn prefWidth="151.0" text="Stan" fx:id="stanColumn"/>
+                                <TableColumn minWidth="7.0" prefWidth="96.0" text="Mechanik" fx:id="mechanikColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="25.0" layoutY="271.0" mnemonicParsing="false" text="Usuń"
+                                onAction="#usunZamowienie"/>
+                        <Label layoutX="25.0" layoutY="28.0" text="Zamówienia"/>
+                    </children>
+                </Pane>
+                <Pane fx:id="profilPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label layoutX="104.0" layoutY="83.0" text="Imie"/>
+                        <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
+                        <Label layoutX="104.0" layoutY="216.0" text="Login:"/>
+                        <Label layoutX="106.0" layoutY="279.0" text="Pesel"/>
+                        <Label layoutX="289.0" layoutY="82.0" text="Label"/>
+                        <Label layoutX="289.0" layoutY="144.0" text="Label"/>
+                        <Label layoutX="289.0" layoutY="216.0" text="Label"/>
+                        <Label layoutX="289.0" layoutY="278.0" text="Label"/>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </center>
 </BorderPane>

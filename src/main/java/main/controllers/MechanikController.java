@@ -17,7 +17,7 @@ public class MechanikController implements Initializable {
     @FXML
     private BorderPane borderPane;
     @FXML
-    private Pane czesciPane,zleceniaPane,mojeZleceniaPane,profilPane;
+    private Pane czesciPane, zleceniaPane, mojeZleceniaPane, profilPane;
     @FXML
     private ToggleButton toggleButtonCzesci, toggleButtonZlecenia, toggleButtonTwojeZlecenia, toggleButtonProfil;
 

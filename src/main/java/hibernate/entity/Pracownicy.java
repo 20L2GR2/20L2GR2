@@ -36,7 +36,7 @@ public class Pracownicy {
     public Pracownicy() {
     }
 
-    public long getIdPracownika() {
+    public int getIdPracownika() {
         return idPracownika;
     }
 

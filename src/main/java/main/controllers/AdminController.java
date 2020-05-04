@@ -43,9 +43,9 @@ public class AdminController implements Initializable {
     @FXML
     private TableView uzytkownicy, zamowienia, czesci;
     @FXML
-    private TableColumn <Pracownicy, String> imieColumn, nazwiskoColumn, loginColumn;
+    private TableColumn<Pracownicy, String> imieColumn, nazwiskoColumn, loginColumn;
     @FXML
-    private  TableColumn<Pracownicy, Short> rolaColumn;
+    private TableColumn<Pracownicy, Short> rolaColumn;
     @FXML
     private TableColumn<Magazyn, String> nazwaCzesciColumn, opisColumn;
     @FXML
@@ -53,11 +53,11 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<Magazyn, Float> cenaColumn;
     @FXML
-    private TableColumn  nazwaColumn, komentarzColumn, mechanikColumn, stanColumn, idColumn;
+    private TableColumn nazwaColumn, komentarzColumn, mechanikColumn, stanColumn, idColumn;
     @FXML
     private BorderPane borderPane;
     @FXML
-    private Pane czesciPane,zleceniaPane,profilPane, utworzUzytkownikaPane, uzytkownicyPane, zamowieniaPane;
+    private Pane czesciPane, zleceniaPane, profilPane, utworzUzytkownikaPane, uzytkownicyPane, zamowieniaPane;
     @FXML
     private ToggleButton toggleButtonCzesci, toggleButtonZlecenia, toggleButtonProfil, toggleButtonUtworzUrz, toggleButtonUzytkownicy, toggleButtonZamowienia;
 
@@ -109,23 +109,34 @@ public class AdminController implements Initializable {
     }
 
     public void utwórzUzytkownika() {
-        if(nowyLogin.getText().isEmpty())
-            {blad.setText("Podano zle dane"); return;}
-        if(noweHaslo.getText().isEmpty())
-            {blad.setText("Podano zle dane"); return;}
-        if(nowaRola.getSelectionModel().isEmpty())
-            {blad.setText("Podano zle dane"); return;}
-        if(noweImie.getText().isEmpty())
-            {blad.setText("Podano zle dane"); return;}
-        if(noweNazwisko.getText().isEmpty())
-            {blad.setText("Podano zle dane"); return;}
+        if (nowyLogin.getText().isEmpty()) {
+            blad.setText("Podano zle dane");
+            return;
+        }
+        if (noweHaslo.getText().isEmpty()) {
+            blad.setText("Podano zle dane");
+            return;
+        }
+        if (nowaRola.getSelectionModel().isEmpty()) {
+            blad.setText("Podano zle dane");
+            return;
+        }
+        if (noweImie.getText().isEmpty()) {
+            blad.setText("Podano zle dane");
+            return;
+        }
+        if (noweNazwisko.getText().isEmpty()) {
+            blad.setText("Podano zle dane");
+            return;
+        }
         Transaction transaction = null;
 
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            if(!session.createQuery("SELECT a FROM Pracownicy a WHERE a.login = :login", Pracownicy.class).setParameter("login",nowyLogin.getText()).getResultList().isEmpty()) {
-                blad.setText("Istnieje użytkownik z takim Loginem"); session.clear();
+            if (!session.createQuery("SELECT a FROM Pracownicy a WHERE a.login = :login", Pracownicy.class).setParameter("login", nowyLogin.getText()).getResultList().isEmpty()) {
+                blad.setText("Istnieje użytkownik z takim Loginem");
+                session.clear();
                 session.disconnect();
                 session.close();
                 return;
@@ -135,28 +146,28 @@ public class AdminController implements Initializable {
             Pracownicy nowyPracownik = new Pracownicy();
             nowyPracownik.setHaslo(noweHaslo.getText());
             nowyPracownik.setLogin(nowyLogin.getText());
-            nowyPracownik.setStanowisko((short)Integer.parseInt(nowaRola.getValue().toString()));
+            nowyPracownik.setStanowisko((short) Integer.parseInt(nowaRola.getValue().toString()));
             nowyPracownik.setImie(noweImie.getText());
             nowyPracownik.setNazwisko(noweNazwisko.getText());
             session.save(nowyPracownik);
             uzytkownicy.getItems().add(nowyPracownik);
             session.getTransaction().commit();
-            blad.setText("Stworzyłem użytkownika "+nowyLogin.getText());
+            blad.setText("Stworzyłem użytkownika " + nowyLogin.getText());
 
             session.clear();
             session.disconnect();
             session.close();
-        }catch(Exception e){
-            if(transaction != null) transaction.rollback();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
 
     }
 
     public void usunUzytkownika() {
-        if(uzytkownicy.getSelectionModel().isEmpty()) return;
+        if (uzytkownicy.getSelectionModel().isEmpty()) return;
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
             Pracownicy pracownik = (Pracownicy) uzytkownicy.getSelectionModel().getSelectedItem();
@@ -169,8 +180,8 @@ public class AdminController implements Initializable {
             session.clear();
             session.disconnect();
             session.close();
-        }catch(Exception e){
-            if(transaction != null) transaction.rollback();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
         System.out.println("Usunieto uzytkownika!");
@@ -181,9 +192,9 @@ public class AdminController implements Initializable {
     }
 
     public void usunCzesc() {
-        if(czesci.getSelectionModel().isEmpty()) return;
+        if (czesci.getSelectionModel().isEmpty()) return;
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
             Magazyn czesc = (Magazyn) czesci.getSelectionModel().getSelectedItem();
@@ -196,21 +207,21 @@ public class AdminController implements Initializable {
             session.clear();
             session.disconnect();
             session.close();
-        }catch(Exception e){
-            if(transaction != null) transaction.rollback();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
         System.out.println("Usunieto czesc!");
     }
 
     public void usunZamowienie() {
-        if(zamowienia.getSelectionModel().isEmpty()) return;
+        if (zamowienia.getSelectionModel().isEmpty()) return;
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            Zamowienia zamowienie = (Zamowienia)zamowienia.getSelectionModel().getSelectedItem();
-            System.out.println("PRZESZEDŁEM DALEJ!!!! "+zamowienie.getIdZamowienia()*30);
+            Zamowienia zamowienie = (Zamowienia) zamowienia.getSelectionModel().getSelectedItem();
+            System.out.println("PRZESZEDŁEM DALEJ!!!! " + zamowienie.getIdZamowienia() * 30);
             session.delete(zamowienie);
 
             zamowienia.getItems().remove(zamowienie);
@@ -220,16 +231,16 @@ public class AdminController implements Initializable {
             session.clear();
             session.disconnect();
             session.close();
-        }catch(Exception e){
-            if(transaction != null) transaction.rollback();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
         System.out.println("Usunięto zamówienie!");
     }
 
-    private void updateData(Object obiekt){
+    private void updateData(Object obiekt) {
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             System.out.println("UPDATE!");
             session.update(obiekt);
@@ -238,51 +249,51 @@ public class AdminController implements Initializable {
             session.clear();
             session.disconnect();
             session.close();
-        }catch(Exception e){
-            if(transaction != null) transaction.rollback();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
 
     }
 
 
-    public void inicjalizujWidokAdminaZBazy(){
+    public void inicjalizujWidokAdminaZBazy() {
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            List<Pracownicy> pracownicy =  session.createQuery("SELECT a FROM Pracownicy a", Pracownicy.class).getResultList();
+            List<Pracownicy> pracownicy = session.createQuery("SELECT a FROM Pracownicy a", Pracownicy.class).getResultList();
 
             uzytkownicy.setEditable(true);
             imieColumn.setCellValueFactory(new PropertyValueFactory<>("imie"));
             imieColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-            imieColumn.setOnEditCommit(e->{
+            imieColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setImie(e.getNewValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
             nazwiskoColumn.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
             nazwiskoColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-            nazwiskoColumn.setOnEditCommit(e->{
+            nazwiskoColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setNazwisko(e.getNewValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
             loginColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
             loginColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-            loginColumn.setOnEditCommit(e->{
+            loginColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setLogin(e.getNewValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
             rolaColumn.setCellValueFactory(new PropertyValueFactory<>("stanowisko"));
-            ObservableList<Short> testlist = FXCollections.observableArrayList((short)0,(short)1,(short)2,(short)3);
+            ObservableList<Short> testlist = FXCollections.observableArrayList((short) 0, (short) 1, (short) 2, (short) 3);
             rolaColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(testlist));
-            rolaColumn.setOnEditCommit(e->{
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setStanowisko((short)e.getNewValue());
+            rolaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setStanowisko((short) e.getNewValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
-            for(Pracownicy p : pracownicy){
+            for (Pracownicy p : pracownicy) {
                 uzytkownicy.getItems().add(p);
             }
             idColumn.setCellValueFactory(new PropertyValueFactory<>("idZamowienia"));
@@ -290,48 +301,48 @@ public class AdminController implements Initializable {
             komentarzColumn.setCellValueFactory(new PropertyValueFactory<>("komentarz"));
             stanColumn.setCellValueFactory(new PropertyValueFactory<>("stanZamowienia"));
             nazwaColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
-            List<Zamowienia> zamowieniaTab =  session.createQuery("SELECT a FROM Zamowienia a", Zamowienia.class).getResultList();
-            for(Zamowienia z : zamowieniaTab){
+            List<Zamowienia> zamowieniaTab = session.createQuery("SELECT a FROM Zamowienia a", Zamowienia.class).getResultList();
+            for (Zamowienia z : zamowieniaTab) {
                 zamowienia.getItems().add(z);
             }
             czesci.setEditable(true);
             nazwaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
             nazwaCzesciColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-            nazwaCzesciColumn.setOnEditCommit(e->{
+            nazwaCzesciColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setNazwaCzesci(e.getNewValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
             opisColumn.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
             opisColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-            opisColumn.setOnEditCommit(e->{
+            opisColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setOpisCzesci(e.getNewValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
             iloscColumn.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
             iloscColumn.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
-            iloscColumn.setOnEditCommit(e->{
+            iloscColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setIlosc(e.getNewValue().intValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
             cenaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
             cenaColumn.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
-            cenaColumn.setOnEditCommit(e->{
+            cenaColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setCena(e.getNewValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
-            List<Magazyn> magazyn =  session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
-            for(Magazyn z : magazyn){
+            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
+            for (Magazyn z : magazyn) {
                 czesci.getItems().add(z);
             }
 
             session.clear();
             session.disconnect();
             session.close();
-        }catch(Exception e){
-            if(transaction != null) transaction.rollback();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
 

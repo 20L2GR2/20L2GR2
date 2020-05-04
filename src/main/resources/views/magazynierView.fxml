@@ -39,7 +39,8 @@
                 </ToggleButton>
                 <ToggleButton fx:id="toggleButtonStanmagazyn" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
                               maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzStanMagazyn"
-                              styleClass="buttons" text="Stan magazynu" toggleGroup="$magazynierMenu" VBox.vgrow="ALWAYS">
+                              styleClass="buttons" text="Stan magazynu" toggleGroup="$magazynierMenu"
+                              VBox.vgrow="ALWAYS">
                     <graphic>
                         <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -93,26 +94,32 @@
                         <Label layoutX="104.0" layoutY="83.0" text="Imie"/>
                         <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
                         <Label layoutX="104.0" layoutY="216.0" text="Login:"/>
-                        <Label layoutX="106.0" layoutY="279.0" text="Pesel"/>
-                        <Label layoutX="289.0" layoutY="82.0" text="Label"/>
-                        <Label layoutX="289.0" layoutY="144.0" text="Label"/>
-                        <Label layoutX="289.0" layoutY="216.0" text="Label"/>
-                        <Label layoutX="289.0" layoutY="278.0" text="Label"/>
+                        <Label layoutX="289.0" layoutY="82.0" text="Label" fx:id="imieLabel"/>
+                        <Label layoutX="289.0" layoutY="144.0" text="Label" fx:id="nazwiskoLabel"/>
+                        <Label layoutX="289.0" layoutY="216.0" text="Label" fx:id="loginLabel"/>
+
                     </children>
                 </Pane>
                 <Pane fx:id="stanMagazynuPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1100.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1200.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableMagazyn">
                             <columns>
-                                <TableColumn prefWidth="700.0" text="Nazwa części" />
-                                <TableColumn prefWidth="400.0" text="Ilość sztuk" />
+                                <TableColumn prefWidth="500.0" text="Nazwa części" fx:id="magazynNazwaCzesciColumn"/>
+                                <TableColumn prefWidth="500.0" text="Opis części" fx:id="magazynOpisCzesciColumn"/>
+                                <TableColumn prefWidth="100.0" text="Ilość sztuk" fx:id="magazynIloscCzesciColumn"/>
+                                <TableColumn prefWidth="90.0" text="Cena" fx:id="magazynCenaCzesciColumn"/>
                             </columns>
                         </TableView>
-                        <Button layoutX="950" layoutY="500" fx:id="buttonDodajczesc" onAction="#dodajCzesc" alignment="CENTER" mnemonicParsing="false"
+                        <Button layoutX="950" layoutY="500" fx:id="buttonDodajczesc" onAction="#dodajCzesc"
+                                alignment="CENTER" mnemonicParsing="false"
                                 text="Dodaj część">
                         </Button>
-                        <Button layoutX="1050" layoutY="500" fx:id="buttonUsunczesc" onAction="#usunCzesc" alignment="CENTER" mnemonicParsing="false"
+                        <Button layoutX="1050" layoutY="500" fx:id="buttonUsunczesc" onAction="#usunCzesc"
+                                alignment="CENTER" mnemonicParsing="false"
                                 text="Usuń część">
                         </Button>
                     </children>
@@ -120,13 +127,19 @@
                 <Pane fx:id="zamowieniaPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1100.0">
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1200.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableZamowienia">
                             <columns>
-                                <TableColumn prefWidth="400.0" text="Mechanik" />
-                                <TableColumn minWidth="4.0" prefWidth="700.0" text="Nazwa części" />
+                                <TableColumn minWidth="4.0" prefWidth="400.0" text="Nazwa części"
+                                             fx:id="zamowieniaNazwaCzesciColumn"/>
+                                <TableColumn prefWidth="400.0" text="Komentarz" fx:id="zamowieniaKomentarzColumn"/>
+                                <TableColumn prefWidth="390.0" text="Mechanik" fx:id="zamowieniaMechanikColumn"/>
                             </columns>
                         </TableView>
-                        <Button layoutX="1050" layoutY="500" fx:id="buttonUsunZlecenie" onAction="#usunZlecenie" alignment="CENTER" mnemonicParsing="false"
+                        <Button layoutX="1050" layoutY="500" fx:id="buttonUsunZlecenie" onAction="#usunZlecenie"
+                                alignment="CENTER" mnemonicParsing="false"
                                 text="Usuń zlecenie">
                         </Button>
                     </children>

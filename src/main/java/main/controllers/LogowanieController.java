@@ -21,27 +21,31 @@ import java.io.IOException;
 
 public class LogowanieController {
 
+    public static int userID;
+
     @FXML
     public TextField loginTextField;
     public PasswordField passwordField;
     public Label bladLogowaniaLabel;
 
     public void zaloguj(ActionEvent event) throws IOException {
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         String login = loginTextField.getText();
         String haslo = passwordField.getText();
         int stanowisko = -1;
 
-        try{
-            if(validate(login,haslo)){
+        try {
+            if (validate(login, haslo)) {
                 Transaction transaction = null;
                 Pracownicy user = null;
                 try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                     transaction = session.beginTransaction();
-                    user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.login = :login").setParameter("login",login).uniqueResult();
-                    if ( user != null ) {
+                    user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.login = :login").setParameter("login", login).uniqueResult();
+                    if (user != null) {
                         stanowisko = user.getStanowisko();
+                        userID = user.getIdPracownika();
                         System.out.println(stanowisko);
+                        session.save(stanowisko);
                     }
                     transaction.commit();
                 } catch (Exception e) {
@@ -50,15 +54,15 @@ public class LogowanieController {
                     }
                     e.printStackTrace();
                 }
-            }else{
+            } else {
                 bladLogowaniaLabel.setVisible(true);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println(stanowisko);
 
-        switch (stanowisko){
+        switch (stanowisko) {
             case 0:
                 openWindow("/views/adminView.fxml", window);
                 break;
@@ -78,13 +82,13 @@ public class LogowanieController {
     }
 
     public void logout(ActionEvent event) throws IOException {
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         openWindow("/views/application.fxml", window);
     }
 
     private void openWindow(String name, Stage window) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource(name));
-        Scene scene = new Scene(parent,1600,800);
+        Scene scene = new Scene(parent, 1600, 800);
 
         window.setTitle("AutoService");
         window.setScene(scene);
@@ -101,7 +105,7 @@ public class LogowanieController {
         Pracownicy user = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.login = :login").setParameter("login",userName).uniqueResult();
+            user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.login = :login").setParameter("login", userName).uniqueResult();
             if (user != null && user.getHaslo().equals(password)) {
                 return true;
             }
