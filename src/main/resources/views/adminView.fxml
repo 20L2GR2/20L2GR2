@@ -18,6 +18,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import java.lang.Integer?>
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.AdminController">
    <left>
       <VBox alignment="CENTER" prefHeight="323.0" prefWidth="137.0" BorderPane.alignment="CENTER">
@@ -62,11 +65,12 @@
              <Pane fx:id="czesciPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                  <children>
-                     <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+                     <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:id="czesci">
                          <columns>
-                             <TableColumn prefWidth="150.0" text="Nazwa części" />
-                             <TableColumn prefWidth="100.0" text="Opis" />
-                             <TableColumn prefWidth="100.0" text="Ilość sztuk" />
+                             <TableColumn prefWidth="150.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
+                             <TableColumn prefWidth="100.0" text="Opis" fx:id="opisColumn"/>
+                             <TableColumn prefWidth="100.0" text="Ilość sztuk" fx:id="iloscColumn"/>
+                             <TableColumn prefWidth="100.0" text="Cena" fx:id="cenaColumn"/>
                          </columns>
                      </TableView>
                      <Button layoutX="50" layoutY="500" fx:id="buttonUsunczesc"  alignment="CENTER" mnemonicParsing="false"
@@ -98,12 +102,12 @@
             <Pane fx:id="uzytkownicyPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label layoutX="14.0" layoutY="32.0" text="Użtkownicy:" />
-                  <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="432.0">
+                  <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="432.0" fx:id="uzytkownicy">
                     <columns>
-                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Imie" />
-                        <TableColumn minWidth="100.0" prefWidth="100.0" text="Nazwisko" />
-                      <TableColumn minWidth="100.0" prefWidth="73.0" text="Login" />
-                        <TableColumn minWidth="76.0" prefWidth="77.0" text="Rola" />
+                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Imie" fx:id="imieColumn"/>
+                        <TableColumn minWidth="100.0" prefWidth="100.0" text="Nazwisko" fx:id="nazwiskoColumn"/>
+                      <TableColumn minWidth="100.0" prefWidth="73.0" text="Login" fx:id="loginColumn"/>
+                        <TableColumn minWidth="76.0" prefWidth="77.0" text="Rola" fx:id="rolaColumn"/>
                     </columns>
                   </TableView>
                   <Button layoutX="18.0" layoutY="274.0" mnemonicParsing="false" text="Usuń" onAction="#usunUzytkownika"/>
@@ -111,25 +115,39 @@
             </Pane>
             <Pane fx:id="utworzUzytkownikaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TextField layoutX="69.0" layoutY="65.0" />
+                  <TextField layoutX="69.0" layoutY="65.0" fx:id="nowyLogin"/>
                   <Label layoutX="14.0" layoutY="69.0" text="Login" />
+                   <Label layoutX="300.0" layoutY="69.0" text="Imie" />
+                   <Label layoutX="300.0" layoutY="131.0" text="Nazwisko" />
+                   <TextField layoutX="360.0" layoutY="65.0" fx:id="noweImie"/>
+                   <TextField layoutX="360.0" layoutY="126.0" fx:id="noweNazwisko"/>
                   <Label layoutX="14.0" layoutY="131.0" text="Hasło" />
-                  <PasswordField layoutX="69.0" layoutY="126.0" />
+                  <PasswordField layoutX="69.0" layoutY="126.0" fx:id="noweHaslo"/>
                   <Label layoutX="15.0" layoutY="189.0" text="Rola" />
                   <Accordion layoutX="69.0" layoutY="183.0" />
-                  <ChoiceBox layoutX="68.0" layoutY="183.0" prefWidth="150.0" />
+                  <ChoiceBox layoutX="68.0" layoutY="183.0" prefWidth="150.0" fx:id="nowaRola">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <Integer fx:value="0"/>
+                            <Integer fx:value="1"/>
+                            <Integer fx:value="2"/>
+                            <Integer fx:value="3"/>
+                        </FXCollections>
+                    </items>
+                  </ChoiceBox>
                   <Button layoutX="68.0" layoutY="238.0" mnemonicParsing="false" text="Dodaj" onAction="#utwórzUzytkownika"/>
-                  <Label layoutX="143.0" layoutY="243.0" text="Error (już istnieje o takim loginie) albo dodano message" />
+                  <Label layoutX="143.0" layoutY="243.0" text="Error (już istnieje o takim loginie) albo dodano message" fx:id="blad" />
                </children>
             </Pane>
             <Pane fx:id="zamowieniaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TableView layoutX="25.0" layoutY="51.0" prefHeight="200.0" prefWidth="398.0">
+                  <TableView layoutX="25.0" layoutY="51.0" prefHeight="200.0" prefWidth="600.0" fx:id="zamowienia">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Klient" />
-                      <TableColumn prefWidth="101.0" text="Mechanik" />
-                        <TableColumn prefWidth="101.0" text="Obsługa K." />
-                        <TableColumn minWidth="7.0" prefWidth="66.0" text="Stan" />
+                        <TableColumn prefWidth="75.0" text="Id" fx:id="idColumn"/>
+                      <TableColumn prefWidth="75.0" text="Nazwa" fx:id="nazwaColumn"/>
+                      <TableColumn prefWidth="151.0" text="Komentarz" fx:id="komentarzColumn"/>
+                        <TableColumn prefWidth="151.0" text="Stan" fx:id="stanColumn"/>
+                        <TableColumn minWidth="7.0" prefWidth="96.0" text="Mechanik" fx:id="mechanikColumn"/>
                     </columns>
                   </TableView>
                   <Button layoutX="25.0" layoutY="271.0" mnemonicParsing="false" text="Usuń" onAction="#usunZamowienie"/>

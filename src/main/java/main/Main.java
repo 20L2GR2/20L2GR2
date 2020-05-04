@@ -8,6 +8,13 @@ import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import hibernate.entity.*;
+import hibernate.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class Main extends Application {
 
@@ -26,6 +33,8 @@ public class Main extends Application {
 
         Scene scene = new Scene(root, 1600, 800);
 
+
+
         stage.setTitle("AutoService");
         stage.setScene(scene);
         stage.show();
@@ -34,4 +43,7 @@ public class Main extends Application {
         jMetro.setScene(scene);
         root.setStyle("-fx-font: title");
     }
+
+
+
 }

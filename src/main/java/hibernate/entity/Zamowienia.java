@@ -17,9 +17,10 @@ public class Zamowienia {
     @Column(name = "stan_zamowienia", nullable = false)
     private short stanZamowienia;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_mechanika")
     private Pracownicy pracownik;
+
 
     public Zamowienia() {
     }
@@ -73,4 +74,11 @@ public class Zamowienia {
                 ", stanZamowienia=" + stanZamowienia +
                 '}';
     }
+
+
+    public String getPracownikImie() {
+        return pracownik.getImie();
+    }
+
+
 }
