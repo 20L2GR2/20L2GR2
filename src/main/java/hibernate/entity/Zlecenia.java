@@ -12,7 +12,7 @@ public class Zlecenia {
     private int idZlecenia;
     @Column(name = "opis_usterki", nullable = false)
     private String opisUsterki;
-    @Column(name = "data_rozpoczecia", nullable = false)
+    @Column(name = "data_rozpoczecia")
     private java.util.Date dataRozpoczecia;
     @Column(name = "data_zakonczenia")
     private java.util.Date dataZakonczenia;
@@ -22,6 +22,8 @@ public class Zlecenia {
     private String uzyteCzesci;
     @Column(name = "cena")
     private float cena;
+    @Column(name = "stan_zlecenia", nullable = false)
+    private int stanZlecenia;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_klienta")

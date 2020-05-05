@@ -85,17 +85,21 @@
                         <Label layoutX="40" layoutY="30" text="Imię klienta"/>
                         <Label layoutX="40" layoutY="70" text="Nazwisko klienta"/>
                         <Label layoutX="40" layoutY="110" text="Numer kontaktowy"/>
-                        <Label layoutX="40" layoutY="150" text="Marka i model samochodu"/>
-                        <Label layoutX="40" layoutY="190" text="Numer rejestracyjny"/>
-                        <Label layoutX="40" layoutY="230" text="Opis usterki"/>
-                        <TextField layoutX="200" layoutY="30" prefWidth="300"/>
-                        <TextField layoutX="200" layoutY="70" prefWidth="300"/>
-                        <TextField layoutX="200" layoutY="110" prefWidth="300"/>
-                        <TextField layoutX="200" layoutY="150" prefWidth="300"/>
-                        <TextField layoutX="200" layoutY="190" prefWidth="300"/>
-                        <TextArea layoutX="200" layoutY="230" prefHeight="150" prefWidth="300" wrapText="true"/>
-                        <Button layoutX="450" layoutY="410" mnemonicParsing="false" text="Dodaj"
-                                onAction="#dodajZlecenieButton"/>
+                        <Label layoutX="40" layoutY="150" text="Marka samochodu"/>
+                        <Label layoutX="40" layoutY="190" text="Model samochodu"/>
+                        <Label layoutX="40" layoutY="230" text="Numer rejestracyjny"/>
+                        <Label layoutX="40" layoutY="270" text="Opis usterki"/>
+                        <TextField layoutX="200" layoutY="30" prefWidth="300" fx:id="klientImie"/>
+                        <TextField layoutX="200" layoutY="70" prefWidth="300" fx:id="klientNazwisko"/>
+                        <TextField layoutX="200" layoutY="110" prefWidth="300" fx:id="klientTelefon"/>
+                        <TextField layoutX="200" layoutY="150" prefWidth="300" fx:id="klientMarka"/>
+                        <TextField layoutX="200" layoutY="190" prefWidth="300" fx:id="klientModel"/>
+                        <TextField layoutX="200" layoutY="230" prefWidth="300" fx:id="klientRejestracja"/>
+                        <TextArea layoutX="200" layoutY="270" prefHeight="150" prefWidth="300" wrapText="true"
+                                  fx:id="klientOpis"/>
+                        <Button layoutX="450" layoutY="450" mnemonicParsing="false" text="Dodaj"
+                        onAction="#dodajZlecenieButton"/>
+                        <Label layoutX="200" layoutY="500" text="" fx:id="bladKlient"/>
                     </children>
                 </Pane>
 
@@ -108,14 +112,15 @@
                                 onAction="#wybierzZlecenieButton"/>
                         <Label layoutX="500" layoutY="50" text="Imię klienta"/>
                         <Label layoutX="500" layoutY="90" text="Nazwisko klienta"/>
-                        <Label layoutX="500" layoutY="130" text="Marka i model samochodu"/>
-                        <Label layoutX="500" layoutY="170" text="Numer rejestracyjny"/>
-                        <Label layoutX="500" layoutY="210" text="Opis usterki"/>
-                        <Label layoutX="500" layoutY="250" text="Opis mechanika"/>
-                        <Label layoutX="500" layoutY="290" text="Użyte części"/>
-                        <Label layoutX="500" layoutY="400" text="Kwota do zapłaty"/>
-                        <TextField layoutX="610" layoutY="395" prefWidth="50"/>
-                        <Button layoutX="610" layoutY="440" mnemonicParsing="false" text="Zakończ"
+                        <Label layoutX="500" layoutY="130" text="Marka  samochodu"/>
+                        <Label layoutX="500" layoutY="170" text="Model samochodu"/>
+                        <Label layoutX="500" layoutY="210" text="Numer rejestracyjny"/>
+                        <Label layoutX="500" layoutY="250" text="Opis usterki"/>
+                        <Label layoutX="500" layoutY="290" text="Opis mechanika"/>
+                        <Label layoutX="500" layoutY="330" text="Użyte części"/>
+                        <Label layoutX="500" layoutY="440" text="Kwota do zapłaty"/>
+                        <TextField layoutX="610" layoutY="435" prefWidth="50"/>
+                        <Button layoutX="610" layoutY="480" mnemonicParsing="false" text="Zakończ"
                                 onAction="#wybierzZlecenieButton"/>
 
 
@@ -127,12 +132,10 @@
                     <children>
                         <Label layoutX="104.0" layoutY="83.0" text="Imię"/>
                         <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
-                        <Label layoutX="104.0" layoutY="216.0" text="Login:"/>
-                        <Label layoutX="106.0" layoutY="279.0" text="Pesel"/>
-                        <Label layoutX="289.0" layoutY="82.0" text="Label"/>
-                        <Label layoutX="289.0" layoutY="144.0" text="Label"/>
-                        <Label layoutX="289.0" layoutY="216.0" text="Label"/>
-                        <Label layoutX="289.0" layoutY="278.0" text="Label"/>
+                        <Label layoutX="104.0" layoutY="216.0" text="Login"/>
+                        <Label layoutX="289.0" layoutY="82.0" text="asd" fx:id="imieLabel"/>
+                        <Label layoutX="289.0" layoutY="144.0" text="asd2" fx:id="nazwiskoLabel"/>
+                        <Label layoutX="289.0" layoutY="216.0" text="asd3" fx:id="loginLabel"/>
                     </children>
                 </Pane>
             </children>

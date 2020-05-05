@@ -29,7 +29,7 @@ public class Klienci {
     public Klienci() {
     }
 
-    public long getIdKlienta() {
+    public int getIdKlienta() {
         return idKlienta;
     }
 
