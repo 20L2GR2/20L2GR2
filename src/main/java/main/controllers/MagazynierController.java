@@ -7,10 +7,7 @@ import hibernate.util.HibernateUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
@@ -48,12 +45,29 @@ public class MagazynierController implements Initializable {
     public TableColumn zamowieniaNazwaCzesciColumn, zamowieniaKomentarzColumn, zamowieniaMechanikColumn;
     @FXML
     public Label imieLabel, nazwiskoLabel, loginLabel;
+    @FXML
+    public TextField nowaNazwaCzesci, nowaOpisCzesci, nowaIloscCzesci, nowaCenaCzesci;
+    @FXML
+    public Label blad, usuwanieCzesciLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         borderPane.setCenter(profilPane);
         toggleButtonProfil.setSelected(true);
         inicjalizujWidokMagazynieraZBazy();
+
+        // only numbers
+        nowaIloscCzesci.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.matches("\\d*")) return;
+            nowaIloscCzesci.setText(newValue.replaceAll("[^\\d]", ""));
+        });
+
+        // only numbers and . ,
+        nowaCenaCzesci.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.matches("^[1-9]*\\d?(.\\d{1,2})*")) return;
+            nowaCenaCzesci.setText(newValue.replaceAll("[^[1-9]*\\d?(.\\d{1,2})*]", ""));
+        });
+
     }
 
     public void logout(ActionEvent event) throws IOException {
@@ -82,25 +96,123 @@ public class MagazynierController implements Initializable {
     }
 
     public void dodajCzesc() {
-        System.out.println("Dodano!");
+
+        blad.setStyle("-fx-text-fill: red;");
+
+        if (nowaNazwaCzesci.getText().isEmpty()) {
+            blad.setText("Proszę wypełnić wszystkie pola");
+            return;
+        }
+        if (nowaOpisCzesci.getText().isEmpty()) {
+            blad.setText("Proszę wypełnić wszystkie pola");
+            return;
+        }
+        if (nowaIloscCzesci.getText().isEmpty()) {
+            blad.setText("Proszę wypełnić wszystkie pola");
+            return;
+        }
+        if (nowaCenaCzesci.getText().isEmpty()) {
+            blad.setText("Proszę wypełnić wszystkie pola");
+            return;
+        }
+
+        Float num = null;
+        boolean numeric = true;
+        try {
+            num = Float.parseFloat(nowaCenaCzesci.getText());
+        } catch (NumberFormatException e) {
+            numeric = false;
+        }
+
+        if (!numeric) {
+            blad.setText("Niepoprawna cena części");
+            return;
+        }
+
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            if (!session.createQuery("SELECT m FROM Magazyn m WHERE m.nazwaCzesci = :nazwa", Magazyn.class).setParameter("nazwa", nowaNazwaCzesci.getText()).getResultList().isEmpty()) {
+                blad.setText("Istnieje już taka część");
+                session.clear();
+                session.disconnect();
+                session.close();
+                return;
+            }
+
+            System.out.println("Dodawanie części...");
+            Magazyn nowaCzesc = new Magazyn();
+            nowaCzesc.setNazwaCzesci(nowaNazwaCzesci.getText());
+            nowaCzesc.setOpisCzesci(nowaOpisCzesci.getText());
+            nowaCzesc.setIlosc(Integer.parseInt(nowaIloscCzesci.getText()));
+            nowaCzesc.setCena(num);
+            session.save(nowaCzesc);
+            tableMagazyn.getItems().add(nowaCzesc);
+            session.getTransaction().commit();
+            System.out.println("Dodawano!");
+
+            blad.setStyle("-fx-text-fill: white;");
+            blad.setText("Dodano część");
+            usuwanieCzesciLabel.setText("");
+
+            session.clear();
+            session.disconnect();
+            session.close();
+
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
     }
 
+
     public void usunCzesc() {
-        System.out.println("Usunięto!");
+
+        usuwanieCzesciLabel.setStyle("-fx-text-fill: red;");
+
+        if (tableMagazyn.getSelectionModel().isEmpty()) {
+            usuwanieCzesciLabel.setText("Nie wybrano części");
+            return;
+        }
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            Magazyn usuwanieCzesci = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
+            System.out.println("Usuwanie części...");
+            session.delete(usuwanieCzesci);
+
+            tableMagazyn.getItems().remove(usuwanieCzesci);
+
+            session.getTransaction().commit();
+
+            System.out.println("Usunięto część");
+
+            usuwanieCzesciLabel.setStyle("-fx-text-fill: white;");
+            usuwanieCzesciLabel.setText("Usunięto część");
+            blad.setText("");
+
+            session.clear();
+            session.disconnect();
+            session.close();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
     }
 
     public void usunZlecenie() {
-        System.out.println("Usunięto!");
+        System.out.println("Usunięto zlecenie");
     }
 
     private void updateData(Object object) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            System.out.println("UPDATE!");
+            System.out.println("Update...");
             session.update(object);
             session.getTransaction().commit();
-
+            System.out.println("Updated");
             session.clear();
             session.disconnect();
             session.close();
