@@ -132,13 +132,19 @@
                                 <TableColumn minWidth="4.0" prefWidth="400.0" text="Nazwa części"
                                              fx:id="nazwaColumn"/>
                                 <TableColumn prefWidth="400.0" text="Komentarz" fx:id="komentarzColumn"/>
-                                <TableColumn prefWidth="390.0" text="Mechanik" fx:id="mechanikColumn"/>
+                                <TableColumn prefWidth="120.0" text="Mechanik" fx:id="mechanikColumn"/>
+                                <TableColumn prefWidth="270.0" text="Stan zamówienia" fx:id="zamowienieColumn"/>
                             </columns>
                         </TableView>
-                        <Button layoutX="1050" layoutY="500" fx:id="buttonUsunZlecenie" onAction="#usunZlecenie"
+                        <Button layoutX="100" layoutY="500" fx:id="buttonDoRealizacji" onAction="#doRealizacjiButton"
                                 alignment="CENTER" mnemonicParsing="false"
-                                text="Usuń zlecenie">
+                                text="Zamówienie w trakcie realizacji">
                         </Button>
+                        <Button layoutX="100" layoutY="550" fx:id="buttonZrealizowane" onAction="#zrealizowaneButton"
+                                alignment="CENTER" mnemonicParsing="false"
+                                text="Zamówienie zrealizowane">
+                        </Button>
+                        <Label layoutX="100.0" layoutY="600.0" text="" fx:id="bladRealizacji"/>
                     </children>
                 </Pane>
             </children>

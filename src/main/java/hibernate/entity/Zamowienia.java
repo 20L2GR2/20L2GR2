@@ -83,5 +83,21 @@ public class Zamowienia {
         return pracownik.getImie() + " " + pracownik.getNazwisko();
     }
 
+    public String getStanZamowieniaToString() {
+        int stan = getStanZamowienia();
+        switch (stan) {
+            case 0:
+                return "Zamówienie złożone przez mechanika (0)";
+            case 1:
+                return "Zamówienie w trakcie realizacji (1)";
+            case 2:
+                return "Zamówienie zrealizowane (2)";
+            case 3:
+                return "Zamówienie anulowane (3)";
+            default:
+                return "Nieprawidłowy stan zamówienia";
+        }
+    }
+
 
 }
