@@ -39,6 +39,8 @@ public class AdminController implements Initializable {
     private Label blad;
 
     @FXML
+    private Label imieLabel, nazwiskoLabel, loginLabel;
+    @FXML
     private TableView uzytkownicy, zamowienia, czesci;
     @FXML
     private TableColumn<Pracownicy, String> imieColumn, nazwiskoColumn, loginColumn;
@@ -51,7 +53,9 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<Magazyn, Float> cenaColumn;
     @FXML
-    private TableColumn nazwaColumn, komentarzColumn, mechanikColumn, stanColumn, idColumn;
+    private TableColumn idColumn;
+    @FXML
+    private TableColumn<Zamowienia, String> komentarzColumn, nazwaColumn, mechanikColumn, stanColumn;
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -259,6 +263,12 @@ public class AdminController implements Initializable {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+            Pracownicy user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
+
+            imieLabel.setText(user.getImie());
+            nazwiskoLabel.setText(user.getNazwisko());
+            loginLabel.setText(user.getLogin());
+
             List<Pracownicy> pracownicy = session.createQuery("SELECT a FROM Pracownicy a", Pracownicy.class).getResultList();
 
             uzytkownicy.setEditable(true);
@@ -294,15 +304,49 @@ public class AdminController implements Initializable {
             for (Pracownicy p : pracownicy) {
                 uzytkownicy.getItems().add(p);
             }
+            zamowienia.setEditable(true);
             idColumn.setCellValueFactory(new PropertyValueFactory<>("idZamowienia"));
+
+            ObservableList<String> mechanikList = FXCollections.observableArrayList();
+            for (Pracownicy pracownik:
+                    pracownicy) {
+                if(pracownik.getStanowisko() == 2) mechanikList.add(pracownik.getLogin());
+            }
+
+
             mechanikColumn.setCellValueFactory(new PropertyValueFactory<>("pracownikImie"));
+            mechanikColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(mechanikList));
+            mechanikColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setPracownik(getUserByLogin(pracownicy,e.getNewValue()));
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
             komentarzColumn.setCellValueFactory(new PropertyValueFactory<>("komentarz"));
-            stanColumn.setCellValueFactory(new PropertyValueFactory<>("stanZamowienia"));
+            komentarzColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+            komentarzColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setKomentarz(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            stanColumn.setCellValueFactory(new PropertyValueFactory<>("stanZamowieniaToString"));
+            ObservableList<String> stanylist = FXCollections.observableArrayList("Zamówienie złożone przez mechanika (0)", "Zamówienie w trakcie realizacji (1)", "Zamówienie zrealizowane (2)", "Zamówienie anulowane (3)");
+            stanColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(stanylist));
+            stanColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setStanZamowienia(getStanZamowieniaByText(e.getNewValue()));
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
             nazwaColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
+            nazwaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+            nazwaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setNazwaCzesci(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
             List<Zamowienia> zamowieniaTab = session.createQuery("SELECT a FROM Zamowienia a", Zamowienia.class).getResultList();
             for (Zamowienia z : zamowieniaTab) {
                 zamowienia.getItems().add(z);
             }
+
             czesci.setEditable(true);
             nazwaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
             nazwaCzesciColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -344,5 +388,29 @@ public class AdminController implements Initializable {
             e.printStackTrace();
         }
 
+
+
+    }
+    Pracownicy getUserByLogin(List<Pracownicy> listaPracownikow, String login){
+        for (Pracownicy pracownik:
+             listaPracownikow) {
+            if(pracownik.getLogin()==login) return pracownik;
+        }
+        return new Pracownicy();
+    }
+
+    short getStanZamowieniaByText(String zamowienie){
+        switch (zamowienie) {
+            case "Zamówienie złożone przez mechanika (0)":
+                return 0;
+            case "Zamówienie w trakcie realizacji (1)":
+                return 1;
+            case "Zamówienie zrealizowane (2)":
+                return 2;
+            case "Zamówienie anulowane (3)":
+                return 3;
+            default:
+                return 0;
+        }
     }
 }

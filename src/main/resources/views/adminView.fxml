@@ -178,11 +178,11 @@
                         <Label layoutX="104.0" layoutY="83.0" text="Imie"/>
                         <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
                         <Label layoutX="104.0" layoutY="216.0" text="Login:"/>
-                        <Label layoutX="106.0" layoutY="279.0" text="Pesel"/>
-                        <Label layoutX="289.0" layoutY="82.0" text="Label"/>
-                        <Label layoutX="289.0" layoutY="144.0" text="Label"/>
-                        <Label layoutX="289.0" layoutY="216.0" text="Label"/>
-                        <Label layoutX="289.0" layoutY="278.0" text="Label"/>
+                      
+                        <Label layoutX="289.0" layoutY="82.0" text="Label" fx:id="imieLabel"/>
+                        <Label layoutX="289.0" layoutY="144.0" text="Label" fx:id="nazwiskoLabel"/>
+                        <Label layoutX="289.0" layoutY="216.0" text="Label" fx:id="loginLabel"/>
+
                     </children>
                 </Pane>
             </children>
