@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 29 Kwi 2020, 18:25
--- Wersja serwera: 10.4.8-MariaDB
--- Wersja PHP: 7.3.11
+-- Czas generowania: 06 Maj 2020, 18:42
+-- Wersja serwera: 10.4.11-MariaDB
+-- Wersja PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -38,9 +37,6 @@ CREATE TABLE `klienci` (
   `numer_rejestracyjny` varchar(8) COLLATE utf8mb4_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
-
--- --------------------------------------------------------
-
 --
 -- Struktura tabeli dla tabeli `magazyn`
 --
@@ -52,9 +48,6 @@ CREATE TABLE `magazyn` (
   `ilosc` int(9) NOT NULL,
   `cena` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
-
-
--- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla tabeli `pracownicy`
@@ -69,9 +62,6 @@ CREATE TABLE `pracownicy` (
   `haslo` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
-
--- --------------------------------------------------------
-
 --
 -- Struktura tabeli dla tabeli `zamowienia`
 --
@@ -84,9 +74,6 @@ CREATE TABLE `zamowienia` (
   `id_mechanika` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
-
--- --------------------------------------------------------
-
 --
 -- Struktura tabeli dla tabeli `zlecenia`
 --
@@ -97,18 +84,14 @@ CREATE TABLE `zlecenia` (
   `id_mechanika` int(9) DEFAULT NULL,
   `id_obslugaklientastart` int(9) NOT NULL,
   `id_obslugaklientakoniec` int(9) DEFAULT NULL,
+  `stan_zlecenia` int(1) NOT NULL,
   `opis_usterki` text COLLATE utf8mb4_polish_ci NOT NULL,
-  `data_rozpoczecia` datetime NOT NULL,
+  `data_rozpoczecia` datetime DEFAULT current_timestamp(),
   `data_zakonczenia` datetime DEFAULT NULL,
   `opis_naprawy` text COLLATE utf8mb4_polish_ci DEFAULT NULL,
   `uzyte_czesci` varchar(1000) COLLATE utf8mb4_polish_ci DEFAULT NULL,
   `cena` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
-
-
---
--- Indeksy dla zrzutĂłw tabel
---
 
 --
 -- Indeksy dla tabeli `klienci`
@@ -153,7 +136,7 @@ ALTER TABLE `zlecenia`
 -- AUTO_INCREMENT dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `id_klienta` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_klienta` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT dla tabeli `magazyn`
@@ -165,7 +148,7 @@ ALTER TABLE `magazyn`
 -- AUTO_INCREMENT dla tabeli `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  MODIFY `id_pracownika` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pracownika` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienia`
@@ -177,10 +160,10 @@ ALTER TABLE `zamowienia`
 -- AUTO_INCREMENT dla tabeli `zlecenia`
 --
 ALTER TABLE `zlecenia`
-  MODIFY `id_zlecenie` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_zlecenie` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Ograniczenia dla zrzutĂłw tabel
+-- Ograniczenia dla zrzutów tabel
 --
 
 --
