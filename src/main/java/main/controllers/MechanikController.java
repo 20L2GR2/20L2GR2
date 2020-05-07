@@ -98,10 +98,13 @@ public class MechanikController implements Initializable {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
+            Pracownicy user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
+
             System.out.println("Dodawanie części...");
             Zamowienia nowaCzesc = new Zamowienia();
             nowaCzesc.setNazwaCzesci(nazwaCzesci.getText());
             nowaCzesc.setKomentarz(komentarz.getText());
+            nowaCzesc.setPracownik(user);
             session.save(nowaCzesc);
             session.getTransaction().commit();
             System.out.println("Dodano!");
@@ -113,24 +116,6 @@ public class MechanikController implements Initializable {
             session.disconnect();
             session.close();
 
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        }
-    }
-
-
-    private void updateData(Object object) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            System.out.println("Update...");
-            session.update(object);
-            session.getTransaction().commit();
-            System.out.println("Updated");
-            session.clear();
-            session.disconnect();
-            session.close();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
