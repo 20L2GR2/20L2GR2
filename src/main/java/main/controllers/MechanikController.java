@@ -1,6 +1,5 @@
 package main.controllers;
 
-import hibernate.entity.Magazyn;
 import hibernate.entity.Pracownicy;
 import hibernate.entity.Zamowienia;
 import hibernate.entity.Zlecenia;
@@ -10,11 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.util.converter.FloatStringConverter;
-import javafx.util.converter.LongStringConverter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -87,16 +83,29 @@ public class MechanikController implements Initializable {
         }
 
         Transaction transaction = null;
+        Zlecenia zlecenie = null;
+        Pracownicy user = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            System.out.println("Update...");
-            Zlecenia zlecenie = (Zlecenia) tableZlecenia.getSelectionModel().getSelectedItem();
-            System.out.println(zlecenie.getIdZlecenia());
+            try {
+                transaction = session.beginTransaction();
+                System.out.println("Update...");
+                zlecenie = (Zlecenia) tableZlecenia.getSelectionModel().getSelectedItem();
+                System.out.println(zlecenie.getIdZlecenia());
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
 
-            Pracownicy user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
-            zlecenie.setPracownikMechanik(user);
+            try {
+                transaction = session.beginTransaction();
+                user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
+                zlecenie.setPracownikMechanik(user);
 
-            System.out.println(zlecenie);
+                System.out.println(zlecenie);
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
             session.update(zlecenie);
             session.getTransaction().commit();
             System.out.println("Updated");

@@ -16,41 +16,14 @@ public class Zlecenia {
     private java.util.Date dataRozpoczecia;
     @Column(name = "data_zakonczenia")
     private java.util.Date dataZakonczenia;
+    @Column(name = "stan_zlecenia", nullable = false)
+    private int stanZlecenia;
     @Column(name = "opis_naprawy")
     private String opisNaprawy;
     @Column(name = "uzyte_czesci")
     private String uzyteCzesci;
     @Column(name = "cena", nullable = false)
     private Float cena;
-
-    public int getStanZlecenia() {
-        return stanZlecenia;
-    }
-
-    @Override
-    public String toString() {
-        return "Zlecenia{" +
-                "idZlecenia=" + idZlecenia +
-                ", opisUsterki='" + opisUsterki + '\'' +
-                ", dataRozpoczecia=" + dataRozpoczecia +
-                ", dataZakonczenia=" + dataZakonczenia +
-                ", opisNaprawy='" + opisNaprawy + '\'' +
-                ", uzyteCzesci='" + uzyteCzesci + '\'' +
-                ", cena=" + cena +
-                ", stanZlecenia=" + stanZlecenia +
-                ", klientZlecenie=" + klientZlecenie +
-                ", pracownikMechanik=" + pracownikMechanik +
-                ", pracownikObslugaStart=" + pracownikObslugaStart +
-                ", pracownikObslugaKoniec=" + pracownikObslugaKoniec +
-                '}';
-    }
-
-    public void setStanZlecenia(int stanZlecenia) {
-        this.stanZlecenia = stanZlecenia;
-    }
-
-    @Column(name = "stan_zlecenia", nullable = false)
-    private int stanZlecenia;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_klienta")
@@ -159,5 +132,29 @@ public class Zlecenia {
         this.pracownikObslugaKoniec = pracownikObslugaKoniec;
     }
 
+    public int getStanZlecenia() {
+        return stanZlecenia;
+    }
 
+    public void setStanZlecenia(int stanZlecenia) {
+        this.stanZlecenia = stanZlecenia;
+    }
+
+    @Override
+    public String toString() {
+        return "Zlecenia{" +
+                "idZlecenia=" + idZlecenia +
+                ", opisUsterki='" + opisUsterki + '\'' +
+                ", dataRozpoczecia=" + dataRozpoczecia +
+                ", dataZakonczenia=" + dataZakonczenia +
+                ", opisNaprawy='" + opisNaprawy + '\'' +
+                ", uzyteCzesci='" + uzyteCzesci + '\'' +
+                ", cena=" + cena +
+                ", stanZlecenia=" + stanZlecenia +
+                ", klientZlecenie=" + klientZlecenie +
+                ", pracownikMechanik=" + pracownikMechanik +
+                ", pracownikObslugaStart=" + pracownikObslugaStart +
+                ", pracownikObslugaKoniec=" + pracownikObslugaKoniec +
+                '}';
+    }
 }
