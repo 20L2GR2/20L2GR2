@@ -96,6 +96,7 @@ public class MechanikController implements Initializable {
             Pracownicy user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
             zlecenie.setPracownikMechanik(user);
 
+            System.out.println(zlecenie);
             session.update(zlecenie);
             session.getTransaction().commit();
             System.out.println("Updated");
@@ -109,7 +110,7 @@ public class MechanikController implements Initializable {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
-        System.out.println("Zamówienie zrealizowane");
+        System.out.println("Zamówienie przypisane");
     }
 
     public void zlecenieZakoncz() {

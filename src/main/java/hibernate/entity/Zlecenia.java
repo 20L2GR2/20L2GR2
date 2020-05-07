@@ -27,6 +27,24 @@ public class Zlecenia {
         return stanZlecenia;
     }
 
+    @Override
+    public String toString() {
+        return "Zlecenia{" +
+                "idZlecenia=" + idZlecenia +
+                ", opisUsterki='" + opisUsterki + '\'' +
+                ", dataRozpoczecia=" + dataRozpoczecia +
+                ", dataZakonczenia=" + dataZakonczenia +
+                ", opisNaprawy='" + opisNaprawy + '\'' +
+                ", uzyteCzesci='" + uzyteCzesci + '\'' +
+                ", cena=" + cena +
+                ", stanZlecenia=" + stanZlecenia +
+                ", klientZlecenie=" + klientZlecenie +
+                ", pracownikMechanik=" + pracownikMechanik +
+                ", pracownikObslugaStart=" + pracownikObslugaStart +
+                ", pracownikObslugaKoniec=" + pracownikObslugaKoniec +
+                '}';
+    }
+
     public void setStanZlecenia(int stanZlecenia) {
         this.stanZlecenia = stanZlecenia;
     }
@@ -141,16 +159,5 @@ public class Zlecenia {
         this.pracownikObslugaKoniec = pracownikObslugaKoniec;
     }
 
-    @Override
-    public String toString() {
-        return "Zlecenia{" +
-                "idZlecenia=" + idZlecenia +
-                ", opisUsterki='" + opisUsterki + '\'' +
-                ", dataRozpoczecia=" + dataRozpoczecia +
-                ", dataZakonczenia=" + dataZakonczenia +
-                ", opisNaprawy='" + opisNaprawy + '\'' +
-                ", uzyteCzesci='" + uzyteCzesci + '\'' +
-                ", cena=" + cena +
-                '}';
-    }
+
 }
