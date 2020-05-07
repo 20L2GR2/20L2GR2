@@ -3,12 +3,12 @@ package main.controllers;
 import hibernate.entity.Magazyn;
 import hibernate.entity.Pracownicy;
 import hibernate.entity.Zamowienia;
+import hibernate.entity.Zlecenia;
 import hibernate.util.HibernateUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
@@ -33,7 +33,15 @@ public class MechanikController implements Initializable {
     @FXML
     private ToggleButton toggleButtonCzesci, toggleButtonZlecenia, toggleButtonTwojeZlecenia, toggleButtonProfil;
     @FXML
-    public Label imieLabel, nazwiskoLabel, loginLabel;
+    public Label imieLabel, nazwiskoLabel, loginLabel, blad;
+    @FXML
+    private TableColumn idColumn, opisUsterkaColumn;
+    @FXML
+    public TableView tableZlecenia;
+    @FXML
+    public TextField nazwaCzesci;
+    @FXML
+    public TextArea komentarz;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,7 +87,36 @@ public class MechanikController implements Initializable {
     }
 
     public void czesciWyslij() {
-        System.out.println("Wysłano!");
+        blad.setStyle("-fx-text-fill: red;");
+
+        if (nazwaCzesci.getText().isEmpty()) {
+            blad.setText("Proszę podać nazwę części!");
+            return;
+        }
+
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            System.out.println("Dodawanie części...");
+            Zamowienia nowaCzesc = new Zamowienia();
+            nowaCzesc.setNazwaCzesci(nazwaCzesci.getText());
+            nowaCzesc.setKomentarz(komentarz.getText());
+            session.save(nowaCzesc);
+            session.getTransaction().commit();
+            System.out.println("Dodano!");
+
+            blad.setStyle("-fx-text-fill: white;");
+            blad.setText("Dodano zamówienie części");
+
+            session.clear();
+            session.disconnect();
+            session.close();
+
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
     }
 
 
@@ -100,14 +137,27 @@ public class MechanikController implements Initializable {
         }
     }
 
+    // wyświetlenie początkowych danych z bazy danych
     public void inicjalizujWidokMechanikaZBazy() {
 
+        tableZlecenia.getItems().clear();
+        tableZlecenia.setEditable(true);
 
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
+            // wyświetlanie dostępnych zleceń
+//            List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z ", Zlecenia.class).getResultList();
+//
+//            idColumn.setCellValueFactory(new PropertyValueFactory<>("idZlecenia"));
+//            opisUsterkaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
+//
+//            for (Zlecenia z : zlecenia) {
+//                tableZlecenia.getItems().add(z);
+//            }
 
+            // wyświetlanie użytkownika
             Pracownicy user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
 
             imieLabel.setText(user.getImie());

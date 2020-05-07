@@ -101,9 +101,20 @@
                 <Pane fx:id="zleceniaPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <ListView layoutX="28.0" layoutY="21.0" prefHeight="280.0" prefWidth="381.0"/>
-                        <Button layoutX="166.0" layoutY="317.0" mnemonicParsing="false" onAction="#zlecenieRezerwacja"
-                                text="Zarezerwuj zlecenie"/>
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1200.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableZlecenia">
+                            <columns>
+                                <TableColumn minWidth="4.0" prefWidth="250.0" text="Numer identyfikacyjny zlecenia" fx:id="idColumn"/>
+                                <TableColumn prefWidth="400.0" text="Opis usterki" fx:id="opisUsterkaColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="100" layoutY="500" fx:id="buttonDoRealizacji" onAction="#zlecenieRezerwacja"
+                                alignment="CENTER" mnemonicParsing="false"
+                                text="Przyjmij zlecenie">
+                        </Button>
+                        <Label layoutX="100.0" layoutY="600.0" text="" fx:id="bladRealizacji"/>
                     </children>
                 </Pane>
                 <Pane fx:id="mojeZleceniaPane" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
@@ -122,11 +133,13 @@
                 <Pane fx:id="czesciPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Button layoutX="196.0" layoutY="266.0" mnemonicParsing="false" onAction="#czesciWyslij"
+                        <Button layoutX="196.0" layoutY="306.0" mnemonicParsing="false" onAction="#czesciWyslij"
                                 text="Wyślij"/>
-                        <TextArea layoutX="79.0" layoutY="92.0" prefHeight="155.0" prefWidth="284.0"
-                                  promptText="Napisz jakich części potrzebujesz do magazyniera"/>
-                        <Label layoutX="162.0" layoutY="51.0" text="Formularz kontaktowy"/>
+                        <TextField layoutX="79.0" layoutY="92.0" promptText="Nazwa części" prefWidth="284.0" fx:id="nazwaCzesci"/>
+                        <TextArea layoutX="79.0" layoutY="130.0" prefHeight="155.0" prefWidth="298.0"
+                                  promptText="Komentarz" fx:id="komentarz"/>
+                        <Label layoutX="122.0" layoutY="51.0" text="Formularz zgłoszeniuwy o braku części"/>
+                        <Label layoutX="122.0" layoutY="360.0" text="" fx:id="blad"/>
                     </children>
                 </Pane>
             </children>
