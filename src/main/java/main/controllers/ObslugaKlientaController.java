@@ -13,11 +13,11 @@ import javafx.scene.layout.Pane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.NoResultException;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ObslugaKlientaController implements Initializable {
@@ -33,9 +33,6 @@ public class ObslugaKlientaController implements Initializable {
     public Pane twojProfilPane;
     public BorderPane obslugaKlientaBorderPane;
 
-    static int zmienna = 0;
-    static int zmienna2 = 0;
-
     @FXML
     public TextField klientImie, klientNazwisko, klientTelefon, klientMarka, klientModel, klientRejestracja;
 
@@ -48,7 +45,7 @@ public class ObslugaKlientaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         obslugaKlientaBorderPane.setCenter(utworzZleceniePane);
-        toogleButtonUtworzZlecenie.setSelected(true);
+        selectedButton(toogleButtonUtworzZlecenie);
         //inicjalizujWidokObslugiKlientaZBazy();
     }
 
@@ -60,28 +57,31 @@ public class ObslugaKlientaController implements Initializable {
         System.out.println("otworzTwojProfil");
         obslugaKlientaBorderPane.setCenter(twojProfilPane);
         selectedButton(toogleButtonTwojProfil);
-        inicjalizujWidokObslugiKlientaZBazy();
+        Pracownicy pracownik = null;
+        inicjalizujWidokObslugiKlientaZBazy(pracownik);
     }
 
     public void otworzUkonczoneZlecenia() {
         System.out.println("otworzUkonczoneZlecenia");
         obslugaKlientaBorderPane.setCenter(ukonczoneZleceniaPane);
         selectedButton(toogleButtonUkonczoneZlecenia);
-        inicjalizujWidokObslugiKlientaZBazy();
+        Pracownicy pracownik = null;
+        inicjalizujWidokObslugiKlientaZBazy(pracownik);
     }
 
     public void otworzUtworzZlecenie() {
         System.out.println("otworzUtworzZlecenia");
         obslugaKlientaBorderPane.setCenter(utworzZleceniePane);
         selectedButton(toogleButtonUtworzZlecenie);
-        inicjalizujWidokObslugiKlientaZBazy();
+        Pracownicy pracownik = null;
+        inicjalizujWidokObslugiKlientaZBazy(pracownik);
     }
 
     private void selectedButton(ToggleButton button) {
         button.setSelected(true);
     }
 
-    public void dodajZlecenieButton() {
+    public void dodajZlecenieButton() throws ParseException {
         if (klientImie.getText().isEmpty()) {
             bladKlient.setText("Podano zle dane");
             return;
@@ -106,95 +106,80 @@ public class ObslugaKlientaController implements Initializable {
             bladKlient.setText("Podano zle dane");
             return;
         }
-        if (klientOpis.getText().isEmpty()) {
-            bladKlient.setText("Podano zle dane");
-            return;
+
+        Klienci klient = new Klienci();
+        Pracownicy pracownik = new Pracownicy();
+        isOrCreateRejestracjaInDb(klient);
+        inicjalizujWidokObslugiKlientaZBazy(pracownik);
+        createZlecenie(klient,pracownik);
+    }
+
+    public void isOrCreateRejestracjaInDb(Klienci klient) {
+        Transaction transaction = null;
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            klient = session.createQuery("SELECT a FROM Klienci a WHERE a.nrReje = :numer_rejestracyjny", Klienci.class).setParameter("numer_rejestracyjny", klientRejestracja.getText()).getSingleResult();
+            klient.setIdKlienta(klient.getIdKlienta());
+            klient.setImie(klient.getImie());
+            klient.setNazwisko(klient.getNazwisko());
+            klient.setNrKontakt((int) klient.getNrKontakt());
+            klient.setMarka(klient.getMarka());
+            klient.setModel(klient.getModel());
+            klient.setNrReje(klient.getNrReje());
+        }catch (NoResultException nre){
+            createKlient(klient);
+            System.out.println("Dodano Klienta");
+            klient.setNrReje(klient.getNrReje());
+        }catch (Exception e){
+            if(transaction != null) transaction.rollback();
+            e.printStackTrace();
         }
-        Transaction transactionKlient = null;
+    }
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            if (!nrRejeInDb(session)) {
-                System.out.println("Tworzę klienta!");
-                createKlient(session);
-            }
-            Klienci klient = new Klienci();
-            klient.setIdKlienta(zmienna);
-            Pracownicy pracownik = new Pracownicy();
-            inicjalizujWidokObslugiKlientaZBazy();
-            pracownik.setIdPracownika(zmienna2);
+    public void createKlient(Klienci nowyKlient) {
+        Transaction transaction = null;
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            nowyKlient.setImie(klientImie.getText());
+            nowyKlient.setNazwisko(klientNazwisko.getText());
+            nowyKlient.setNrKontakt(Integer.parseInt(klientTelefon.getText()));
+            nowyKlient.setMarka(klientMarka.getText());
+            nowyKlient.setModel(klientModel.getText());
+            nowyKlient.setNrReje(klientRejestracja.getText());
 
-            Zlecenia noweZlecenie = new Zlecenia();
+            session.save(nowyKlient);
+            session.getTransaction().commit();
+            bladKlient.setText("Dodano Klienta");
+        }catch (Exception e){
+            if(transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
+    }
 
-            //DateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-            //Date dateobj = new Date();
-            //java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
-            //java.util.Date date=new java.util.Date();
-            //java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
+    public void createZlecenie(Klienci klient, Pracownicy pracownik) throws ParseException {
+        Zlecenia noweZlecenie = new Zlecenia();
+        Transaction transaction = null;
 
-            //Klienci zmienna1 = zmienna;
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+            java.util.Date date = new java.util.Date();
+            java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
 
             noweZlecenie.setKlientZlecenie(klient);
-            noweZlecenie.setOpisUsterki(klientOpis.getText());
-            //noweZlecenie.setDataRozpoczecia(sqlTime);
+            //noweZlecenie.setDataRozpoczecia(timestamp);
+            noweZlecenie.setDataRozpoczecia(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(String.valueOf(timestamp)));
+            noweZlecenie.setStanZlecenia(0);
             noweZlecenie.setPracownikObslugaStart(pracownik);
+            noweZlecenie.setOpisUsterki(klientOpis.getText());
+
             session.save(noweZlecenie);
             session.getTransaction().commit();
-
-
-            destroySession(session);
-        } catch (Exception e) {
-            if (transactionKlient != null) transactionKlient.rollback();
+        }catch (Exception e){
+            transaction.rollback();
             e.printStackTrace();
         }
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            if (zmienna != 0) nrRejeInDb(session);
-        } catch (Exception e) {
-            if (transactionKlient != null) transactionKlient.rollback();
-            e.printStackTrace();
-        }
-        zmienna = 0;
-        zmienna2 = 0;
     }
 
-    public boolean nrRejeInDb(Session session) {
-        Transaction transaction = session.beginTransaction();
-        Klienci user = new Klienci();
-        try {
-            user = (Klienci) session.createQuery("SELECT a FROM Klienci a WHERE a.nrReje = :numer_rejestracyjny", Klienci.class).setParameter("numer_rejestracyjny", klientRejestracja.getText()).getSingleResult();
-            zmienna = user.getIdKlienta();
-            if (user != null) {
-                bladKlient.setText("Taki numer rejestracyjny jest w bazie!");
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public void createKlient(Session session){
-        Klienci nowyKlient = new Klienci();
-        String s_tel = klientTelefon.getText();
-        nowyKlient.setImie(klientImie.getText());
-        nowyKlient.setNazwisko(klientNazwisko.getText());
-        try {
-            int i = Integer.parseInt(s_tel.trim());
-            nowyKlient.setNrKontakt(i);
-        } catch (NumberFormatException nfe) {
-            System.out.println("NumberFormatException: " + nfe.getMessage());
-        }
-        nowyKlient.setMarka(klientMarka.getText());
-        nowyKlient.setModel(klientModel.getText());
-        nowyKlient.setNrReje(klientRejestracja.getText());
-
-        session.save(nowyKlient);
-        session.getTransaction().commit();
-        bladKlient.setText("Dodano zlecenie.");
-    }
-
-    public void destroySession(Session session){
+    public void destroySession(Session session) {
         session.clear();
         session.disconnect();
         session.close();
@@ -205,26 +190,23 @@ public class ObslugaKlientaController implements Initializable {
         System.out.println("Wybrano zlecenie button");
     }
 
-    public void inicjalizujWidokObslugiKlientaZBazy() {
-
+    public void inicjalizujWidokObslugiKlientaZBazy(Pracownicy pracownik) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+            pracownik = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
+            pracownik.setIdPracownika(pracownik.getIdPracownika());
+            pracownik.setStanowisko(pracownik.getStanowisko());
+            pracownik.setImie(pracownik.getImie());
+            pracownik.setNazwisko(pracownik.getNazwisko());
+            pracownik.setLogin(pracownik.getLogin());
+            pracownik.setHaslo(pracownik.getHaslo());
 
-            Pracownicy user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
-            zmienna2 = user.getIdPracownika();
-//            String cos = String.valueOf(LogowanieController.userID);
-
-            imieLabel.setText(user.getImie());
-            nazwiskoLabel.setText(user.getNazwisko());
-            loginLabel.setText(user.getLogin());
-
-            session.clear();
-            session.disconnect();
-            session.close();
-
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
+            imieLabel.setText(pracownik.getImie());
+            nazwiskoLabel.setText(pracownik.getNazwisko());
+            loginLabel.setText(pracownik.getLogin());
+        }catch (Exception e){
+            if(transaction != null) transaction.rollback();
             e.printStackTrace();
         }
     }

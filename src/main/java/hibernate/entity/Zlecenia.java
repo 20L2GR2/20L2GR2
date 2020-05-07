@@ -13,17 +13,19 @@ public class Zlecenia {
     @Column(name = "opis_usterki", nullable = false)
     private String opisUsterki;
     @Column(name = "data_rozpoczecia")
+    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dataRozpoczecia;
     @Column(name = "data_zakonczenia")
+    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dataZakonczenia;
+    @Column(name = "stan_zlecenia", nullable = false)
+    private int stanZlecenia;
     @Column(name = "opis_naprawy")
     private String opisNaprawy;
     @Column(name = "uzyte_czesci")
     private String uzyteCzesci;
     @Column(name = "cena")
     private float cena;
-    @Column(name = "stan_zlecenia", nullable = false)
-    private int stanZlecenia;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_klienta")
@@ -44,7 +46,7 @@ public class Zlecenia {
     public Zlecenia() {
     }
 
-    public long getIdZlecenia() {
+    public int getIdZlecenia() {
         return idZlecenia;
     }
 
@@ -74,6 +76,14 @@ public class Zlecenia {
 
     public void setDataZakonczenia(Date dataZakonczenia) {
         this.dataZakonczenia = dataZakonczenia;
+    }
+
+    public int getStanZlecenia() {
+        return stanZlecenia;
+    }
+
+    public void setStanZlecenia(int stanZlecenia) {
+        this.stanZlecenia = stanZlecenia;
     }
 
     public String getOpisNaprawy() {
@@ -139,6 +149,7 @@ public class Zlecenia {
                 ", opisUsterki='" + opisUsterki + '\'' +
                 ", dataRozpoczecia=" + dataRozpoczecia +
                 ", dataZakonczenia=" + dataZakonczenia +
+                ", stanZlecenia=" + stanZlecenia +
                 ", opisNaprawy='" + opisNaprawy + '\'' +
                 ", uzyteCzesci='" + uzyteCzesci + '\'' +
                 ", cena=" + cena +

@@ -5,6 +5,8 @@ import hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.text.SimpleDateFormat;
+
 public class App {
     public static void main(String[] args) {
         Transaction transaction = null;
@@ -25,6 +27,11 @@ public class App {
 //            zamowienie = session.get(Zamowienia.class,1);
 //            magazyn = session.get(Magazyn.class,1);
             System.out.println("\n\n\n" + pracownik + "\n" + pracownik2 + "\n" + pracownik3 + "\n\n\n" + klient + "\n" + zlecenie + "\n" + zamowienie + "\n" + magazyn + "\n\n\n");
+
+            java.util.Date date = new java.util.Date();
+            java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
+            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(String.valueOf(timestamp)));
+
             session.clear();
             session.disconnect();
             session.close();

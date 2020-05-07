@@ -11,7 +11,7 @@ INSERT INTO `magazyn` (`id_czesci`, `nazwa_czesci`, `opis_czesci`, `ilosc`, `cen
 
 INSERT INTO `pracownicy` (`id_pracownika`, `imie`, `nazwisko`, `stanowisko`, `login`, `haslo`) VALUES
 (1, 'Jan', 'Kowalski', 0, 'admin', 'admin'),
-(2, 'Paweł‚', 'Nowak', 1, 'obslugaklienta1', 'obslugaklienta1'),
+(2, 'Paweł', 'Nowak', 1, 'obslugaklienta1', 'obslugaklienta1'),
 (3, 'Maciej', 'Solejuk', 2, 'mechanik1', 'mechanik1'),
 (4, 'Piotr', 'Nowakowski', 3, 'magazynier1', 'magazynier1');
 
