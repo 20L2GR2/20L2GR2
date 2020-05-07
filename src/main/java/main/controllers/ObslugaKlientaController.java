@@ -107,9 +107,15 @@ public class ObslugaKlientaController implements Initializable {
             return;
         }
 
-        Klienci klient = new Klienci();
+        Klienci klient = null;
         Pracownicy pracownik = new Pracownicy();
         isOrCreateRejestracjaInDb(klient);
+        if(klient == null){
+            createKlient(klient);
+            System.out.println("Dodano Klienta");
+            klient.setNrReje(klient.getNrReje());
+            klient.setIdKlienta(klient.getIdKlienta());
+        }
         inicjalizujWidokObslugiKlientaZBazy(pracownik);
         createZlecenie(klient,pracownik);
     }
@@ -126,10 +132,12 @@ public class ObslugaKlientaController implements Initializable {
             klient.setMarka(klient.getMarka());
             klient.setModel(klient.getModel());
             klient.setNrReje(klient.getNrReje());
-        }catch (NoResultException nre){
-            createKlient(klient);
-            System.out.println("Dodano Klienta");
-            klient.setNrReje(klient.getNrReje());
+            session.clear();
+            session.disconnect();
+            session.close();
+        }catch(NoResultException nre){
+            if(transaction != null) transaction.rollback();
+            return;
         }catch (Exception e){
             if(transaction != null) transaction.rollback();
             e.printStackTrace();
@@ -150,6 +158,9 @@ public class ObslugaKlientaController implements Initializable {
             session.save(nowyKlient);
             session.getTransaction().commit();
             bladKlient.setText("Dodano Klienta");
+            session.clear();
+            session.disconnect();
+            session.close();
         }catch (Exception e){
             if(transaction != null) transaction.rollback();
             e.printStackTrace();
@@ -165,29 +176,21 @@ public class ObslugaKlientaController implements Initializable {
             java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
 
             noweZlecenie.setKlientZlecenie(klient);
-            //noweZlecenie.setDataRozpoczecia(timestamp);
-            noweZlecenie.setDataRozpoczecia(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(String.valueOf(timestamp)));
+            noweZlecenie.setDataRozpoczecia(timestamp);
+            //noweZlecenie.setDataRozpoczecia(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(String.valueOf(timestamp)));
             noweZlecenie.setStanZlecenia(0);
             noweZlecenie.setPracownikObslugaStart(pracownik);
             noweZlecenie.setOpisUsterki(klientOpis.getText());
 
             session.save(noweZlecenie);
             session.getTransaction().commit();
+            session.clear();
+            session.disconnect();
+            session.close();
         }catch (Exception e){
-            transaction.rollback();
+            if(transaction != null) transaction.rollback();
             e.printStackTrace();
         }
-    }
-
-    public void destroySession(Session session) {
-        session.clear();
-        session.disconnect();
-        session.close();
-        HibernateUtil.shutdown();
-    }
-
-    public void wybierzZlecenieButton() {
-        System.out.println("Wybrano zlecenie button");
     }
 
     public void inicjalizujWidokObslugiKlientaZBazy(Pracownicy pracownik) {
@@ -205,9 +208,23 @@ public class ObslugaKlientaController implements Initializable {
             imieLabel.setText(pracownik.getImie());
             nazwiskoLabel.setText(pracownik.getNazwisko());
             loginLabel.setText(pracownik.getLogin());
+            session.clear();
+            session.disconnect();
+            session.close();
         }catch (Exception e){
             if(transaction != null) transaction.rollback();
             e.printStackTrace();
         }
+    }
+
+    public void wybierzZlecenieButton() {
+        System.out.println("Wybrano zlecenie button");
+    }
+
+    public void destroySession(Session session) {
+        session.clear();
+        session.disconnect();
+        session.close();
+        HibernateUtil.shutdown();
     }
 }
