@@ -42,7 +42,7 @@
                 <TextField layoutX="274.0" layoutY="263.0" promptText="Login" fx:id="loginTextField"/>
                 <PasswordField id="password" layoutX="275.0" layoutY="300.0" promptText="Password"
                                fx:id="passwordField"/>
-                <Label layoutX="274.0" layoutY="197.0" prefHeight="39.0" prefWidth="160.0" text="Zaloguj Się">
+                <Label layoutX="274.0" layoutY="197.0" prefHeight="39.0" prefWidth="160.0" text="Zaloguj się">
                     <font>
                         <Font size="32.0"/>
                     </font>

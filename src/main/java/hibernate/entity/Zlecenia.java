@@ -20,8 +20,17 @@ public class Zlecenia {
     private String opisNaprawy;
     @Column(name = "uzyte_czesci")
     private String uzyteCzesci;
-    @Column(name = "cena")
-    private float cena;
+    @Column(name = "cena", nullable = false)
+    private Float cena;
+
+    public int getStanZlecenia() {
+        return stanZlecenia;
+    }
+
+    public void setStanZlecenia(int stanZlecenia) {
+        this.stanZlecenia = stanZlecenia;
+    }
+
     @Column(name = "stan_zlecenia", nullable = false)
     private int stanZlecenia;
 
@@ -96,7 +105,7 @@ public class Zlecenia {
         return cena;
     }
 
-    public void setCena(float cena) {
+    public void setCena(Float cena) {
         this.cena = cena;
     }
 
