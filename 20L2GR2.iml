@@ -6,7 +6,9 @@
         <datasource-map>
           <unit-entry name="hibernate.cfg.xml" value="ddc219e6-06cb-403d-b483-fc3964b33d20" />
         </datasource-map>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="hibernate.cfg.xml" />
+        </naming-strategy-map>
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
     </facet>
@@ -30,6 +32,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="javafx" level="application" />
     <orderEntry type="library" name="Maven: org.jfxtras:jmetro:11.6.9" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.openjfx:javafx-base:win:11.0.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.openjfx:javafx-controls:win:11.0.2" level="project" />

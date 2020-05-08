@@ -106,7 +106,8 @@
                                    xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
                                    fx:id="tableZlecenia">
                             <columns>
-                                <TableColumn minWidth="4.0" prefWidth="250.0" text="Numer identyfikacyjny zlecenia" fx:id="idColumn"/>
+                                <TableColumn minWidth="4.0" prefWidth="250.0" text="Numer identyfikacyjny zlecenia"
+                                             fx:id="idColumn"/>
                                 <TableColumn prefWidth="400.0" text="Opis usterki" fx:id="opisUsterkaColumn"/>
                             </columns>
                         </TableView>
@@ -135,7 +136,8 @@
                     <children>
                         <Button layoutX="196.0" layoutY="306.0" mnemonicParsing="false" onAction="#czesciWyslij"
                                 text="Wyślij"/>
-                        <TextField layoutX="79.0" layoutY="92.0" promptText="Nazwa części" prefWidth="284.0" fx:id="nazwaCzesci"/>
+                        <TextField layoutX="79.0" layoutY="92.0" promptText="Nazwa części" prefWidth="284.0"
+                                   fx:id="nazwaCzesci"/>
                         <TextArea layoutX="79.0" layoutY="130.0" prefHeight="155.0" prefWidth="298.0"
                                   promptText="Komentarz" fx:id="komentarz"/>
                         <Label layoutX="122.0" layoutY="51.0" text="Formularz zgłoszeniowy o braku części"/>

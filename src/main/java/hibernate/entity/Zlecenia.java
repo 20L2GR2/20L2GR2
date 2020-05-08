@@ -134,18 +134,44 @@ public class Zlecenia {
         this.pracownikObslugaStart = pracownikObslugaStart;
     }
 
+    public void setPracownikObslugaKoniec(Pracownicy pracownikObslugaKoniec) {
+        this.pracownikObslugaKoniec = pracownikObslugaKoniec;
+    }
+
     public Pracownicy getPracownikObslugaKoniec() {
         return pracownikObslugaKoniec;
     }
 
-    public void setPracownikObslugaKoniec(Pracownicy pracownikObslugaKoniec) {
-        this.pracownikObslugaKoniec = pracownikObslugaKoniec;
+
+    public String getImieNazwisko() {
+        return klientZlecenie.getImie() + " " + klientZlecenie.getNazwisko();
+    }
+
+    public String getNrReje() {
+        return klientZlecenie.getNrReje();
+    }
+
+    public int getIdKlienta() {
+        return klientZlecenie.getIdKlienta();
+    }
+
+    public String getMarkaModel() {
+        return klientZlecenie.getMarka() + " " + klientZlecenie.getModel();
+    }
+
+    public String getImieNazwiskoMechanik() {
+        return pracownikMechanik.getImie() + " " + pracownikMechanik.getNazwisko();
+    }
+
+    public String getImieNazwiskoObslugaPoczatek() {
+        return pracownikObslugaStart.getImie() + " " + pracownikObslugaStart.getNazwisko();
     }
 
     @Override
     public String toString() {
         return "Zlecenia{" +
                 "idZlecenia=" + idZlecenia +
+                ", idKlienta=" + klientZlecenie +
                 ", opisUsterki='" + opisUsterki + '\'' +
                 ", dataRozpoczecia=" + dataRozpoczecia +
                 ", dataZakonczenia=" + dataZakonczenia +
@@ -153,10 +179,6 @@ public class Zlecenia {
                 ", opisNaprawy='" + opisNaprawy + '\'' +
                 ", uzyteCzesci='" + uzyteCzesci + '\'' +
                 ", cena=" + cena +
-                ", klientZlecenie=" + klientZlecenie +
-                ", pracownikMechanik=" + pracownikMechanik +
-                ", pracownikObslugaStart=" + pracownikObslugaStart +
-                ", pracownikObslugaKoniec=" + pracownikObslugaKoniec +
                 '}';
     }
 }
