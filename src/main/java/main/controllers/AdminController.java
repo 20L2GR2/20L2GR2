@@ -308,16 +308,16 @@ public class AdminController implements Initializable {
             idColumn.setCellValueFactory(new PropertyValueFactory<>("idZamowienia"));
 
             ObservableList<String> mechanikList = FXCollections.observableArrayList();
-            for (Pracownicy pracownik:
+            for (Pracownicy pracownik :
                     pracownicy) {
-                if(pracownik.getStanowisko() == 2) mechanikList.add(pracownik.getLogin());
+                if (pracownik.getStanowisko() == 2) mechanikList.add(pracownik.getLogin());
             }
 
 
             mechanikColumn.setCellValueFactory(new PropertyValueFactory<>("pracownikImie"));
             mechanikColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(mechanikList));
             mechanikColumn.setOnEditCommit(e -> {
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setPracownik(getUserByLogin(pracownicy,e.getNewValue()));
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setPracownik(getUserByLogin(pracownicy, e.getNewValue()));
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
@@ -389,17 +389,17 @@ public class AdminController implements Initializable {
         }
 
 
-
     }
-    Pracownicy getUserByLogin(List<Pracownicy> listaPracownikow, String login){
-        for (Pracownicy pracownik:
-             listaPracownikow) {
-            if(pracownik.getLogin()==login) return pracownik;
+
+    Pracownicy getUserByLogin(List<Pracownicy> listaPracownikow, String login) {
+        for (Pracownicy pracownik :
+                listaPracownikow) {
+            if (pracownik.getLogin() == login) return pracownik;
         }
         return new Pracownicy();
     }
 
-    short getStanZamowieniaByText(String zamowienie){
+    short getStanZamowieniaByText(String zamowienie) {
         switch (zamowienie) {
             case "Zamówienie złożone przez mechanika (0)":
                 return 0;

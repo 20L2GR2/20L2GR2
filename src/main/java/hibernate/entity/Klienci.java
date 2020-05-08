@@ -93,6 +93,7 @@ public class Klienci {
         this.zlecenieKlient = zlecenieKlient;
     }
 
+
     @Override
     public String toString() {
         return "Klienci{" +
