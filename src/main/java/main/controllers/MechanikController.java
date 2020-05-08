@@ -86,26 +86,16 @@ public class MechanikController implements Initializable {
         Zlecenia zlecenie = null;
         Pracownicy user = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            try {
-                transaction = session.beginTransaction();
-                System.out.println("Update...");
-                zlecenie = (Zlecenia) tableZlecenia.getSelectionModel().getSelectedItem();
-                System.out.println(zlecenie.getIdZlecenia());
-            } catch (Exception e) {
-                if (transaction != null) transaction.rollback();
-                e.printStackTrace();
-            }
+            transaction = session.beginTransaction();
+            System.out.println("Update...");
+            zlecenie = (Zlecenia) tableZlecenia.getSelectionModel().getSelectedItem();
+            System.out.println(zlecenie.getIdZlecenia());
 
-            try {
-                transaction = session.beginTransaction();
-                user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
-                zlecenie.setPracownikMechanik(user);
+            user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
+            zlecenie.setPracownikMechanik(user);
 
-                System.out.println(zlecenie);
-            } catch (Exception e) {
-                if (transaction != null) transaction.rollback();
-                e.printStackTrace();
-            }
+            System.out.println(zlecenie);
+
             session.update(zlecenie);
             session.getTransaction().commit();
             System.out.println("Updated");
