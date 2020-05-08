@@ -97,6 +97,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.App" />
+        <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
   </component>
@@ -285,10 +287,10 @@
     <state x="585" y="113" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586116939162" />
     <state x="150" y="121" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1588699036909" />
     <state x="146" y="102" width="1576" height="811" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1588889580104" />
-    <state x="-988" y="92" width="896" height="1696" key="DiffContextDialog" timestamp="1588939008446">
+    <state x="-988" y="92" width="896" height="1696" key="DiffContextDialog" timestamp="1588939333816">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-988" y="92" width="896" height="1696" key="DiffContextDialog/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1588939008446" />
+    <state x="-988" y="92" width="896" height="1696" key="DiffContextDialog/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1588939333816" />
     <state width="1037" height="255" key="GridCell.Tab.0.bottom" timestamp="1588938829997">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
@@ -349,10 +351,10 @@
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
     <state x="-778" y="653" key="git4idea.branch.GitSmartOperationDialog/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1588938940380" />
-    <state x="-795" y="731" key="git4idea.merge.GitMergeDialog" timestamp="1588938973781">
+    <state x="-795" y="731" key="git4idea.merge.GitMergeDialog" timestamp="1588939322149">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-795" y="731" key="git4idea.merge.GitMergeDialog/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1588938973781" />
+    <state x="-795" y="731" key="git4idea.merge.GitMergeDialog/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1588939322149" />
     <state x="461" y="240" width="672" height="678" key="search.everywhere.popup" timestamp="1588533941960">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
