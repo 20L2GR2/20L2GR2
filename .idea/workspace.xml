@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zlecenia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zlecenia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/MechanikController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/MechanikController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +39,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="obslugaklienta1" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,6 +96,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.App" />
+        <item itemvalue="Application.App" />
+        <item itemvalue="Application.App" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -326,10 +329,10 @@
     </state>
     <state x="440" y="93" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586115404202" />
     <state x="440" y="97" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1588531843078" />
-    <state x="-816" y="334" key="Vcs.Push.Dialog.v2" timestamp="1588937914290">
+    <state x="-816" y="334" key="Vcs.Push.Dialog.v2" timestamp="1588941266639">
       <screen x="-1080" y="0" width="1080" height="1880" />
     </state>
-    <state x="-816" y="334" key="Vcs.Push.Dialog.v2/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1588937914290" />
+    <state x="-816" y="334" key="Vcs.Push.Dialog.v2/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1588941266639" />
     <state x="552" y="251" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588699039858" />
     <state x="515" y="192" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1588889586814" />
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1588674368788">
@@ -344,6 +347,10 @@
     <state x="769" y="435" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1588784581792" />
     <state x="769" y="435" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588698991605" />
     <state x="769" y="452" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080@0.0.1920.1080" timestamp="1588525868537" />
+    <state x="-795" y="731" key="git4idea.merge.GitMergeDialog" timestamp="1588941461282">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-795" y="731" key="git4idea.merge.GitMergeDialog/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1588941461282" />
     <state x="461" y="240" width="672" height="678" key="search.everywhere.popup" timestamp="1588533941960">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

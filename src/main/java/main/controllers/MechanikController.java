@@ -97,7 +97,7 @@ public class MechanikController implements Initializable {
             System.out.println(zlecenie);
 
             session.update(zlecenie);
-            session.getTransaction().commit();
+            //session.getTransaction().commit();
             System.out.println("Updated");
             tableZlecenia.refresh();
             bladRealizacji.setStyle("-fx-text-fill: white;");
@@ -106,7 +106,7 @@ public class MechanikController implements Initializable {
             session.disconnect();
             session.close();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
+            //if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
         System.out.println("Zamówienie przypisane");
