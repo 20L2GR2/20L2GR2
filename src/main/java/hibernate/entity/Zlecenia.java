@@ -25,7 +25,7 @@ public class Zlecenia {
     @Column(name = "uzyte_czesci")
     private String uzyteCzesci;
     @Column(name = "cena")
-    private float cena;
+    private Float cena;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_klienta")
@@ -102,11 +102,11 @@ public class Zlecenia {
         this.uzyteCzesci = uzyteCzesci;
     }
 
-    public float getCena() {
+    public Float getCena() {
         return cena;
     }
 
-    public void setCena(float cena) {
+    public void setCena(Float cena) {
         this.cena = cena;
     }
 
@@ -153,6 +153,10 @@ public class Zlecenia {
                 ", opisNaprawy='" + opisNaprawy + '\'' +
                 ", uzyteCzesci='" + uzyteCzesci + '\'' +
                 ", cena=" + cena +
+                ", klientZlecenie=" + klientZlecenie +
+                ", pracownikMechanik=" + pracownikMechanik +
+                ", pracownikObslugaStart=" + pracownikObslugaStart +
+                ", pracownikObslugaKoniec=" + pracownikObslugaKoniec +
                 '}';
     }
 }
