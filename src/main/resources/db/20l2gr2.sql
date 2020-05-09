@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 18 Kwi 2020, 21:41
--- Wersja serwera: 10.4.8-MariaDB
--- Wersja PHP: 7.3.11
+-- Czas generowania: 06 Maj 2020, 18:42
+-- Wersja serwera: 10.4.11-MariaDB
+-- Wersja PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,37 +28,33 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `klienci` (
-  `id_klienta` int(11) NOT NULL,
+  `id_klienta` int(9) NOT NULL,
   `imie_klienta` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
   `nazwisko_klienta` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
-  `nr_kontaktowy` int(20) NOT NULL,
+  `nr_kontaktowy` int(9) NOT NULL,
   `marka_samochodu` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL,
   `model_samochodu` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL,
   `numer_rejestracyjny` varchar(8) COLLATE utf8mb4_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
-
--- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla tabeli `magazyn`
 --
 
 CREATE TABLE `magazyn` (
-  `id_czesci` int(11) NOT NULL,
+  `id_czesci` int(9) NOT NULL,
   `nazwa_czesci` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
   `opis_czesci` text COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `ilosc` int(11) NOT NULL,
-  `cena` float NOT NULL
+  `ilosc` int(9) NOT NULL,
+  `cena` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
-
--- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla tabeli `pracownicy`
 --
 
 CREATE TABLE `pracownicy` (
-  `id_pracownika` int(11) NOT NULL,
+  `id_pracownika` int(9) NOT NULL,
   `imie` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
   `nazwisko` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
   `stanowisko` int(1) NOT NULL,
@@ -67,43 +62,36 @@ CREATE TABLE `pracownicy` (
   `haslo` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
--- --------------------------------------------------------
-
 --
 -- Struktura tabeli dla tabeli `zamowienia`
 --
 
 CREATE TABLE `zamowienia` (
-  `id_zamowienia` int(11) NOT NULL,
+  `id_zamowienia` int(9) NOT NULL,
   `nazwa_czesci` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
   `kometarz` varchar(500) COLLATE utf8mb4_polish_ci NOT NULL,
-  `stan_zamowienia` int(11) NOT NULL,
-  `id_mechanika` int(11) NOT NULL
+  `stan_zamowienia` int(1) NOT NULL,
+  `id_mechanika` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
-
--- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla tabeli `zlecenia`
 --
 
 CREATE TABLE `zlecenia` (
-  `id_zlecenie` int(11) NOT NULL,
-  `id_klienta` int(11) NOT NULL,
-  `id_mechanika` int(11) DEFAULT NULL,
-  `id_obslugaklientastart` int(11) NOT NULL,
-  `id_obslugaklientakoniec` int(11) DEFAULT NULL,
+  `id_zlecenie` int(9) NOT NULL,
+  `id_klienta` int(9) NOT NULL,
+  `id_mechanika` int(9) DEFAULT NULL,
+  `id_obslugaklientastart` int(9) NOT NULL,
+  `id_obslugaklientakoniec` int(9) DEFAULT NULL,
+  `stan_zlecenia` int(1) NOT NULL,
   `opis_usterki` text COLLATE utf8mb4_polish_ci NOT NULL,
-  `data_rozpoczecia` datetime NOT NULL,
+  `data_rozpoczecia` datetime DEFAULT current_timestamp(),
   `data_zakonczenia` datetime DEFAULT NULL,
   `opis_naprawy` text COLLATE utf8mb4_polish_ci DEFAULT NULL,
   `uzyte_czesci` varchar(1000) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `cena` float DEFAULT NULL
+  `cena` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
-
---
--- Indeksy dla zrzutów tabel
---
 
 --
 -- Indeksy dla tabeli `klienci`
@@ -148,31 +136,31 @@ ALTER TABLE `zlecenia`
 -- AUTO_INCREMENT dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `id_klienta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_klienta` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT dla tabeli `magazyn`
 --
 ALTER TABLE `magazyn`
-  MODIFY `id_czesci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_czesci` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  MODIFY `id_pracownika` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pracownika` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `id_zamowienia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_zamowienia` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `zlecenia`
 --
 ALTER TABLE `zlecenia`
-  MODIFY `id_zlecenie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_zlecenie` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ograniczenia dla zrzutów tabel

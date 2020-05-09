@@ -24,14 +24,30 @@ public class Pracownicy {
     @OneToMany(mappedBy = "pracownik", cascade = CascadeType.ALL)
     private List<Zamowienia> zamowienieMechanik;
 
-    @OneToMany(mappedBy = "pracownikMechanik", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pracownikMechanik")
     private List<Zlecenia> zlecenieMechanik;
 
-    @OneToMany(mappedBy = "pracownikObslugaStart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pracownikObslugaStart")
     private List<Zlecenia> zlecenieObslugaStart;
 
-    @OneToMany(mappedBy = "pracownikObslugaKoniec", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pracownikObslugaKoniec")
     private List<Zlecenia> zlecenieObslugaKoniec;
+
+    @PreRemove
+    private void removeAssociationsWithChildren() {
+        for (Zlecenia zlecenie:
+             zlecenieObslugaKoniec) {
+            zlecenie.setPracownikObslugaKoniec(null);
+        }
+        for (Zlecenia zlecenie:
+                zlecenieObslugaStart) {
+            zlecenie.setPracownikObslugaStart(null);
+        }
+        for (Zlecenia zlecenie:
+                zlecenieMechanik) {
+            zlecenie.setPracownikMechanik(null);
+        }
+    }
 
     public Pracownicy() {
     }

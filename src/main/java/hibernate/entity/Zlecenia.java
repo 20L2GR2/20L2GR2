@@ -27,19 +27,19 @@ public class Zlecenia {
     @Column(name = "cena")
     private Float cena;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_klienta")
     private Klienci klientZlecenie;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_mechanika")
     private Pracownicy pracownikMechanik;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_obslugaklientastart")
     private Pracownicy pracownikObslugaStart;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_obslugaklientakoniec")
     private Pracownicy pracownikObslugaKoniec;
 
@@ -180,5 +180,32 @@ public class Zlecenia {
                 ", uzyteCzesci='" + uzyteCzesci + '\'' +
                 ", cena=" + cena +
                 '}';
+    }
+
+    public String getKlientImie(){
+        return klientZlecenie.getImie();
+    }
+
+    public String getMechanikLogin(){
+        return pracownikMechanik.getLogin();
+    }
+
+    public String getSZleceniaLogin(){
+        return pracownikObslugaStart.getLogin();
+    }
+
+    public String getEZleceniaLogin(){
+        return pracownikObslugaKoniec.getLogin();
+    }
+
+    public String getStanZleceniaToString(){
+        switch(stanZlecenia){
+            case 0: return "zlecenie utworzone i oczekujące do przyjęcia przez mechanika";
+            case 1: return "zlecenie przyjęte przez mechanika i w trakcie realizacji";
+            case 2: return "zlecenie oczekujące do wyceny (mechanik wykonał naprawę)";
+            case 3: return "zlecenie zakończone";
+            case 4: return "zlecenie anulowane";
+            default: return "ZŁY STAN";
+        }
     }
 }

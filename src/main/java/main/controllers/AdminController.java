@@ -1,8 +1,6 @@
 package main.controllers;
 
-import hibernate.entity.Magazyn;
-import hibernate.entity.Pracownicy;
-import hibernate.entity.Zamowienia;
+import hibernate.entity.*;
 import hibernate.util.HibernateUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.util.converter.DateStringConverter;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.LongStringConverter;
 import org.hibernate.Session;
@@ -22,6 +21,7 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,7 +41,7 @@ public class AdminController implements Initializable {
     @FXML
     private Label imieLabel, nazwiskoLabel, loginLabel;
     @FXML
-    private TableView uzytkownicy, zamowienia, czesci;
+    private TableView uzytkownicy, zamowienia, czesci, zlecenia;
     @FXML
     private TableColumn<Pracownicy, String> imieColumn, nazwiskoColumn, loginColumn;
     @FXML
@@ -62,6 +62,19 @@ public class AdminController implements Initializable {
     private Pane czesciPane, zleceniaPane, profilPane, utworzUzytkownikaPane, uzytkownicyPane, zamowieniaPane;
     @FXML
     private ToggleButton toggleButtonCzesci, toggleButtonZlecenia, toggleButtonProfil, toggleButtonUtworzUrz, toggleButtonUzytkownicy, toggleButtonZamowienia;
+    @FXML
+    private TableColumn<Zlecenia, Integer> idZleceniaColumn;
+    @FXML
+    private TableColumn<Zlecenia, String> klientZleceniaColumn, stanZleceniaColumn;
+    @FXML
+    private TableColumn<Zlecenia, String> mechanikZleceniaColumn, obslugaSZleceniaColumn, obslugaEZleceniaColumn;
+    @FXML
+    private TableColumn<Zlecenia, String> opisZleceniaColumn, naprwZleceniaColumn, czesciZleceniaColumn;
+    @FXML
+    private TableColumn<Zlecenia, Date> rozpZleceniaColumn, zakZleceniaColumn;
+    @FXML
+    private TableColumn<Zlecenia, Float> cenaZleceniaColumn;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -175,9 +188,10 @@ public class AdminController implements Initializable {
             Pracownicy pracownik = (Pracownicy) uzytkownicy.getSelectionModel().getSelectedItem();
             session.delete(pracownik);
 
-            uzytkownicy.getItems().remove(pracownik);
+            //uzytkownicy.getItems().remove(pracownik);
 
             session.getTransaction().commit();
+            inicjalizujWidokAdminaZBazy();
 
             session.clear();
             session.disconnect();
@@ -190,6 +204,27 @@ public class AdminController implements Initializable {
     }
 
     public void usunZlecenie() {
+
+        if (zlecenia.getSelectionModel().isEmpty()) return;
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            Zlecenia zlecenie = (Zlecenia) zlecenia.getSelectionModel().getSelectedItem();
+            session.delete(zlecenie);
+
+            //zlecenia.getItems().remove(zlecenie);
+
+            session.getTransaction().commit();
+            inicjalizujWidokAdminaZBazy();
+
+            session.clear();
+            session.disconnect();
+            session.close();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
         System.out.println("Usunieto zlecenie!");
     }
 
@@ -202,9 +237,10 @@ public class AdminController implements Initializable {
             Magazyn czesc = (Magazyn) czesci.getSelectionModel().getSelectedItem();
             session.delete(czesc);
 
-            czesci.getItems().remove(czesc);
+            //czesci.getItems().remove(czesc);
 
             session.getTransaction().commit();
+            inicjalizujWidokAdminaZBazy();
 
             session.clear();
             session.disconnect();
@@ -226,9 +262,10 @@ public class AdminController implements Initializable {
             System.out.println("PRZESZEDŁEM DALEJ!!!! " + zamowienie.getIdZamowienia() * 30);
             session.delete(zamowienie);
 
-            zamowienia.getItems().remove(zamowienie);
+            //zamowienia.getItems().remove(zamowienie);
 
             session.getTransaction().commit();
+            inicjalizujWidokAdminaZBazy();
 
             session.clear();
             session.disconnect();
@@ -260,6 +297,12 @@ public class AdminController implements Initializable {
 
 
     public void inicjalizujWidokAdminaZBazy() {
+
+        zlecenia.getItems().clear();
+        uzytkownicy.getItems().clear();
+        zamowienia.getItems().clear();
+        czesci.getItems().clear();
+
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -270,6 +313,7 @@ public class AdminController implements Initializable {
             loginLabel.setText(user.getLogin());
 
             List<Pracownicy> pracownicy = session.createQuery("SELECT a FROM Pracownicy a", Pracownicy.class).getResultList();
+            List<Klienci> klienci = session.createQuery("SELECT a FROM Klienci a", Klienci.class).getResultList();
 
             uzytkownicy.setEditable(true);
             imieColumn.setCellValueFactory(new PropertyValueFactory<>("imie"));
@@ -291,6 +335,7 @@ public class AdminController implements Initializable {
             loginColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setLogin(e.getNewValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+                inicjalizujWidokAdminaZBazy();
             });
 
             rolaColumn.setCellValueFactory(new PropertyValueFactory<>("stanowisko"));
@@ -314,7 +359,7 @@ public class AdminController implements Initializable {
             }
 
 
-            mechanikColumn.setCellValueFactory(new PropertyValueFactory<>("pracownikImie"));
+            mechanikColumn.setCellValueFactory(new PropertyValueFactory<>("pracownikLogin"));
             mechanikColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(mechanikList));
             mechanikColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setPracownik(getUserByLogin(pracownicy, e.getNewValue()));
@@ -380,6 +425,106 @@ public class AdminController implements Initializable {
                 czesci.getItems().add(z);
             }
 
+            zlecenia.setEditable(true);
+
+            idZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("idZlecenia"));
+
+            ObservableList<String> klienciList = FXCollections.observableArrayList();
+            for (Klienci klient :
+                    klienci) {
+               klienciList.add(klient.getImie());
+            }
+
+            klientZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("klientImie"));
+            klientZleceniaColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(klienciList));
+            klientZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setKlientZlecenie(getKlientByImie(klienci, e.getNewValue()));
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            mechanikZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("mechanikLogin"));
+            mechanikZleceniaColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(mechanikList));
+            mechanikZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setPracownikMechanik(getUserByLogin(pracownicy, e.getNewValue()));
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            ObservableList<String> obslugaList = FXCollections.observableArrayList();
+            for (Pracownicy pracownik :
+                    pracownicy) {
+                if (pracownik.getStanowisko() == 1) obslugaList.add(pracownik.getLogin());
+            }
+
+            obslugaSZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("sZleceniaLogin"));
+            obslugaSZleceniaColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(obslugaList));
+            obslugaSZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setPracownikObslugaStart(getUserByLogin(pracownicy, e.getNewValue()));
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            obslugaEZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("eZleceniaLogin"));
+            obslugaEZleceniaColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(obslugaList));
+            obslugaEZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setPracownikObslugaKoniec(getUserByLogin(pracownicy, e.getNewValue()));
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            opisZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
+            opisZleceniaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+            opisZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setOpisUsterki(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            rozpZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("dataRozpoczecia"));
+            rozpZleceniaColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DateStringConverter()));
+            rozpZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setDataRozpoczecia(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            zakZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("dataZakonczenia"));
+            zakZleceniaColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DateStringConverter()));
+            zakZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setDataZakonczenia(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            naprwZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("opisNaprawy"));
+            naprwZleceniaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+            naprwZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setOpisNaprawy(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            czesciZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("uzyteCzesci"));
+            czesciZleceniaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+            czesciZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setUzyteCzesci(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            cenaZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
+            cenaZleceniaColumn.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
+            cenaZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setCena(e.getNewValue());
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+
+            stanZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("stanZleceniaToString"));
+            ObservableList<String> stanyZlecenialist = FXCollections.observableArrayList("zlecenie utworzone i oczekujące do przyjęcia przez mechanika", "zlecenie przyjęte przez mechanika i w trakcie realizacji", "zlecenie oczekujące do wyceny (mechanik wykonał naprawę)", "zlecenie zakończone", "zlecenie anulowane");
+            stanZleceniaColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(stanyZlecenialist));
+            stanZleceniaColumn.setOnEditCommit(e -> {
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setStanZlecenia(getStanZleceniaByText(e.getNewValue()));
+                updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+            });
+
+            List<Zlecenia> zleceniaList = session.createQuery("SELECT a FROM Zlecenia a", Zlecenia.class).getResultList();
+            for (Zlecenia z : zleceniaList) {
+                zlecenia.getItems().add(z);
+            }
+
             session.clear();
             session.disconnect();
             session.close();
@@ -399,6 +544,14 @@ public class AdminController implements Initializable {
         return new Pracownicy();
     }
 
+    Klienci getKlientByImie(List<Klienci> listaKlientow, String imie){
+        for (Klienci klient :
+                listaKlientow){
+            if (klient.getImie() == imie) return klient;
+        }
+        return new Klienci();
+    }
+
     short getStanZamowieniaByText(String zamowienie) {
         switch (zamowienie) {
             case "Zamówienie złożone przez mechanika (0)":
@@ -413,4 +566,17 @@ public class AdminController implements Initializable {
                 return 0;
         }
     }
+
+    int getStanZleceniaByText(String zlecenie){
+        switch(zlecenie){
+            case "zlecenie utworzone i oczekujące do przyjęcia przez mechanika": return 0;
+            case "zlecenie przyjęte przez mechanika i w trakcie realizacji": return 1;
+            case "zlecenie oczekujące do wyceny (mechanik wykonał naprawę)": return 2;
+            case "zlecenie zakończone": return 3;
+            case "zlecenie anulowane": return 4;
+        }
+        return 0;
+    }
+
+
 }

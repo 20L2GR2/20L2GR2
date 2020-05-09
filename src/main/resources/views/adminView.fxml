@@ -89,19 +89,20 @@
                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Label layoutX="14.0" layoutY="32.0" text="Zlecenia:"/>
-                        <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="1100.0">
+                        <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="1175.0" fx:id="zlecenia">
                             <columns>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Id zlecenia"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Klient"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Mechanik"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa s"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa e"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Opis"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Data rozp."/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Data zak."/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Opis napr."/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Użyte części"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Cena"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Id zlecenia" fx:id="idZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Stan zlecenia" fx:id="stanZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Klient" fx:id="klientZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Mechanik" fx:id="mechanikZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa s" fx:id="obslugaSZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa e" fx:id="obslugaEZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Opis" fx:id="opisZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Data rozp." fx:id="rozpZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Data zak." fx:id="zakZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Opis napr." fx:id="naprwZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Użyte części" fx:id="czesciZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Cena" fx:id="cenaZleceniaColumn"/>
                             </columns>
                         </TableView>
                         <Button layoutX="18.0" layoutY="274.0" mnemonicParsing="false" text="Usuń"

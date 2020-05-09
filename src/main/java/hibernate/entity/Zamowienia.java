@@ -1,5 +1,7 @@
 package hibernate.entity;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 
 @Entity
@@ -78,6 +80,8 @@ public class Zamowienia {
     public String getPracownikImie() {
         return pracownik.getImie();
     }
+
+    public String getPracownikLogin() { return pracownik.getLogin(); }
 
     public String getImieNazwisko() {
         return pracownik.getImie() + " " + pracownik.getNazwisko();

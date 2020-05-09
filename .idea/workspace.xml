@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="ABBCK-39 # Dodanie wyswietlen ukonczonych zlecen oraz informacji o nich">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="ABBCK-41 # Skończenie widoku admina - skończenie edycji i usuwania zleceń">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/20L2GR2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/20L2GR2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Klienci.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Klienci.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Pracownicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Pracownicy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zamowienia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zamowienia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zlecenia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zlecenia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/ObslugaKlientaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/ObslugaKlientaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/20l2gr2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/20l2gr2.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/dump.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/dump.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/adminView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/adminView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/application.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/application.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/magazynierView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/magazynierView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/mechanikView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/mechanikView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/obslugaKlientaView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/obslugaKlientaView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +78,18 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Application.loginScreen">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
