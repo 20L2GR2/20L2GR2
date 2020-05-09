@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.Integer?>
+<?import java.lang.String?>
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.AdminController">
@@ -142,17 +143,17 @@
                         <ChoiceBox layoutX="68.0" layoutY="183.0" prefWidth="150.0" fx:id="nowaRola">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-                                    <Integer fx:value="0"/>
-                                    <Integer fx:value="1"/>
-                                    <Integer fx:value="2"/>
-                                    <Integer fx:value="3"/>
+                                    <String fx:value="Admin"/>
+                                    <String fx:value="Obsługa klienta"/>
+                                    <String fx:value="Mechanik"/>
+                                    <String fx:value="Magazynier"/>
                                 </FXCollections>
                             </items>
                         </ChoiceBox>
                         <Button layoutX="68.0" layoutY="238.0" mnemonicParsing="false" text="Dodaj"
                                 onAction="#utwórzUzytkownika"/>
                         <Label layoutX="143.0" layoutY="243.0"
-                               text="Error (już istnieje o takim loginie) albo dodano message" fx:id="blad"/>
+                               text="" fx:id="blad"/>
                     </children>
                 </Pane>
                 <Pane fx:id="zamowieniaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"

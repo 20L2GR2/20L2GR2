@@ -43,9 +43,7 @@ public class AdminController implements Initializable {
     @FXML
     private TableView uzytkownicy, zamowienia, czesci, zlecenia;
     @FXML
-    private TableColumn<Pracownicy, String> imieColumn, nazwiskoColumn, loginColumn;
-    @FXML
-    private TableColumn<Pracownicy, Short> rolaColumn;
+    private TableColumn<Pracownicy, String> imieColumn, nazwiskoColumn, loginColumn, rolaColumn;
     @FXML
     private TableColumn<Magazyn, String> nazwaCzesciColumn, opisColumn;
     @FXML
@@ -161,12 +159,14 @@ public class AdminController implements Initializable {
             Pracownicy nowyPracownik = new Pracownicy();
             nowyPracownik.setHaslo(noweHaslo.getText());
             nowyPracownik.setLogin(nowyLogin.getText());
-            nowyPracownik.setStanowisko((short) Integer.parseInt(nowaRola.getValue().toString()));
+            nowyPracownik.setStanowisko(getShortFromStanowisko(nowaRola.getValue().toString()));
             nowyPracownik.setImie(noweImie.getText());
             nowyPracownik.setNazwisko(noweNazwisko.getText());
             session.save(nowyPracownik);
-            uzytkownicy.getItems().add(nowyPracownik);
+            //uzytkownicy.getItems().add(nowyPracownik);
+
             session.getTransaction().commit();
+            inicjalizujWidokAdminaZBazy();
             blad.setText("Stworzyłem użytkownika " + nowyLogin.getText());
 
             session.clear();
@@ -338,12 +338,13 @@ public class AdminController implements Initializable {
                 inicjalizujWidokAdminaZBazy();
             });
 
-            rolaColumn.setCellValueFactory(new PropertyValueFactory<>("stanowisko"));
-            ObservableList<Short> testlist = FXCollections.observableArrayList((short) 0, (short) 1, (short) 2, (short) 3);
+            rolaColumn.setCellValueFactory(new PropertyValueFactory<>("stanowiskoToString"));
+            ObservableList<String> testlist = FXCollections.observableArrayList("Admin", "Obsługa klienta", "Mechanik", "Magazynier");
             rolaColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(testlist));
             rolaColumn.setOnEditCommit(e -> {
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setStanowisko((short) e.getNewValue());
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setStanowisko(getShortFromStanowisko(e.getNewValue()));
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
+                inicjalizujWidokAdminaZBazy();
             });
 
             for (Pracownicy p : pracownicy) {
@@ -552,6 +553,8 @@ public class AdminController implements Initializable {
         return new Klienci();
     }
 
+
+
     short getStanZamowieniaByText(String zamowienie) {
         switch (zamowienie) {
             case "Zamówienie złożone przez mechanika (0)":
@@ -576,6 +579,16 @@ public class AdminController implements Initializable {
             case "zlecenie anulowane": return 4;
         }
         return 0;
+    }
+
+    short getShortFromStanowisko(String stanowisko){
+        switch (stanowisko){
+            case "admin": return 0;
+            case "Obsługa klienta": return 1;
+            case "Mechanik": return 2;
+            case "Magazynier": return 3;
+        }
+        return 1;
     }
 
 

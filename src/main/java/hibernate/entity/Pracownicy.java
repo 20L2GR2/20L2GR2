@@ -143,4 +143,14 @@ public class Pracownicy {
                 ", haslo='" + haslo + '\'' +
                 '}';
     }
+
+    public String getStanowiskoToString() {
+        switch (stanowisko){
+            case 0 : return "admin";
+            case 1 : return "Obsługa klienta";
+            case 2 : return "Mechanik";
+            case 3 : return "Magazynier";
+        }
+        return "Obsługa klienta";
+    }
 }
