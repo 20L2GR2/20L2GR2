@@ -167,6 +167,10 @@ public class Zlecenia {
         return pracownikObslugaStart.getImie() + " " + pracownikObslugaStart.getNazwisko();
     }
 
+    public String getImieNazwiskoObslugaKoniec() {
+        return pracownikObslugaKoniec.getImie() + " " + pracownikObslugaKoniec.getNazwisko();
+    }
+
     @Override
     public String toString() {
         return "Zlecenia{" +
