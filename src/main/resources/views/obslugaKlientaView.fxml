@@ -60,6 +60,20 @@
                         </ImageView>
                     </graphic>
                 </ToggleButton>
+
+                <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Historia zleceń"
+                              VBox.vgrow="ALWAYS" toggleGroup="$obslugaMenu" fx:id="toogleButtonHistoriaZlecen"
+                              onAction="#otworzHistoriaZlecen">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/profil.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+
                 <ToggleButton styleClass="buttons" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
                               maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Twój profil"
                               VBox.vgrow="ALWAYS" toggleGroup="$obslugaMenu" fx:id="toogleButtonTwojProfil"
@@ -140,14 +154,54 @@
                 </Pane>
 
                 <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" fx:id="historiaZlecenPane">
+                    <children>
+                        <Label layoutX="160" layoutY="20" text="Historia zleceń"/>
+                        <TableView layoutX="40.0" layoutY="40.0" prefHeight="280.0" prefWidth="400"
+                                   fx:id="tableHistoria">
+                            <columns>
+                                <TableColumn minWidth="4.0" prefWidth="250.0" text="Imie i nazwisko klienta"
+                                             fx:id="imieNazwiskoHistoria"/>
+                                <TableColumn minWidth="4.0" prefWidth="150.0" text="Nr rejestracyjny"
+                                             fx:id="nrRejeHistoria"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="375.0" layoutY="330.0" mnemonicParsing="false" text="Wybierz"
+                                onAction="#wybierzHistorieButton"/>
+                        <Label layoutX="500" layoutY="50" text="Imię i nazwisko mechanika"/>
+                        <Label layoutX="500" layoutY="90" text="Imie i nazwisko przyjmującego"/>
+                        <Label layoutX="500" layoutY="130" text="Imie i nazwisko kończącego zlecenie"/>
+                        <Label layoutX="500" layoutY="170" text="Marka i model samochodu"/>
+                        <Label layoutX="500" layoutY="210" text="Opis usterki"/>
+                        <Label layoutX="500" layoutY="250" text="Opis naprawy"/>
+                        <Label layoutX="500" layoutY="290" text="Użyte części"/>
+                        <Label layoutX="500" layoutY="330" text="Cena usługi"/>
+                        <!--  <Label layoutX="500" layoutY="370" text="Data rozpoczecia zlecenia"/>
+                          <Label layoutX="500" layoutY="410" text="Data zakonczenia zlecenia"/> -->
+                        <Label layoutX="700" layoutY="50" text="" fx:id="mechanikHistoria"/>
+                        <Label layoutX="700" layoutY="90" text="" fx:id="obslugaPoczatekHistoria"/>
+                        <Label layoutX="700" layoutY="130" text="" fx:id="obslugaKoniecHistoria"/>
+                        <Label layoutX="700" layoutY="170" text="" fx:id="markaHistoria"/>
+                        <Label layoutX="700" layoutY="210" text="" fx:id="opisUsterkiHistoria"/>
+                        <Label layoutX="700" layoutY="250" text="" fx:id="opisNaprawyHistoria"/>
+                        <Label layoutX="700" layoutY="290" text="" fx:id="uzyteCzesciHistoria"/>
+                        <Label layoutX="700" layoutY="330" text="" fx:id="cenaHistoria"/>
+                        <!-- <Label layoutX="700" layoutY="370" text="" fx:id="dataPoczatekHistoria"/>
+                         <Label layoutX="700" layoutY="410" text="" fx:id="dataKoniecHistoria"/> -->
+                        <Label layoutX="200" layoutY="500" text="" fx:id="bladHistoria"/>
+                    </children>
+                </Pane>
+
+
+                <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                       AnchorPane.topAnchor="0.0" fx:id="twojProfilPane">
                     <children>
                         <Label layoutX="104.0" layoutY="83.0" text="Imię"/>
                         <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
                         <Label layoutX="104.0" layoutY="216.0" text="Login"/>
-                        <Label layoutX="289.0" layoutY="82.0" text="" fx:id="imieLabel"/>
-                        <Label layoutX="289.0" layoutY="144.0" text="" fx:id="nazwiskoLabel"/>
-                        <Label layoutX="289.0" layoutY="216.0" text="" fx:id="loginLabel"/>
+                        <Label layoutX="289.0" layoutY="82.0" text="a" fx:id="imieLabel"/>
+                        <Label layoutX="289.0" layoutY="144.0" text="b" fx:id="nazwiskoLabel"/>
+                        <Label layoutX="289.0" layoutY="216.0" text="c" fx:id="loginLabel"/>
                     </children>
                 </Pane>
             </children>
