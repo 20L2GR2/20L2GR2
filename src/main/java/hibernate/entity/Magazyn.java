@@ -23,8 +23,8 @@ public class Magazyn {
     @Column(name = "cena", nullable = false)
     private float cena;
 
-    @OneToMany(mappedBy = "")
-    private List<Magazyn> czescMagazyn;
+    @OneToMany(mappedBy = "czesc")
+    private List<Magazyn> czesc;
 
     public Magazyn() {
     }
