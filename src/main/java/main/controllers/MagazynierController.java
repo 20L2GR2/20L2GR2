@@ -1,3 +1,4 @@
+// nowy branch
 package main.controllers;
 
 import hibernate.entity.Magazyn;
