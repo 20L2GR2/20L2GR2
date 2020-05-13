@@ -119,6 +119,7 @@
                                 text="Usuń część">
                         </Button>
                         <Label layoutX="1120.0" layoutY="500.0" text="" fx:id="usuwanieCzesciLabel"/>
+                        <TextArea layoutX="600" layoutY="500" wrapText="true" fx:id="nowaCzescTextArea"/>
                     </children>
                 </Pane>
                 <Pane fx:id="zamowieniaPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"

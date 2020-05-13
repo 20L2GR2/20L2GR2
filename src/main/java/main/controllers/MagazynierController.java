@@ -1,4 +1,3 @@
-// nowy branch
 package main.controllers;
 
 import hibernate.entity.Magazyn;
@@ -24,7 +23,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MagazynierController implements Initializable {
+
     LogowanieController mainController = new LogowanieController();
+    boolean przeniesiono = false;
+    Zamowienia zamowienie = null;
+    Magazyn czesc = null;
 
     @FXML
     private BorderPane borderPane;
@@ -50,6 +53,8 @@ public class MagazynierController implements Initializable {
     public TextField nowaNazwaCzesci, nowaOpisCzesci, nowaIloscCzesci, nowaCenaCzesci;
     @FXML
     public Label blad, usuwanieCzesciLabel, bladRealizacji;
+    @FXML
+    public TextArea nowaCzescTextArea;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -152,7 +157,13 @@ public class MagazynierController implements Initializable {
             session.save(nowaCzesc);
             tableMagazyn.getItems().add(nowaCzesc);
             session.getTransaction().commit();
-            System.out.println("Dodawano!");
+            czesc = nowaCzesc;
+            System.out.println("Dodano!");
+
+            if (przeniesiono) {
+                otworzZamowienia();
+                zrealizowaneButton();
+            }
 
             blad.setStyle("-fx-text-fill: white;");
             blad.setText("Dodano część");
@@ -167,7 +178,6 @@ public class MagazynierController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     public void usunCzesc() {
 
@@ -235,33 +245,60 @@ public class MagazynierController implements Initializable {
     }
 
     public void zrealizowaneButton() {
+
+        System.out.println(zamowienie);
+
+        if (zamowienie != null) {
+            System.out.println("Zamówienie różne od null");
+            Transaction transaction = null;
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                transaction = session.beginTransaction();
+                System.out.println("Update...");
+
+                zamowienie.setStanZamowienia((short) 2);
+                System.out.println(czesc);
+                zamowienie.setCzesc(czesc);
+                System.out.println(zamowienie);
+                if (przeniesiono) {
+                    przeniesiono = false;
+                    session.update(zamowienie);
+                    session.getTransaction().commit();
+                    System.out.println("Updated");
+                    tableZamowienia.refresh();
+                    bladRealizacji.setStyle("-fx-text-fill: white;");
+                    bladRealizacji.setText("Zmieniono stan zamówienia");
+                    tableZamowienia.refresh();
+                }
+
+                zamowienie = null;
+                session.clear();
+                session.disconnect();
+                session.close();
+                System.out.println("Zamówienie zrealizowane");
+                return;
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
+        }
+
         bladRealizacji.setStyle("-fx-text-fill: red;");
         if (tableZamowienia.getSelectionModel().isEmpty()) {
             bladRealizacji.setText("Nie wybrano zamówienia");
             return;
         }
 
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            System.out.println("Update...");
-            Zamowienia zamowienie = (Zamowienia) tableZamowienia.getSelectionModel().getSelectedItem();
-            System.out.println(zamowienie.getIdZamowienia());
-            zamowienie.setStanZamowienia((short) 2);
-            session.update(zamowienie);
-            session.getTransaction().commit();
-            System.out.println("Updated");
-            tableZamowienia.refresh();
-            bladRealizacji.setStyle("-fx-text-fill: white;");
-            bladRealizacji.setText("Zmieniono stan zamówienia");
-            session.clear();
-            session.disconnect();
-            session.close();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        }
-        System.out.println("Zamówienie zrealizowane");
+        zamowienie = (Zamowienia) tableZamowienia.getSelectionModel().getSelectedItem();
+
+        System.out.println("Id zamówienia w tabeli: " + zamowienie.getIdZamowienia());
+        zamowienie.setStanZamowienia((short) 2);
+
+        nowaCzescTextArea.setText(zamowienie.getNazwaCzesci() + "\n" + zamowienie.getKomentarz());
+
+        przeniesiono = true;
+        System.out.println("Przeniesiono: " + przeniesiono);
+        otworzStanMagazyn();
+
     }
 
     private void updateData(Object object) {
@@ -303,6 +340,8 @@ public class MagazynierController implements Initializable {
             for (Zamowienia z : zamowienia) {
                 tableZamowienia.getItems().add(z);
             }
+
+            // tu
 
             //------------------------------------------------------------
 

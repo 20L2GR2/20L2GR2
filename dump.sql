@@ -15,9 +15,9 @@ INSERT INTO `pracownicy` (`id_pracownika`, `imie`, `nazwisko`, `stanowisko`, `lo
 (3, 'Maciej', 'Solejuk', 2, 'mechanik1', 'mechanik1'),
 (4, 'Piotr', 'Nowakowski', 3, 'magazynier1', 'magazynier1');
 
-INSERT INTO `zamowienia` (`id_zamowienia`, `nazwa_czesci`, `kometarz`, `stan_zamowienia`, `id_mechanika`) VALUES
-(1, 'Belka tylna Renault Scenic', 'Wymagany osprzęt układu hamulcowego', 0, 2),
-(2, 'Reflektor przedni prawy Fiat Panda', '', 0, 2);
+INSERT INTO `zamowienia` (`id_zamowienia`, `nazwa_czesci`, `kometarz`, `stan_zamowienia`, `id_mechanika`, `id_czesci`) VALUES
+(1, 'Belka tylna Renault Scenic', 'Wymagany osprzęt układu hamulcowego', 0, 2, NULL),
+(2, 'Reflektor przedni prawy Fiat Panda', '', 0, 2, NULL);
 
 INSERT INTO `zlecenia` (`id_zlecenie`, `id_klienta`, `id_mechanika`, `id_obslugaklientastart`, `id_obslugaklientakoniec`, `stan_zlecenia`, `opis_usterki`, `data_rozpoczecia`, `data_zakonczenia`, `opis_naprawy`, `uzyte_czesci`, `cena`) VALUES
 (1, 1, NULL, 3, NULL, 2, 'Wymiana klocków hamulcowych przód', '2020-04-19 10:00:00', NULL, NULL, NULL, NULL);

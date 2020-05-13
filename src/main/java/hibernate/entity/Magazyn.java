@@ -1,6 +1,7 @@
 package hibernate.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "magazyn")
@@ -21,6 +22,9 @@ public class Magazyn {
 
     @Column(name = "cena", nullable = false)
     private float cena;
+
+    @OneToMany(mappedBy = "")
+    private List<Magazyn> czescMagazyn;
 
     public Magazyn() {
     }

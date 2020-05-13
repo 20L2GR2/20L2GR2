@@ -71,7 +71,8 @@ CREATE TABLE `zamowienia` (
   `nazwa_czesci` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
   `kometarz` varchar(500) COLLATE utf8mb4_polish_ci NOT NULL,
   `stan_zamowienia` int(1) NOT NULL,
-  `id_mechanika` int(9) NOT NULL
+  `id_mechanika` int(9) NOT NULL,
+  `id_czesci` int(9) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --

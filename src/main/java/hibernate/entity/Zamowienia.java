@@ -1,7 +1,5 @@
 package hibernate.entity;
 
-import com.sun.istack.Nullable;
-
 import javax.persistence.*;
 
 @Entity
@@ -21,6 +19,10 @@ public class Zamowienia {
     @ManyToOne
     @JoinColumn(name = "id_mechanika")
     private Pracownicy pracownik;
+
+    @ManyToOne
+    @JoinColumn(name="id_czesci")
+    private Magazyn czesc;
 
 
     public Zamowienia() {
@@ -66,6 +68,10 @@ public class Zamowienia {
         this.pracownik = pracownik;
     }
 
+    public Magazyn getCzesc() { return czesc; }
+
+    public void setCzesc(Magazyn czesc) { this.czesc = czesc; }
+
     @Override
     public String toString() {
         return "Zamowienia{" +
@@ -81,7 +87,9 @@ public class Zamowienia {
         return pracownik.getImie();
     }
 
-    public String getPracownikLogin() { return pracownik.getLogin(); }
+    public String getPracownikLogin() {
+        return pracownik.getLogin();
+    }
 
     public String getImieNazwisko() {
         return pracownik.getImie() + " " + pracownik.getNazwisko();
