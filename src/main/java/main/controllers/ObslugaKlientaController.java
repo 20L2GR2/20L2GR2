@@ -20,6 +20,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static java.lang.String.valueOf;
+
 public class ObslugaKlientaController implements Initializable {
     LogowanieController mainController = new LogowanieController();
 
@@ -27,10 +29,12 @@ public class ObslugaKlientaController implements Initializable {
     public Button buttonLogout;
     public ToggleButton toogleButtonUtworzZlecenie;
     public ToggleButton toogleButtonUkonczoneZlecenia;
+    public ToggleButton toogleButtonHistoriaZlecen;
     public ToggleButton toogleButtonTwojProfil;
     public Pane utworzZleceniePane;
     public Pane ukonczoneZleceniaPane;
     public Pane twojProfilPane;
+    public Pane historiaZlecenPane;
     public BorderPane obslugaKlientaBorderPane;
 
     @FXML
@@ -40,13 +44,13 @@ public class ObslugaKlientaController implements Initializable {
     public TextArea klientOpis;
 
     @FXML
-    public Label bladKlient, imieLabel, nazwiskoLabel, loginLabel, bladUkonczone, mechanikLabel, obslugaLabel, markaLabel, opisUsterkiLabel, opisNaprawyLabel, uzyteCzesciLabel;
+    public Label bladKlient, bladHistoria, imieLabel, nazwiskoLabel, loginLabel, bladUkonczone, mechanikLabel, obslugaLabel, markaLabel, opisUsterkiLabel, opisNaprawyLabel, uzyteCzesciLabel;
+    public Label mechanikHistoria, obslugaPoczatekHistoria, obslugaKoniecHistoria, markaHistoria, opisUsterkiHistoria, opisNaprawyHistoria, uzyteCzesciHistoria, cenaHistoria, dataPoczatekHistoria, dataKoniecHistoria;
+    @FXML
+    public TableView tableUkonczone, tableHistoria;
 
     @FXML
-    public TableView tableUkonczone;
-
-    @FXML
-    private TableColumn imieNazwiskoColumn, nrRejeColumn;
+    private TableColumn imieNazwiskoColumn, nrRejeColumn, nrRejeHistoria, imieNazwiskoHistoria;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,6 +73,13 @@ public class ObslugaKlientaController implements Initializable {
         System.out.println("otworzTwojProfil");
         obslugaKlientaBorderPane.setCenter(twojProfilPane);
         selectedButton(toogleButtonTwojProfil);
+        inicjalizujWidokObslugiKlientaZBazy();
+    }
+
+    public void otworzHistoriaZlecen() {
+        System.out.println("otworzHistoriaZlecen");
+        obslugaKlientaBorderPane.setCenter(historiaZlecenPane);
+        selectedButton(toogleButtonHistoriaZlecen);
         inicjalizujWidokObslugiKlientaZBazy();
     }
 
@@ -195,6 +206,7 @@ public class ObslugaKlientaController implements Initializable {
 
     public Pracownicy inicjalizujWidokObslugiKlientaZBazy() {
         tableUkonczone.getItems().clear();
+        tableHistoria.getItems().clear();
         Transaction transaction = null;
         Pracownicy pracownik = new Pracownicy();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -212,6 +224,17 @@ public class ObslugaKlientaController implements Initializable {
 
             for (Zlecenia z : zlecenia) {
                 tableUkonczone.getItems().add(z);
+            }
+
+            List<Zlecenia> historia = session.createQuery("SELECT h FROM Zlecenia h WHERE h.stanZlecenia = :stan", Zlecenia.class).setParameter("stan", 3).getResultList();
+
+            System.out.println(historia);
+
+            imieNazwiskoHistoria.setCellValueFactory(new PropertyValueFactory<>("imieNazwisko"));
+            nrRejeHistoria.setCellValueFactory(new PropertyValueFactory<>("nrReje"));
+
+            for (Zlecenia h : historia) {
+                tableHistoria.getItems().add(h);
             }
 
             System.out.println("Po");
@@ -257,7 +280,38 @@ public class ObslugaKlientaController implements Initializable {
         }
     }
 
-    public void zakonczZlecenieButton() {
+    public void wybierzHistorieButton() {
+        if (tableHistoria.getSelectionModel().isEmpty()) {
+            bladHistoria.setText("Nie wybrano klienta!");
+            return;
+        }
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            Zlecenia zlecenia1 = (Zlecenia) tableHistoria.getSelectionModel().getSelectedItem();
+            Zlecenia z1 = (Zlecenia) session.createQuery("SELECT z1 FROM Zlecenia z1 WHERE z1.klientZlecenie.idKlienta = :id", Zlecenia.class).setParameter("id", zlecenia1.getIdKlienta()).uniqueResult();
+            System.out.println(z1);
+            mechanikHistoria.setText(z1.getImieNazwiskoMechanik());
+            obslugaPoczatekHistoria.setText(z1.getImieNazwiskoObslugaPoczatek());
+            obslugaKoniecHistoria.setText(z1.getImieNazwiskoObslugaKoniec());
+            markaHistoria.setText(z1.getMarkaModel());
+            opisUsterkiHistoria.setText(z1.getOpisUsterki());
+            opisNaprawyHistoria.setText(z1.getOpisNaprawy());
+            uzyteCzesciHistoria.setText(z1.getUzyteCzesci());
+            cenaHistoria.setText(valueOf(z1.getCena()));
+            //dataPoczatekHistoria.setText(z1.getDataRozpoczecia());
+
+
+            session.clear();
+            session.disconnect();
+            session.close();
+        } catch (Exception e) {
+            //if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public void zakonczZlecenieButton() throws ParseException {
         bladUkonczone.setStyle("-fx-text-fill: red");
         if (tableUkonczone.getSelectionModel().isEmpty()) {
             bladUkonczone.setText("Nie wybrano klienta!");
@@ -309,7 +363,7 @@ public class ObslugaKlientaController implements Initializable {
             Zlecenia kwota = (Zlecenia) session.createQuery("SELECT z FROM Zlecenia z WHERE z.klientZlecenie.idKlienta = :id", Zlecenia.class).setParameter("id", zlecenia.getIdKlienta()).uniqueResult();
             kwota.setCena(num);
             kwota.setStanZlecenia(3);
-            kwota.setPracownikObslugaKoniec(pracownik);
+            //kwota.setPracownikObslugaKoniec(pracownik);
 
             java.util.Date date = new java.util.Date();
             java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
