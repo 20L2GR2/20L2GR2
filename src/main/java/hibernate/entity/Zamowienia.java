@@ -72,6 +72,8 @@ public class Zamowienia {
 
     public void setCzesc(Magazyn czesc) { this.czesc = czesc; }
 
+    //public void setIdCzesci() { this.czesc =  }
+
     @Override
     public String toString() {
         return "Zamowienia{" +

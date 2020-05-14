@@ -24,7 +24,7 @@ public class Magazyn {
     private float cena;
 
     @OneToMany(mappedBy = "czesc")
-    private List<Magazyn> czesc;
+    private List<Zamowienia> czesc;
 
     public Magazyn() {
     }

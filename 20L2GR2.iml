@@ -18,7 +18,9 @@
         <datasource-mapping>
           <factory-entry name="Entities" />
         </datasource-mapping>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="Entities" />
+        </naming-strategy-map>
       </configuration>
     </facet>
   </component>

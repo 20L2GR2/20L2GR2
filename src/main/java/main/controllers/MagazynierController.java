@@ -192,7 +192,19 @@ public class MagazynierController implements Initializable {
             transaction = session.beginTransaction();
 
             Magazyn usuwanieCzesci = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
+            System.out.println(usuwanieCzesci);
             System.out.println("Usuwanie części...");
+
+            //if (usuwanieCzesci.getIdCzesci() != null) {
+
+            //}
+
+            Zamowienia zamowieniaCzesc = (Zamowienia) session.createQuery("FROM Zamowienia z WHERE z.czesc.idCzesci = :id").setParameter("id", usuwanieCzesci.getIdCzesci());
+
+            System.out.println("ID części w magazynie: " + usuwanieCzesci.getIdCzesci());
+            System.out.println("ID części w zamówniach: " + zamowieniaCzesc.getCzesc());
+
+
             session.delete(usuwanieCzesci);
 
             tableMagazyn.getItems().remove(usuwanieCzesci);
@@ -267,7 +279,6 @@ public class MagazynierController implements Initializable {
                     tableZamowienia.refresh();
                     bladRealizacji.setStyle("-fx-text-fill: white;");
                     bladRealizacji.setText("Zmieniono stan zamówienia");
-                    tableZamowienia.refresh();
                 }
 
                 zamowienie = null;
@@ -275,6 +286,7 @@ public class MagazynierController implements Initializable {
                 session.disconnect();
                 session.close();
                 System.out.println("Zamówienie zrealizowane");
+                tableZamowienia.refresh();
                 return;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
@@ -331,6 +343,7 @@ public class MagazynierController implements Initializable {
             transaction = session.beginTransaction();
 
             List<Zamowienia> zamowienia = session.createQuery("SELECT z FROM Zamowienia z ORDER BY stanZamowienia ASC", Zamowienia.class).getResultList();
+
 
             nazwaColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
             komentarzColumn.setCellValueFactory(new PropertyValueFactory<>("komentarz"));
