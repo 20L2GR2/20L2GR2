@@ -163,6 +163,7 @@ public class MagazynierController implements Initializable {
             if (przeniesiono) {
                 otworzZamowienia();
                 zrealizowaneButton();
+                tableZamowienia.refresh();
             }
 
             blad.setStyle("-fx-text-fill: white;");
