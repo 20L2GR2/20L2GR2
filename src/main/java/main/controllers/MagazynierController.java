@@ -187,30 +187,24 @@ public class MagazynierController implements Initializable {
             usuwanieCzesciLabel.setText("Nie wybrano części");
             return;
         }
+
+        Magazyn usuwanieCzesci = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
+        Zamowienia zamowieniaCzesc = ifCzescInDb(usuwanieCzesci);
+        if (zamowieniaCzesc != null) {
+            updateCzescZamowienia(zamowieniaCzesc);
+        }
+        System.out.println("Usuwanie części...");
+
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            Magazyn usuwanieCzesci = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
-            System.out.println(usuwanieCzesci);
-            System.out.println("Usuwanie części...");
-
-            //if (usuwanieCzesci.getIdCzesci() != null) {
-
-            //}
-
-            Zamowienia zamowieniaCzesc = (Zamowienia) session.createQuery("FROM Zamowienia z WHERE z.czesc.idCzesci = :id").setParameter("id", usuwanieCzesci.getIdCzesci());
-
             System.out.println("ID części w magazynie: " + usuwanieCzesci.getIdCzesci());
-            System.out.println("ID części w zamówniach: " + zamowieniaCzesc.getCzesc());
-
+            System.out.println("ID części w zamówniach: " + zamowieniaCzesc);
 
             session.delete(usuwanieCzesci);
-
             tableMagazyn.getItems().remove(usuwanieCzesci);
-
             session.getTransaction().commit();
-
             System.out.println("Usunięto część");
 
             usuwanieCzesciLabel.setStyle("-fx-text-fill: white;");
@@ -223,6 +217,41 @@ public class MagazynierController implements Initializable {
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
+        }
+    }
+
+    public void updateCzescZamowienia(Zamowienia zamow) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            zamow.setCzesc(null);
+
+            session.update(zamow);
+            session.getTransaction().commit();
+            session.clear();
+            session.disconnect();
+            session.close();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public Zamowienia ifCzescInDb(Magazyn usuwanieCzesci) {
+        Zamowienia czescZamow;
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            czescZamow = (Zamowienia) session.createQuery("FROM Zamowienia z WHERE z.czesc = :id").setParameter("id", usuwanieCzesci).uniqueResult();
+
+            session.clear();
+            session.disconnect();
+            session.close();
+            return czescZamow;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return null;
         }
     }
 
