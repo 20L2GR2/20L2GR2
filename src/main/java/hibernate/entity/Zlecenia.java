@@ -171,7 +171,6 @@ public class Zlecenia {
     public String toString() {
         return "Zlecenia{" +
                 "idZlecenia=" + idZlecenia +
-                ", idKlienta=" + klientZlecenie +
                 ", opisUsterki='" + opisUsterki + '\'' +
                 ", dataRozpoczecia=" + dataRozpoczecia +
                 ", dataZakonczenia=" + dataZakonczenia +
@@ -179,6 +178,10 @@ public class Zlecenia {
                 ", opisNaprawy='" + opisNaprawy + '\'' +
                 ", uzyteCzesci='" + uzyteCzesci + '\'' +
                 ", cena=" + cena +
+                ", klientZlecenie=" + klientZlecenie +
+                ", pracownikMechanik=" + pracownikMechanik +
+                ", pracownikObslugaStart=" + pracownikObslugaStart +
+                ", pracownikObslugaKoniec=" + pracownikObslugaKoniec +
                 '}';
     }
 

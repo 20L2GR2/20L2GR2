@@ -10,6 +10,18 @@
     <left>
         <VBox prefHeight="358.0" prefWidth="158.0" BorderPane.alignment="CENTER">
             <children>
+                <ToggleButton fx:id="toggleButtonStanmagazyn" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzStanMagazyn"
+                              styleClass="buttons" text="Stan magazynu" toggleGroup="$mechanikMenu"
+                              VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/stanmagazynu.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
                 <ToggleButton fx:id="toggleButtonCzesci" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
                               maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzCzesci"
                               styleClass="buttons" text="Części" toggleGroup="$mechanikMenu" VBox.vgrow="ALWAYS">
@@ -96,6 +108,22 @@
                         <Label layoutX="289.0" layoutY="144.0" text="Label" fx:id="nazwiskoLabel"/>
                         <Label layoutX="289.0" layoutY="216.0" text="Label" fx:id="loginLabel"/>
 
+                    </children>
+                </Pane>
+                <Pane fx:id="stanMagazynuPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1200.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableMagazyn">
+                            <columns>
+                                <TableColumn prefWidth="500.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
+                                <TableColumn prefWidth="500.0" text="Opis części" fx:id="opisColumn"/>
+                                <TableColumn prefWidth="100.0" text="Ilość" fx:id="iloscColumn"/>
+                                <TableColumn prefWidth="90.0" text="Cena" fx:id="cenaColumn"/>
+                            </columns>
+                        </TableView>
                     </children>
                 </Pane>
                 <Pane fx:id="zleceniaPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
