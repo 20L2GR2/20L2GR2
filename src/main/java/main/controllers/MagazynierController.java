@@ -4,6 +4,8 @@ import hibernate.entity.Magazyn;
 import hibernate.entity.Pracownicy;
 import hibernate.entity.Zamowienia;
 import hibernate.util.HibernateUtil;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,11 +44,9 @@ public class MagazynierController implements Initializable {
     @FXML
     private TableColumn nazwaColumn, komentarzColumn, mechanikColumn, zamowienieColumn;
     @FXML
-    public TableColumn zamowieniaNazwaCzesciColumn, zamowieniaKomentarzColumn, zamowieniaMechanikColumn;
-    @FXML
     public Label imieLabel, nazwiskoLabel, loginLabel;
     @FXML
-    public TextField nowaNazwaCzesci, nowaOpisCzesci, nowaIloscCzesci, nowaCenaCzesci;
+    public TextField nowaNazwaCzesci, nowaOpisCzesci, nowaIloscCzesci, nowaCenaCzesci, szukajNazwaCzesci;
     @FXML
     public Label blad, usuwanieCzesciLabel, bladRealizacji;
 
@@ -68,6 +68,36 @@ public class MagazynierController implements Initializable {
             nowaCenaCzesci.setText(newValue.replaceAll("[^[1-9]*\\d?(.\\d{1,2})*]", ""));
         });
 
+        szukajNazwaCzesci.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                tableMagazyn.getItems().clear();
+                if (!t1.isEmpty()) {
+                    filtering(t1);
+                } else inicjalizujWidokMagazynieraZBazy();
+            }
+        });
+    }
+
+    private void filtering(String text) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
+
+            for (Magazyn m : magazyn) {
+                if (m.getNazwaCzesci().toLowerCase().contains(text.toLowerCase())) {
+                    tableMagazyn.getItems().add(m);
+                }
+            }
+            session.clear();
+            session.disconnect();
+            session.close();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
     }
 
     public void logout(ActionEvent event) throws IOException {
@@ -348,12 +378,10 @@ public class MagazynierController implements Initializable {
             session.clear();
             session.disconnect();
             session.close();
-
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
     }
-
 
 }

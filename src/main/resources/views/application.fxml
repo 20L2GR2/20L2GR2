@@ -38,7 +38,8 @@
         </AnchorPane>
         <AnchorPane minHeight="500.0" minWidth="400.0" prefHeight="489.0" prefWidth="403.0">
             <children>
-                <Button layoutX="317.0" layoutY="346.0" mnemonicParsing="false" text="Zaloguj" onAction="#zaloguj"/>
+                <Button layoutX="317.0" layoutY="346.0" mnemonicParsing="false" text="Zaloguj" onAction="#zaloguj"
+                        fx:id="zalogujButton"/>
                 <TextField layoutX="274.0" layoutY="263.0" promptText="Login" fx:id="loginTextField"/>
                 <PasswordField id="password" layoutX="275.0" layoutY="300.0" promptText="Password"
                                fx:id="passwordField"/>

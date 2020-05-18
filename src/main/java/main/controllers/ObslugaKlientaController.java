@@ -4,6 +4,8 @@ import hibernate.entity.Klienci;
 import hibernate.entity.Pracownicy;
 import hibernate.entity.Zlecenia;
 import hibernate.util.HibernateUtil;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,16 +36,17 @@ public class ObslugaKlientaController implements Initializable {
     public BorderPane obslugaKlientaBorderPane;
 
     @FXML
-    public TextField klientImie, klientNazwisko, klientTelefon, klientMarka, klientModel, klientRejestracja, kwotaUslugi;
+    private TextField klientImie, klientNazwisko, klientTelefon, klientMarka, klientModel, klientRejestracja, kwotaUslugi, szukajZlecenia;
+    ;
 
     @FXML
-    public TextArea klientOpis;
+    private TextArea klientOpis;
 
     @FXML
-    public Label bladKlient, imieLabel, nazwiskoLabel, loginLabel, bladUkonczone, mechanikLabel, obslugaLabel, markaLabel, opisUsterkiLabel, opisNaprawyLabel, uzyteCzesciLabel;
+    private Label bladKlient, imieLabel, nazwiskoLabel, loginLabel, bladUkonczone, mechanikLabel, obslugaLabel, markaLabel, opisUsterkiLabel, opisNaprawyLabel, uzyteCzesciLabel;
 
     @FXML
-    public TableView tableUkonczone;
+    private TableView tableUkonczone;
 
     @FXML
     private TableColumn imieNazwiskoColumn, nrRejeColumn;
@@ -59,6 +62,37 @@ public class ObslugaKlientaController implements Initializable {
             if (newValue.matches("^[1-9]*\\d?(.\\d{1,2})*")) return;
             kwotaUslugi.setText(newValue.replaceAll("[^[1-9]*\\d?(.\\d{1,2})*]", ""));
         });
+
+        szukajZlecenia.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                tableUkonczone.getItems().clear();
+                if (!t1.isEmpty()) {
+                    filtering(t1);
+                } else inicjalizujWidokObslugiKlientaZBazy();
+            }
+        });
+    }
+
+    private void filtering(String text) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z WHERE z.stanZlecenia = :stan", Zlecenia.class).setParameter("stan", 2).getResultList();
+
+            for (Zlecenia z : zlecenia) {
+                if (z.getNrReje().toUpperCase().contains(text.toUpperCase())) {
+                    tableUkonczone.getItems().add(z);
+                }
+            }
+            session.clear();
+            session.disconnect();
+            session.close();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
     }
 
     public void logout(ActionEvent event) throws IOException {
@@ -129,7 +163,7 @@ public class ObslugaKlientaController implements Initializable {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            klient = session.createQuery("SELECT a FROM Klienci a WHERE a.nrReje = :numerRejestracyjny", Klienci.class).setParameter("numerRejestracyjny", klientRejestracja.getText()).getSingleResult();
+            klient = session.createQuery("SELECT a FROM Klienci a WHERE a.nrReje = :numerRejestracyjny AND a.imie = :imie AND a.nazwisko = :nazwisko", Klienci.class).setParameter("numerRejestracyjny", klientRejestracja.getText()).setParameter("imie", klientImie.getText()).setParameter("nazwisko", klientNazwisko.getText()).getSingleResult();
             session.clear();
             session.disconnect();
             session.close();

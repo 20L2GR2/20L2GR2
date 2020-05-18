@@ -2,15 +2,21 @@ package main.controllers;
 
 import hibernate.entity.Pracownicy;
 import hibernate.util.HibernateUtil;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
@@ -18,8 +24,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LogowanieController {
+public class LogowanieController implements Initializable {
 
     public static int userID;
 
@@ -27,6 +35,23 @@ public class LogowanieController {
     public TextField loginTextField;
     public PasswordField passwordField;
     public Label bladLogowaniaLabel;
+    public Button zalogujButton;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(() -> loginTextField.requestFocus());
+
+        keyLogin(passwordField);
+        keyLogin(loginTextField);
+    }
+
+    public void keyLogin(TextField field){
+        field.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                zalogujButton.fire();
+            }
+        });
+    }
 
     public void zaloguj(ActionEvent event) throws IOException {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
