@@ -84,6 +84,9 @@ public class Zamowienia {
                 '}';
     }
 
+    public String getCzescNazwa() {
+        return czesc.getNazwaCzesci();
+    }
 
     public String getPracownikImie() {
         return pracownik.getImie();

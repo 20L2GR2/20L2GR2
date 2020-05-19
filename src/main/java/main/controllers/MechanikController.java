@@ -10,14 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.util.converter.FloatStringConverter;
-import javafx.util.converter.LongStringConverter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -33,15 +29,15 @@ public class MechanikController implements Initializable {
     @FXML
     private ToggleButton toggleButtonCzesci, toggleButtonZlecenia, toggleButtonTwojeZlecenia, toggleButtonProfil, toggleButtonStanmagazyn;
     @FXML
-    public Label imieLabel, nazwiskoLabel, loginLabel, blad, bladRealizacji;
+    public Label imieLabel, nazwiskoLabel, loginLabel, blad, bladRealizacji, idTwojeZlecenie, opisUsterkaZlecenia, uzyteCzesci, bladZlecenie;
     @FXML
-    private TableColumn idColumn, opisUsterkaColumn, nazwaCzesciColumn, opisColumn, iloscColumn, cenaColumn;
+    private TableColumn idColumn, opisUsterkaColumn, nazwaCzesciColumn, opisColumn, iloscColumn, cenaColumn, nazwaZamowieniaColumn, komentarzColumn, stanColumn, nazwaCzesciMagazynColumn, opisUsterkaZleceniaColumn, idZleceniaColumn;
     @FXML
-    public TableView tableZlecenia, tableMagazyn;
+    public TableView tableZlecenia, tableMagazyn, tableZamowienia, tableTwojeZlecenia, tableZlecenieMagazyn;
     @FXML
     public TextField nazwaCzesci;
     @FXML
-    public TextArea komentarz;
+    public TextArea komentarz, opisNaprawaZlecenia;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,6 +81,30 @@ public class MechanikController implements Initializable {
         System.out.println("otworzCzesci");
         borderPane.setCenter(czesciPane);
         toggleButtonCzesci.setSelected(true);
+        blad.setText("");
+
+        // wyświetlanie zamówień
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            List<Zamowienia> zamowienia = session.createQuery("SELECT z FROM Zamowienia z ORDER BY stanZamowienia ASC", Zamowienia.class).getResultList();
+
+
+            nazwaZamowieniaColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
+            komentarzColumn.setCellValueFactory(new PropertyValueFactory<>("komentarz"));
+            stanColumn.setCellValueFactory(new PropertyValueFactory<>("stanZamowieniaToString"));
+            nazwaCzesciMagazynColumn.setCellValueFactory(new PropertyValueFactory<>("czescNazwa"));
+
+            for (Zamowienia z : zamowienia) {
+                tableZamowienia.getItems().add(z);
+            }
+
+            session.clear();
+            session.disconnect();
+            session.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void otworzZlecenia() {
@@ -93,6 +113,7 @@ public class MechanikController implements Initializable {
         toggleButtonZlecenia.setSelected(true);
         tableZlecenia.getItems().clear();
         tableZlecenia.setEditable(true);
+        bladRealizacji.setText("");
 
         // wyświetlanie dostępnych zleceń
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -103,7 +124,8 @@ public class MechanikController implements Initializable {
             opisUsterkaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
 
             for (Zlecenia z : zlecenia) {
-                tableZlecenia.getItems().add(z);
+                if(z.getStanZlecenia() == 0)
+                    tableZlecenia.getItems().add(z);
             }
 
             session.clear();
@@ -119,6 +141,50 @@ public class MechanikController implements Initializable {
         System.out.println("otworzTwojeZlecenia");
         borderPane.setCenter(mojeZleceniaPane);
         toggleButtonTwojeZlecenia.setSelected(true);
+
+        bladZlecenie.setText("");
+
+        opisNaprawaZlecenia.setText("");
+        uzyteCzesci.setText("");
+        idTwojeZlecenie.setText("");
+        opisUsterkaZlecenia.setText("");
+
+        tableZlecenia.getItems().clear();
+        tableZlecenia.setEditable(true);
+        bladRealizacji.setText("");
+
+        // wyświetlanie dostępnych zleceń
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            //List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z", Zlecenia.class).getResultList();
+            List<Zlecenia> zlecenia = session.createQuery("FROM Zlecenia z WHERE z.pracownikMechanik = :id").setParameter("id", LogowanieController.userID).getResultList();
+
+            idZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("idZlecenia"));
+            opisUsterkaZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
+
+            for (Zlecenia z : zlecenia) {
+                if(z.getStanZlecenia() == 1)
+                    tableZlecenia.getItems().add(z);
+            }
+
+            nazwaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
+            opisColumn.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
+            iloscColumn.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+            cenaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
+
+            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
+
+            for (Magazyn m : magazyn) {
+                tableMagazyn.getItems().add(m);
+            }
+
+            session.clear();
+            session.disconnect();
+            session.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void otworzProfil() {
@@ -132,7 +198,7 @@ public class MechanikController implements Initializable {
         // wyświetlanie użytkownika
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            Pracownicy user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
+            Pracownicy user = (Pracownicy) session.get(Pracownicy.class, LogowanieController.userID);
 
             imieLabel.setText(user.getImie());
             nazwiskoLabel.setText(user.getNazwisko());
@@ -143,6 +209,60 @@ public class MechanikController implements Initializable {
             session.close();
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void zlecenieZaladuj(){
+        Zlecenia zlecenie = (Zlecenia) tableTwojeZlecenia.getSelectionModel().getSelectedItem();
+        idTwojeZlecenie.setText(String.valueOf(zlecenie.getIdZlecenia()));
+        opisUsterkaZlecenia.setText(String.valueOf(zlecenie.getOpisUsterki()));
+        opisNaprawaZlecenia.setText("");
+        uzyteCzesci.setText("");
+    }
+
+    public void czescPrzypisz(){
+        Magazyn magazyn = (Magazyn) tableZlecenieMagazyn.getSelectionModel().getSelectedItem();
+        String czesci = uzyteCzesci.getText();
+        uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + " ");
+    }
+
+    public void zlecenieZakoncz(){
+        bladZlecenie.setText("");
+        if (idTwojeZlecenie.getText() == null || idTwojeZlecenie.getText().equals("")) {
+            bladZlecenie.setStyle("-fx-text-fill: red;");
+            bladZlecenie.setText("Nie wybrano zlecenia");
+            return;
+        }else if(opisNaprawaZlecenia.getText() == null || opisNaprawaZlecenia.getText().equals("")){
+            bladZlecenie.setStyle("-fx-text-fill: red;");
+            bladZlecenie.setText("Dodaj opis naprawy");
+            return;
+        }
+
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            Zlecenia zlecenie = (Zlecenia) session.createQuery("FROM Zlecenia U WHERE U.idZlecenia = :id").setParameter("id", idTwojeZlecenie.getText()).uniqueResult();
+
+            zlecenie.setUzyteCzesci(uzyteCzesci.getText());
+            zlecenie.setStanZlecenia(2);
+
+            System.out.println(zlecenie);
+
+            session.update(zlecenie);
+            session.getTransaction().commit();
+            System.out.println("Updated");
+            tableZlecenia.refresh();
+            otworzTwojeZlecenia();
+            bladZlecenie.setStyle("-fx-text-fill: white;");
+            bladZlecenie.setText("Zlecenie zostało zakończone");
+            session.clear();
+            session.disconnect();
+            session.close();
+            System.out.println("Zlecenie zakończone");
+        } catch (Exception e) {
+            //if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
     }
@@ -166,7 +286,6 @@ public class MechanikController implements Initializable {
             System.out.println(zlecenie.getIdZlecenia());
 
             Pracownicy pracownik = (Pracownicy) session.get(Pracownicy.class, LogowanieController.userID);
-            //user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
             zlecenie.setPracownikMechanik(pracownik);
             zlecenie.setStanZlecenia(1);
 
@@ -176,20 +295,17 @@ public class MechanikController implements Initializable {
             session.getTransaction().commit();
             System.out.println("Updated");
             tableZlecenia.refresh();
+            otworzZlecenia();
             bladRealizacji.setStyle("-fx-text-fill: white;");
             bladRealizacji.setText("Zlecenie zostało przypisane do Ciebie");
             session.clear();
             session.disconnect();
             session.close();
+            System.out.println("Zamówienie przypisane");
         } catch (Exception e) {
             //if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
-        System.out.println("Zamówienie przypisane");
-    }
-
-    public void zlecenieZakoncz() {
-        System.out.println("Zakończono!");
     }
 
     //dodanie rekordu do zamówienia
@@ -205,7 +321,7 @@ public class MechanikController implements Initializable {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            Pracownicy user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
+            Pracownicy user = (Pracownicy) session.get(Pracownicy.class, LogowanieController.userID);
 
             System.out.println("Dodawanie części...");
             Zamowienia nowaCzesc = new Zamowienia();
@@ -222,47 +338,12 @@ public class MechanikController implements Initializable {
             session.clear();
             session.disconnect();
             session.close();
+            nazwaCzesci.clear();
+            komentarz.clear();
 
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
     }
-
-    // wyświetlenie początkowych danych z bazy danych
-//    public void inicjalizujWidokMechanikaZBazy() {
-//
-//        tableZlecenia.getItems().clear();
-//        tableZlecenia.setEditable(true);
-//
-//        Transaction transaction = null;
-//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-//            transaction = session.beginTransaction();
-//
-//            // wyświetlanie dostępnych zleceń
-//            List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z", Zlecenia.class).getResultList();
-//
-//            idColumn.setCellValueFactory(new PropertyValueFactory<>("idZlecenia"));
-//            opisUsterkaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
-//
-//            for (Zlecenia z : zlecenia) {
-//                tableZlecenia.getItems().add(z);
-//            }
-//
-//            // wyświetlanie użytkownika
-//            Pracownicy user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).uniqueResult();
-//
-//            imieLabel.setText(user.getImie());
-//            nazwiskoLabel.setText(user.getNazwisko());
-//            loginLabel.setText(user.getLogin());
-//
-//            session.clear();
-//            session.disconnect();
-//            session.close();
-//
-//        } catch (Exception e) {
-//            if (transaction != null) transaction.rollback();
-//            e.printStackTrace();
-//        }
-//    }
 }
