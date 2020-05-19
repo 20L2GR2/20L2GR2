@@ -34,7 +34,7 @@ public class MechanikController implements Initializable {
     private TableColumn idColumn, opisUsterkaColumn, nazwaCzesciColumn, opisColumn, iloscColumn, cenaColumn, nazwaZamowieniaColumn,
             komentarzColumn, stanColumn, nazwaCzesciMagazynColumn, opisUsterkaZleceniaColumn, idZleceniaColumn, nazwaCzesciC, opisC, iloscC, cenaC;
     @FXML
-    public TableView tableZlecenia, tableMagazyn, tableZamowienia, tableTwojeZlecenia, tableZlecenieMagazyn;
+    public TableView tableZlecenia, tableMagazyn, tableZamowienia, tableTwojeZlecenia;
     @FXML
     public TextField nazwaCzesci;
     @FXML
@@ -49,35 +49,6 @@ public class MechanikController implements Initializable {
 
     public void logout(ActionEvent event) throws IOException {
         mainController.logout(event);
-    }
-
-    public void otworzStanMagazyn() {
-        System.out.println("otworzStanMagazynu");
-        borderPane.setCenter(stanMagazynuPane);
-        toggleButtonStanmagazyn.setSelected(true);
-        tableMagazyn.getItems().clear();
-        tableMagazyn.setEditable(true);
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-
-            nazwaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
-            opisColumn.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
-            iloscColumn.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
-            cenaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
-
-            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
-
-            for (Magazyn m : magazyn) {
-                tableMagazyn.getItems().add(m);
-            }
-
-            session.clear();
-            session.disconnect();
-            session.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void otworzCzesci() {
@@ -156,13 +127,15 @@ public class MechanikController implements Initializable {
 
         tableTwojeZlecenia.getItems().clear();
         tableTwojeZlecenia.setEditable(true);
+        tableMagazyn.getItems().clear();
+        tableMagazyn.setEditable(true);
         bladRealizacji.setText("");
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             //wyswietlenie zlecen przypisanych do mechanika
             //List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z", Zlecenia.class).getResultList();
-            List<Zlecenia> zlecenia = session.createQuery("FROM Zlecenia z WHERE z.pracownikMechanik = :id").setParameter("id", LogowanieController.userID).getResultList();
+            List<Zlecenia> zlecenia = session.createQuery("FROM Zlecenia z WHERE z.pracownikMechanik.idPracownika = :id").setParameter("id", LogowanieController.userID).getResultList();
 
             idZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("idZlecenia"));
             opisUsterkaZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
@@ -173,15 +146,15 @@ public class MechanikController implements Initializable {
             }
 
             //wyswietlenie stanu magazynu
-            nazwaCzesciC.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
-            opisC.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
-            iloscC.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
-            cenaC.setCellValueFactory(new PropertyValueFactory<>("cena"));
+            nazwaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
+            opisColumn.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
+            iloscColumn.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+            cenaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
 
             List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
 
             for (Magazyn m : magazyn) {
-                tableZlecenieMagazyn.getItems().add(m);
+                tableMagazyn.getItems().add(m);
             }
 
             session.clear();
@@ -228,7 +201,7 @@ public class MechanikController implements Initializable {
     }
 
     public void czescPrzypisz(){
-        Magazyn magazyn = (Magazyn) tableZlecenieMagazyn.getSelectionModel().getSelectedItem();
+        Magazyn magazyn = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
         uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + "; ");
     }
