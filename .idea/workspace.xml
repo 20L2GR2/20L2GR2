@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/MechanikController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/MechanikController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/mechanikView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/mechanikView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/ObslugaKlientaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/ObslugaKlientaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/obslugaKlientaView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/obslugaKlientaView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,6 +162,7 @@
       <workItem from="1589859755444" duration="15728000" />
       <workItem from="1589905360782" duration="35000" />
       <workItem from="1589910359823" duration="8634000" />
+      <workItem from="1589924720266" duration="607000" />
     </task>
     <task id="LOCAL-00001" summary="Fix i dodanie .idea">
       <created>1586115626288</created>

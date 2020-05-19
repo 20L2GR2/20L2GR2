@@ -1,9 +1,12 @@
 package main.controllers;
 
 import hibernate.entity.Klienci;
+import hibernate.entity.Magazyn;
 import hibernate.entity.Pracownicy;
 import hibernate.entity.Zlecenia;
 import hibernate.util.HibernateUtil;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,6 +28,8 @@ import static java.lang.String.valueOf;
 public class ObslugaKlientaController implements Initializable {
     LogowanieController mainController = new LogowanieController();
 
+    List<Zlecenia> zlecenia;
+
     @FXML
     public Button buttonLogout;
     public ToggleButton toogleButtonUtworzZlecenie;
@@ -38,7 +43,7 @@ public class ObslugaKlientaController implements Initializable {
     public BorderPane obslugaKlientaBorderPane;
 
     @FXML
-    public TextField klientImie, klientNazwisko, klientTelefon, klientMarka, klientModel, klientRejestracja, kwotaUslugi;
+    public TextField klientImie, klientNazwisko, klientTelefon, klientMarka, klientModel, klientRejestracja, kwotaUslugi, szukajZlecenia;
 
     @FXML
     public TextArea klientOpis;
@@ -62,6 +67,17 @@ public class ObslugaKlientaController implements Initializable {
         kwotaUslugi.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("^[1-9]*\\d?(.\\d{1,2})*")) return;
             kwotaUslugi.setText(newValue.replaceAll("[^[1-9]*\\d?(.\\d{1,2})*]", ""));
+        });
+
+        szukajZlecenia.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                for (Zlecenia z : zlecenia) {
+                    if (z.getNrReje().toUpperCase().contains(t1.toUpperCase())) {
+                        tableUkonczone.getItems().add(z);
+                    }
+                }
+            }
         });
     }
 
@@ -215,7 +231,7 @@ public class ObslugaKlientaController implements Initializable {
 
             System.out.println("Przed");
 
-            List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z WHERE z.stanZlecenia = :stan", Zlecenia.class).setParameter("stan", 2).getResultList();
+            zlecenia = session.createQuery("SELECT z FROM Zlecenia z WHERE z.stanZlecenia = :stan", Zlecenia.class).setParameter("stan", 2).getResultList();
 
             System.out.println(zlecenia);
 
