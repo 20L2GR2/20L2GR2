@@ -30,6 +30,7 @@ public class MagazynierController implements Initializable {
     boolean przeniesiono = false;
     Zamowienia zamowienie = null;
     Magazyn czesc = null;
+    List<Magazyn> magazyn;
 
     @FXML
     private BorderPane borderPane;
@@ -86,24 +87,12 @@ public class MagazynierController implements Initializable {
     }
 
     private void filtering(String text) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-
-            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
 
             for (Magazyn m : magazyn) {
                 if (m.getNazwaCzesci().toLowerCase().contains(text.toLowerCase())) {
                     tableMagazyn.getItems().add(m);
                 }
             }
-            session.clear();
-            session.disconnect();
-            session.close();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        }
     }
 
     public void logout(ActionEvent event) throws IOException {
@@ -444,7 +433,7 @@ public class MagazynierController implements Initializable {
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
-            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
+            magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
 
             for (Magazyn m : magazyn) {
                 tableMagazyn.getItems().add(m);
