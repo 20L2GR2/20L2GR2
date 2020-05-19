@@ -201,6 +201,10 @@ public class Zlecenia {
         return pracownikObslugaKoniec.getLogin();
     }
 
+    public String getImieNazwiskoObslugaKoniec() {
+        return pracownikObslugaKoniec.getImie() + " " + pracownikObslugaKoniec.getNazwisko();
+    }
+
     public String getStanZleceniaToString(){
         switch(stanZlecenia){
             case 0: return "zlecenie utworzone i oczekujące do przyjęcia przez mechanika";
