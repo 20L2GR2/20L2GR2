@@ -160,6 +160,7 @@ public class MechanikController implements Initializable {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
+            //wyswietlenie zlecen przypisanych do mechanika
             //List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z", Zlecenia.class).getResultList();
             List<Zlecenia> zlecenia = session.createQuery("FROM Zlecenia z WHERE z.pracownikMechanik = :id").setParameter("id", LogowanieController.userID).getResultList();
 
@@ -171,6 +172,7 @@ public class MechanikController implements Initializable {
                     tableTwojeZlecenia.getItems().add(z);
             }
 
+            //wyswietlenie stanu magazynu
             nazwaCzesciC.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
             opisC.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
             iloscC.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
@@ -228,7 +230,7 @@ public class MechanikController implements Initializable {
     public void czescPrzypisz(){
         Magazyn magazyn = (Magazyn) tableZlecenieMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
-        uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + " ");
+        uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + "; ");
     }
 
     public void zlecenieZakoncz(){
@@ -247,7 +249,7 @@ public class MechanikController implements Initializable {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            Zlecenia zlecenie = (Zlecenia) session.createQuery("FROM Zlecenia U WHERE U.idZlecenia = :id").setParameter("id", idTwojeZlecenie.getText()).uniqueResult();
+            Zlecenia zlecenie = (Zlecenia) session.createQuery("FROM Zlecenia U WHERE U.idZlecenia = :id").setParameter("id", Integer.parseInt(idTwojeZlecenie.getText())).uniqueResult();
 
             zlecenie.setUzyteCzesci(uzyteCzesci.getText());
             zlecenie.setStanZlecenia(2);

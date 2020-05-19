@@ -85,7 +85,11 @@ public class Zamowienia {
     }
 
     public String getCzescNazwa() {
-        return czesc.getNazwaCzesci();
+        try {
+            return czesc.getNazwaCzesci();
+        } catch (NullPointerException e) {
+            return "";
+        }
     }
 
     public String getPracownikImie() {
