@@ -5,6 +5,8 @@ import hibernate.entity.Pracownicy;
 import hibernate.entity.Zamowienia;
 import hibernate.entity.Zlecenia;
 import hibernate.util.HibernateUtil;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class MechanikController implements Initializable {
     LogowanieController mainController = new LogowanieController();
+    List<Magazyn> magazyn;
 
     @FXML
     private BorderPane borderPane;
@@ -36,7 +39,7 @@ public class MechanikController implements Initializable {
     @FXML
     public TableView tableZlecenia, tableMagazyn, tableZamowienia, tableTwojeZlecenia;
     @FXML
-    public TextField nazwaCzesci;
+    public TextField nazwaCzesci, szukajNazwaCzesci;
     @FXML
     public TextArea komentarz, opisNaprawaZlecenia;
 
@@ -45,6 +48,18 @@ public class MechanikController implements Initializable {
         borderPane.setCenter(profilPane);
         toggleButtonProfil.setSelected(true);
         otworzProfil();
+
+        szukajNazwaCzesci.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                tableMagazyn.getItems().clear();
+                for (Magazyn m : magazyn) {
+                    if (m.getNazwaCzesci().toLowerCase().contains(t1.toLowerCase())) {
+                        tableMagazyn.getItems().add(m);
+                    }
+                }
+            }
+        });
     }
 
     public void logout(ActionEvent event) throws IOException {
@@ -134,7 +149,6 @@ public class MechanikController implements Initializable {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             //wyswietlenie zlecen przypisanych do mechanika
-            //List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z", Zlecenia.class).getResultList();
             List<Zlecenia> zlecenia = session.createQuery("FROM Zlecenia z WHERE z.pracownikMechanik.idPracownika = :id").setParameter("id", LogowanieController.userID).getResultList();
 
             idZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("idZlecenia"));
@@ -151,7 +165,7 @@ public class MechanikController implements Initializable {
             iloscColumn.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
             cenaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
 
-            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
+            magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
 
             for (Magazyn m : magazyn) {
                 tableMagazyn.getItems().add(m);
