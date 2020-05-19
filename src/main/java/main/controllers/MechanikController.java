@@ -31,7 +31,8 @@ public class MechanikController implements Initializable {
     @FXML
     public Label imieLabel, nazwiskoLabel, loginLabel, blad, bladRealizacji, idTwojeZlecenie, opisUsterkaZlecenia, uzyteCzesci, bladZlecenie;
     @FXML
-    private TableColumn idColumn, opisUsterkaColumn, nazwaCzesciColumn, opisColumn, iloscColumn, cenaColumn, nazwaZamowieniaColumn, komentarzColumn, stanColumn, nazwaCzesciMagazynColumn, opisUsterkaZleceniaColumn, idZleceniaColumn;
+    private TableColumn idColumn, opisUsterkaColumn, nazwaCzesciColumn, opisColumn, iloscColumn, cenaColumn, nazwaZamowieniaColumn,
+            komentarzColumn, stanColumn, nazwaCzesciMagazynColumn, opisUsterkaZleceniaColumn, idZleceniaColumn, nazwaCzesciC, opisC, iloscC, cenaC;
     @FXML
     public TableView tableZlecenia, tableMagazyn, tableZamowienia, tableTwojeZlecenia, tableZlecenieMagazyn;
     @FXML
@@ -54,6 +55,8 @@ public class MechanikController implements Initializable {
         System.out.println("otworzStanMagazynu");
         borderPane.setCenter(stanMagazynuPane);
         toggleButtonStanmagazyn.setSelected(true);
+        tableMagazyn.getItems().clear();
+        tableMagazyn.setEditable(true);
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
@@ -82,6 +85,8 @@ public class MechanikController implements Initializable {
         borderPane.setCenter(czesciPane);
         toggleButtonCzesci.setSelected(true);
         blad.setText("");
+        tableZamowienia.getItems().clear();
+        tableZamowienia.setEditable(true);
 
         // wyświetlanie zamówień
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -149,11 +154,10 @@ public class MechanikController implements Initializable {
         idTwojeZlecenie.setText("");
         opisUsterkaZlecenia.setText("");
 
-        tableZlecenia.getItems().clear();
-        tableZlecenia.setEditable(true);
+        tableTwojeZlecenia.getItems().clear();
+        tableTwojeZlecenia.setEditable(true);
         bladRealizacji.setText("");
 
-        // wyświetlanie dostępnych zleceń
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             //List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z", Zlecenia.class).getResultList();
@@ -164,18 +168,18 @@ public class MechanikController implements Initializable {
 
             for (Zlecenia z : zlecenia) {
                 if(z.getStanZlecenia() == 1)
-                    tableZlecenia.getItems().add(z);
+                    tableTwojeZlecenia.getItems().add(z);
             }
 
-            nazwaCzesciColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
-            opisColumn.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
-            iloscColumn.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
-            cenaColumn.setCellValueFactory(new PropertyValueFactory<>("cena"));
+            nazwaCzesciC.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
+            opisC.setCellValueFactory(new PropertyValueFactory<>("opisCzesci"));
+            iloscC.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+            cenaC.setCellValueFactory(new PropertyValueFactory<>("cena"));
 
             List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
 
             for (Magazyn m : magazyn) {
-                tableMagazyn.getItems().add(m);
+                tableZlecenieMagazyn.getItems().add(m);
             }
 
             session.clear();

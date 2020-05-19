@@ -180,10 +180,10 @@
                                    xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
                                    fx:id="tableZlecenieMagazyn">
                             <columns>
-                                <TableColumn prefWidth="500.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
-                                <TableColumn prefWidth="500.0" text="Opis części" fx:id="opisColumn"/>
-                                <TableColumn prefWidth="100.0" text="Ilość" fx:id="iloscColumn"/>
-                                <TableColumn prefWidth="90.0" text="Cena" fx:id="cenaColumn"/>
+                                <TableColumn prefWidth="500.0" text="Nazwa części" fx:id="nazwaCzesciC"/>
+                                <TableColumn prefWidth="500.0" text="Opis części" fx:id="opisC"/>
+                                <TableColumn prefWidth="100.0" text="Ilość" fx:id="iloscC"/>
+                                <TableColumn prefWidth="90.0" text="Cena" fx:id="cenaC"/>
                             </columns>
                         </TableView>
                         <Button layoutX="50.0" layoutY="704.0" mnemonicParsing="false" onAction="#czescPrzypisz" text="Przypisz część do zlecenia"/>
