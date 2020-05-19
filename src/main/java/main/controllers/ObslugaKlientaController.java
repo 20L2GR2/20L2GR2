@@ -72,6 +72,7 @@ public class ObslugaKlientaController implements Initializable {
         szukajZlecenia.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                tableUkonczone.getItems().clear();
                 for (Zlecenia z : zlecenia) {
                     if (z.getNrReje().toUpperCase().contains(t1.toUpperCase())) {
                         tableUkonczone.getItems().add(z);
