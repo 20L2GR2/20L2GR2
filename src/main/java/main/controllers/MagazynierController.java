@@ -79,20 +79,13 @@ public class MagazynierController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 tableMagazyn.getItems().clear();
-                if (!t1.isEmpty()) {
-                    filtering(t1);
-                } else inicjalizujWidokMagazynieraZBazy();
-            }
-        });
-    }
-
-    private void filtering(String text) {
-
-            for (Magazyn m : magazyn) {
-                if (m.getNazwaCzesci().toLowerCase().contains(text.toLowerCase())) {
-                    tableMagazyn.getItems().add(m);
+                for (Magazyn m : magazyn) {
+                    if (m.getNazwaCzesci().toLowerCase().contains(t1.toLowerCase())) {
+                        tableMagazyn.getItems().add(m);
+                    }
                 }
             }
+        });
     }
 
     public void logout(ActionEvent event) throws IOException {
