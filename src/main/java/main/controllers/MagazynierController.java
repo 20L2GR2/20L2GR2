@@ -316,7 +316,7 @@ public class MagazynierController implements Initializable {
                 session.disconnect();
                 session.close();
                 System.out.println("Zamówienie zrealizowane");
-                tableZamowienia.refresh();
+                inicjalizujWidokMagazynieraZBazy();
                 return;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
@@ -383,8 +383,6 @@ public class MagazynierController implements Initializable {
             for (Zamowienia z : zamowienia) {
                 tableZamowienia.getItems().add(z);
             }
-
-            // tu
 
             //------------------------------------------------------------
 
