@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import pdf.GeneratePdf;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class Main extends Application {
 
@@ -18,6 +20,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        //GENEROWANIE PDF odbywa się za pomocą tej klasy
+        GeneratePdf pdf = new GeneratePdf();
+        String[][] koszta = {{"Naprawa silnika", "200.50"},{"Szpachla", "100.75"}};
+        pdf.generatePDF("pdf/pdf.pdf", new Date().toString(),"Dobra-Firma", "Roafał Kowalski", "Warszawa szkolna 2", koszta);
+        //
+
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("/views/application.fxml"));
