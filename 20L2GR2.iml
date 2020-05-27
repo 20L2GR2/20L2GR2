@@ -76,5 +76,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="generatePDF-1.0-SNAPSHOT-jar-with-dependencies" level="project" />
   </component>
 </module>
