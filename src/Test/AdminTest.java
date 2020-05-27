@@ -1,3 +1,5 @@
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -16,20 +18,11 @@ public class AdminTest extends ApplicationTest {
     AdminController controller;
 
     @Override
-    public void start(Stage stage) throws Exception {
-        Flow flow = new Flow(AdminController.class);
-
-        // create a handler to initialize a view and a sceneRoot.
-        FlowHandler handler = flow.createHandler();
-        StackPane sceneRoot = handler.start();
-
-        // retrieve the injected controller from the view.
-        FlowView view = handler.getCurrentView();
-        controller = (AdminController) view.getViewContext().getController();
-
-        // attach the sceneRoot to stage.
-        stage.setScene(new Scene(sceneRoot));
-        stage.show();
+    public void start(Stage primaryStage) throws Exception {
+        Parent mainNode = FXMLLoader.load(getClass().getResource("/views/application.fxml"));
+        primaryStage.setScene(new Scene(mainNode));
+        primaryStage.show();
+        primaryStage.toFront();
     }
 
     @Test(expected = FxRobotException.class)
@@ -37,6 +30,10 @@ public class AdminTest extends ApplicationTest {
         clickOn("#thisElementDoesntExist");
     }
 
+    @Test(expected = FxRobotException.class)
+    public void clickOnNormalElement(){
+        clickOn("#zalogujButton");
+    }
 
 
 }
