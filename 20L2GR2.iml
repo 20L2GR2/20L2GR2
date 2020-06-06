@@ -86,5 +86,6 @@
     <orderEntry type="library" name="Maven: org.javafxdata:datafx-core:8.0b5" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.4.5" level="project" />
   </component>
 </module>
