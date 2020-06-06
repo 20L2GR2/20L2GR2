@@ -3,6 +3,7 @@ import javassist.tools.Dump;
 import main.controllers.AdminController;
 import main.controllers.LogowanieController;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,6 +25,11 @@ public class LogowanieTest {
     @After
     public void destroyMethod(){
         DumpData.deleteDataFromDatabase();
+    }
+
+    @AfterClass
+    public static void initializeMethodAfter(){
+        DumpData.dumpDataToDatabase();
     }
 
     @Test

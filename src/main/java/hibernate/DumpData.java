@@ -17,7 +17,7 @@ public class DumpData {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             //Getting the connection
             String mysqlUrl = "jdbc:mysql://localhost/20l2gr2";
-            Connection con = DriverManager.getConnection(mysqlUrl, "root", "root");
+            Connection con = DriverManager.getConnection(mysqlUrl, "root", "");
             System.out.println("Connection established......");
             //Initialize the script runner
             ScriptRunner sr = new ScriptRunner(con);
@@ -36,7 +36,7 @@ public class DumpData {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             //Getting the connection
             String mysqlUrl = "jdbc:mysql://localhost/20l2gr2";
-            Connection con = DriverManager.getConnection(mysqlUrl, "root", "root");
+            Connection con = DriverManager.getConnection(mysqlUrl, "root", "");
             System.out.println("Connection established......");
             //Initialize the script runner
             ScriptRunner sr = new ScriptRunner(con);
