@@ -11,19 +11,28 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static java.lang.String.valueOf;
+
+import pdf.GeneratePdf;
 
 public class ObslugaKlientaController implements Initializable {
     LogowanieController mainController = new LogowanieController();
@@ -393,9 +402,35 @@ public class ObslugaKlientaController implements Initializable {
 
             bladUkonczone.setStyle("-fx-text-fill: white");
             bladUkonczone.setText("Zlecenie zakończone.");
+
+            //GENEROWANIE PDF
+
+            GeneratePdf pdf = new GeneratePdf();
+            String[][] koszta = {{opisNaprawyLabel.getText(), kwotaUslugi.getText()}};
+
+
+            String czas = new SimpleDateFormat("MM-dd-yyyy HH-mm-ss").format(timestamp);
+            String czas2 = new SimpleDateFormat("MM.dd.yyyy HH:mm:ss").format(timestamp);
+
+            String path = "pdf/" + czas + ".pdf";
+
+            System.out.println(koszta[0][0]);
+            pdf.generatePDF(path, czas2, "Auto-Service", zlecenia.getImieNazwisko(), "ul. Kościuszki 1", koszta);
+
+            System.out.println("Ścieżka pdf: " + path);
+
+            // Otworzenie pliku PDF w domyślnym programie systemowym
+
+            File file = new File("pdf\\" + czas + ".pdf");
+            Desktop.getDesktop().open(file);
+
+            System.out.println("Wygenerowano pdf: " + file);
+
             session.clear();
             session.disconnect();
             session.close();
+
+
         } catch (Exception e) {
             //if (transaction != null) transaction.rollback();
             e.printStackTrace();
