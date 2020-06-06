@@ -53,10 +53,7 @@ public class LogowanieController implements Initializable {
         });
     }
 
-    public void zaloguj(ActionEvent event) throws IOException {
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        String login = loginTextField.getText();
-        String haslo = passwordField.getText();
+    public int zalogujLogic(String login, String haslo){
         int stanowisko = -1;
 
         try {
@@ -86,6 +83,15 @@ public class LogowanieController implements Initializable {
             e.printStackTrace();
         }
         System.out.println(stanowisko);
+        return stanowisko;
+    }
+
+    public void zaloguj(ActionEvent event) throws IOException {
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        String login = loginTextField.getText();
+        String haslo = passwordField.getText();
+
+        int stanowisko = zalogujLogic(login, haslo);
 
         switch (stanowisko) {
             case 0:

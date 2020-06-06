@@ -24,7 +24,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws SQLException, FileNotFoundException {
-//        //GENEROWANIE PDF odbywa się za pomocą tej klasy
+        //GENEROWANIE PDF odbywa się za pomocą tej klasy
 //        GeneratePdf pdf = new GeneratePdf();
 //        String[][] koszta = {{"Naprawa silnika", "200.50"},{"Szpachla", "100.75"}};
 //        pdf.generatePDF("pdf/pdf.pdf", new Date().toString(),"Dobra-Firma", "Roafał Kowalski", "Warszawa szkolna 2", koszta);
@@ -48,18 +48,7 @@ public class Main extends Application {
         jMetro.setScene(scene);
         root.setStyle("-fx-font: title");
 
-        //Registering the Driver
-        DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-        //Getting the connection
-        String mysqlUrl = "jdbc:mysql://localhost/20l2gr2";
-        Connection con = DriverManager.getConnection(mysqlUrl, "root", "root");
-        System.out.println("Connection established......");
-        //Initialize the script runner
-        ScriptRunner sr = new ScriptRunner(con);
-        //Creating a reader object
-        Reader reader = new BufferedReader(new FileReader("dump.sql"));
-        //Running the script
-        sr.runScript(reader);
+
 
     }
 
