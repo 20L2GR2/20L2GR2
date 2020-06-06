@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/20L2GR2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/20L2GR2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/LogowanieTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/LogowanieTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test/AdminTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/AdminTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/DumpData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/DumpData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +129,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.loginScreen">
+  <component name="RunManager" selected="JUnit.All in 20L2GR2">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="hibernate.App" />
       <module name="20L2GR2" />
@@ -148,6 +147,16 @@
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="20L2GR2" />
       <option name="VM_PARAMETERS" value="--module-path C:\javafx-sdk-11.0.2\lib --add-modules=javafx.controls,javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminTest.addingUserWithLoginThatExistsShouldntWork" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="20L2GR2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AdminTest" />
+      <option name="METHOD_NAME" value="addingUserWithLoginThatExistsShouldntWork" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -172,6 +181,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in 20L2GR2" />
+        <item itemvalue="JUnit.AdminTest.addingUserWithLoginThatExistsShouldntWork" />
         <item itemvalue="JUnit.LogowanieTest" />
         <item itemvalue="Application.App" />
         <item itemvalue="Application.App" />
@@ -424,7 +434,21 @@
       <option name="project" value="LOCAL" />
       <updated>1591475321986</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="TESTOWE">
+      <created>1591477312137</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1591477312137</updated>
+    </task>
+    <task id="LOCAL-00032" summary="TESTOWE">
+      <created>1591477374964</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1591477374964</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

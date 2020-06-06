@@ -121,39 +121,50 @@ public class AdminController implements Initializable {
         toggleButtonZamowienia.setSelected(true);
     }
 
-    public void utwórzUzytkownika() {
-        if (nowyLogin.getText().isEmpty()) {
-            blad.setText("Podano zle dane");
-            return;
+    public String utworzUzytkownikaLogic(String login, String haslo, String rola, String imie, String nazwisko){
+        if (login == null || login.trim().isEmpty()) {
+            return "Podano zle dane";
         }
-        if (noweHaslo.getText().isEmpty()) {
-            blad.setText("Podano zle dane");
-            return;
+        if (haslo == null || haslo.trim().isEmpty()) {
+            return "Podano zle dane";
         }
-        if (nowaRola.getSelectionModel().isEmpty()) {
-            blad.setText("Podano zle dane");
-            return;
+        if (rola == null || rola.trim().isEmpty()) {
+            return "Podano zle dane";
         }
-        if (noweImie.getText().isEmpty()) {
-            blad.setText("Podano zle dane");
-            return;
+        if (imie == null || imie.trim().isEmpty()) {
+            return "Podano zle dane";
         }
-        if (noweNazwisko.getText().isEmpty()) {
-            blad.setText("Podano zle dane");
-            return;
+        if (nazwisko == null || nazwisko.trim().isEmpty()) {
+            return "Podano zle dane";
         }
         Transaction transaction = null;
 
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            if (!session.createQuery("SELECT a FROM Pracownicy a WHERE a.login = :login", Pracownicy.class).setParameter("login", nowyLogin.getText()).getResultList().isEmpty()) {
-                blad.setText("Istnieje użytkownik z takim Loginem");
+            if (!session.createQuery("SELECT a FROM Pracownicy a WHERE a.login = :login", Pracownicy.class).setParameter("login", login).getResultList().isEmpty()) {
                 session.clear();
                 session.disconnect();
                 session.close();
-                return;
+                return "Istnieje użytkownik z takim Loginem";
             }
+        }catch(Exception e){
+            e.printStackTrace();
+            return "ERROR";
+        }
+        return "DODANO";
+    }
+
+    public void utwórzUzytkownika() {
+        if(nowaRola.getSelectionModel().isEmpty()){
+            blad.setText("Podano zle dane");
+            return;
+        }
+        String mogeUtworzyc = utworzUzytkownikaLogic(nowyLogin.getText(), noweHaslo.getText(), nowaRola.getValue().toString(), noweImie.getText(), noweNazwisko.getText());
+
+        if(mogeUtworzyc.equals("DODANO")){
+            Transaction transaction = null;
+            try (Session session = HibernateUtil.getSessionFactory().openSession()){
 
             System.out.println("Tworzę użytkownika!");
             Pracownicy nowyPracownik = new Pracownicy();
@@ -164,19 +175,22 @@ public class AdminController implements Initializable {
             nowyPracownik.setNazwisko(noweNazwisko.getText());
             session.save(nowyPracownik);
             //uzytkownicy.getItems().add(nowyPracownik);
+                blad.setText("Stworzyłem użytkownika " + nowyLogin.getText());
 
             session.getTransaction().commit();
             inicjalizujWidokAdminaZBazy();
-            blad.setText("Stworzyłem użytkownika " + nowyLogin.getText());
+
 
             session.clear();
             session.disconnect();
             session.close();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        }
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
 
+    }else{
+        blad.setText(mogeUtworzyc);}
     }
 
     public void usunUzytkownika() {
