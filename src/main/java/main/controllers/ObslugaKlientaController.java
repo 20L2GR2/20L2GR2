@@ -1,7 +1,6 @@
 package main.controllers;
 
 import hibernate.entity.Klienci;
-import hibernate.entity.Magazyn;
 import hibernate.entity.Pracownicy;
 import hibernate.entity.Zlecenia;
 import hibernate.util.HibernateUtil;
@@ -10,16 +9,17 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import pdf.GeneratePdf;
 
 import java.awt.*;
 import java.io.File;
@@ -31,8 +31,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static java.lang.String.valueOf;
-
-import pdf.GeneratePdf;
 
 public class ObslugaKlientaController implements Initializable {
     LogowanieController mainController = new LogowanieController();
@@ -337,7 +335,7 @@ public class ObslugaKlientaController implements Initializable {
         }
     }
 
-    public void zakonczZlecenieButton() throws ParseException {
+    public void zakonczZlecenieButton() {
         bladUkonczone.setStyle("-fx-text-fill: red");
         if (tableUkonczone.getSelectionModel().isEmpty()) {
             bladUkonczone.setText("Nie wybrano klienta!");
@@ -345,27 +343,31 @@ public class ObslugaKlientaController implements Initializable {
         }
         if (mechanikLabel.getText().trim().isEmpty()) {
             bladUkonczone.setText("Nie pobrano informacji!");
+            return;
         }
         if (obslugaLabel.getText().trim().isEmpty()) {
             bladUkonczone.setText("Nie pobrano informacji!");
+            return;
         }
         if (markaLabel.getText().trim().isEmpty()) {
             bladUkonczone.setText("Nie pobrano informacji!");
-        }
-        if (mechanikLabel.getText().trim().isEmpty()) {
-            bladUkonczone.setText("Nie pobrano informacji!");
+            return;
         }
         if (opisUsterkiLabel.getText().trim().isEmpty()) {
             bladUkonczone.setText("Nie pobrano informacji!");
+            return;
         }
         if (opisNaprawyLabel.getText().trim().isEmpty()) {
             bladUkonczone.setText("Nie pobrano informacji!");
+            return;
         }
         if (uzyteCzesciLabel.getText().trim().isEmpty()) {
             bladUkonczone.setText("Nie pobrano informacji!");
+            return;
         }
         if (kwotaUslugi.getText().trim().isEmpty()) {
             bladUkonczone.setText("Nie podano kwoty!");
+            return;
         }
 
         Float num = null;
@@ -425,6 +427,15 @@ public class ObslugaKlientaController implements Initializable {
             Desktop.getDesktop().open(file);
 
             System.out.println("Wygenerowano pdf: " + file);
+
+            mechanikLabel.setText("");
+            obslugaLabel.setText("");
+            markaLabel.setText("");
+            opisUsterkiLabel.setText("");
+            opisNaprawyLabel.setText("");
+            uzyteCzesciLabel.setText("");
+            kwotaUslugi.setText("");
+            tableUkonczone.getItems().remove(tableUkonczone.getSelectionModel().getSelectedItem());
 
             session.clear();
             session.disconnect();
