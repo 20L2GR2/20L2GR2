@@ -9,11 +9,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -25,8 +25,10 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -36,6 +38,7 @@ public class ObslugaKlientaController implements Initializable {
     LogowanieController mainController = new LogowanieController();
 
     List<Zlecenia> zlecenia;
+    Zlecenia zleconko;
 
     @FXML
     public Button buttonLogout;
@@ -237,11 +240,9 @@ public class ObslugaKlientaController implements Initializable {
             transaction = session.beginTransaction();
             pracownik = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.idPracownika = :id").setParameter("id", LogowanieController.userID).getSingleResult();
 
-            System.out.println("Przed");
-
             zlecenia = session.createQuery("SELECT z FROM Zlecenia z WHERE z.stanZlecenia = :stan", Zlecenia.class).setParameter("stan", 2).getResultList();
 
-            System.out.println(zlecenia);
+            System.out.println("Zlecenie:: " + zlecenia);
 
             imieNazwiskoColumn.setCellValueFactory(new PropertyValueFactory<>("imieNazwisko"));
             nrRejeColumn.setCellValueFactory(new PropertyValueFactory<>("nrReje"));
@@ -252,7 +253,7 @@ public class ObslugaKlientaController implements Initializable {
 
             List<Zlecenia> historia = session.createQuery("SELECT h FROM Zlecenia h WHERE h.stanZlecenia = :stan", Zlecenia.class).setParameter("stan", 3).getResultList();
 
-            System.out.println(historia);
+            System.out.println("Historia: " + historia);
 
             imieNazwiskoHistoria.setCellValueFactory(new PropertyValueFactory<>("imieNazwisko"));
             nrRejeHistoria.setCellValueFactory(new PropertyValueFactory<>("nrReje"));
@@ -260,8 +261,6 @@ public class ObslugaKlientaController implements Initializable {
             for (Zlecenia h : historia) {
                 tableHistoria.getItems().add(h);
             }
-
-            System.out.println("Po");
 
             imieLabel.setText(pracownik.getImie());
             nazwiskoLabel.setText(pracownik.getNazwisko());
@@ -277,65 +276,25 @@ public class ObslugaKlientaController implements Initializable {
         }
     }
 
-    public void wybierzZlecenieButton() {
-        if (tableUkonczone.getSelectionModel().isEmpty()) {
-            bladUkonczone.setText("Nie wybrano klienta!");
-            return;
-        }
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            Zlecenia zlecenia = (Zlecenia) tableUkonczone.getSelectionModel().getSelectedItem();
-            Zlecenia z = (Zlecenia) session.createQuery("SELECT z FROM Zlecenia z WHERE z.klientZlecenie.idKlienta = :id", Zlecenia.class).setParameter("id", zlecenia.getIdKlienta()).uniqueResult();
-            System.out.println(z);
-            mechanikLabel.setText(z.getImieNazwiskoMechanik());
-            obslugaLabel.setText(z.getImieNazwiskoObslugaPoczatek());
-            markaLabel.setText(z.getMarkaModel());
-            opisUsterkiLabel.setText(z.getOpisUsterki());
-            opisNaprawyLabel.setText(z.getOpisNaprawy());
-            uzyteCzesciLabel.setText(z.getUzyteCzesci());
-
-            session.clear();
-            session.disconnect();
-            session.close();
-        } catch (Exception e) {
-            //if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        }
-    }
-
     public void wybierzHistorieButton() {
         if (tableHistoria.getSelectionModel().isEmpty()) {
             bladHistoria.setText("Nie wybrano klienta!");
             return;
         }
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            Zlecenia zlecenia1 = (Zlecenia) tableHistoria.getSelectionModel().getSelectedItem();
-            Zlecenia z1 = (Zlecenia) session.createQuery("SELECT z1 FROM Zlecenia z1 WHERE z1.klientZlecenie.idKlienta = :id", Zlecenia.class).setParameter("id", zlecenia1.getIdKlienta()).uniqueResult();
-            System.out.println(z1);
-            mechanikHistoria.setText(z1.getImieNazwiskoMechanik());
-            obslugaPoczatekHistoria.setText(z1.getImieNazwiskoObslugaPoczatek());
-            obslugaKoniecHistoria.setText(z1.getImieNazwiskoObslugaKoniec());
-            markaHistoria.setText(z1.getMarkaModel());
-            opisUsterkiHistoria.setText(z1.getOpisUsterki());
-            opisNaprawyHistoria.setText(z1.getOpisNaprawy());
-            uzyteCzesciHistoria.setText(z1.getUzyteCzesci());
-            cenaHistoria.setText(valueOf(z1.getCena()));
-            //dataPoczatekHistoria.setText(z1.getDataRozpoczecia());
+        Zlecenia zlecenia1 = (Zlecenia) tableHistoria.getSelectionModel().getSelectedItem();
 
-
-            session.clear();
-            session.disconnect();
-            session.close();
-        } catch (Exception e) {
-            //if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        }
+        System.out.println(zlecenia1);
+        mechanikHistoria.setText(zlecenia1.getImieNazwiskoMechanik());
+        obslugaPoczatekHistoria.setText(zlecenia1.getImieNazwiskoObslugaPoczatek());
+        obslugaKoniecHistoria.setText(zlecenia1.getImieNazwiskoObslugaKoniec());
+        markaHistoria.setText(zlecenia1.getMarkaModel());
+        opisUsterkiHistoria.setText(zlecenia1.getOpisUsterki());
+        opisNaprawyHistoria.setText(zlecenia1.getOpisNaprawy());
+        uzyteCzesciHistoria.setText(zlecenia1.getUzyteCzesci());
+        cenaHistoria.setText(valueOf(zlecenia1.getCena()));
     }
 
-    public void zakonczZlecenieButton() {
+    public void zakonczZlecenieButton() throws ParseException {
         bladUkonczone.setStyle("-fx-text-fill: red");
         if (tableUkonczone.getSelectionModel().isEmpty()) {
             bladUkonczone.setText("Nie wybrano klienta!");
@@ -370,6 +329,13 @@ public class ObslugaKlientaController implements Initializable {
             return;
         }
 
+        Pracownicy pracownik = inicjalizujWidokObslugiKlientaZBazy();
+        zakonczZlecenie(pracownik, zleconko);
+
+    }
+
+    public void zakonczZlecenie(Pracownicy pracownik, Zlecenia zlecenie) throws ParseException {
+
         Float num = null;
         boolean numeric = true;
         try {
@@ -378,28 +344,20 @@ public class ObslugaKlientaController implements Initializable {
             numeric = false;
         }
 
-        if (!numeric) {
-            bladUkonczone.setText("Niepoprawna cena części");
-            return;
-        }
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Pracownicy pracownik = new Pracownicy();
-            pracownik.setIdPracownika(LogowanieController.userID);
-            Zlecenia zlecenia = (Zlecenia) tableUkonczone.getSelectionModel().getSelectedItem();
-            Zlecenia kwota = (Zlecenia) session.createQuery("SELECT z FROM Zlecenia z WHERE z.klientZlecenie.idKlienta = :id", Zlecenia.class).setParameter("id", zlecenia.getIdKlienta()).uniqueResult();
-            kwota.setCena(num);
-            kwota.setStanZlecenia(3);
-            //kwota.setPracownikObslugaKoniec(pracownik);
 
-            java.util.Date date = new java.util.Date();
-            java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
+            zlecenie.setCena(num);
+            zlecenie.setStanZlecenia(3);
+            zlecenie.setPracownikObslugaKoniec(pracownik);
 
-            kwota.setDataZakonczenia(timestamp);
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
 
-            System.out.println(kwota);
-            session.saveOrUpdate(kwota);
+            zlecenie.setDataZakonczenia(timestamp);
+
+            session.saveOrUpdate(zlecenie);
             session.getTransaction().commit();
 
             bladUkonczone.setStyle("-fx-text-fill: white");
@@ -411,13 +369,13 @@ public class ObslugaKlientaController implements Initializable {
             String[][] koszta = {{opisNaprawyLabel.getText(), kwotaUslugi.getText()}};
 
 
-            String czas = new SimpleDateFormat("MM-dd-yyyy HH-mm-ss").format(timestamp);
-            String czas2 = new SimpleDateFormat("MM.dd.yyyy HH:mm:ss").format(timestamp);
+            String czas = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss").format(timestamp);
+            String czas2 = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(timestamp);
 
             String path = "pdf/" + czas + ".pdf";
 
             System.out.println(koszta[0][0]);
-            pdf.generatePDF(path, czas2, "Auto-Service", zlecenia.getImieNazwisko(), "ul. Kościuszki 1", koszta);
+            pdf.generatePDF(path, czas2, "Auto-Service", zlecenie.getImieNazwisko(), "ul. Kościuszki 1", koszta);
 
             System.out.println("Ścieżka pdf: " + path);
 
@@ -435,18 +393,32 @@ public class ObslugaKlientaController implements Initializable {
             opisNaprawyLabel.setText("");
             uzyteCzesciLabel.setText("");
             kwotaUslugi.setText("");
-            tableUkonczone.getItems().remove(tableUkonczone.getSelectionModel().getSelectedItem());
+            inicjalizujWidokObslugiKlientaZBazy();
 
             session.clear();
             session.disconnect();
             session.close();
-
-
         } catch (Exception e) {
             //if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
+    }
 
+    public void wybierzZlecenieButton() {
+        if (tableUkonczone.getSelectionModel().isEmpty()) {
+            bladUkonczone.setText("Nie wybrano klienta!");
+        }
+
+        Zlecenia zlecenia = (Zlecenia) tableUkonczone.getSelectionModel().getSelectedItem();
+
+        mechanikLabel.setText(zlecenia.getImieNazwiskoMechanik());
+        obslugaLabel.setText(zlecenia.getImieNazwiskoObslugaPoczatek());
+        markaLabel.setText(zlecenia.getMarkaModel());
+        opisUsterkiLabel.setText(zlecenia.getOpisUsterki());
+        opisNaprawyLabel.setText(zlecenia.getOpisNaprawy());
+        uzyteCzesciLabel.setText(zlecenia.getUzyteCzesci());
+
+        zleconko = zlecenia;
     }
 
     public void destroySession(Session session) {
