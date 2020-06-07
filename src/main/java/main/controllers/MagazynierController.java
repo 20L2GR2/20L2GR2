@@ -115,6 +115,39 @@ public class MagazynierController implements Initializable {
         inicjalizujWidokMagazynieraZBazy();
     }
 
+    public String dodajCzescLogic(String nazwaCzesci, String opisCzesci, String iloscCzesci, String cenaCzesci) {
+
+        if (nazwaCzesci == null || nazwaCzesci.trim().isEmpty()) {
+            return "Podano zle dane";
+        }
+        if (opisCzesci == null || opisCzesci.trim().isEmpty()) {
+            return "Podano zle dane";
+        }
+        if (iloscCzesci == null || iloscCzesci.trim().isEmpty()) {
+            return "Podano zle dane";
+        }
+        if (cenaCzesci == null || cenaCzesci.trim().isEmpty()) {
+            return "Podano zle dane";
+        }
+
+        Transaction transaction = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            if (!session.createQuery("SELECT m FROM Magazyn m WHERE m.nazwaCzesci = :nazwa", Magazyn.class).setParameter("nazwa", nazwaCzesci).getResultList().isEmpty()) {
+                session.clear();
+                session.disconnect();
+                session.close();
+                return "Istnieje już taka część";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "ERROR";
+        }
+
+        return "Dodano";
+    }
+
     public void dodajCzesc() {
 
         blad.setStyle("-fx-text-fill: red;");
@@ -152,6 +185,7 @@ public class MagazynierController implements Initializable {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+
             if (!session.createQuery("SELECT m FROM Magazyn m WHERE m.nazwaCzesci = :nazwa", Magazyn.class).setParameter("nazwa", nowaNazwaCzesci.getText()).getResultList().isEmpty()) {
                 blad.setText("Istnieje już taka część");
                 session.clear();
@@ -159,36 +193,48 @@ public class MagazynierController implements Initializable {
                 session.close();
                 return;
             }
-
-            System.out.println("Dodawanie części...");
-            Magazyn nowaCzesc = new Magazyn();
-            nowaCzesc.setNazwaCzesci(nowaNazwaCzesci.getText());
-            nowaCzesc.setOpisCzesci(nowaOpisCzesci.getText());
-            nowaCzesc.setIlosc(Integer.parseInt(nowaIloscCzesci.getText()));
-            nowaCzesc.setCena(num);
-            session.save(nowaCzesc);
-            tableMagazyn.getItems().add(nowaCzesc);
-            session.getTransaction().commit();
-            czesc = nowaCzesc;
-            System.out.println("Dodano!");
-
-            if (przeniesiono) {
-                otworzZamowienia();
-                zrealizowaneButton();
-                tableZamowienia.refresh();
-            }
-
-            blad.setStyle("-fx-text-fill: white;");
-            blad.setText("Dodano część");
-            usuwanieCzesciLabel.setText("");
-
-            session.clear();
-            session.disconnect();
-            session.close();
-
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
+        }
+
+        String mogeUtworzyc = dodajCzescLogic(nowaNazwaCzesci.getText(), nowaOpisCzesci.getText(), nowaCenaCzesci.getText(), nowaIloscCzesci.getText());
+
+        if (mogeUtworzyc.equals("Dodano")) {
+
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                transaction = session.beginTransaction();
+
+                System.out.println("Dodawanie części...");
+                Magazyn nowaCzesc = new Magazyn();
+                nowaCzesc.setNazwaCzesci(nowaNazwaCzesci.getText());
+                nowaCzesc.setOpisCzesci(nowaOpisCzesci.getText());
+                nowaCzesc.setIlosc(Integer.parseInt(nowaIloscCzesci.getText()));
+                nowaCzesc.setCena(num);
+                session.save(nowaCzesc);
+                tableMagazyn.getItems().add(nowaCzesc);
+                session.getTransaction().commit();
+                czesc = nowaCzesc;
+                System.out.println("Dodano!");
+
+                if (przeniesiono) {
+                    otworzZamowienia();
+                    zrealizowaneButton();
+                    tableZamowienia.refresh();
+                }
+
+                blad.setStyle("-fx-text-fill: white;");
+                blad.setText("Dodano część");
+                usuwanieCzesciLabel.setText("");
+
+                session.clear();
+                session.disconnect();
+                session.close();
+
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
         }
     }
 
