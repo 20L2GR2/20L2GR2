@@ -1,8 +1,6 @@
 package main.controllers;
 
-import hibernate.entity.Klienci;
-import hibernate.entity.Pracownicy;
-import hibernate.entity.Zlecenia;
+import hibernate.entity.*;
 import hibernate.util.HibernateUtil;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -36,6 +34,7 @@ public class ObslugaKlientaController implements Initializable {
     LogowanieController mainController = new LogowanieController();
 
     List<Zlecenia> zlecenia;
+    List<Klienci> klienci;
 
     @FXML
     public Button buttonLogout;
@@ -59,10 +58,10 @@ public class ObslugaKlientaController implements Initializable {
     public Label bladKlient, bladHistoria, imieLabel, nazwiskoLabel, loginLabel, bladUkonczone, mechanikLabel, obslugaLabel, markaLabel, opisUsterkiLabel, opisNaprawyLabel, uzyteCzesciLabel;
     public Label mechanikHistoria, obslugaPoczatekHistoria, obslugaKoniecHistoria, markaHistoria, opisUsterkiHistoria, opisNaprawyHistoria, uzyteCzesciHistoria, cenaHistoria, dataPoczatekHistoria, dataKoniecHistoria;
     @FXML
-    public TableView tableUkonczone, tableHistoria;
+    public TableView tableUkonczone, tableHistoria, tableKlienci;
 
     @FXML
-    private TableColumn imieNazwiskoColumn, nrRejeColumn, nrRejeHistoria, imieNazwiskoHistoria;
+    private TableColumn imieNazwiskoColumn, nrRejeColumn, nrRejeHistoria, imieNazwiskoHistoria, nrRejeKlientColumn, imieKlientColumn, nazwiskoKlientColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -83,6 +82,18 @@ public class ObslugaKlientaController implements Initializable {
                 for (Zlecenia z : zlecenia) {
                     if (z.getNrReje().toUpperCase().contains(t1.toUpperCase())) {
                         tableUkonczone.getItems().add(z);
+                    }
+                }
+            }
+        });
+
+        klientRejestracja.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                tableKlienci.getItems().clear();
+                for (Klienci z : klienci) {
+                    if (z.getNrReje().toLowerCase().contains(t1.toLowerCase())) {
+                        tableKlienci.getItems().add(z);
                     }
                 }
             }
@@ -266,6 +277,17 @@ public class ObslugaKlientaController implements Initializable {
             imieLabel.setText(pracownik.getImie());
             nazwiskoLabel.setText(pracownik.getNazwisko());
             loginLabel.setText(pracownik.getLogin());
+
+            klienci = session.createQuery("SELECT z FROM Klienci z ORDER BY nazwisko", Klienci.class).getResultList();
+
+            nrRejeKlientColumn.setCellValueFactory(new PropertyValueFactory<>("nrReje"));
+            imieKlientColumn.setCellValueFactory(new PropertyValueFactory<>("imie"));
+            nazwiskoKlientColumn.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
+
+            for (Klienci z : klienci) {
+                tableKlienci.getItems().add(z);
+            }
+
             session.clear();
             session.disconnect();
             session.close();
@@ -454,5 +476,15 @@ public class ObslugaKlientaController implements Initializable {
         session.disconnect();
         session.close();
         HibernateUtil.shutdown();
+    }
+
+    public void wybierzKlientButton(ActionEvent actionEvent) {
+        Klienci klient = (Klienci) tableKlienci.getSelectionModel().getSelectedItem();
+        klientRejestracja.setText(String.valueOf(klient.getNrReje()));
+        klientNazwisko.setText(String.valueOf(klient.getNazwisko()));
+        klientImie.setText(String.valueOf(klient.getImie()));
+        klientTelefon.setText(String.valueOf(klient.getNrKontakt()));
+        klientMarka.setText(String.valueOf(klient.getMarka()));
+        klientModel.setText(String.valueOf(klient.getModel()));
     }
 }

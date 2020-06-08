@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -115,7 +116,7 @@ public class MechanikController implements Initializable {
             opisUsterkaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
 
             for (Zlecenia z : zlecenia) {
-                if(z.getStanZlecenia() == 0)
+                if (z.getStanZlecenia() == 0)
                     tableZlecenia.getItems().add(z);
             }
 
@@ -155,7 +156,7 @@ public class MechanikController implements Initializable {
             opisUsterkaZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
 
             for (Zlecenia z : zlecenia) {
-                if(z.getStanZlecenia() == 1)
+                if (z.getStanZlecenia() == 1)
                     tableTwojeZlecenia.getItems().add(z);
             }
 
@@ -206,7 +207,7 @@ public class MechanikController implements Initializable {
         }
     }
 
-    public void zlecenieZaladuj(){
+    public void zlecenieZaladuj() {
         Zlecenia zlecenie = (Zlecenia) tableTwojeZlecenia.getSelectionModel().getSelectedItem();
         idTwojeZlecenie.setText(String.valueOf(zlecenie.getIdZlecenia()));
         opisUsterkaZlecenia.setText(String.valueOf(zlecenie.getOpisUsterki()));
@@ -214,19 +215,19 @@ public class MechanikController implements Initializable {
         uzyteCzesci.setText("");
     }
 
-    public void czescPrzypisz(){
+    public void czescPrzypisz() {
         Magazyn magazyn = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
         uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + "; ");
     }
 
-    public void zlecenieZakoncz(){
+    public void zlecenieZakoncz() {
         bladZlecenie.setText("");
         if (idTwojeZlecenie.getText() == null || idTwojeZlecenie.getText().equals("")) {
             bladZlecenie.setStyle("-fx-text-fill: red;");
             bladZlecenie.setText("Nie wybrano zlecenia");
             return;
-        }else if(opisNaprawaZlecenia.getText() == null || opisNaprawaZlecenia.getText().equals("")){
+        } else if (opisNaprawaZlecenia.getText() == null || opisNaprawaZlecenia.getText().equals("")) {
             bladZlecenie.setStyle("-fx-text-fill: red;");
             bladZlecenie.setText("Dodaj opis naprawy");
             return;
