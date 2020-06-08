@@ -241,6 +241,7 @@ public class MechanikController implements Initializable {
 
                 Zlecenia zlecenie = (Zlecenia) session.createQuery("FROM Zlecenia U WHERE U.idZlecenia = :id").setParameter("id", Integer.parseInt(idTwojeZlecenie.getText())).uniqueResult();
 
+                zlecenie.setOpisNaprawy(opisNaprawaZlecenia.getText());
                 zlecenie.setUzyteCzesci(uzyteCzesci.getText());
                 zlecenie.setStanZlecenia(2);
 
