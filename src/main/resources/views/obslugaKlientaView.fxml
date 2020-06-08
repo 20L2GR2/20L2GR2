@@ -114,6 +114,21 @@
                         <Button layoutX="450" layoutY="450" mnemonicParsing="false" text="Dodaj"
                                 onAction="#dodajZlecenieButton"/>
                         <Label layoutX="200" layoutY="500" text="" fx:id="bladKlient"/>
+
+                        <Label layoutX="700.0" layoutY="30" text="Lista klientów"/>
+                        <TableView layoutX="700.0" layoutY="60.0" prefHeight="400.0" prefWidth="550"
+                                   fx:id="tableKlienci">
+                            <columns>
+                                <TableColumn minWidth="4.0" prefWidth="150.0" text="Nr rejestracyjny"
+                                                  fx:id="nrRejeKlientColumn"/>
+                                <TableColumn minWidth="4.0" prefWidth="150.0" text="Imie klienta"
+                                             fx:id="imieKlientColumn"/>
+                                <TableColumn minWidth="4.0" prefWidth="150.0" text="Nazwisko klienta"
+                                             fx:id="nazwiskoKlientColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="700.0" layoutY="490.0" mnemonicParsing="false" text="Wybierz"
+                                onAction="#wybierzKlientButton"/>
                     </children>
                 </Pane>
 
