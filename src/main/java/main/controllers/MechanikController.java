@@ -225,15 +225,7 @@ public class MechanikController implements Initializable {
         bladZlecenie.setText("");
 
         String czyMozna = zlecenieZakonczCzyMozna(idTwojeZlecenie.getText(), opisNaprawaZlecenia.getText());
-//        if (idTwojeZlecenie.getText() == null || idTwojeZlecenie.getText().equals("")) {
-//            bladZlecenie.setStyle("-fx-text-fill: red;");
-//            bladZlecenie.setText("Nie wybrano zlecenia");
-//            return;
-//        } else if (opisNaprawaZlecenia.getText() == null || opisNaprawaZlecenia.getText().equals("")) {
-//            bladZlecenie.setStyle("-fx-text-fill: red;");
-//            bladZlecenie.setText("Dodaj opis naprawy");
-//            return;
-//        }
+
         if (czyMozna.equals("Zlecenie zostało zakończone")) {
             Transaction transaction = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
