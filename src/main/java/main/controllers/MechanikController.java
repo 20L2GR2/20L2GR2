@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -98,6 +99,7 @@ public class MechanikController implements Initializable {
         }
     }
 
+    // wyświetlanie dostępnych zleceń
     public void otworzZlecenia() {
         System.out.println("otworzZlecenia");
         borderPane.setCenter(zleceniaPane);
@@ -106,7 +108,6 @@ public class MechanikController implements Initializable {
         tableZlecenia.setEditable(true);
         bladRealizacji.setText("");
 
-        // wyświetlanie dostępnych zleceń
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z", Zlecenia.class).getResultList();
@@ -115,7 +116,7 @@ public class MechanikController implements Initializable {
             opisUsterkaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
 
             for (Zlecenia z : zlecenia) {
-                if(z.getStanZlecenia() == 0)
+                if (z.getStanZlecenia() == 0)
                     tableZlecenia.getItems().add(z);
             }
 
@@ -155,7 +156,7 @@ public class MechanikController implements Initializable {
             opisUsterkaZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
 
             for (Zlecenia z : zlecenia) {
-                if(z.getStanZlecenia() == 1)
+                if (z.getStanZlecenia() == 1)
                     tableTwojeZlecenia.getItems().add(z);
             }
 
@@ -206,7 +207,7 @@ public class MechanikController implements Initializable {
         }
     }
 
-    public void zlecenieZaladuj(){
+    public void zlecenieZaladuj() {
         Zlecenia zlecenie = (Zlecenia) tableTwojeZlecenia.getSelectionModel().getSelectedItem();
         idTwojeZlecenie.setText(String.valueOf(zlecenie.getIdZlecenia()));
         opisUsterkaZlecenia.setText(String.valueOf(zlecenie.getOpisUsterki()));
@@ -214,50 +215,65 @@ public class MechanikController implements Initializable {
         uzyteCzesci.setText("");
     }
 
-    public void czescPrzypisz(){
+    public void czescPrzypisz() {
         Magazyn magazyn = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
         uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + "; ");
     }
 
-    public void zlecenieZakoncz(){
+    public void zlecenieZakoncz() {
         bladZlecenie.setText("");
-        if (idTwojeZlecenie.getText() == null || idTwojeZlecenie.getText().equals("")) {
+
+        String czyMozna = zlecenieZakonczCzyMozna(idTwojeZlecenie.getText(), opisNaprawaZlecenia.getText());
+//        if (idTwojeZlecenie.getText() == null || idTwojeZlecenie.getText().equals("")) {
+//            bladZlecenie.setStyle("-fx-text-fill: red;");
+//            bladZlecenie.setText("Nie wybrano zlecenia");
+//            return;
+//        } else if (opisNaprawaZlecenia.getText() == null || opisNaprawaZlecenia.getText().equals("")) {
+//            bladZlecenie.setStyle("-fx-text-fill: red;");
+//            bladZlecenie.setText("Dodaj opis naprawy");
+//            return;
+//        }
+        if (czyMozna.equals("Zlecenie zostało zakończone")) {
+            Transaction transaction = null;
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                transaction = session.beginTransaction();
+
+                Zlecenia zlecenie = (Zlecenia) session.createQuery("FROM Zlecenia U WHERE U.idZlecenia = :id").setParameter("id", Integer.parseInt(idTwojeZlecenie.getText())).uniqueResult();
+
+                zlecenie.setUzyteCzesci(uzyteCzesci.getText());
+                zlecenie.setStanZlecenia(2);
+
+                System.out.println(zlecenie);
+
+                session.update(zlecenie);
+                session.getTransaction().commit();
+                System.out.println("Updated");
+                tableZlecenia.refresh();
+                otworzTwojeZlecenia();
+                bladZlecenie.setStyle("-fx-text-fill: white;");
+                bladZlecenie.setText(czyMozna);
+                session.clear();
+                session.disconnect();
+                session.close();
+                System.out.println("Zlecenie zakończone");
+            } catch (Exception e) {
+                //if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
+        } else {
             bladZlecenie.setStyle("-fx-text-fill: red;");
-            bladZlecenie.setText("Nie wybrano zlecenia");
-            return;
-        }else if(opisNaprawaZlecenia.getText() == null || opisNaprawaZlecenia.getText().equals("")){
-            bladZlecenie.setStyle("-fx-text-fill: red;");
-            bladZlecenie.setText("Dodaj opis naprawy");
-            return;
+            bladZlecenie.setText(czyMozna);
         }
+    }
 
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-
-            Zlecenia zlecenie = (Zlecenia) session.createQuery("FROM Zlecenia U WHERE U.idZlecenia = :id").setParameter("id", Integer.parseInt(idTwojeZlecenie.getText())).uniqueResult();
-
-            zlecenie.setUzyteCzesci(uzyteCzesci.getText());
-            zlecenie.setStanZlecenia(2);
-
-            System.out.println(zlecenie);
-
-            session.update(zlecenie);
-            session.getTransaction().commit();
-            System.out.println("Updated");
-            tableZlecenia.refresh();
-            otworzTwojeZlecenia();
-            bladZlecenie.setStyle("-fx-text-fill: white;");
-            bladZlecenie.setText("Zlecenie zostało zakończone");
-            session.clear();
-            session.disconnect();
-            session.close();
-            System.out.println("Zlecenie zakończone");
-        } catch (Exception e) {
-            //if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-        }
+    public String zlecenieZakonczCzyMozna(String idZlecenia, String opisNaprawy) {
+        if(idZlecenia == null || idZlecenia.equals(""))
+            return "Nie wybrano zlecenia";
+        else if (opisNaprawy == null || opisNaprawy.equals(""))
+            return "Dodaj opis naprawy";
+        else
+            return "Zlecenie zostało zakończone";
     }
 
     //rezerwacja zlecenia

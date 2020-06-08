@@ -121,7 +121,7 @@ public class AdminController implements Initializable {
         toggleButtonZamowienia.setSelected(true);
     }
 
-    public String utworzUzytkownikaLogic(String login, String haslo, String rola, String imie, String nazwisko){
+    public String utworzUzytkownikaLogic(String login, String haslo, String rola, String imie, String nazwisko) {
         if (login == null || login.trim().isEmpty()) {
             return "Podano zle dane";
         }
@@ -148,7 +148,7 @@ public class AdminController implements Initializable {
                 session.close();
                 return "Istnieje użytkownik z takim Loginem";
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return "ERROR";
         }
@@ -156,41 +156,42 @@ public class AdminController implements Initializable {
     }
 
     public void utwórzUzytkownika() {
-        if(nowaRola.getSelectionModel().isEmpty()){
+        if (nowaRola.getSelectionModel().isEmpty()) {
             blad.setText("Podano zle dane");
             return;
         }
         String mogeUtworzyc = utworzUzytkownikaLogic(nowyLogin.getText(), noweHaslo.getText(), nowaRola.getValue().toString(), noweImie.getText(), noweNazwisko.getText());
 
-        if(mogeUtworzyc.equals("DODANO")){
+        if (mogeUtworzyc.equals("DODANO")) {
             Transaction transaction = null;
-            try (Session session = HibernateUtil.getSessionFactory().openSession()){
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            System.out.println("Tworzę użytkownika!");
-            Pracownicy nowyPracownik = new Pracownicy();
-            nowyPracownik.setHaslo(noweHaslo.getText());
-            nowyPracownik.setLogin(nowyLogin.getText());
-            nowyPracownik.setStanowisko(getShortFromStanowisko(nowaRola.getValue().toString()));
-            nowyPracownik.setImie(noweImie.getText());
-            nowyPracownik.setNazwisko(noweNazwisko.getText());
-            session.save(nowyPracownik);
-            //uzytkownicy.getItems().add(nowyPracownik);
+                System.out.println("Tworzę użytkownika!");
+                Pracownicy nowyPracownik = new Pracownicy();
+                nowyPracownik.setHaslo(noweHaslo.getText());
+                nowyPracownik.setLogin(nowyLogin.getText());
+                nowyPracownik.setStanowisko(getShortFromStanowisko(nowaRola.getValue().toString()));
+                nowyPracownik.setImie(noweImie.getText());
+                nowyPracownik.setNazwisko(noweNazwisko.getText());
+                session.save(nowyPracownik);
+                //uzytkownicy.getItems().add(nowyPracownik);
                 blad.setText("Stworzyłem użytkownika " + nowyLogin.getText());
 
-            session.getTransaction().commit();
-            inicjalizujWidokAdminaZBazy();
+                session.getTransaction().commit();
+                inicjalizujWidokAdminaZBazy();
 
 
-            session.clear();
-            session.disconnect();
-            session.close();
-        } catch (Exception e) {
+                session.clear();
+                session.disconnect();
+                session.close();
+            } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
                 e.printStackTrace();
             }
 
-    }else{
-        blad.setText(mogeUtworzyc);}
+        } else {
+            blad.setText(mogeUtworzyc);
+        }
     }
 
     public void usunUzytkownika() {
@@ -447,7 +448,7 @@ public class AdminController implements Initializable {
             ObservableList<String> klienciList = FXCollections.observableArrayList();
             for (Klienci klient :
                     klienci) {
-               klienciList.add(klient.getImie());
+                klienciList.add(klient.getImie());
             }
 
             klientZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("klientImie"));
@@ -559,14 +560,13 @@ public class AdminController implements Initializable {
         return new Pracownicy();
     }
 
-    Klienci getKlientByImie(List<Klienci> listaKlientow, String imie){
+    Klienci getKlientByImie(List<Klienci> listaKlientow, String imie) {
         for (Klienci klient :
-                listaKlientow){
+                listaKlientow) {
             if (klient.getImie() == imie) return klient;
         }
         return new Klienci();
     }
-
 
 
     short getStanZamowieniaByText(String zamowienie) {
@@ -584,23 +584,32 @@ public class AdminController implements Initializable {
         }
     }
 
-    int getStanZleceniaByText(String zlecenie){
-        switch(zlecenie){
-            case "zlecenie utworzone i oczekujące do przyjęcia przez mechanika": return 0;
-            case "zlecenie przyjęte przez mechanika i w trakcie realizacji": return 1;
-            case "zlecenie oczekujące do wyceny (mechanik wykonał naprawę)": return 2;
-            case "zlecenie zakończone": return 3;
-            case "zlecenie anulowane": return 4;
+    int getStanZleceniaByText(String zlecenie) {
+        switch (zlecenie) {
+            case "zlecenie utworzone i oczekujące do przyjęcia przez mechanika":
+                return 0;
+            case "zlecenie przyjęte przez mechanika i w trakcie realizacji":
+                return 1;
+            case "zlecenie oczekujące do wyceny (mechanik wykonał naprawę)":
+                return 2;
+            case "zlecenie zakończone":
+                return 3;
+            case "zlecenie anulowane":
+                return 4;
         }
         return 0;
     }
 
-    short getShortFromStanowisko(String stanowisko){
-        switch (stanowisko){
-            case "admin": return 0;
-            case "Obsługa klienta": return 1;
-            case "Mechanik": return 2;
-            case "Magazynier": return 3;
+    short getShortFromStanowisko(String stanowisko) {
+        switch (stanowisko) {
+            case "admin":
+                return 0;
+            case "Obsługa klienta":
+                return 1;
+            case "Mechanik":
+                return 2;
+            case "Magazynier":
+                return 3;
         }
         return 1;
     }
