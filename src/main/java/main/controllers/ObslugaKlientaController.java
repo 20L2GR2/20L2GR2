@@ -1,7 +1,6 @@
 package main.controllers;
 
 import hibernate.entity.Klienci;
-import hibernate.entity.Magazyn;
 import hibernate.entity.Pracownicy;
 import hibernate.entity.Zlecenia;
 import hibernate.util.HibernateUtil;
@@ -10,16 +9,17 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import pdf.GeneratePdf;
 
 import java.awt.*;
 import java.io.File;
@@ -31,8 +31,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static java.lang.String.valueOf;
-
-import pdf.GeneratePdf;
 
 public class ObslugaKlientaController implements Initializable {
     LogowanieController mainController = new LogowanieController();
@@ -436,6 +434,24 @@ public class ObslugaKlientaController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    public String canOrderBeFinalizedIfPriceIsSet(String price) {
+        if (price == null || price.equals("")) {
+            return "Nie podano ceny";
+        } else {
+            return "Zlecenie zakonczone";
+        }
+    }
+
+    public boolean canOrderBeFinalizedIfPriceIsSetProperly(String price) {
+        boolean state = true;
+        try {
+            Float.parseFloat(price);
+        } catch (NumberFormatException e) {
+            state = false;
+        }
+        return state;
     }
 
     public void destroySession(Session session) {

@@ -12,59 +12,58 @@ public class MechanikTest {
     MechanikController controller = new MechanikController();
 
     @Before
-    public void initializeMethod(){
+    public void initializeMethod() {
         DumpData.dumpDataToDatabase();
     }
 
     @After
-    public void destroyMethod(){
+    public void destroyMethod() {
         DumpData.deleteDataFromDatabase();
     }
 
     @AfterClass
-    public static void initializeMethodAfter(){
+    public static void initializeMethodAfter() {
         DumpData.dumpDataToDatabase();
     }
 
     @Test
-    public void nieMoznaZakonczycGdyIdPuste(){
+    public void nieMoznaZakonczycGdyIdPuste() {
         String wynik = controller.zlecenieZakonczCzyMozna("", "qwerty");
-        for(int i =0; i < 100; i++)System.out.println(wynik);
         assertTrue(wynik.equals("Nie wybrano zlecenia"));
     }
 
     @Test
-    public void nieMoznaZakonczycGdyOpisPusty(){
+    public void nieMoznaZakonczycGdyOpisPusty() {
         String wynik = controller.zlecenieZakonczCzyMozna("1", "");
         assertTrue(wynik.equals("Dodaj opis naprawy"));
     }
 
     @Test
-    public void nieMoznaZakonczycGdyOpisNull(){
+    public void nieMoznaZakonczycGdyOpisNull() {
         String wynik = controller.zlecenieZakonczCzyMozna("2", null);
         assertTrue(wynik.equals("Dodaj opis naprawy"));
     }
 
     @Test
-    public void nieMoznaZakonczycGdyIdNull(){
+    public void nieMoznaZakonczycGdyIdNull() {
         String wynik = controller.zlecenieZakonczCzyMozna(null, "fafsd");
         assertTrue(wynik.equals("Nie wybrano zlecenia"));
     }
 
     @Test
-    public void nieMoznaZakonczycGdyObaNull(){
+    public void nieMoznaZakonczycGdyObaNull() {
         String wynik = controller.zlecenieZakonczCzyMozna(null, null);
         assertTrue(wynik.equals("Nie wybrano zlecenia"));
     }
 
     @Test
-    public void nieMoznaZakonczycGdyObaPuste(){
+    public void nieMoznaZakonczycGdyObaPuste() {
         String wynik = controller.zlecenieZakonczCzyMozna("", "");
         assertTrue(wynik.equals("Nie wybrano zlecenia"));
     }
 
     @Test
-    public void moznaZakonczyc(){
+    public void moznaZakonczyc() {
         String wynik = controller.zlecenieZakonczCzyMozna("1", "fsfsdf");
         assertTrue(wynik.equals("Zlecenie zostało zakończone"));
     }

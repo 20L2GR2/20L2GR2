@@ -4,7 +4,6 @@ import hibernate.entity.Pracownicy;
 import hibernate.util.HibernateUtil;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
@@ -45,7 +43,7 @@ public class LogowanieController implements Initializable {
         keyLogin(loginTextField);
     }
 
-    public void keyLogin(TextField field){
+    public void keyLogin(TextField field) {
         field.setOnKeyPressed(ke -> {
             if (ke.getCode().equals(KeyCode.ENTER)) {
                 zalogujButton.fire();
@@ -53,7 +51,7 @@ public class LogowanieController implements Initializable {
         });
     }
 
-    public int zalogujLogic(String login, String haslo){
+    public int zalogujLogic(String login, String haslo) {
         int stanowisko = -1;
 
         try {

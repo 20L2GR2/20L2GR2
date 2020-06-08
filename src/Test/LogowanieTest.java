@@ -1,15 +1,12 @@
 import hibernate.DumpData;
-import javassist.tools.Dump;
-import main.controllers.AdminController;
 import main.controllers.LogowanieController;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.constraints.AssertTrue;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 
 public class LogowanieTest {
@@ -18,25 +15,25 @@ public class LogowanieTest {
     LogowanieController controller = new LogowanieController();
 
     @Before
-    public void initializeMethod(){
+    public void initializeMethod() {
         DumpData.dumpDataToDatabase();
     }
 
     @After
-    public void destroyMethod(){
+    public void destroyMethod() {
         DumpData.deleteDataFromDatabase();
     }
 
     @AfterClass
-    public static void initializeMethodAfter(){
+    public static void initializeMethodAfter() {
         DumpData.dumpDataToDatabase();
     }
 
     @Test
-    public void loggingWithWrongCredentialsWontAllowLogginIn(){
-       String login = "UGABUGA";
-       String haslo = "UGABUGA";
-       int stanowisko = controller.zalogujLogic(login, haslo);
+    public void loggingWithWrongCredentialsWontAllowLogginIn() {
+        String login = "UGABUGA";
+        String haslo = "UGABUGA";
+        int stanowisko = controller.zalogujLogic(login, haslo);
         switch (stanowisko) {
             case 0:
                 fail();
@@ -57,7 +54,7 @@ public class LogowanieTest {
     }
 
     @Test
-    public void logginWithCorrectCredentialsWillLogYouInAdmin(){
+    public void logginWithCorrectCredentialsWillLogYouInAdmin() {
         String login = "admin";
         String haslo = "admin";
         int stanowisko = controller.zalogujLogic(login, haslo);
@@ -81,7 +78,7 @@ public class LogowanieTest {
     }
 
     @Test
-    public void logginWithCorrectCredentialsWillLogYouInObsluga(){
+    public void logginWithCorrectCredentialsWillLogYouInObsluga() {
         String login = "obslugaklienta1";
         String haslo = "obslugaklienta1";
         int stanowisko = controller.zalogujLogic(login, haslo);
@@ -105,7 +102,7 @@ public class LogowanieTest {
     }
 
     @Test
-    public void logginWithCorrectCredentialsWillLogYouInMechanik(){
+    public void logginWithCorrectCredentialsWillLogYouInMechanik() {
         String login = "mechanik1";
         String haslo = "mechanik1";
         int stanowisko = controller.zalogujLogic(login, haslo);
@@ -129,7 +126,7 @@ public class LogowanieTest {
     }
 
     @Test
-    public void logginWithCorrectCredentialsWillLogYouInMagazynier(){
+    public void logginWithCorrectCredentialsWillLogYouInMagazynier() {
         String login = "magazynier1";
         String haslo = "magazynier1";
         int stanowisko = controller.zalogujLogic(login, haslo);

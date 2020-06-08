@@ -269,7 +269,7 @@ public class MechanikController implements Initializable {
     }
 
     public String zlecenieZakonczCzyMozna(String idZlecenia, String opisNaprawy) {
-        if(idZlecenia == null || idZlecenia.equals(""))
+        if (idZlecenia == null || idZlecenia.equals(""))
             return "Nie wybrano zlecenia";
         else if (opisNaprawy == null || opisNaprawy.equals(""))
             return "Dodaj opis naprawy";
