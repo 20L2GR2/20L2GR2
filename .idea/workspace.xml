@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/20L2GR2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/20L2GR2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/DumpData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/DumpData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Klienci.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Klienci.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Magazyn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Magazyn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Pracownicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Pracownicy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zamowienia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zamowienia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zlecenia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zlecenia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/util/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/util/HibernateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/LogowanieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/LogowanieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/MagazynierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/MagazynierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/MechanikController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/MechanikController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/ObslugaKlientaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/ObslugaKlientaController.java" afterDir="false" />
-    </list>
+    <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -233,7 +216,7 @@
       <workItem from="1591603779836" duration="1227000" />
       <workItem from="1591608958969" duration="1845000" />
       <workItem from="1591702011047" duration="1547000" />
-      <workItem from="1591733598257" duration="4730000" />
+      <workItem from="1591733598257" duration="4999000" />
     </task>
     <task id="LOCAL-00001" summary="Fix i dodanie .idea">
       <created>1586115626288</created>
@@ -480,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591718176713</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="ABBCK-62 # Dodanie wygenerowanego JavaDoc">
+      <created>1591738600750</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1591738600750</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,7 +503,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Naprawa i przeniesienie funkcjonowania &quot;Logout&quot;" />
     <MESSAGE value="ABBCK-19 #Dodanie f-cji czyszczenia bazy oraz ładowania dump'a -&gt; ładowanie dump'a chyba do poprawy, ale działa OK (czytać komenty w tej f-cji)" />
     <MESSAGE value="ABBCK-29 ABBCK-31 ABBCK-32 ABBCK-33 ABBCK-34 ABBCK-35 ABBCK-36 ABBCK-42 ABBCK-43 # naprawienie automatycznych zmian lang lvl w project structure; usunięcie klas jdbc; dodanie do projektu, podłączenie i konfiguracja (chyba wstępna) Hibernate; zmapowanie pól bazy; Utworzenie klasy testowej &quot;App&quot;." />
     <MESSAGE value="ABBCK-41 # Wstępne zmian dla admina, pobieranie z bazy dla większości tabel, możliwość tworzenia użytkowników, możliwość usuwania zamówień, poprawa klasy Zamówienia" />
@@ -538,7 +527,8 @@
     <MESSAGE value="Usunięcie buga" />
     <MESSAGE value="ABBCK-64 ABBCK-66 # Dodanie pozostałych testów jednostkowych" />
     <MESSAGE value="Aktualizacja diagramu ERD" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aktualizacja diagramu ERD" />
+    <MESSAGE value="ABBCK-62 # Dodanie wygenerowanego JavaDoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="ABBCK-62 # Dodanie wygenerowanego JavaDoc" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -562,16 +552,16 @@
     <state x="689" y="302" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591460300984" />
     <state x="690" y="265" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591460300984" />
     <state x="690" y="265" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591460300984" />
-    <state x="516" y="146" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1591738225900">
+    <state x="516" y="146" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1591738651978">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="516" y="146" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1591738225900" />
-    <state x="150" y="121" width="1536" height="747" key="CommitChangelistDialog2" timestamp="1591718176416">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="516" y="146" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1591738651978" />
+    <state x="0" y="77" width="1536" height="747" key="CommitChangelistDialog2" timestamp="1591738598480">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-998" y="178" key="CommitChangelistDialog2/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state x="585" y="113" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591655476649" />
-    <state x="0" y="77" width="1536" height="747" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1591460300984" />
+    <state x="0" y="77" width="1536" height="747" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1591738598480" />
     <state x="150" y="121" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591718176416" />
     <state x="146" y="102" width="1576" height="811" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
     <state x="-988" y="92" width="896" height="1100" key="DiffContextDialog" timestamp="1591720827658">
@@ -584,40 +574,40 @@
     </state>
     <state x="592" y="216" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591733717459" />
     <state x="740" y="273" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591720741056" />
-    <state width="1478" height="194" key="GridCell.Tab.0.bottom" timestamp="1591738253031">
+    <state width="1478" height="194" key="GridCell.Tab.0.bottom" timestamp="1591738652063">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1037" height="255" key="GridCell.Tab.0.bottom/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state width="1877" height="239" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591703065903" />
     <state width="1876" height="671" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1591460300984" />
-    <state width="1478" height="194" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591738253031" />
+    <state width="1478" height="194" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591738652063" />
     <state width="1876" height="246" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591721110511" />
     <state width="1477" height="175" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
-    <state width="1478" height="194" key="GridCell.Tab.0.center" timestamp="1591738253031">
+    <state width="1478" height="194" key="GridCell.Tab.0.center" timestamp="1591738652063">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1037" height="255" key="GridCell.Tab.0.center/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state width="1877" height="239" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591703065903" />
     <state width="1876" height="671" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1591460300984" />
-    <state width="1478" height="194" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591738253031" />
+    <state width="1478" height="194" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591738652063" />
     <state width="1876" height="246" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591721110511" />
     <state width="1477" height="175" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
-    <state width="1478" height="194" key="GridCell.Tab.0.left" timestamp="1591738253031">
+    <state width="1478" height="194" key="GridCell.Tab.0.left" timestamp="1591738652063">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1037" height="255" key="GridCell.Tab.0.left/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state width="1877" height="239" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591703065903" />
     <state width="1876" height="671" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1591460300984" />
-    <state width="1478" height="194" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591738253031" />
+    <state width="1478" height="194" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591738652063" />
     <state width="1876" height="246" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591721110511" />
     <state width="1477" height="175" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
-    <state width="1478" height="194" key="GridCell.Tab.0.right" timestamp="1591738253031">
+    <state width="1478" height="194" key="GridCell.Tab.0.right" timestamp="1591738652063">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1037" height="255" key="GridCell.Tab.0.right/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state width="1877" height="239" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591703065903" />
     <state width="1876" height="671" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1591460300984" />
-    <state width="1478" height="194" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591738253031" />
+    <state width="1478" height="194" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591738652063" />
     <state width="1876" height="246" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591721110511" />
     <state width="1477" height="175" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
     <state width="1876" height="342" key="GridCell.Tab.1.bottom" timestamp="1591479777903">
@@ -657,11 +647,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="628" y="258" key="Vcs.Multiple.Commit.Info.Dialog.Key/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591648695390" />
-    <state x="552" y="251" key="Vcs.Push.Dialog.v2" timestamp="1591718178115">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="442" y="199" key="Vcs.Push.Dialog.v2" timestamp="1591738613653">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-816" y="334" key="Vcs.Push.Dialog.v2/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state x="552" y="251" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591655478808" />
+    <state x="442" y="199" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591738613653" />
     <state x="552" y="251" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591718178115" />
     <state x="515" y="192" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
     <state x="714" y="282" key="com.intellij.database.run.ParametersPanel.Standalone" timestamp="1591460300984" />
