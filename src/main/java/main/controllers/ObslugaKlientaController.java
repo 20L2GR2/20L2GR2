@@ -358,10 +358,6 @@ public class ObslugaKlientaController implements Initializable {
             bladUkonczone.setText("Nie pobrano informacji!");
             return;
         }
-        if (uzyteCzesciLabel.getText().trim().isEmpty()) {
-            bladUkonczone.setText("Nie pobrano informacji!");
-            return;
-        }
         if (kwotaUslugi.getText().trim().isEmpty()) {
             bladUkonczone.setText("Nie podano kwoty!");
             return;
