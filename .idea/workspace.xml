@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/import.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/20l2gr2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/20l2gr2.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiagramERD.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/DiagramERD.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20L2GR2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/20L2GR2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/20l2gr2.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/dump.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,17 +93,20 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/2" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
-    <property name="two.files.diff.last.used.folder" value="$USER_HOME$/Downloads" />
+    <property name="two.files.diff.last.used.folder" value="$USER_HOME$/Documents/2" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
       <recent name="hibernate.entity" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\I\IdeaProjects\20L2GR2\src\main\resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -108,7 +116,27 @@
       <recent name="C:\Users\test\IdeaProjects\20L2GR2\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in 20L2GR2">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+      <command value="mvn compile" />
+      <command value="mvn package" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.loginScreen">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="hibernate.App" />
+      <module name="20L2GR2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hibernate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="loginScreen" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="20L2GR2" />
@@ -153,23 +181,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ObslugaKlientaTest.czyMoznaZakonczycZlecenieJesliPodanoNieprawidlowaCene" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="20L2GR2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ObslugaKlientaTest" />
-      <option name="METHOD_NAME" value="czyMoznaZakonczycZlecenieJesliPodanoNieprawidlowaCene" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.App" />
         <item itemvalue="JUnit.All in 20L2GR2" />
         <item itemvalue="JUnit.ObslugaKlientaTest" />
         <item itemvalue="JUnit.MagazynierTest" />
         <item itemvalue="JUnit.MagazynierTest.czyMoznaDodacCzescJesliPodanoPrawidlowaIlosc" />
-        <item itemvalue="JUnit.ObslugaKlientaTest.czyMoznaZakonczycZlecenieJesliPodanoNieprawidlowaCene" />
       </list>
     </recent_temporary>
   </component>
@@ -212,6 +230,7 @@
       <workItem from="1591603779836" duration="1227000" />
       <workItem from="1591608958969" duration="1845000" />
       <workItem from="1591702011047" duration="1547000" />
+      <workItem from="1591730140791" duration="5033000" />
     </task>
     <task id="LOCAL-00001" summary="Fix i dodanie .idea">
       <created>1586115626288</created>
@@ -462,7 +481,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -527,6 +546,10 @@
     <state x="520" y="141" key="#Assign_Data_Sources/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
     <state x="552" y="177" key="#Notifications" timestamp="1591460300984" />
     <state x="552" y="177" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1591460300984" />
+    <state x="771" y="127" key="#SQL_Dialects" timestamp="1591731626975">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="771" y="127" key="#SQL_Dialects/0.0.1920.1080@0.0.1920.1080" timestamp="1591731626975" />
     <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591460300984" />
     <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591460300984" />
     <state x="414" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591460300984" />
@@ -548,51 +571,53 @@
     <state x="0" y="77" width="1536" height="747" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1591460300984" />
     <state x="150" y="121" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591718176416" />
     <state x="146" y="102" width="1576" height="811" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
-    <state x="-988" y="92" width="896" height="1100" key="DiffContextDialog" timestamp="1591720827658">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="56" y="280" width="1285" height="709" key="DiffContextDialog" timestamp="1591732821644">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="-988" y="92" width="896" height="1696" key="DiffContextDialog/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state x="-988" y="92" width="896" height="1100" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591720827658" />
-    <state x="740" y="273" key="FileChooserDialogImpl" timestamp="1591720741056">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="56" y="280" width="1285" height="709" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1591732821644" />
+    <state x="740" y="284" key="FileChooserDialogImpl" timestamp="1591732741822">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="740" y="273" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591720741056" />
-    <state width="1876" height="246" key="GridCell.Tab.0.bottom" timestamp="1591721110511">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="740" y="284" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1591732741822" />
+    <state width="1425" height="190" key="GridCell.Tab.0.bottom" timestamp="1591735021378">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1037" height="255" key="GridCell.Tab.0.bottom/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state width="1877" height="239" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591703065903" />
     <state width="1876" height="671" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1591460300984" />
     <state width="1493" height="532" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591460300984" />
     <state width="1876" height="246" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591721110511" />
-    <state width="1477" height="175" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
-    <state width="1876" height="246" key="GridCell.Tab.0.center" timestamp="1591721110511">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1425" height="190" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1591735021378" />
+    <state width="1425" height="190" key="GridCell.Tab.0.center" timestamp="1591735021374">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1037" height="255" key="GridCell.Tab.0.center/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state width="1877" height="239" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591703065903" />
     <state width="1876" height="671" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1591460300984" />
     <state width="1493" height="532" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591460300984" />
     <state width="1876" height="246" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591721110511" />
-    <state width="1477" height="175" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
-    <state width="1876" height="246" key="GridCell.Tab.0.left" timestamp="1591721110511">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1425" height="190" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1591735021374" />
+    <state width="1425" height="190" key="GridCell.Tab.0.left" timestamp="1591735021374">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1037" height="255" key="GridCell.Tab.0.left/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state width="1877" height="239" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591703065903" />
     <state width="1876" height="671" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1591460300984" />
     <state width="1493" height="532" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591460300984" />
     <state width="1876" height="246" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591721110511" />
-    <state width="1477" height="175" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
-    <state width="1876" height="246" key="GridCell.Tab.0.right" timestamp="1591721110511">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1425" height="190" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1591735021374" />
+    <state width="1425" height="190" key="GridCell.Tab.0.right" timestamp="1591735021378">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1037" height="255" key="GridCell.Tab.0.right/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
     <state width="1877" height="239" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591703065903" />
     <state width="1876" height="671" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1591460300984" />
     <state width="1493" height="532" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591460300984" />
     <state width="1876" height="246" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591721110511" />
-    <state width="1477" height="175" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
+    <state width="1425" height="190" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1591735021378" />
     <state width="1876" height="342" key="GridCell.Tab.1.bottom" timestamp="1591479777903">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -660,6 +685,10 @@
     <state x="705" y="311" key="git4idea.merge.GitMergeDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591648498282" />
     <state x="702" y="137" key="refactoring.ChangeSignatureDialog" timestamp="1591460300984" />
     <state x="702" y="137" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591460300984" />
+    <state x="835" y="217" width="672" height="677" key="run.anything.popup" timestamp="1591735021458">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="835" y="217" width="672" height="677" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1591735021458" />
     <state x="461" y="240" width="672" height="678" key="search.everywhere.popup" timestamp="1591460300984" />
     <state x="461" y="240" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
   </component>
