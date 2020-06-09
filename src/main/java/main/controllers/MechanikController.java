@@ -33,7 +33,7 @@ public class MechanikController implements Initializable {
     @FXML
     private ToggleButton toggleButtonCzesci, toggleButtonZlecenia, toggleButtonTwojeZlecenia, toggleButtonProfil, toggleButtonStanmagazyn;
     @FXML
-    public Label imieLabel, nazwiskoLabel, loginLabel, blad, bladRealizacji, idTwojeZlecenie, opisUsterkaZlecenia, uzyteCzesci, bladZlecenie;
+    public Label imieLabel, nazwiskoLabel, loginLabel, blad, bladRealizacji, idTwojeZlecenie, opisUsterkaZlecenia, bladZlecenie;
     @FXML
     private TableColumn idColumn, opisUsterkaColumn, nazwaCzesciColumn, opisColumn, iloscColumn, cenaColumn, nazwaZamowieniaColumn,
             komentarzColumn, stanColumn, nazwaCzesciMagazynColumn, opisUsterkaZleceniaColumn, idZleceniaColumn, nazwaCzesciC, opisC, iloscC, cenaC;
@@ -42,7 +42,7 @@ public class MechanikController implements Initializable {
     @FXML
     public TextField nazwaCzesci, szukajNazwaCzesci;
     @FXML
-    public TextArea komentarz, opisNaprawaZlecenia;
+    public TextArea komentarz, opisNaprawaZlecenia, uzyteCzesci;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -211,14 +211,16 @@ public class MechanikController implements Initializable {
         Zlecenia zlecenie = (Zlecenia) tableTwojeZlecenia.getSelectionModel().getSelectedItem();
         idTwojeZlecenie.setText(String.valueOf(zlecenie.getIdZlecenia()));
         opisUsterkaZlecenia.setText(String.valueOf(zlecenie.getOpisUsterki()));
-        opisNaprawaZlecenia.setText("");
-        uzyteCzesci.setText("");
+//        opisNaprawaZlecenia.setText("");
+//        uzyteCzesci.setText("");
     }
 
     public void czescPrzypisz() {
         Magazyn magazyn = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
-        uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + "; ");
+        uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + " " + magazyn.getCena() + "\n");
+//        magazyn.setIlosc((int) (magazyn.getIlosc()-1));
+//        tableMagazyn.getSelectionModel().getSelectedItem()
     }
 
     public void zlecenieZakoncz() {
