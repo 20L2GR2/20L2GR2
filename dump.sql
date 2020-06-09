@@ -24,7 +24,7 @@ INSERT INTO `zlecenia` (`id_zlecenie`, `id_klienta`, `id_mechanika`, `id_obsluga
 (2, 2, NULL, 2, NULL, 0, 'Wymiana belki tylniej', '2020-04-19 12:00:00', NULL, NULL, NULL, NULL),
 (3, 3, 3, 2, NULL, 1, 'Wymiana oleju w skrzyni biegów', '2020-04-20 08:00:00', NULL, NULL, NULL, NULL),
 (4, 4, 3, 2, NULL, 1, 'Naprawa manetki kierunkowskazów', '2020-04-20 11:00:00', NULL, NULL, NULL, NULL),
-(5, 4, 3, 2, NULL, 2, 'Niedziałający klakson', '2020-04-22 15:00:00', NULL, 'Naprawiono klakson', '', NULL),
-(6, 3, 3, 2, NULL, 2, 'Wymiana oleju silnikowego', '2020-04-28 13:00:00', NULL, 'Wymieniono olej silnikowy', 'Olej silnikowy 5W40 5L', NULL),
+(5, 4, 3, 2, NULL, 2, 'Niedziałający klakson', '2020-04-22 15:00:00', NULL, 'Naprawiono klakson', 'Olej silnikowy 5W40 5L - 250\nOlej silnikowy 5W40 5L - 250\nOlej silnikowy 5W40 5L - 250\n', NULL),
+(6, 3, 3, 2, NULL, 2, 'Wymiana oleju silnikowego', '2020-04-28 13:00:00', NULL, 'Wymieniono olej silnikowy', '', NULL),
 (7, 2, 3, 2, 2, 3, 'Wymiana wahaczy', '2020-05-02 12:00:00', '2020-05-12 10:00:00', 'Wymieniono wahacze', 'Wahacze tył Citroen Saxo', 123),
-(8, 1, 3, 2, 2, 3, 'Naprawa radia', '2020-05-04 09:00:00', '2020-05-08 14:00:00', 'Podłączono zasilanie', '', 321);
+(8, 1, 3, 2, 2, 3, 'Naprawa radia', '2020-05-04 09:00:00', '2020-05-08 14:00:00', 'Podłączono zasilanie', 'Olej silnikowy 5W40 5L - 250\nOlej silnikowy 5W40 5L - 250\nOlej silnikowy 5W40 5L - 250\n', 321);

@@ -400,8 +400,26 @@ public class ObslugaKlientaController implements Initializable {
             //GENEROWANIE PDF
 
             GeneratePdf pdf = new GeneratePdf();
-            String[][] koszta = {{opisNaprawyLabel.getText(), kwotaUslugi.getText()}};
 
+            String czesci = uzyteCzesciLabel.getText();
+
+            String[] nazwyCzes = czesci.split("-|\n");
+            String[] nazwyCzesci = new String[nazwyCzes.length];
+            for (int i = 0; i < nazwyCzes.length; i++) {
+                nazwyCzesci[i] = nazwyCzes[i].trim();
+                System.out.println(nazwyCzesci[i]);
+            }
+
+            String[][] koszta = new String[(nazwyCzesci.length / 2) + 1][2];
+            koszta[0][0] = opisNaprawyLabel.getText();
+            koszta[0][1] = kwotaUslugi.getText();
+
+            int j = 1;
+            for (int i = 0; i < nazwyCzesci.length; i += 2) {
+                koszta[j][0] = nazwyCzesci[i];
+                koszta[j][1] = nazwyCzesci[i + 1];
+                j++;
+            }
 
             String czas = new SimpleDateFormat("dd-MM-yyyy HH-mm-ss").format(timestamp);
             String czas2 = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(timestamp);
