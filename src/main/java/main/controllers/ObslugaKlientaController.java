@@ -166,6 +166,10 @@ public class ObslugaKlientaController implements Initializable {
             bladKlient.setText("Podano zle dane");
             return;
         }
+        if (klientOpis.getText().isEmpty()) {
+            bladKlient.setText("Dodaj opis usterki");
+            return;
+        }
 
         Klienci klient = isOrCreateRejestracjaInDb();
         Pracownicy pracownik = inicjalizujWidokObslugiKlientaZBazy();
@@ -238,6 +242,14 @@ public class ObslugaKlientaController implements Initializable {
             session.clear();
             session.disconnect();
             session.close();
+
+            klientRejestracja.clear();
+            klientNazwisko.clear();
+            klientImie.clear();
+            klientTelefon.clear();
+            klientMarka.clear();
+            klientModel.clear();
+            klientOpis.clear();
         } catch (Exception e) {
             //if(transaction != null) transaction.rollback();
             e.printStackTrace();
@@ -247,6 +259,8 @@ public class ObslugaKlientaController implements Initializable {
     public Pracownicy inicjalizujWidokObslugiKlientaZBazy() {
         tableUkonczone.getItems().clear();
         tableHistoria.getItems().clear();
+        tableKlienci.getItems().clear();
+
         Transaction transaction = null;
         Pracownicy pracownik = new Pracownicy();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
