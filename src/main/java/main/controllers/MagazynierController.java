@@ -24,6 +24,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Klasa wykorzystywana jako kontroler widoku magazyniera. Zawiera logike, ktora jest wykorzystywana w poprawnym wyświetlaniu i obslugi widoku.
+ */
+
 public class MagazynierController implements Initializable {
 
     LogowanieController mainController = new LogowanieController();
@@ -57,6 +61,14 @@ public class MagazynierController implements Initializable {
     @FXML
     public TextArea nowaCzescTextArea;
 
+    /**
+     * Metoda uruchamiana przy kazdym uruchomieniu widoku magazyniera, dzialaca w tle na watkach Javy.
+     * Metoda rowniez odpowiada za akceptowanie wybranych znakow do pola.
+     *
+     * @param url            Odniesienie do zmiennej, ktora odnosi sie do klasy URL odpowiedzialnej za uruchomienie sceny JavaFX.
+     * @param resourceBundle Odniesienie do zmiennej, ktora odnosi sie do klasy ResourceBundle odpowiedzialnej za uruchomienie sceny.
+     */
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         borderPane.setCenter(profilPane);
@@ -88,9 +100,20 @@ public class MagazynierController implements Initializable {
         });
     }
 
+    /**
+     * Metoda wykorzystywana do wylogowania danego uzytkownika.
+     *
+     * @param event Parametr okreslajacy konkretny widok.
+     * @throws IOException Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
+
     public void logout(ActionEvent event) throws IOException {
         mainController.logout(event);
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku zamowien w widoku magazyniera oraz odznaczenie ToggleButtonow.
+     */
 
     public void otworzZamowienia() {
         System.out.println("otworzZamowienia");
@@ -100,6 +123,10 @@ public class MagazynierController implements Initializable {
         inicjalizujWidokMagazynieraZBazy();
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku stanu magazynu w widoku magazyniera oraz odznaczenie ToggleButtonow.
+     */
+
     public void otworzStanMagazyn() {
         System.out.println("otworzStanMagazynu");
         borderPane.setCenter(stanMagazynuPane);
@@ -108,12 +135,27 @@ public class MagazynierController implements Initializable {
         inicjalizujWidokMagazynieraZBazy();
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku profilu magazyniera w widoku magazyniera oraz odznaczenie ToggleButtonow.
+     */
+
     public void otworzProfil() {
         System.out.println("otworzProfil");
         borderPane.setCenter(profilPane);
         toggleButtonProfil.setSelected(true);
         inicjalizujWidokMagazynieraZBazy();
     }
+
+    /**
+     * Metoda kopiujaca logike z dodajCzesc uzywana w testach jednostkowych.
+     *
+     * @param nazwaCzesci Parametr przyjmujacy nazwe czesci.
+     * @param opisCzesci  Parametr przyjmujacy opis czesci.
+     * @param iloscCzesci Parametr przyjmujacy ilosc czesci.
+     * @param cenaCzesci  Parametr przyjmujacy cene czesci.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
+
 
     public String dodajCzescLogic(String nazwaCzesci, String opisCzesci, String iloscCzesci, String cenaCzesci) {
 
@@ -147,6 +189,12 @@ public class MagazynierController implements Initializable {
 
         return "Dodano";
     }
+
+    /**
+     * Metoda odpowiadajaca za dodanie nowej czesci do magazynu.
+     * W metodzie sprawdzane jest, czy istnieje juz taka czesc w bazie.
+     * Sprawdzana jest takze poprawnosc wprowadzonej ceny.
+     */
 
     public void dodajCzesc() {
 
@@ -238,6 +286,10 @@ public class MagazynierController implements Initializable {
         }
     }
 
+    /**
+     * Metoda odpowiadajaca za usuwanie konkretnej czesci z bazy danych.
+     */
+
     public void usunCzesc() {
 
         usuwanieCzesciLabel.setStyle("-fx-text-fill: red;");
@@ -279,6 +331,13 @@ public class MagazynierController implements Initializable {
         }
     }
 
+    /**
+     * Metoda zabezpieczajaca kaskadowo przy usunieciu czesci z magazynu, jesli czesc zostala juz przypisana do jakiegos zamowienia.
+     *
+     * @param zamow Rekord przechowujacy konkretne zamowienie.
+     */
+
+
     public void updateCzescZamowienia(Zamowienia zamow) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -295,6 +354,13 @@ public class MagazynierController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metoda sprawdzajaca czy dana czesc juz jest w bazie danych.
+     *
+     * @param usuwanieCzesci Sprawdzana czesc.
+     * @return Zwracany rekord z informacja o danej czesci (badz null).
+     */
 
     public Zamowienia ifCzescInDb(Magazyn usuwanieCzesci) {
         Zamowienia czescZamow;
@@ -313,6 +379,10 @@ public class MagazynierController implements Initializable {
             return null;
         }
     }
+
+    /**
+     * Metoda odpowiadajaca za zmiane stanu zlecenia - do realizacji.
+     */
 
     public void doRealizacjiButton() {
         bladRealizacji.setStyle("-fx-text-fill: red;");
@@ -343,6 +413,11 @@ public class MagazynierController implements Initializable {
         }
         System.out.println("Zmieniono do realizacji");
     }
+
+    /**
+     * Metoda odpowiadajaca za zmiane stanu zlecenia - zlecenia zrealizowane
+     * Po zmianie stanu, metoda przenosi do widoku dodawania czesci, kopiujac dane do TextArea dla wygody uzytkownika.
+     */
 
     public void zrealizowaneButton() {
 
@@ -401,6 +476,12 @@ public class MagazynierController implements Initializable {
 
     }
 
+    /**
+     * Metoda odpowiadajaca za pobranie nowych, wyedytowanych danych wiersza z tabeli w programi i aktualizacja ich w bazie danych.
+     *
+     * @param object Wiersz ze zmienionymi danymi, ktore dane te sa aktualizowane w bazie danych.
+     */
+
     private void updateData(Object object) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -417,6 +498,10 @@ public class MagazynierController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Pobranie danych do wszystkich podwidokow dla zalogowanego magazyniera.
+     */
 
     public void inicjalizujWidokMagazynieraZBazy() {
 
@@ -493,6 +578,16 @@ public class MagazynierController implements Initializable {
         }
     }
 
+    /**
+     * Metoda wykorzystywana w testach jednostkowych - sprawdza czy wszystkie pola sa wypelnione.
+     *
+     * @param nazwa Parametr przyjmuje nazwe.
+     * @param opis  Parametr przyjmuje opis.
+     * @param ilosc Parametr przyjmuje ilosc.
+     * @param cena  Parametr przyjmuje cene.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
+
     public String canAddPartIfAllFieldsAreSet(String nazwa, String opis, String ilosc, String cena) {
         if (nazwa == null || nazwa.equals("")) {
             return "Nie podano wszystkich danych";
@@ -507,6 +602,13 @@ public class MagazynierController implements Initializable {
         }
     }
 
+    /**
+     * Metoda wykorzystywana w testach jednostkowych - sprawdza czy ilosc zostala podana.
+     *
+     * @param quantity Parametr przyjmuje ilosc.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
+
     public boolean canAddPartBeFinalizedIfQuantityIsSetProperly(String quantity) {
         boolean state = true;
         try {
@@ -516,6 +618,13 @@ public class MagazynierController implements Initializable {
         }
         return state;
     }
+
+    /**
+     * Metoda wykorzystywana w testach jednostkowych - sprawdza czy cena zostala podana.
+     *
+     * @param price Parametr przyjmuje cene.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
 
     public boolean canAddPartBeFinalizedIfPriceIsSetProperly(String price) {
         boolean state = true;

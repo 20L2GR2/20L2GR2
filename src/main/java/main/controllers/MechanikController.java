@@ -22,6 +22,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Klasa wykorzystywana jako kontroler widoku mechanika. Zawiera logike, ktora jest wykorzystywana w poprawnym wyświetlaniu i obslugi widoku.
+ */
+
 public class MechanikController implements Initializable {
     LogowanieController mainController = new LogowanieController();
     List<Magazyn> magazyn;
@@ -44,6 +48,13 @@ public class MechanikController implements Initializable {
     @FXML
     public TextArea komentarz, opisNaprawaZlecenia;
 
+    /**
+     * Metoda uruchamiana przy kazdym uruchomieniu widoku mechanika, dzialaca w tle na watkach Javy.
+     *
+     * @param url            Odniesienie do zmiennej, ktora odnosi sie do klasy URL odpowiedzialnej za uruchomienie sceny JavaFX.
+     * @param resourceBundle Odniesienie do zmiennej, ktora odnosi sie do klasy ResourceBundle odpowiedzialnej za uruchomienie sceny JavaFX.
+     */
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         borderPane.setCenter(profilPane);
@@ -63,9 +74,21 @@ public class MechanikController implements Initializable {
         });
     }
 
+    /**
+     * Metoda wykorzystywana do wylogowania danego uzytkownika.
+     *
+     * @param event Parametr okreslajacy konkretny widok.
+     * @throws IOException Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
+
     public void logout(ActionEvent event) throws IOException {
         mainController.logout(event);
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku czesci w widoku mechanika oraz odznaczenie ToggleButtonow.
+     * Odpowiada takze za wyswietlenie zamowien.
+     */
 
     public void otworzCzesci() {
         System.out.println("otworzCzesci");
@@ -99,6 +122,10 @@ public class MechanikController implements Initializable {
         }
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku dostepnych zlecen w widoku mechanika oraz odznaczenie ToggleButtonow.
+     */
+
     // wyświetlanie dostępnych zleceń
     public void otworzZlecenia() {
         System.out.println("otworzZlecenia");
@@ -128,6 +155,11 @@ public class MechanikController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku zlecen przypisanych do konkretnego mechanika oraz odznaczenie ToggleButtonow.
+     * Odpowiada rowniez za wyswietlenie stanu co znajduje sie na magazynie.
+     */
 
     public void otworzTwojeZlecenia() {
         System.out.println("otworzTwojeZlecenia");
@@ -181,6 +213,10 @@ public class MechanikController implements Initializable {
         }
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku informacji o konkretnym oraz odznaczenie ToggleButtonow.
+     */
+
     public void otworzProfil() {
         System.out.println("otworzProfil");
         borderPane.setCenter(profilPane);
@@ -192,7 +228,7 @@ public class MechanikController implements Initializable {
         // wyświetlanie użytkownika
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            Pracownicy user = (Pracownicy) session.get(Pracownicy.class, LogowanieController.userID);
+            Pracownicy user = session.get(Pracownicy.class, LogowanieController.userID);
 
             imieLabel.setText(user.getImie());
             nazwiskoLabel.setText(user.getNazwisko());
@@ -207,6 +243,10 @@ public class MechanikController implements Initializable {
         }
     }
 
+    /**
+     * Metoda ladujaca informacje do wyswietlenia o danym zleceniu.
+     */
+
     public void zlecenieZaladuj() {
         Zlecenia zlecenie = (Zlecenia) tableTwojeZlecenia.getSelectionModel().getSelectedItem();
         idTwojeZlecenie.setText(String.valueOf(zlecenie.getIdZlecenia()));
@@ -215,11 +255,20 @@ public class MechanikController implements Initializable {
         uzyteCzesci.setText("");
     }
 
+    /**
+     * Metoda odpowiadajaca za przypisanie danej czesci do danego zlecenia.
+     */
+
     public void czescPrzypisz() {
         Magazyn magazyn = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
         uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + "; ");
     }
+
+    /**
+     * Metoda konczaca zlecenie po wykonanej naprawie.
+     * W metodzie sprawdzane jest wypelnianie pol.
+     */
 
     public void zlecenieZakoncz() {
         bladZlecenie.setText("");
@@ -260,6 +309,14 @@ public class MechanikController implements Initializable {
         }
     }
 
+    /**
+     * Metoda kopiujaca logike z zaloguj uzywana w testach jednostkowych.
+     *
+     * @param idZlecenia  Parametr przyjmuje idZlecenia.
+     * @param opisNaprawy Parametr przyjmuje opis naprawy.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
+
     public String zlecenieZakonczCzyMozna(String idZlecenia, String opisNaprawy) {
         if (idZlecenia == null || idZlecenia.equals(""))
             return "Nie wybrano zlecenia";
@@ -268,6 +325,10 @@ public class MechanikController implements Initializable {
         else
             return "Zlecenie zostało zakończone";
     }
+
+    /**
+     * Metoda umozliwiajaca przypisanie zlecenia danemu mechanikowi.
+     */
 
     //rezerwacja zlecenia
     public void zlecenieRezerwacja() {
@@ -287,7 +348,7 @@ public class MechanikController implements Initializable {
             zlecenie = (Zlecenia) tableZlecenia.getSelectionModel().getSelectedItem();
             System.out.println(zlecenie.getIdZlecenia());
 
-            Pracownicy pracownik = (Pracownicy) session.get(Pracownicy.class, LogowanieController.userID);
+            Pracownicy pracownik = session.get(Pracownicy.class, LogowanieController.userID);
             zlecenie.setPracownikMechanik(pracownik);
             zlecenie.setStanZlecenia(1);
 
@@ -310,6 +371,10 @@ public class MechanikController implements Initializable {
         }
     }
 
+    /**
+     * Metoda odpowiadajaca za wyslanie do magazyniera informacji o zapotrzebowaniu na konkretna czesc.
+     */
+
     //dodanie rekordu do zamówienia
     public void czesciWyslij() {
         blad.setStyle("-fx-text-fill: red;");
@@ -323,7 +388,7 @@ public class MechanikController implements Initializable {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            Pracownicy user = (Pracownicy) session.get(Pracownicy.class, LogowanieController.userID);
+            Pracownicy user = session.get(Pracownicy.class, LogowanieController.userID);
 
             System.out.println("Dodawanie części...");
             Zamowienia nowaCzesc = new Zamowienia();

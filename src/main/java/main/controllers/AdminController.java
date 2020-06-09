@@ -25,6 +25,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Klasa wykorzystywana jako kontroler widoku administratora. Zawiera logike, ktora jest wykorzystywana w poprawnym wyświetlaniu i obslugi widoku.
+ */
+
 public class AdminController implements Initializable {
     LogowanieController mainController = new LogowanieController();
 
@@ -74,6 +78,13 @@ public class AdminController implements Initializable {
     private TableColumn<Zlecenia, Float> cenaZleceniaColumn;
 
 
+    /**
+     * Metoda uruchamiana przy kazdym uruchomieniu widoku administratora, dzialaca w tle na watkach Javy.
+     *
+     * @param url            Odniesienie do zmiennej, ktora odnosi sie do klasy URL odpowiedzialnej za uruchomienie sceny JavaFX.
+     * @param resourceBundle Odniesienie do zmiennej, ktora odnosi sie do klasy ResourceBundle odpowiedzialnej za uruchomienie sceny JavaFX.
+     */
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         inicjalizujWidokAdminaZBazy();
@@ -81,9 +92,20 @@ public class AdminController implements Initializable {
         toggleButtonZlecenia.setSelected(true);
     }
 
+    /**
+     * Metoda wykorzystywana do wylogowania danego uzytkownika.
+     *
+     * @param event Parametr okreslajacy konkretny widok.
+     * @throws IOException Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
+
     public void logout(ActionEvent event) throws IOException {
         mainController.logout(event);
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku czesci oraz odznaczenie ToggleButtonow.
+     */
 
     public void otworzCzesci() {
         System.out.println("otworzCzesci");
@@ -91,11 +113,19 @@ public class AdminController implements Initializable {
         toggleButtonCzesci.setSelected(true);
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku zlecen oraz odznaczenie ToggleButtonow.
+     */
+
     public void otworzZlecenia() {
         System.out.println("otworzZlecenia");
         borderPane.setCenter(zleceniaPane);
         toggleButtonZlecenia.setSelected(true);
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku tworzenia uzytkownika oraz odznaczenie ToggleButtonow.
+     */
 
     public void otworzUtworzUzytkownika() {
         System.out.println("otworzUtworzUzytkownika");
@@ -103,11 +133,19 @@ public class AdminController implements Initializable {
         toggleButtonUtworzUrz.setSelected(true);
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku informacji o administratorze oraz odznaczenie ToggleButtonow.
+     */
+
     public void otworzProfil() {
         System.out.println("otworzProfil");
         borderPane.setCenter(profilPane);
         toggleButtonProfil.setSelected(true);
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku o uzytkownikach oraz odznaczenie ToggleButtonow.
+     */
 
     public void otworzUzytkownicy() {
         System.out.println("otworzUzytkownicy");
@@ -115,11 +153,26 @@ public class AdminController implements Initializable {
         toggleButtonUzytkownicy.setSelected(true);
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku zamowien oraz odznaczenie ToggleButtonow.
+     */
+
     public void otworzZamowienia() {
         System.out.println("otworzZamowienia");
         borderPane.setCenter(zamowieniaPane);
         toggleButtonZamowienia.setSelected(true);
     }
+
+    /**
+     * Metoda kopiujaca logike z metody utworzUzytkownika uzywana w testach jednostkowych.
+     *
+     * @param login    Parametr przyjmuje login.
+     * @param haslo    Parametr przyjmuje haslo.
+     * @param rola     Parametr przyjmuje role.
+     * @param imie     Parametr przyjmuje Imie.
+     * @param nazwisko Parametr przyjmuje nazwisko.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
 
     public String utworzUzytkownikaLogic(String login, String haslo, String rola, String imie, String nazwisko) {
         if (login == null || login.trim().isEmpty()) {
@@ -154,6 +207,10 @@ public class AdminController implements Initializable {
         }
         return "DODANO";
     }
+
+    /**
+     * Metoda odpowiadajaca za tworzenie uzytkownika, sprawdzenie czy dane zostaly wypelnione oraz sprawdzenie czy uzytkownik z takim loginem juz istnieje
+     */
 
     public void utwórzUzytkownika() {
         if (nowaRola.getSelectionModel().isEmpty()) {
@@ -194,6 +251,10 @@ public class AdminController implements Initializable {
         }
     }
 
+    /**
+     * Metoda odpowiadajaca za usuwanie konkretnego uzytkownika.
+     */
+
     public void usunUzytkownika() {
         if (uzytkownicy.getSelectionModel().isEmpty()) return;
         Transaction transaction = null;
@@ -217,6 +278,10 @@ public class AdminController implements Initializable {
         }
         System.out.println("Usunieto uzytkownika!");
     }
+
+    /**
+     * Metoda odpowiadajaca za usuwanie konkretnego zlecenia z bazy.
+     */
 
     public void usunZlecenie() {
 
@@ -243,6 +308,10 @@ public class AdminController implements Initializable {
         System.out.println("Usunieto zlecenie!");
     }
 
+    /**
+     * Metoda odpowiadajaca za usuwanie konkretnej czesci z bazy.
+     */
+
     public void usunCzesc() {
         if (czesci.getSelectionModel().isEmpty()) return;
         Transaction transaction = null;
@@ -267,6 +336,10 @@ public class AdminController implements Initializable {
         System.out.println("Usunieto czesc!");
     }
 
+    /**
+     * Metoda odpowiadajaca za usuwanie konkretnego zamowienia z bazy.
+     */
+
     public void usunZamowienie() {
         if (zamowienia.getSelectionModel().isEmpty()) return;
         Transaction transaction = null;
@@ -274,7 +347,7 @@ public class AdminController implements Initializable {
             transaction = session.beginTransaction();
 
             Zamowienia zamowienie = (Zamowienia) zamowienia.getSelectionModel().getSelectedItem();
-            System.out.println("PRZESZEDŁEM DALEJ!!!! " + zamowienie.getIdZamowienia() * 30);
+            System.out.println("PRZESZEDLEM DALEJ!!!! " + zamowienie.getIdZamowienia() * 30);
             session.delete(zamowienie);
 
             //zamowienia.getItems().remove(zamowienie);
@@ -291,6 +364,12 @@ public class AdminController implements Initializable {
         }
         System.out.println("Usunięto zamówienie!");
     }
+
+    /**
+     * Metoda odpowiadajaca za pobranie nowych, wyedytowanych danych wiersza z tabeli w programi i aktualizacja ich w bazie danych.
+     *
+     * @param obiekt Wiersz ze zmienionymi danymi, ktore dane te sa aktualizowane w bazie danych.
+     */
 
     private void updateData(Object obiekt) {
         Transaction transaction = null;
@@ -310,6 +389,9 @@ public class AdminController implements Initializable {
 
     }
 
+    /**
+     * Pobranie danych do wszystkich podwidokow dla zalogowanego administratora.
+     */
 
     public void inicjalizujWidokAdminaZBazy() {
 
@@ -552,6 +634,15 @@ public class AdminController implements Initializable {
 
     }
 
+    /**
+     * Metoda pobierajaca informacje o danym pracowniku na podstawie jego loginu
+     *
+     * @param listaPracownikow Parametr zawierajacy informacje o wszystkich pracownikach.
+     * @param login            Podany login aktualnie zalogowanego pracownika.
+     * @return Zwracanie wszystkich informacji o aktualnie zalogowanym pracowniku.
+     */
+
+
     Pracownicy getUserByLogin(List<Pracownicy> listaPracownikow, String login) {
         for (Pracownicy pracownik :
                 listaPracownikow) {
@@ -559,6 +650,14 @@ public class AdminController implements Initializable {
         }
         return new Pracownicy();
     }
+
+    /**
+     * Metoda zwracajaca informacje o danym kliencie na podstawie podanego imienia.
+     *
+     * @param listaKlientow Parametr zawierajacy informacje o wszystkich klientach.
+     * @param imie          Podane imie poszczegolnego klienta.
+     * @return Zwracanie wszystkich informacji o poszczegolnym kliencie.
+     */
 
     Klienci getKlientByImie(List<Klienci> listaKlientow, String imie) {
         for (Klienci klient :
@@ -568,6 +667,12 @@ public class AdminController implements Initializable {
         return new Klienci();
     }
 
+    /**
+     * Metoda zwracajaca stan konkretnego zamowienia i tlumaczaca ten stan z postaci zapisanej w bazie danych do postaci tekstowej, zrozumialej dla uzytkownika.
+     *
+     * @param zamowienie Stan zamowienia zapisany tekstowo w postaci zrozumialej dla uzytkownika.
+     * @return Zwrocony zostaje stan zamowienia zapisany w bazie danych.
+     */
 
     short getStanZamowieniaByText(String zamowienie) {
         switch (zamowienie) {
@@ -584,6 +689,13 @@ public class AdminController implements Initializable {
         }
     }
 
+    /**
+     * Metoda zwracajaca stan konkretnego zlecenia i tlumaczaca ten stan z postaci zapisanej w bazie danych do postaci tekstowej, zrozumialej dla uzytkownika.
+     *
+     * @param zlecenie Stan zlecenia zapisany tekstowo w postaci zrozumialej dla uzytkownika.
+     * @return Zwrocony zostaje stan zlecenia zapisany w bazie danych.
+     */
+
     int getStanZleceniaByText(String zlecenie) {
         switch (zlecenie) {
             case "zlecenie utworzone i oczekujące do przyjęcia przez mechanika":
@@ -599,6 +711,13 @@ public class AdminController implements Initializable {
         }
         return 0;
     }
+
+    /**
+     * Metoda zwracajaca nazwe konkretnego stanowiska i tlumaczaca ta nazwe z postaci liczbowej zapisanej w bazie danych do postaci tekstowej, zrozumialej dla uzytkownika.
+     *
+     * @param stanowisko Stanowisko zapisane slownie w postaci zrozumialej dla uzytkownika.
+     * @return Zwrocone zostaje stanowisko zapisane postaci liczby w bazie danych.
+     */
 
     short getShortFromStanowisko(String stanowisko) {
         switch (stanowisko) {

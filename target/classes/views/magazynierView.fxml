@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.241"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.MagazynierController">
+    <left>
+        <VBox prefHeight="358.0" prefWidth="158.0" BorderPane.alignment="CENTER">
+            <children>
+                <ToggleButton fx:id="toggleButtonZamowienia" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzZamowienia"
+                              styleClass="buttons" text="Zamowienia" toggleGroup="$magazynierMenu" VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/zamowienia.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="magazynierMenu"/>
+                    </toggleGroup>
+                </ToggleButton>
+                <ToggleButton fx:id="toggleButtonStanmagazyn" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzStanMagazyn"
+                              styleClass="buttons" text="Stan magazynu" toggleGroup="$magazynierMenu"
+                              VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/stanmagazynu.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="toggleButtonProfil" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzProfil"
+                              styleClass="buttons" text="Twój profil" toggleGroup="$magazynierMenu" VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/profil.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+            </children>
+        </VBox>
+    </left>
+    <top>
+        <HBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="42.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true"
+                           HBox.hgrow="ALWAYS">
+                    <image>
+                        <Image url="/img/logo.png"/>
+                    </image>
+                    <HBox.margin>
+                        <Insets top="10.0"/>
+                    </HBox.margin>
+                </ImageView>
+                <Pane prefWidth="40.0" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="buttonLogout" onAction="#logout" alignment="CENTER" mnemonicParsing="false"
+                        text="Logout">
+                    <HBox.margin>
+                        <Insets right="10.0" top="10.0"/>
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+            <children>
+                <Pane fx:id="profilPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label layoutX="104.0" layoutY="83.0" text="Imie"/>
+                        <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
+                        <Label layoutX="104.0" layoutY="216.0" text="Login:"/>
+                        <Label layoutX="289.0" layoutY="82.0" text="Label" fx:id="imieLabel"/>
+                        <Label layoutX="289.0" layoutY="144.0" text="Label" fx:id="nazwiskoLabel"/>
+                        <Label layoutX="289.0" layoutY="216.0" text="Label" fx:id="loginLabel"/>
+
+                    </children>
+                </Pane>
+                <Pane fx:id="stanMagazynuPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1200.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableMagazyn">
+                            <columns>
+                                <TableColumn prefWidth="500.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
+                                <TableColumn prefWidth="500.0" text="Opis części" fx:id="opisColumn"/>
+                                <TableColumn prefWidth="100.0" text="Ilość" fx:id="iloscColumn"/>
+                                <TableColumn prefWidth="90.0" text="Cena" fx:id="cenaColumn"/>
+                            </columns>
+                        </TableView>
+                        <Label layoutX="50.0" layoutY="15.0" text="Szukaj"/>
+                        <TextField layoutX="120.0" layoutY="10.0" promptText="Nazwa Części" fx:id="szukajNazwaCzesci"/>
+                        <Label layoutX="50.0" layoutY="500.0" text="Nazwa części"/>
+                        <Label layoutX="50.0" layoutY="530.0" text="Opis części"/>
+                        <Label layoutX="50.0" layoutY="560.0" text="Ilość"/>
+                        <Label layoutX="50.0" layoutY="590.0" text="Cena"/>
+                        <TextField layoutX="140.0" layoutY="495.0" fx:id="nowaNazwaCzesci"/>
+                        <TextField layoutX="140.0" layoutY="525.0" fx:id="nowaOpisCzesci"/>
+                        <TextField layoutX="140.0" layoutY="555.0" fx:id="nowaIloscCzesci"/>
+                        <TextField layoutX="140.0" layoutY="585.0" fx:id="nowaCenaCzesci"/>
+                        <Label layoutX="350.0" layoutY="500.0" text="" fx:id="blad"/>
+                        <Button layoutX="205" layoutY="620" fx:id="buttonDodajczesc" onAction="#dodajCzesc"
+                                alignment="CENTER" mnemonicParsing="false"
+                                text="Dodaj część">
+                        </Button>
+                        <Button layoutX="1170" layoutY="450" fx:id="buttonUsunczesc" onAction="#usunCzesc"
+                                alignment="CENTER" mnemonicParsing="false"
+                                text="Usuń część">
+                        </Button>
+                        <Label layoutX="1120.0" layoutY="500.0" text="" fx:id="usuwanieCzesciLabel"/>
+                        <TextArea layoutX="600" layoutY="500" wrapText="true" fx:id="nowaCzescTextArea"/>
+                    </children>
+                </Pane>
+                <Pane fx:id="zamowieniaPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1200.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableZamowienia">
+                            <columns>
+                                <TableColumn minWidth="4.0" prefWidth="400.0" text="Nazwa części"
+                                             fx:id="nazwaColumn"/>
+                                <TableColumn prefWidth="400.0" text="Komentarz" fx:id="komentarzColumn"/>
+                                <TableColumn prefWidth="120.0" text="Mechanik" fx:id="mechanikColumn"/>
+                                <TableColumn prefWidth="270.0" text="Stan zamówienia" fx:id="zamowienieColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="100" layoutY="500" fx:id="buttonDoRealizacji" onAction="#doRealizacjiButton"
+                                alignment="CENTER" mnemonicParsing="false"
+                                text="Zamówienie w trakcie realizacji">
+                        </Button>
+                        <Button layoutX="100" layoutY="550" fx:id="buttonZrealizowane" onAction="#zrealizowaneButton"
+                                alignment="CENTER" mnemonicParsing="false"
+                                text="Zamówienie zrealizowane">
+                        </Button>
+                        <Label layoutX="100.0" layoutY="600.0" text="" fx:id="bladRealizacji"/>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

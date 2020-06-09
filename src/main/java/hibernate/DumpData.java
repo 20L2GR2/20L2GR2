@@ -8,7 +8,15 @@ import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * Klasa potrzebna do testow jednostkowych na bazie danych
+ */
+
 public class DumpData {
+
+    /**
+     * Metoda ladujaca dane do bazy danych z pliku.
+     */
 
     public static void dumpDataToDatabase() {
         try {
@@ -25,12 +33,16 @@ public class DumpData {
             Reader reader = new BufferedReader(new FileReader("dump.sql"));
             //Running the script
             sr.runScript(reader);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void deleteDataFromDatabase(){
+    /**
+     * Metoda czyszczaca wszystkie rekordy w bazie danych.
+     */
+
+    public static void deleteDataFromDatabase() {
         try {
             //Registering the Driver
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
