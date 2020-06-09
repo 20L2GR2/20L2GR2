@@ -493,4 +493,38 @@ public class MagazynierController implements Initializable {
         }
     }
 
+    public String canAddPartIfAllFieldsAreSet(String nazwa, String opis, String ilosc, String cena) {
+        if (nazwa == null || nazwa.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else if (opis == null || opis.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else if (ilosc == null || ilosc.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else if (cena == null || cena.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else {
+            return "Dodano czesc";
+        }
+    }
+
+    public boolean canAddPartBeFinalizedIfQuantityIsSetProperly(String quantity) {
+        boolean state = true;
+        try {
+            Integer.parseInt(quantity);
+        } catch (NumberFormatException e) {
+            state = false;
+        }
+        return state;
+    }
+
+    public boolean canAddPartBeFinalizedIfPriceIsSetProperly(String price) {
+        boolean state = true;
+        try {
+            Float.parseFloat(price);
+        } catch (NumberFormatException e) {
+            state = false;
+        }
+        return state;
+    }
+
 }

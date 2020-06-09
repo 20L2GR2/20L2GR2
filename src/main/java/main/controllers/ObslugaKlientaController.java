@@ -455,6 +455,26 @@ public class ObslugaKlientaController implements Initializable {
         zleconko = zlecenia;
     }
 
+    public String canAddOrderIfAllFieldsAreSet(String nr_rej, String nazwisko, String imie, String numer, String marka, String model, String opis) {
+        if (nr_rej == null || nr_rej.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else if (nazwisko == null || nazwisko.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else if (imie == null || imie.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else if (numer == null || numer.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else if (marka == null || marka.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else if (model == null || model.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else if (opis == null || opis.equals("")) {
+            return "Nie podano wszystkich danych";
+        } else {
+            return "Zlecenie utworzone";
+        }
+    }
+
     public String canOrderBeFinalizedIfPriceIsSet(String price) {
         if (price == null || price.equals("")) {
             return "Nie podano ceny";
