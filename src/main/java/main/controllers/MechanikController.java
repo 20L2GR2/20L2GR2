@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 public class MechanikController implements Initializable {
     LogowanieController mainController = new LogowanieController();
     List<Magazyn> magazyn;
+    List<Magazyn> uzyteCzesciList;
 
     @FXML
     private BorderPane borderPane;
@@ -218,9 +219,17 @@ public class MechanikController implements Initializable {
     public void czescPrzypisz() {
         Magazyn magazyn = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
-        uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + " " + magazyn.getCena() + "\n");
-//        magazyn.setIlosc((int) (magazyn.getIlosc()-1));
-//        tableMagazyn.getSelectionModel().getSelectedItem()
+        if (magazyn.getIlosc() == 0) {
+            bladZlecenie.setStyle("-fx-text-fill: red;");
+            bladZlecenie.setText("Ta część się już skończyła!");
+        } else {
+            bladZlecenie.setStyle("-fx-text-fill: white;");
+            bladZlecenie.setText("");
+            uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + " - " + magazyn.getCena() + "\n");
+            magazyn.setIlosc((int) (magazyn.getIlosc() - 1));
+            tableMagazyn.refresh();
+            uzyteCzesciList.add(magazyn);
+        }
     }
 
     public void zlecenieZakoncz() {
@@ -242,6 +251,16 @@ public class MechanikController implements Initializable {
                 System.out.println(zlecenie);
 
                 session.update(zlecenie);
+
+//                for (Magazyn m : uzyteCzesciList) {
+//                    //Magazyn magazyn = (Magazyn) session.get(Magazyn.class, m.getIdCzesci());
+//                    //magazyn.setIlosc((int) m.getIlosc());
+//                    //session.update(magazyn);
+//                    session.update(m);
+//                }
+
+                //session.update(uzyteCzesciList);
+
                 session.getTransaction().commit();
                 System.out.println("Updated");
                 tableZlecenia.refresh();
@@ -255,6 +274,26 @@ public class MechanikController implements Initializable {
             } catch (Exception e) {
                 //if (transaction != null) transaction.rollback();
                 e.printStackTrace();
+            }
+            for (Magazyn m : uzyteCzesciList) {
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                    transaction = session.beginTransaction();
+
+                    session.update(m);
+
+                    session.getTransaction().commit();
+                    System.out.println("Updated");
+                    tableZlecenia.refresh();
+                    otworzTwojeZlecenia();
+                    bladZlecenie.setStyle("-fx-text-fill: white;");
+                    bladZlecenie.setText(czyMozna);
+                    session.clear();
+                    session.disconnect();
+                    session.close();
+//                    System.out.println("Zlecenie zakończone");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             bladZlecenie.setStyle("-fx-text-fill: red;");

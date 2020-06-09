@@ -142,7 +142,6 @@
                         <Label layoutX="1000.0" layoutY="164.0" text="Opis naprawy:"/>
                         <TextArea layoutX="1000.0" layoutY="194.0" wrapText="true" prefHeight="158.0" prefWidth="307.0" fx:id="opisNaprawaZlecenia"/>
                         <Label layoutX="1000.0" layoutY="358.0" text="Użyte części:"/>
-<!--                        <Label layoutX="1000.0" layoutY="384.0" text="" fx:id="uzyteCzesci"/>-->
                         <TextArea layoutX="1000.0" layoutY="384.0" editable="false" wrapText="true" prefHeight="158.0" prefWidth="307.0" fx:id="uzyteCzesci"/>
                         <Button layoutX="1000.0" layoutY="554.0" mnemonicParsing="false" onAction="#zlecenieZakoncz" text="Zakończ zlecenie"/>
                         <Label layoutX="1000.0" layoutY="598.0" text="" fx:id="bladZlecenie"/>
