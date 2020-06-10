@@ -90,13 +90,15 @@
                 <Pane fx:id="zleceniaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label layoutX="50.0" layoutY="20.0" text="Zlecenia:"/>
+                        <Label layoutX="50.0" layoutY="15.0" text="Zlecenia:"/>
+                        <Label layoutX="200.0" layoutY="15.0" text="Szukaj"/>
+                        <TextField layoutX="240.0" layoutY="10.0" promptText="Klient" fx:id="szukajKlienta"/>
                         <TableView layoutX="50.0" layoutY="50.0" prefHeight="600.0" prefWidth="1350.0" fx:id="zlecenia">
                             <columns>
                                 <TableColumn minWidth="50.0" text="Id" fx:id="idZleceniaColumn"/>
                                 <TableColumn minWidth="75.0" prefWidth="200" text="Stan zlecenia"
                                              fx:id="stanZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Klient"
+                                <TableColumn minWidth="75.0" prefWidth="150" text="Klient"
                                              fx:id="klientZleceniaColumn"/>
                                 <TableColumn minWidth="75.0" prefWidth="100" text="Mechanik"
                                              fx:id="mechanikZleceniaColumn"/>

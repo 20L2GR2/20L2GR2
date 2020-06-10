@@ -36,8 +36,8 @@ public class AdminController implements Initializable {
 
     LogowanieController mainController = new LogowanieController();
     @FXML
-    public TextField szukajNazwaCzesci;
-
+    public TextField szukajNazwaCzesci, szukajKlienta;
+    List<Magazyn> magazyn;
 
     @FXML
     private TextField nowyLogin, noweImie, noweNazwisko;
@@ -82,7 +82,7 @@ public class AdminController implements Initializable {
     private TableColumn<Zlecenia, Date> rozpZleceniaColumn, zakZleceniaColumn;
     @FXML
     private TableColumn<Zlecenia, Float> cenaZleceniaColumn;
-    List<Magazyn> magazyn;
+    List<Zlecenia> zleceniaList;
 
     /**
      * Metoda uruchamiana przy kazdym uruchomieniu widoku administratora, dzialaca w tle na watkach Javy.
@@ -104,6 +104,18 @@ public class AdminController implements Initializable {
                 for (Magazyn m : magazyn) {
                     if (m.getNazwaCzesci().toLowerCase().contains(t1.toLowerCase())) {
                         czesci.getItems().add(m);
+                    }
+                }
+            }
+        });
+
+        szukajKlienta.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                zlecenia.getItems().clear();
+                for (Zlecenia z : zleceniaList) {
+                    if (z.getImieNazwisko().toLowerCase().contains(t1.toLowerCase())) {
+                        zlecenia.getItems().add(z);
                     }
                 }
             }
@@ -551,10 +563,10 @@ public class AdminController implements Initializable {
             ObservableList<String> klienciList = FXCollections.observableArrayList();
             for (Klienci klient :
                     klienci) {
-                klienciList.add(klient.getImie());
+                klienciList.add(klient.getImie() + " " + klient.getNazwisko());
             }
 
-            klientZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("klientImie"));
+            klientZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("imieNazwisko"));
             klientZleceniaColumn.setCellFactory(ChoiceBoxTableCell.forTableColumn(klienciList));
             klientZleceniaColumn.setOnEditCommit(e -> {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setKlientZlecenie(getKlientByImie(klienci, e.getNewValue()));
@@ -639,7 +651,7 @@ public class AdminController implements Initializable {
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
 
-            List<Zlecenia> zleceniaList = session.createQuery("SELECT a FROM Zlecenia a", Zlecenia.class).getResultList();
+            zleceniaList = session.createQuery("SELECT a FROM Zlecenia a", Zlecenia.class).getResultList();
             for (Zlecenia z : zleceniaList) {
                 zlecenia.getItems().add(z);
             }
@@ -683,7 +695,7 @@ public class AdminController implements Initializable {
     Klienci getKlientByImie(List<Klienci> listaKlientow, String imie) {
         for (Klienci klient :
                 listaKlientow) {
-            if (klient.getImie() == imie) return klient;
+            if ((klient.getImie() + " " + klient.getNazwisko()).equals(imie)) return klient;
         }
         return new Klienci();
     }
