@@ -2,32 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_crypto_5_3_3_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/PasswordHash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/20L2GR2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/20L2GR2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/20l2gr2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/20l2gr2.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dump.sql" beforeDir="false" afterPath="$PROJECT_DIR$/dump.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/LogowanieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/LogowanieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/20L2GR2.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/20l2gr2.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/dump.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate/entity/Zlecenia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hibernate/entity/Zlecenia.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate/util/HibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hibernate/util/HibernateUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/LogowanieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/LogowanieController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/MagazynierController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/MagazynierController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/MagazynierController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/MagazynierController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/MechanikController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/MechanikController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/MechanikController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/MechanikController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/ObslugaKlientaController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/ObslugaKlientaController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/ObslugaKlientaController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/ObslugaKlientaController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/ObslugaKlientaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/ObslugaKlientaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/mechanikView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/mechanikView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +65,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="mechanik" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -490,7 +466,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591738600750</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="poprawa pliku tworzącego bazę danych">
+      <created>1591753118494</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1591753118494</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -522,7 +505,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="ABBCK-19 #Dodanie f-cji czyszczenia bazy oraz ładowania dump'a -&gt; ładowanie dump'a chyba do poprawy, ale działa OK (czytać komenty w tej f-cji)" />
     <MESSAGE value="ABBCK-29 ABBCK-31 ABBCK-32 ABBCK-33 ABBCK-34 ABBCK-35 ABBCK-36 ABBCK-42 ABBCK-43 # naprawienie automatycznych zmian lang lvl w project structure; usunięcie klas jdbc; dodanie do projektu, podłączenie i konfiguracja (chyba wstępna) Hibernate; zmapowanie pól bazy; Utworzenie klasy testowej &quot;App&quot;." />
     <MESSAGE value="ABBCK-41 # Wstępne zmian dla admina, pobieranie z bazy dla większości tabel, możliwość tworzenia użytkowników, możliwość usuwania zamówień, poprawa klasy Zamówienia" />
     <MESSAGE value="ABBCK-38 # Poprawa widoku magazyniera, dodanie wyświetlania zawartości tabel" />
@@ -547,7 +529,8 @@
     <MESSAGE value="ABBCK-64 ABBCK-66 # Dodanie pozostałych testów jednostkowych" />
     <MESSAGE value="Aktualizacja diagramu ERD" />
     <MESSAGE value="ABBCK-62 # Dodanie wygenerowanego JavaDoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="ABBCK-62 # Dodanie wygenerowanego JavaDoc" />
+    <MESSAGE value="poprawa pliku tworzącego bazę danych" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawa pliku tworzącego bazę danych" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -575,11 +558,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="146" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1591738651978" />
-    <state x="0" y="77" width="1536" height="747" key="CommitChangelistDialog2" timestamp="1591738598480">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="585" y="113" width="1536" height="747" key="CommitChangelistDialog2" timestamp="1591753117930">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-998" y="178" key="CommitChangelistDialog2/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
-    <state x="585" y="113" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591655476649" />
+    <state x="585" y="113" key="CommitChangelistDialog2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591753117930" />
     <state x="0" y="77" width="1536" height="747" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1591738598480" />
     <state x="150" y="121" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591718176416" />
     <state x="146" y="102" width="1576" height="811" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />
@@ -670,11 +653,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="628" y="258" key="Vcs.Multiple.Commit.Info.Dialog.Key/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591648695390" />
-    <state x="552" y="251" key="Vcs.Push.Dialog.v2" timestamp="1591748939920">
+    <state x="552" y="251" key="Vcs.Push.Dialog.v2" timestamp="1591753120144">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-816" y="334" key="Vcs.Push.Dialog.v2/-1080.0.1080.1880/0.0.1920.1040@-1080.0.1080.1880" timestamp="1591460300984" />
-    <state x="552" y="251" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591748939920" />
+    <state x="552" y="251" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591753120144" />
     <state x="442" y="199" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591738613653" />
     <state x="552" y="251" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591718178115" />
     <state x="515" y="192" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1591460300984" />

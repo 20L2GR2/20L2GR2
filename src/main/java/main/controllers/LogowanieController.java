@@ -40,8 +40,6 @@ public class LogowanieController implements Initializable {
     public Label bladLogowaniaLabel;
     public Button zalogujButton;
 
-    PasswordHash haslo = new PasswordHash();
-
     /**
      * Metoda uruchamiana przy kazdym uruchomieniu widoku logowania, dzialaca w tle na watkach Javy.
      *
