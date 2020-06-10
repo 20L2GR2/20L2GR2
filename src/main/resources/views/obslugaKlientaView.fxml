@@ -151,7 +151,7 @@
                         <Button layoutX="375.0" layoutY="370.0" mnemonicParsing="false" text="Wybierz"
                                 onAction="#wybierzZlecenieButton"/>
                         <Label layoutX="500" layoutY="50" text="Imię i nazwisko mechanika"/>
-                        <Label layoutX="500" layoutY="90" text="Imie i naziwsko przyjmującego"/>
+                        <Label layoutX="500" layoutY="90" text="Imie i nazwisko przyjmującego"/>
                         <Label layoutX="500" layoutY="130" text="Marka i model samochodu"/>
                         <Label layoutX="500" layoutY="170" text="Opis usterki"/>
                         <Label layoutX="500" layoutY="210" text="Opis naprawy"/>
