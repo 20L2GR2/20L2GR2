@@ -73,6 +73,8 @@ Diagram ERD
 
 ![Diagram ERD](DiagramERD.jpg)
 
+Dokumentacja użytkownika znajduje się [w tym miejscu](Dokumetacja%20użytkownika.pdf).
+
 Wykorzystane narzędzia i technologie:
 
 - IntelliJ
