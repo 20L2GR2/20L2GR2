@@ -2,6 +2,8 @@ package main.controllers;
 
 import hibernate.entity.*;
 import hibernate.util.HibernateUtil;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +33,10 @@ import java.util.ResourceBundle;
  */
 
 public class AdminController implements Initializable {
+
     LogowanieController mainController = new LogowanieController();
+    @FXML
+    public TextField szukajNazwaCzesci;
 
 
     @FXML
@@ -77,7 +82,7 @@ public class AdminController implements Initializable {
     private TableColumn<Zlecenia, Date> rozpZleceniaColumn, zakZleceniaColumn;
     @FXML
     private TableColumn<Zlecenia, Float> cenaZleceniaColumn;
-
+    List<Magazyn> magazyn;
 
     /**
      * Metoda uruchamiana przy kazdym uruchomieniu widoku administratora, dzialaca w tle na watkach Javy.
@@ -91,6 +96,19 @@ public class AdminController implements Initializable {
         inicjalizujWidokAdminaZBazy();
         borderPane.setCenter(zleceniaPane);
         toggleButtonZlecenia.setSelected(true);
+
+        szukajNazwaCzesci.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                czesci.getItems().clear();
+                for (Magazyn m : magazyn) {
+                    if (m.getNazwaCzesci().toLowerCase().contains(t1.toLowerCase())) {
+                        czesci.getItems().add(m);
+                    }
+                }
+            }
+        });
+
     }
 
     /**
@@ -521,7 +539,7 @@ public class AdminController implements Initializable {
                 e.getTableView().getItems().get(e.getTablePosition().getRow()).setCena(e.getNewValue());
                 updateData(e.getTableView().getItems().get(e.getTablePosition().getRow()));
             });
-            List<Magazyn> magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
+            magazyn = session.createQuery("SELECT a FROM Magazyn a", Magazyn.class).getResultList();
             for (Magazyn z : magazyn) {
                 czesci.getItems().add(z);
             }
