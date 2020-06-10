@@ -54,12 +54,12 @@ CREATE TABLE `magazyn` (
 --
 
 CREATE TABLE `pracownicy` (
-  `id_pracownika` int(9) NOT NULL,
-  `imie` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
-  `nazwisko` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
-  `stanowisko` int(1) NOT NULL,
-  `login` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
-  `haslo` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL
+                              `id_pracownika` int(9) NOT NULL,
+                              `imie` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
+                              `nazwisko` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
+                              `stanowisko` int(1) NOT NULL,
+                              `login` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
+                              `haslo` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
@@ -80,54 +80,57 @@ CREATE TABLE `zamowienia` (
 --
 
 CREATE TABLE `zlecenia` (
-  `id_zlecenie` int(9) NOT NULL,
-  `id_klienta` int(9) NOT NULL,
-  `id_mechanika` int(9) DEFAULT NULL,
-  `id_obslugaklientastart` int(9) NOT NULL,
-  `id_obslugaklientakoniec` int(9) DEFAULT NULL,
-  `stan_zlecenia` int(1) NOT NULL,
-  `opis_usterki` text COLLATE utf8mb4_polish_ci NOT NULL,
-  `data_rozpoczecia` datetime DEFAULT current_timestamp(),
-  `data_zakonczenia` datetime DEFAULT NULL,
-  `opis_naprawy` text COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `uzyte_czesci` varchar(1000) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `cena` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+                            `id_zlecenie`             int(9) NOT NULL,
+                            `id_klienta`              int(9) NOT NULL,
+                            `id_mechanika`            int(9)                                  DEFAULT NULL,
+                            `id_obslugaklientastart`  int(9) NOT NULL,
+                            `id_obslugaklientakoniec` int(9)                                  DEFAULT NULL,
+                            `stan_zlecenia`           int(1) NOT NULL,
+                            `opis_usterki`            text COLLATE utf8mb4_polish_ci NOT NULL,
+                            `data_rozpoczecia`        datetime                                DEFAULT current_timestamp(),
+                            `data_zakonczenia`        datetime                                DEFAULT NULL,
+                            `opis_naprawy`            text COLLATE utf8mb4_polish_ci          DEFAULT NULL,
+                            `uzyte_czesci`            varchar(1000) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+                            `cena`                    double                                  DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_polish_ci;
 
 --
 -- Indeksy dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  ADD PRIMARY KEY (`id_klienta`);
+    ADD PRIMARY KEY (`id_klienta`);
 
 --
 -- Indeksy dla tabeli `magazyn`
 --
 ALTER TABLE `magazyn`
-  ADD PRIMARY KEY (`id_czesci`);
+    ADD PRIMARY KEY (`id_czesci`);
 
 --
 -- Indeksy dla tabeli `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  ADD PRIMARY KEY (`id_pracownika`);
+    ADD PRIMARY KEY (`id_pracownika`);
 
 --
 -- Indeksy dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  ADD PRIMARY KEY (`id_zamowienia`),
-  ADD KEY `id_mechanika` (`id_mechanika`);
+    ADD PRIMARY KEY (`id_zamowienia`),
+    ADD KEY `id_mechanika` (`id_mechanika`),
+    ADD KEY `id_czesci` (`id_czesci`);
 
 --
 -- Indeksy dla tabeli `zlecenia`
 --
 ALTER TABLE `zlecenia`
-  ADD PRIMARY KEY (`id_zlecenie`),
-  ADD KEY `id_klienta` (`id_klienta`),
-  ADD KEY `id_mechanika` (`id_mechanika`),
-  ADD KEY `id_obslugaklientastart` (`id_obslugaklientastart`),
-  ADD KEY `id_obslugaklientakoniec` (`id_obslugaklientakoniec`);
+    ADD PRIMARY KEY (`id_zlecenie`),
+    ADD KEY `id_klienta` (`id_klienta`),
+    ADD KEY `id_mechanika` (`id_mechanika`),
+    ADD KEY `id_obslugaklientastart` (`id_obslugaklientastart`),
+    ADD KEY `id_obslugaklientakoniec` (`id_obslugaklientakoniec`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -137,31 +140,36 @@ ALTER TABLE `zlecenia`
 -- AUTO_INCREMENT dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `id_klienta` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+    MODIFY `id_klienta` int(9) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 21;
 
 --
 -- AUTO_INCREMENT dla tabeli `magazyn`
 --
 ALTER TABLE `magazyn`
-  MODIFY `id_czesci` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+    MODIFY `id_czesci` int(9) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 8;
 
 --
 -- AUTO_INCREMENT dla tabeli `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  MODIFY `id_pracownika` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+    MODIFY `id_pracownika` int(9) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 6;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `id_zamowienia` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `id_zamowienia` int(9) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 3;
 
 --
 -- AUTO_INCREMENT dla tabeli `zlecenia`
 --
 ALTER TABLE `zlecenia`
-  MODIFY `id_zlecenie` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+    MODIFY `id_zlecenie` int(9) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 9;
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -171,19 +179,20 @@ ALTER TABLE `zlecenia`
 -- Ograniczenia dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  ADD CONSTRAINT `zamowienia_ibfk_2` FOREIGN KEY (`id_mechanika`) REFERENCES `pracownicy` (`id_pracownika`);
+    ADD CONSTRAINT `zamowienia_ibfk_2` FOREIGN KEY (`id_mechanika`) REFERENCES `pracownicy` (`id_pracownika`),
+    ADD CONSTRAINT `zamowienia_ibfk_3` FOREIGN KEY (`id_czesci`) REFERENCES `magazyn` (`id_czesci`);
 
 --
 -- Ograniczenia dla tabeli `zlecenia`
 --
 ALTER TABLE `zlecenia`
-  ADD CONSTRAINT `zlecenia_ibfk_1` FOREIGN KEY (`id_klienta`) REFERENCES `klienci` (`id_klienta`),
-  ADD CONSTRAINT `zlecenia_ibfk_2` FOREIGN KEY (`id_klienta`) REFERENCES `klienci` (`id_klienta`),
-  ADD CONSTRAINT `zlecenia_ibfk_3` FOREIGN KEY (`id_mechanika`) REFERENCES `pracownicy` (`id_pracownika`),
-  ADD CONSTRAINT `zlecenia_ibfk_4` FOREIGN KEY (`id_obslugaklientastart`) REFERENCES `pracownicy` (`id_pracownika`),
-  ADD CONSTRAINT `zlecenia_ibfk_5` FOREIGN KEY (`id_obslugaklientakoniec`) REFERENCES `pracownicy` (`id_pracownika`);
+    ADD CONSTRAINT `zlecenia_ibfk_1` FOREIGN KEY (`id_klienta`) REFERENCES `klienci` (`id_klienta`),
+    ADD CONSTRAINT `zlecenia_ibfk_2` FOREIGN KEY (`id_klienta`) REFERENCES `klienci` (`id_klienta`),
+    ADD CONSTRAINT `zlecenia_ibfk_3` FOREIGN KEY (`id_mechanika`) REFERENCES `pracownicy` (`id_pracownika`),
+    ADD CONSTRAINT `zlecenia_ibfk_4` FOREIGN KEY (`id_obslugaklientastart`) REFERENCES `pracownicy` (`id_pracownika`),
+    ADD CONSTRAINT `zlecenia_ibfk_5` FOREIGN KEY (`id_obslugaklientakoniec`) REFERENCES `pracownicy` (`id_pracownika`);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;

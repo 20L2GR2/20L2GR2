@@ -96,32 +96,50 @@
                 <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                       AnchorPane.topAnchor="0.0" fx:id="utworzZleceniePane">
                     <children>
-                        <Label layoutX="40" layoutY="30" text="Imię klienta"/>
+                        <Label layoutX="40" layoutY="30" text="Numer rejestracyjny"/>
                         <Label layoutX="40" layoutY="70" text="Nazwisko klienta"/>
-                        <Label layoutX="40" layoutY="110" text="Numer kontaktowy"/>
-                        <Label layoutX="40" layoutY="150" text="Marka samochodu"/>
-                        <Label layoutX="40" layoutY="190" text="Model samochodu"/>
-                        <Label layoutX="40" layoutY="230" text="Numer rejestracyjny"/>
+                        <Label layoutX="40" layoutY="110" text="Imię klienta"/>
+                        <Label layoutX="40" layoutY="150" text="Numer kontaktowy"/>
+                        <Label layoutX="40" layoutY="190" text="Marka samochodu"/>
+                        <Label layoutX="40" layoutY="230" text="Model samochodu"/>
                         <Label layoutX="40" layoutY="270" text="Opis usterki"/>
-                        <TextField layoutX="200" layoutY="30" prefWidth="300" fx:id="klientImie"/>
+                        <TextField layoutX="200" layoutY="30" prefWidth="300" fx:id="klientRejestracja"/>
                         <TextField layoutX="200" layoutY="70" prefWidth="300" fx:id="klientNazwisko"/>
-                        <TextField layoutX="200" layoutY="110" prefWidth="300" fx:id="klientTelefon"/>
-                        <TextField layoutX="200" layoutY="150" prefWidth="300" fx:id="klientMarka"/>
-                        <TextField layoutX="200" layoutY="190" prefWidth="300" fx:id="klientModel"/>
-                        <TextField layoutX="200" layoutY="230" prefWidth="300" fx:id="klientRejestracja"/>
+                        <TextField layoutX="200" layoutY="110" prefWidth="300" fx:id="klientImie"/>
+                        <TextField layoutX="200" layoutY="150" prefWidth="300" fx:id="klientTelefon"/>
+                        <TextField layoutX="200" layoutY="190" prefWidth="300" fx:id="klientMarka"/>
+                        <TextField layoutX="200" layoutY="230" prefWidth="300" fx:id="klientModel"/>
                         <TextArea layoutX="200" layoutY="270" prefHeight="150" prefWidth="300" wrapText="true"
                                   fx:id="klientOpis"/>
                         <Button layoutX="450" layoutY="450" mnemonicParsing="false" text="Dodaj"
                                 onAction="#dodajZlecenieButton"/>
                         <Label layoutX="200" layoutY="500" text="" fx:id="bladKlient"/>
+
+                        <Label layoutX="700.0" layoutY="30" text="Lista klientów"/>
+                        <TableView layoutX="700.0" layoutY="60.0" prefHeight="400.0" prefWidth="550"
+                                   fx:id="tableKlienci">
+                            <columns>
+                                <TableColumn minWidth="4.0" prefWidth="150.0" text="Nr rejestracyjny"
+                                                  fx:id="nrRejeKlientColumn"/>
+                                <TableColumn minWidth="4.0" prefWidth="150.0" text="Imie klienta"
+                                             fx:id="imieKlientColumn"/>
+                                <TableColumn minWidth="4.0" prefWidth="150.0" text="Nazwisko klienta"
+                                             fx:id="nazwiskoKlientColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="700.0" layoutY="490.0" mnemonicParsing="false" text="Wybierz"
+                                onAction="#wybierzKlientButton"/>
                     </children>
                 </Pane>
 
                 <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                       AnchorPane.topAnchor="0.0" fx:id="ukonczoneZleceniaPane">
                     <children>
-                        <Label layoutX="160" layoutY="20" text="Lista ukończonych zleceń"/>
-                        <TableView layoutX="40.0" layoutY="40.0" prefHeight="280.0" prefWidth="400"
+                        <Label layoutX="50.0" layoutY="15.0" text="Szukaj"/>
+                        <TextField layoutX="150.0" layoutY="10.0" promptText="Numer Rejestracyjny"
+                                   fx:id="szukajZlecenia"/>
+                        <Label layoutX="160" layoutY="40" text="Lista ukończonych zleceń"/>
+                        <TableView layoutX="40.0" layoutY="60.0" prefHeight="280.0" prefWidth="400"
                                    fx:id="tableUkonczone">
                             <columns>
                                 <TableColumn minWidth="4.0" prefWidth="250.0" text="Imie i nazwisko klienta"
@@ -130,7 +148,7 @@
                                              fx:id="nrRejeColumn"/>
                             </columns>
                         </TableView>
-                        <Button layoutX="375.0" layoutY="330.0" mnemonicParsing="false" text="Wybierz"
+                        <Button layoutX="375.0" layoutY="370.0" mnemonicParsing="false" text="Wybierz"
                                 onAction="#wybierzZlecenieButton"/>
                         <Label layoutX="500" layoutY="50" text="Imię i nazwisko mechanika"/>
                         <Label layoutX="500" layoutY="90" text="Imie i naziwsko przyjmującego"/>

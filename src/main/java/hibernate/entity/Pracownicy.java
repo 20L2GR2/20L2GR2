@@ -5,6 +5,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "pracownicy")
+/**
+ * Klasa mapujaca tabele Pracownicy.
+ */
+
 public class Pracownicy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,15 +43,19 @@ public class Pracownicy {
              zlecenieObslugaKoniec) {
             zlecenie.setPracownikObslugaKoniec(null);
         }
-        for (Zlecenia zlecenie:
+        for (Zlecenia zlecenie :
                 zlecenieObslugaStart) {
             zlecenie.setPracownikObslugaStart(null);
         }
-        for (Zlecenia zlecenie:
+        for (Zlecenia zlecenie :
                 zlecenieMechanik) {
             zlecenie.setPracownikMechanik(null);
         }
     }
+
+    /**
+     * Konstruktor bezparamtrowy.
+     */
 
     public Pracownicy() {
     }

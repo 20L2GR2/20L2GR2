@@ -16,14 +16,21 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+/**
+ * Klasa wykorzystywana jako kontroler widoku mechanika. Zawiera logike, ktora jest wykorzystywana w poprawnym wyświetlaniu i obslugi widoku.
+ */
 
 public class MechanikController implements Initializable {
     LogowanieController mainController = new LogowanieController();
     List<Magazyn> magazyn;
+    List<Magazyn> uzyteCzesciList = new ArrayList<>();
 
     @FXML
     private BorderPane borderPane;
@@ -32,7 +39,7 @@ public class MechanikController implements Initializable {
     @FXML
     private ToggleButton toggleButtonCzesci, toggleButtonZlecenia, toggleButtonTwojeZlecenia, toggleButtonProfil, toggleButtonStanmagazyn;
     @FXML
-    public Label imieLabel, nazwiskoLabel, loginLabel, blad, bladRealizacji, idTwojeZlecenie, opisUsterkaZlecenia, uzyteCzesci, bladZlecenie;
+    public Label imieLabel, nazwiskoLabel, loginLabel, blad, bladRealizacji, idTwojeZlecenie, opisUsterkaZlecenia, bladZlecenie;
     @FXML
     private TableColumn idColumn, opisUsterkaColumn, nazwaCzesciColumn, opisColumn, iloscColumn, cenaColumn, nazwaZamowieniaColumn,
             komentarzColumn, stanColumn, nazwaCzesciMagazynColumn, opisUsterkaZleceniaColumn, idZleceniaColumn, nazwaCzesciC, opisC, iloscC, cenaC;
@@ -41,7 +48,14 @@ public class MechanikController implements Initializable {
     @FXML
     public TextField nazwaCzesci, szukajNazwaCzesci;
     @FXML
-    public TextArea komentarz, opisNaprawaZlecenia;
+    public TextArea komentarz, opisNaprawaZlecenia, uzyteCzesci;
+
+    /**
+     * Metoda uruchamiana przy kazdym uruchomieniu widoku mechanika, dzialaca w tle na watkach Javy.
+     *
+     * @param url            Odniesienie do zmiennej, ktora odnosi sie do klasy URL odpowiedzialnej za uruchomienie sceny JavaFX.
+     * @param resourceBundle Odniesienie do zmiennej, ktora odnosi sie do klasy ResourceBundle odpowiedzialnej za uruchomienie sceny JavaFX.
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,9 +76,21 @@ public class MechanikController implements Initializable {
         });
     }
 
+    /**
+     * Metoda wykorzystywana do wylogowania danego uzytkownika.
+     *
+     * @param event Parametr okreslajacy konkretny widok.
+     * @throws IOException Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
+
     public void logout(ActionEvent event) throws IOException {
         mainController.logout(event);
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku czesci w widoku mechanika oraz odznaczenie ToggleButtonow.
+     * Odpowiada takze za wyswietlenie zamowien.
+     */
 
     public void otworzCzesci() {
         System.out.println("otworzCzesci");
@@ -98,6 +124,11 @@ public class MechanikController implements Initializable {
         }
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku dostepnych zlecen w widoku mechanika oraz odznaczenie ToggleButtonow.
+     */
+
+    // wyświetlanie dostępnych zleceń
     public void otworzZlecenia() {
         System.out.println("otworzZlecenia");
         borderPane.setCenter(zleceniaPane);
@@ -106,7 +137,6 @@ public class MechanikController implements Initializable {
         tableZlecenia.setEditable(true);
         bladRealizacji.setText("");
 
-        // wyświetlanie dostępnych zleceń
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             List<Zlecenia> zlecenia = session.createQuery("SELECT z FROM Zlecenia z", Zlecenia.class).getResultList();
@@ -115,7 +145,7 @@ public class MechanikController implements Initializable {
             opisUsterkaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
 
             for (Zlecenia z : zlecenia) {
-                if(z.getStanZlecenia() == 0)
+                if (z.getStanZlecenia() == 0)
                     tableZlecenia.getItems().add(z);
             }
 
@@ -127,6 +157,11 @@ public class MechanikController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku zlecen przypisanych do konkretnego mechanika oraz odznaczenie ToggleButtonow.
+     * Odpowiada rowniez za wyswietlenie stanu co znajduje sie na magazynie.
+     */
 
     public void otworzTwojeZlecenia() {
         System.out.println("otworzTwojeZlecenia");
@@ -145,6 +180,7 @@ public class MechanikController implements Initializable {
         tableMagazyn.getItems().clear();
         tableMagazyn.setEditable(true);
         bladRealizacji.setText("");
+        uzyteCzesciList.clear();
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
@@ -155,7 +191,7 @@ public class MechanikController implements Initializable {
             opisUsterkaZleceniaColumn.setCellValueFactory(new PropertyValueFactory<>("opisUsterki"));
 
             for (Zlecenia z : zlecenia) {
-                if(z.getStanZlecenia() == 1)
+                if (z.getStanZlecenia() == 1)
                     tableTwojeZlecenia.getItems().add(z);
             }
 
@@ -180,6 +216,10 @@ public class MechanikController implements Initializable {
         }
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku informacji o konkretnym oraz odznaczenie ToggleButtonow.
+     */
+
     public void otworzProfil() {
         System.out.println("otworzProfil");
         borderPane.setCenter(profilPane);
@@ -191,7 +231,7 @@ public class MechanikController implements Initializable {
         // wyświetlanie użytkownika
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            Pracownicy user = (Pracownicy) session.get(Pracownicy.class, LogowanieController.userID);
+            Pracownicy user = session.get(Pracownicy.class, LogowanieController.userID);
 
             imieLabel.setText(user.getImie());
             nazwiskoLabel.setText(user.getNazwisko());
@@ -206,59 +246,106 @@ public class MechanikController implements Initializable {
         }
     }
 
-    public void zlecenieZaladuj(){
+    /**
+     * Metoda ladujaca informacje do wyswietlenia o danym zleceniu.
+     */
+
+    public void zlecenieZaladuj() {
         Zlecenia zlecenie = (Zlecenia) tableTwojeZlecenia.getSelectionModel().getSelectedItem();
         idTwojeZlecenie.setText(String.valueOf(zlecenie.getIdZlecenia()));
         opisUsterkaZlecenia.setText(String.valueOf(zlecenie.getOpisUsterki()));
-        opisNaprawaZlecenia.setText("");
-        uzyteCzesci.setText("");
     }
 
-    public void czescPrzypisz(){
-        Magazyn magazyn = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
+    /**
+     * Metoda odpowiadajaca za przypisanie danej czesci do danego zlecenia.
+     */
+
+    public void czescPrzypisz() {
+        Magazyn magazynCzesc = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
-        uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + "; ");
-    }
-
-    public void zlecenieZakoncz(){
-        bladZlecenie.setText("");
-        if (idTwojeZlecenie.getText() == null || idTwojeZlecenie.getText().equals("")) {
+        if (magazynCzesc.getIlosc() == 0) {
             bladZlecenie.setStyle("-fx-text-fill: red;");
-            bladZlecenie.setText("Nie wybrano zlecenia");
-            return;
-        }else if(opisNaprawaZlecenia.getText() == null || opisNaprawaZlecenia.getText().equals("")){
-            bladZlecenie.setStyle("-fx-text-fill: red;");
-            bladZlecenie.setText("Dodaj opis naprawy");
-            return;
-        }
-
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-
-            Zlecenia zlecenie = (Zlecenia) session.createQuery("FROM Zlecenia U WHERE U.idZlecenia = :id").setParameter("id", Integer.parseInt(idTwojeZlecenie.getText())).uniqueResult();
-
-            zlecenie.setUzyteCzesci(uzyteCzesci.getText());
-            zlecenie.setStanZlecenia(2);
-
-            System.out.println(zlecenie);
-
-            session.update(zlecenie);
-            session.getTransaction().commit();
-            System.out.println("Updated");
-            tableZlecenia.refresh();
-            otworzTwojeZlecenia();
+            bladZlecenie.setText("Ta część się już skończyła!");
+        } else {
             bladZlecenie.setStyle("-fx-text-fill: white;");
-            bladZlecenie.setText("Zlecenie zostało zakończone");
-            session.clear();
-            session.disconnect();
-            session.close();
-            System.out.println("Zlecenie zakończone");
-        } catch (Exception e) {
-            //if (transaction != null) transaction.rollback();
-            e.printStackTrace();
+            bladZlecenie.setText("");
+            uzyteCzesci.setText(czesci + magazynCzesc.getNazwaCzesci() + " - " + magazynCzesc.getCena() + "\n");
+            magazynCzesc.setIlosc((int) (magazynCzesc.getIlosc() - 1));
+            uzyteCzesciList.add(magazynCzesc);
+            tableMagazyn.refresh();
         }
     }
+
+    /**
+     * Metoda konczaca zlecenie po wykonanej naprawie.
+     * W metodzie sprawdzane jest wypelnianie pol.
+     */
+
+    public void zlecenieZakoncz() {
+        bladZlecenie.setText("");
+
+        String czyMozna = zlecenieZakonczCzyMozna(idTwojeZlecenie.getText(), opisNaprawaZlecenia.getText());
+
+        if (czyMozna.equals("Zlecenie zostało zakończone")) {
+            Transaction transaction = null;
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                transaction = session.beginTransaction();
+
+                Zlecenia zlecenie = (Zlecenia) session.createQuery("FROM Zlecenia U WHERE U.idZlecenia = :id").setParameter("id", Integer.parseInt(idTwojeZlecenie.getText())).uniqueResult();
+
+                zlecenie.setOpisNaprawy(opisNaprawaZlecenia.getText());
+                zlecenie.setUzyteCzesci(uzyteCzesci.getText());
+                zlecenie.setStanZlecenia(2);
+
+                System.out.println(zlecenie);
+
+                session.update(zlecenie);
+
+                for (Magazyn m : uzyteCzesciList) {
+                    session.update(m);
+                }
+
+                session.getTransaction().commit();
+                System.out.println("Updated");
+                tableZlecenia.refresh();
+                otworzTwojeZlecenia();
+                bladZlecenie.setStyle("-fx-text-fill: white;");
+                bladZlecenie.setText(czyMozna);
+                session.clear();
+                session.disconnect();
+                session.close();
+                System.out.println("Zlecenie zakończone");
+            } catch (Exception e) {
+                //if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
+
+        } else {
+            bladZlecenie.setStyle("-fx-text-fill: red;");
+            bladZlecenie.setText(czyMozna);
+        }
+    }
+
+    /**
+     * Metoda kopiujaca logike z zaloguj uzywana w testach jednostkowych.
+     *
+     * @param idZlecenia  Parametr przyjmuje idZlecenia.
+     * @param opisNaprawy Parametr przyjmuje opis naprawy.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
+
+    public String zlecenieZakonczCzyMozna(String idZlecenia, String opisNaprawy) {
+        if (idZlecenia == null || idZlecenia.equals(""))
+            return "Nie wybrano zlecenia";
+        else if (opisNaprawy == null || opisNaprawy.equals(""))
+            return "Dodaj opis naprawy";
+        else
+            return "Zlecenie zostało zakończone";
+    }
+
+    /**
+     * Metoda umozliwiajaca przypisanie zlecenia danemu mechanikowi.
+     */
 
     //rezerwacja zlecenia
     public void zlecenieRezerwacja() {
@@ -278,7 +365,7 @@ public class MechanikController implements Initializable {
             zlecenie = (Zlecenia) tableZlecenia.getSelectionModel().getSelectedItem();
             System.out.println(zlecenie.getIdZlecenia());
 
-            Pracownicy pracownik = (Pracownicy) session.get(Pracownicy.class, LogowanieController.userID);
+            Pracownicy pracownik = session.get(Pracownicy.class, LogowanieController.userID);
             zlecenie.setPracownikMechanik(pracownik);
             zlecenie.setStanZlecenia(1);
 
@@ -301,6 +388,10 @@ public class MechanikController implements Initializable {
         }
     }
 
+    /**
+     * Metoda odpowiadajaca za wyslanie do magazyniera informacji o zapotrzebowaniu na konkretna czesc.
+     */
+
     //dodanie rekordu do zamówienia
     public void czesciWyslij() {
         blad.setStyle("-fx-text-fill: red;");
@@ -314,7 +405,7 @@ public class MechanikController implements Initializable {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            Pracownicy user = (Pracownicy) session.get(Pracownicy.class, LogowanieController.userID);
+            Pracownicy user = session.get(Pracownicy.class, LogowanieController.userID);
 
             System.out.println("Dodawanie części...");
             Zamowienia nowaCzesc = new Zamowienia();

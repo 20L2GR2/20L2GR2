@@ -3,6 +3,10 @@ package hibernate.entity;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * Klasa mapujaca tabele Klienci.
+ */
+
 @Entity
 @Table(name = "klienci")
 public class Klienci {
@@ -25,6 +29,10 @@ public class Klienci {
 
     @OneToMany(mappedBy = "klientZlecenie", cascade = CascadeType.ALL)
     private Set<Zlecenia> zlecenieKlient;
+
+    /**
+     * Konstruktor bezparametrowy.
+     */
 
     public Klienci() {
     }
