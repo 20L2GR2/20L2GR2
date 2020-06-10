@@ -75,6 +75,8 @@ Diagram ERD
 
 Dokumentacja użytkownika znajduje się [w tym miejscu](Dokumetacja%20użytkownika.pdf).
 
+Dokumentacja instalacji znajduje się [w tym miejscu](Dokumetacja%20Instalacji.pdf).
+
 Wykorzystane narzędzia i technologie:
 
 - IntelliJ
