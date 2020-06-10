@@ -232,6 +232,7 @@ public class AdminController implements Initializable {
 
     /**
      * Metoda odpowiadajaca za tworzenie uzytkownika, sprawdzenie czy dane zostaly wypelnione oraz sprawdzenie czy uzytkownik z takim loginem juz istnieje
+     * W metodzie tej wywolywana jest rowniez metoda hashowania podanego hasla dla nowego uzytkownika.
      */
 
     public void utwórzUzytkownika() {

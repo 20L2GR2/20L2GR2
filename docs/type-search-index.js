@@ -16,7 +16,7 @@ typeSearchIndex = [{"p": "main.controllers", "l": "AdminController"}, {
 }, {"p": "main.controllers", "l": "ObslugaKlientaController"}, {
     "p": "<Unnamed>",
     "l": "ObslugaKlientaTest"
-}, {"p": "hibernate.entity", "l": "Pracownicy"}, {"p": "hibernate.entity", "l": "Zamowienia"}, {
+}, {"p": "main", "l": "PasswordHash"}, {"p": "hibernate.entity", "l": "Pracownicy"}, {
     "p": "hibernate.entity",
-    "l": "Zlecenia"
-}];
+    "l": "Zamowienia"
+}, {"p": "hibernate.entity", "l": "Zlecenia"}];

@@ -27,7 +27,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Klasa wykorzystywana jako kontroler widoku logowania. Zawiera logike, ktora jest wykorzystywana w poprawnym wyświetlaniu i obslugi widoku..
+ * Klasa wykorzystywana jako kontroler widoku logowania. Zawiera logike, ktora jest wykorzystywana w poprawnym wyświetlaniu i obslugi widoku.
  */
 
 public class LogowanieController implements Initializable {
@@ -182,6 +182,7 @@ public class LogowanieController implements Initializable {
 
     /**
      * Metoda sluzaca do sprawdzania poprawnosci wprowadzonego loginu i hasla przez uzytkownika.
+     * W metodzie wywolywane jest rowniez hashowanie wprowadzonego hasla.
      *
      * @param userName Parametr przyjmujacy login podany przez uzytkownika.
      * @param password Parametr przyjmujacy haslo podane przez uzytkownika.
