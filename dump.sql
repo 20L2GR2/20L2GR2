@@ -16,8 +16,8 @@ VALUES (1, 'Jan', 'Kowalski', 0, 'admin', '$2a$10$BuF9SIfM.hZIdceHkj7SUuRC0xFPZe
        (4, 'Piotr', 'Nowakowski', 3, 'magazynier1', '$2a$10$RSg/enzOdBj04SdJV91ese6VwewMngqzEqY1/6AcGpIvVfw4eDO0y');
 
 INSERT INTO `zamowienia` (`id_zamowienia`, `nazwa_czesci`, `kometarz`, `stan_zamowienia`, `id_mechanika`, `id_czesci`)
-VALUES (1, 'Belka tylna Renault Scenic', 'Wymagany osprzęt układu hamulcowego', 0, 2, NULL),
-       (2, 'Reflektor przedni prawy Fiat Panda', '', 0, 2, NULL);
+VALUES (1, 'Belka tylna Renault Scenic', 'Wymagany osprzęt układu hamulcowego', 0, 3, NULL),
+       (2, 'Reflektor przedni prawy Fiat Panda', '', 0, 3, NULL);
 
 INSERT INTO `zlecenia` (`id_zlecenie`, `id_klienta`, `id_mechanika`, `id_obslugaklientastart`,
                         `id_obslugaklientakoniec`, `stan_zlecenia`, `opis_usterki`, `data_rozpoczecia`,
