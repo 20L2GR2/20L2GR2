@@ -54,12 +54,12 @@ CREATE TABLE `magazyn` (
 --
 
 CREATE TABLE `pracownicy` (
-  `id_pracownika` int(9) NOT NULL,
-  `imie` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
-  `nazwisko` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
-  `stanowisko` int(1) NOT NULL,
-  `login` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
-  `haslo` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL
+                              `id_pracownika` int(9) NOT NULL,
+                              `imie` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
+                              `nazwisko` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
+                              `stanowisko` int(1) NOT NULL,
+                              `login` varchar(30) COLLATE utf8mb4_polish_ci NOT NULL,
+                              `haslo` varchar(500) COLLATE utf8mb4_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --

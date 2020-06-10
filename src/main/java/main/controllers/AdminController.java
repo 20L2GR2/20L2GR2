@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.converter.DateStringConverter;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.LongStringConverter;
+import main.PasswordHash;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -218,14 +219,15 @@ public class AdminController implements Initializable {
             return;
         }
         String mogeUtworzyc = utworzUzytkownikaLogic(nowyLogin.getText(), noweHaslo.getText(), nowaRola.getValue().toString(), noweImie.getText(), noweNazwisko.getText());
-
+        PasswordHash haslo = new PasswordHash();
         if (mogeUtworzyc.equals("DODANO")) {
             Transaction transaction = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
                 System.out.println("Tworzę użytkownika!");
                 Pracownicy nowyPracownik = new Pracownicy();
-                nowyPracownik.setHaslo(noweHaslo.getText());
+//                nowyPracownik.setHaslo(noweHaslo.getText());
+                nowyPracownik.setHaslo(PasswordHash.hashPassword(noweHaslo.getText()));
                 nowyPracownik.setLogin(nowyLogin.getText());
                 nowyPracownik.setStanowisko(getShortFromStanowisko(nowaRola.getValue().toString()));
                 nowyPracownik.setImie(noweImie.getText());

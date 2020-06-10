@@ -18,6 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import main.PasswordHash;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -39,6 +40,8 @@ public class LogowanieController implements Initializable {
     public Label bladLogowaniaLabel;
     public Button zalogujButton;
 
+    PasswordHash haslo = new PasswordHash();
+
     /**
      * Metoda uruchamiana przy kazdym uruchomieniu widoku logowania, dzialaca w tle na watkach Javy.
      *
@@ -52,6 +55,7 @@ public class LogowanieController implements Initializable {
 
         keyLogin(passwordField);
         keyLogin(loginTextField);
+
     }
 
     /**
@@ -192,10 +196,12 @@ public class LogowanieController implements Initializable {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             user = (Pracownicy) session.createQuery("FROM Pracownicy U WHERE U.login = :login").setParameter("login", userName).uniqueResult();
-            if (user != null && user.getHaslo().equals(password)) {
-                return true;
-            }
-            transaction.commit();
+            session.clear();
+            session.disconnect();
+            session.close();
+
+            return PasswordHash.combinePasswords(password, user.getHaslo());
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

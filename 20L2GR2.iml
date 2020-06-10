@@ -97,14 +97,15 @@
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: org.testfx:testfx-junit:4.0.15-alpha" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
-        <orderEntry type="module-library">
-          <library name="Maven: pdf.GeneratePdf:GeneratePdf:1.0">
-            <CLASSES>
-              <root url="jar://$MODULE_DIR$/generatePDF-1.0-SNAPSHOT-jar-with-dependencies.jar!/" />
-            </CLASSES>
-            <JAVADOC />
-            <SOURCES />
-          </library>
-        </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: pdf.GeneratePdf:GeneratePdf:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/generatePDF-1.0-SNAPSHOT-jar-with-dependencies.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:5.3.3.RELEASE" level="project" />
   </component>
 </module>
