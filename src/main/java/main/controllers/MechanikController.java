@@ -19,12 +19,14 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class MechanikController implements Initializable {
     LogowanieController mainController = new LogowanieController();
     List<Magazyn> magazyn;
+    List<Magazyn> uzyteCzesciList = new ArrayList<>();
 
     @FXML
     private BorderPane borderPane;
@@ -33,7 +35,7 @@ public class MechanikController implements Initializable {
     @FXML
     private ToggleButton toggleButtonCzesci, toggleButtonZlecenia, toggleButtonTwojeZlecenia, toggleButtonProfil, toggleButtonStanmagazyn;
     @FXML
-    public Label imieLabel, nazwiskoLabel, loginLabel, blad, bladRealizacji, idTwojeZlecenie, opisUsterkaZlecenia, uzyteCzesci, bladZlecenie;
+    public Label imieLabel, nazwiskoLabel, loginLabel, blad, bladRealizacji, idTwojeZlecenie, opisUsterkaZlecenia, bladZlecenie;
     @FXML
     private TableColumn idColumn, opisUsterkaColumn, nazwaCzesciColumn, opisColumn, iloscColumn, cenaColumn, nazwaZamowieniaColumn,
             komentarzColumn, stanColumn, nazwaCzesciMagazynColumn, opisUsterkaZleceniaColumn, idZleceniaColumn, nazwaCzesciC, opisC, iloscC, cenaC;
@@ -42,7 +44,7 @@ public class MechanikController implements Initializable {
     @FXML
     public TextField nazwaCzesci, szukajNazwaCzesci;
     @FXML
-    public TextArea komentarz, opisNaprawaZlecenia;
+    public TextArea komentarz, opisNaprawaZlecenia, uzyteCzesci;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -146,6 +148,7 @@ public class MechanikController implements Initializable {
         tableMagazyn.getItems().clear();
         tableMagazyn.setEditable(true);
         bladRealizacji.setText("");
+        uzyteCzesciList.clear();
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
@@ -211,14 +214,22 @@ public class MechanikController implements Initializable {
         Zlecenia zlecenie = (Zlecenia) tableTwojeZlecenia.getSelectionModel().getSelectedItem();
         idTwojeZlecenie.setText(String.valueOf(zlecenie.getIdZlecenia()));
         opisUsterkaZlecenia.setText(String.valueOf(zlecenie.getOpisUsterki()));
-        opisNaprawaZlecenia.setText("");
-        uzyteCzesci.setText("");
     }
 
     public void czescPrzypisz() {
-        Magazyn magazyn = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
+        Magazyn magazynCzesc = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
-        uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + "; ");
+        if (magazynCzesc.getIlosc() == 0) {
+            bladZlecenie.setStyle("-fx-text-fill: red;");
+            bladZlecenie.setText("Ta część się już skończyła!");
+        } else {
+            bladZlecenie.setStyle("-fx-text-fill: white;");
+            bladZlecenie.setText("");
+            uzyteCzesci.setText(czesci + magazynCzesc.getNazwaCzesci() + " - " + magazynCzesc.getCena() + "\n");
+            magazynCzesc.setIlosc((int) (magazynCzesc.getIlosc() - 1));
+            uzyteCzesciList.add(magazynCzesc);
+            tableMagazyn.refresh();
+        }
     }
 
     public void zlecenieZakoncz() {
@@ -240,6 +251,11 @@ public class MechanikController implements Initializable {
                 System.out.println(zlecenie);
 
                 session.update(zlecenie);
+
+                for (Magazyn m : uzyteCzesciList) {
+                    session.update(m);
+                }
+
                 session.getTransaction().commit();
                 System.out.println("Updated");
                 tableZlecenia.refresh();
@@ -254,6 +270,7 @@ public class MechanikController implements Initializable {
                 //if (transaction != null) transaction.rollback();
                 e.printStackTrace();
             }
+
         } else {
             bladZlecenie.setStyle("-fx-text-fill: red;");
             bladZlecenie.setText(czyMozna);
