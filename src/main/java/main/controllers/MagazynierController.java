@@ -64,6 +64,7 @@ public class MagazynierController implements Initializable {
     /**
      * Metoda uruchamiana przy kazdym uruchomieniu widoku magazyniera, dzialaca w tle na watkach Javy.
      * Metoda rowniez odpowiada za akceptowanie wybranych znakow do pola.
+     * Metoda rowniez odpowiada za wyszukiwania.
      *
      * @param url            Odniesienie do zmiennej, ktora odnosi sie do klasy URL odpowiedzialnej za uruchomienie sceny JavaFX.
      * @param resourceBundle Odniesienie do zmiennej, ktora odnosi sie do klasy ResourceBundle odpowiedzialnej za uruchomienie sceny.
