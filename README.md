@@ -63,7 +63,7 @@ Diagram sekwencji
 
 Diagram stanów
 
-![Diagram stanów](DiagramStanow.jpg)
+![Diagram stanów](DiagramStanow.png)
 
 Diagram aktywności
 
