@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.converter.DateStringConverter;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.LongStringConverter;
+import main.PasswordHash;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -227,7 +228,7 @@ public class AdminController implements Initializable {
 
                 System.out.println("Tworzę użytkownika!");
                 Pracownicy nowyPracownik = new Pracownicy();
-                nowyPracownik.setHaslo(noweHaslo.getText());
+                nowyPracownik.setHaslo(PasswordHash.hashPassword(noweHaslo.getText()));
                 nowyPracownik.setLogin(nowyLogin.getText());
                 nowyPracownik.setStanowisko(getShortFromStanowisko(nowaRola.getValue().toString()));
                 nowyPracownik.setImie(noweImie.getText());

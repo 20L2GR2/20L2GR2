@@ -3,15 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="404a7249-0aa6-4116-a94f-a3c5166d82e2" name="Default Changelist" comment="poprawa Admina">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dump.sql" beforeDir="false" afterPath="$PROJECT_DIR$/dump.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zlecenia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/entity/Zlecenia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/controllers/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/adminView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/adminView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate/DumpData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hibernate/DumpData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate/entity/Zlecenia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hibernate/entity/Zlecenia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hibernate/DumpData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hibernate/DumpData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/controllers/LogowanieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/controllers/LogowanieController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/adminView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/adminView.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -494,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591753118494</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="poprawa Admina">
+      <created>1591784543758</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1591784543758</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -527,7 +529,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="ABBCK-29 ABBCK-31 ABBCK-32 ABBCK-33 ABBCK-34 ABBCK-35 ABBCK-36 ABBCK-42 ABBCK-43 # naprawienie automatycznych zmian lang lvl w project structure; usunięcie klas jdbc; dodanie do projektu, podłączenie i konfiguracja (chyba wstępna) Hibernate; zmapowanie pól bazy; Utworzenie klasy testowej &quot;App&quot;." />
     <MESSAGE value="ABBCK-41 # Wstępne zmian dla admina, pobieranie z bazy dla większości tabel, możliwość tworzenia użytkowników, możliwość usuwania zamówień, poprawa klasy Zamówienia" />
     <MESSAGE value="ABBCK-38 # Poprawa widoku magazyniera, dodanie wyświetlania zawartości tabel" />
     <MESSAGE value="ABBCK-38 # Dalsza poprawa widoku magazyniera, dodanie edycji zawartości magazynu; optymalizacja kodu całego projektu" />
@@ -552,7 +553,8 @@
     <MESSAGE value="Aktualizacja diagramu ERD" />
     <MESSAGE value="ABBCK-62 # Dodanie wygenerowanego JavaDoc" />
     <MESSAGE value="poprawa pliku tworzącego bazę danych" />
-    <option name="LAST_COMMIT_MESSAGE" value="poprawa pliku tworzącego bazę danych" />
+    <MESSAGE value="poprawa Admina" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawa Admina" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
