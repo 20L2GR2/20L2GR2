@@ -34,6 +34,10 @@ import java.util.ResourceBundle;
 
 import static java.lang.String.valueOf;
 
+/**
+ * Klasa wykorzystywana jako kontroler widoku obslugi klienta. Zawiera logike, ktora jest wykorzystywana w poprawnym wyświetlaniu i obslugi widoku.
+ */
+
 public class ObslugaKlientaController implements Initializable {
     LogowanieController mainController = new LogowanieController();
 
@@ -67,6 +71,14 @@ public class ObslugaKlientaController implements Initializable {
 
     @FXML
     private TableColumn imieNazwiskoColumn, nrRejeColumn, nrRejeHistoria, imieNazwiskoHistoria, nrRejeKlientColumn, imieKlientColumn, nazwiskoKlientColumn;
+
+    /**
+     * Metoda uruchamiana przy kazdym uruchomieniu widoku obslugi klienta, dzialaca w tle na watkach Javy.
+     * Metoda rowniez odpowiada za akceptowanie wybranych znakow do pola.
+     *
+     * @param url            Odniesienie do zmiennej, ktora odnosi sie do klasy URL odpowiedzialnej za uruchomienie sceny JavaFX.
+     * @param resourceBundle Odniesienie do zmiennej, ktora odnosi sie do klasy ResourceBundle odpowiedzialnej za uruchomienie sceny.
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -105,9 +117,21 @@ public class ObslugaKlientaController implements Initializable {
         });
     }
 
+    /**
+     * Metoda wykorzystywana do wylogowania danego uzytkownika.
+     *
+     * @param event Parametr okreslajacy konkretny widok.
+     * @throws IOException Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
+
     public void logout(ActionEvent event) throws IOException {
         mainController.logout(event);
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku profilu pracownika obslugi klienta w widoku obslugi klienta oraz odznaczenie ToggleButtonow.
+     */
+
 
     public void otworzTwojProfil() {
         System.out.println("otworzTwojProfil");
@@ -116,6 +140,10 @@ public class ObslugaKlientaController implements Initializable {
         inicjalizujWidokObslugiKlientaZBazy();
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku historii zlecen w widoku obslugi klienta oraz odznaczenie ToggleButtonow.
+     */
+
     public void otworzHistoriaZlecen() {
         System.out.println("otworzHistoriaZlecen");
         obslugaKlientaBorderPane.setCenter(historiaZlecenPane);
@@ -123,12 +151,20 @@ public class ObslugaKlientaController implements Initializable {
         inicjalizujWidokObslugiKlientaZBazy();
     }
 
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku ukonczonych zlecen w widoku obslugi klienta oraz odznaczenie ToggleButtonow.
+     */
+
     public void otworzUkonczoneZlecenia() {
         System.out.println("otworzUkonczoneZlecenia");
         obslugaKlientaBorderPane.setCenter(ukonczoneZleceniaPane);
         selectedButton(toogleButtonUkonczoneZlecenia);
         inicjalizujWidokObslugiKlientaZBazy();
     }
+
+    /**
+     * Metoda odpowiadajaca za otworzenie i wyswietlenie podwidoku tworzenia nowego zlecenia w widoku obslugi klienta oraz odznaczenie ToggleButtonow.
+     */
 
     public void otworzUtworzZlecenie() {
         System.out.println("otworzUtworzZlecenia");
@@ -140,6 +176,13 @@ public class ObslugaKlientaController implements Initializable {
     private void selectedButton(ToggleButton button) {
         button.setSelected(true);
     }
+
+    /**
+     * Metoda odpowiedzialna za sprawdzanie, czy pola sa wypelnione podczas dodawania zlecenia, wywolanie metody ktora sprawdza istnienie klienta.
+     * Wywoluje takze metode odpowiedzialna za utworzenie zlecenia w bazie danych.
+     *
+     * @throws ParseException Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
 
     public void dodajZlecenieButton() throws ParseException {
         if (klientImie.getText().isEmpty()) {
@@ -179,6 +222,12 @@ public class ObslugaKlientaController implements Initializable {
         createZlecenie(klient, pracownik);
     }
 
+    /**
+     * Metoda zwracajaca dane klienta na podstawie jego numeru rejestracyjnego
+     *
+     * @return Zwracane sa dane klienta.
+     */
+
     public Klienci isOrCreateRejestracjaInDb() {
         Klienci klient = new Klienci();
         Transaction transaction = null;
@@ -195,6 +244,12 @@ public class ObslugaKlientaController implements Initializable {
             return null;
         }
     }
+
+    /**
+     * Metoda odpowiadajaca za utworzenie klienta w bazie danych.
+     *
+     * @return Zwrocone zostaja dane nowoutworzonego klienta i przekazane do {@link ObslugaKlientaController#createZlecenie(Klienci, Pracownicy) tej} metody.
+     */
 
     public Klienci createKlient() {
         Klienci nowyKlient = new Klienci();
@@ -221,6 +276,14 @@ public class ObslugaKlientaController implements Initializable {
             return null;
         }
     }
+
+    /**
+     * Metoda odpowiadajaca za dodanie nowego zlecenia w tabeli zlecen w bazie danych.
+     *
+     * @param klient    Parametr zawiera dane nowoutworzonego klienta.
+     * @param pracownik Parametr zawiera dane pracownika, ktory aktualnie dodaje to zlecenie.
+     * @throws ParseException Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
 
     public void createZlecenie(Klienci klient, Pracownicy pracownik) throws ParseException {
         Zlecenia noweZlecenie = new Zlecenia();
@@ -255,6 +318,12 @@ public class ObslugaKlientaController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Pobranie danych do wszystkich podwidokow dla zalogowanego pracownika obslugi klienta.
+     *
+     * @return Zwracane sa dane pracownika obslugi klienta, ktory aktualnie jest zalogowany i wykorzystywane sa do {@link ObslugaKlientaController#createZlecenie(Klienci, Pracownicy) tej} metody.
+     */
 
     public Pracownicy inicjalizujWidokObslugiKlientaZBazy() {
         tableUkonczone.getItems().clear();
@@ -314,6 +383,10 @@ public class ObslugaKlientaController implements Initializable {
         }
     }
 
+    /**
+     * Metoda wykonujaca akcje do pobrania informacji o konkretnym zleceniu w historii zlecen.
+     */
+
     public void wybierzHistorieButton() {
         if (tableHistoria.getSelectionModel().isEmpty()) {
             bladHistoria.setText("Nie wybrano klienta!");
@@ -331,6 +404,13 @@ public class ObslugaKlientaController implements Initializable {
         uzyteCzesciHistoria.setText(zlecenia1.getUzyteCzesci());
         cenaHistoria.setText(valueOf(zlecenia1.getCena()));
     }
+
+    /**
+     * Metoda sprawdzajaca poprawnosc wyboru klienta, pobrania jego danych do zakonczenia danego zlecenia.
+     * Metoda ta wywoluje {@link ObslugaKlientaController#zakonczZlecenie(Pracownicy, Zlecenia) inna metode,}, ktora konczy zlecenie zapisujac odpowiednie informacje w bazie danych.
+     *
+     * @throws ParseException Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
 
     public void zakonczZlecenieButton() throws ParseException {
         bladUkonczone.setStyle("-fx-text-fill: red");
@@ -367,6 +447,15 @@ public class ObslugaKlientaController implements Initializable {
         zakonczZlecenie(pracownik, zleconko);
 
     }
+
+    /**
+     * Metoda ta zapisuje koncowe informacje tj. kwota, data zakonczenia, stan zlecenia oraz pracownika, ktory konczy zlecenie w bazie danych.
+     * Metoda ta rowniez generuje raport w formacie PDF.
+     *
+     * @param pracownik Parametr przyjmuje dane pracownika, ktory aktualnie jest zalogowany i konczy zlecenie.
+     * @param zlecenie  Parametr przyjmuje dane o zleceniu, ktore aktualnie jest wybrane do zakonczenia.
+     * @throws ParseException Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
 
     public void zakonczZlecenie(Pracownicy pracownik, Zlecenia zlecenie) throws ParseException {
 
@@ -456,6 +545,10 @@ public class ObslugaKlientaController implements Initializable {
         }
     }
 
+    /**
+     * Metoda sprawdzajaca poprawnosc wyboru klienta oraz wyswietlajaca pobrane informacje na ekranie.
+     */
+
     public void wybierzZlecenieButton() {
         if (tableUkonczone.getSelectionModel().isEmpty()) {
             bladUkonczone.setText("Nie wybrano klienta!");
@@ -472,6 +565,19 @@ public class ObslugaKlientaController implements Initializable {
 
         zleconko = zlecenia;
     }
+
+    /**
+     * Metoda wykorzystywana w testach jednostkowych - sprawdza czy wszystkie pola sa wypelnione.
+     *
+     * @param nr_rej   Parametr przyjmujacy numer rejestracyjny.
+     * @param nazwisko Parametr przyjmujacy nazwisko.
+     * @param imie     Parametr przyjmujacy imie.
+     * @param numer    Parametr przyjmujacy numer.
+     * @param marka    Parametr przyjmujacy marke.
+     * @param model    Parametr przyjmujacy model.
+     * @param opis     Parametr przyjmujacy opis.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
 
     public String canAddOrderIfAllFieldsAreSet(String nr_rej, String nazwisko, String imie, String numer, String marka, String model, String opis) {
         if (nr_rej == null || nr_rej.equals("")) {
@@ -493,6 +599,13 @@ public class ObslugaKlientaController implements Initializable {
         }
     }
 
+    /**
+     * Metoda wykorzystywana w testach jednostkowych - sprawdza czy cena zostala podana.
+     *
+     * @param price Parametr przyjmujacy cene.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
+
     public String canOrderBeFinalizedIfPriceIsSet(String price) {
         if (price == null || price.equals("")) {
             return "Nie podano ceny";
@@ -500,6 +613,13 @@ public class ObslugaKlientaController implements Initializable {
             return "Zlecenie zakonczone";
         }
     }
+
+    /**
+     * Metoda wykorzystywana w testach jednostkowych - sprawdza czy cena zostala podana.
+     *
+     * @param price Parametr przyjmuje cene.
+     * @return Zwracany jest wynik wykonania testu na podstawie danych.
+     */
 
     public boolean canOrderBeFinalizedIfPriceIsSetProperly(String price) {
         boolean state = true;
@@ -511,12 +631,11 @@ public class ObslugaKlientaController implements Initializable {
         return state;
     }
 
-    public void destroySession(Session session) {
-        session.clear();
-        session.disconnect();
-        session.close();
-        HibernateUtil.shutdown();
-    }
+    /**
+     * Metoda wyswietlajaca dane klienta.
+     *
+     * @param actionEvent Parametr okreslajacy konkretny widok.
+     */
 
     public void wybierzKlientButton(ActionEvent actionEvent) {
         Klienci klient = (Klienci) tableKlienci.getSelectionModel().getSelectedItem();

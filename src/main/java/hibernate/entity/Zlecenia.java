@@ -3,6 +3,10 @@ package hibernate.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Klasa mapujaca tabele Zlecenia.
+ */
+
 @Entity
 @Table(name = "zlecenia")
 public class Zlecenia {
@@ -42,6 +46,10 @@ public class Zlecenia {
     @ManyToOne
     @JoinColumn(name = "id_obslugaklientakoniec")
     private Pracownicy pracownikObslugaKoniec;
+
+    /**
+     * Konstruktor bezparametrowy.
+     */
 
     public Zlecenia() {
     }
@@ -206,13 +214,19 @@ public class Zlecenia {
     }
 
     public String getStanZleceniaToString(){
-        switch(stanZlecenia){
-            case 0: return "zlecenie utworzone i oczekujące do przyjęcia przez mechanika";
-            case 1: return "zlecenie przyjęte przez mechanika i w trakcie realizacji";
-            case 2: return "zlecenie oczekujące do wyceny (mechanik wykonał naprawę)";
-            case 3: return "zlecenie zakończone";
-            case 4: return "zlecenie anulowane";
-            default: return "ZŁY STAN";
+        switch(stanZlecenia) {
+            case 0:
+                return "zlecenie utworzone i oczekujące do przyjęcia przez mechanika";
+            case 1:
+                return "zlecenie przyjęte przez mechanika i w trakcie realizacji";
+            case 2:
+                return "zlecenie oczekujące do wyceny (mechanik wykonał naprawę)";
+            case 3:
+                return "zlecenie zakończone";
+            case 4:
+                return "zlecenie anulowane";
+            default:
+                return "ZLY STAN";
         }
     }
 }

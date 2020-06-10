@@ -4,6 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "zamowienia")
+
+/**
+ * Klasa mapujaca tabele Zamowienia.
+ */
+
 public class Zamowienia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +26,13 @@ public class Zamowienia {
     private Pracownicy pracownik;
 
     @ManyToOne
-    @JoinColumn(name="id_czesci")
+    @JoinColumn(name = "id_czesci")
     private Magazyn czesc;
 
+
+    /**
+     * Konstruktor bezparametrowy.
+     */
 
     public Zamowienia() {
     }

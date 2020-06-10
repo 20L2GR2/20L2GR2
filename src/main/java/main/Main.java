@@ -7,20 +7,44 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
-import org.apache.ibatis.jdbc.ScriptRunner;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+
 //import pdf.GeneratePdf;
 
-import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Date;
+/**
+ * <h1>AutoService</h1>
+ * <p>Aplikacja wspomagajaca prace warsztatu samochodowego.</p>
+ * Glowna klasa odpowiedzialna za uruchomienie programu.
+ *
+ * @author Albrycht Adrian
+ * @author Bieda Andrzej
+ * @author Borek Kamil
+ * @author Cwynar Wiktor
+ * @author Kluk Paweł
+ * @version 1.0
+ * @since 2020-06-08
+ */
+
 
 public class Main extends Application {
+
+    /**
+     * Glowna metoda w naszej aplikacji, ktora uruchamia program.
+     * @param args Argument wymagany do uruchomienia okna w JavaFX.
+     */
 
     public static void main(String[] args) {
         launch(args);
     }
+
+    /**
+     * Metoda wykorzystywana do uruchomienia sceny w JavaFX.
+     * @param stage Odniesienie do zmiennej, ktora odnosi sie do klasy Stage odpowiedzialnej za uruchomienie sceny JavaFX.
+     * @throws SQLException  Odniesienie do klasy odpowiedzialnej za zwrot obslugi bledu wyjatku.
+     */
 
     @Override
     public void start(Stage stage) throws SQLException, FileNotFoundException {
@@ -47,7 +71,6 @@ public class Main extends Application {
         jMetro.setAutomaticallyColorPanes(true);
         jMetro.setScene(scene);
         root.setStyle("-fx-font: title");
-
 
 
     }

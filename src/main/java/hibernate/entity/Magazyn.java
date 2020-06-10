@@ -5,6 +5,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "magazyn")
+
+/**
+ * Klasa mapujaca tabele Magazyn.
+ */
+
 public class Magazyn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +30,10 @@ public class Magazyn {
 
     @OneToMany(mappedBy = "czesc")
     private List<Zamowienia> czesc;
+
+    /**
+     * Konstruktor bezparametrowy.
+     */
 
     public Magazyn() {
     }

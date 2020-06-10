@@ -46,6 +46,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="javafx-swt" level="application" />
     <orderEntry type="library" name="Maven: org.jfxtras:jmetro:11.6.9" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.openjfx:javafx-base:win:11.0.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.openjfx:javafx-controls:win:11.0.2" level="project" />

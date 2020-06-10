@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.241"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controllers.MechanikController">
+    <left>
+        <VBox prefHeight="358.0" prefWidth="158.0" BorderPane.alignment="CENTER">
+            <children>
+                <ToggleButton fx:id="toggleButtonCzesci" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzCzesci"
+                              styleClass="buttons" text="Części" toggleGroup="$mechanikMenu" VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/tools.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="mechanikMenu"/>
+                    </toggleGroup>
+                </ToggleButton>
+                <ToggleButton fx:id="toggleButtonZlecenia" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzZlecenia"
+                              styleClass="buttons" text="Zlecenia" toggleGroup="$mechanikMenu" VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/zlecenia.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="toggleButtonTwojeZlecenia" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzTwojeZlecenia"
+                              styleClass="buttons" text="Twoje zlecenia" toggleGroup="$mechanikMenu"
+                              VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/twojeZlecenie.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="toggleButtonProfil" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#otworzProfil"
+                              styleClass="buttons" text="Twój profil" toggleGroup="$mechanikMenu" VBox.vgrow="ALWAYS">
+                    <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/img/profil.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+            </children>
+        </VBox>
+    </left>
+    <top>
+        <HBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="42.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true"
+                           HBox.hgrow="ALWAYS">
+                    <image>
+                        <Image url="/img/logo.png"/>
+                    </image>
+                    <HBox.margin>
+                        <Insets top="10.0"/>
+                    </HBox.margin>
+                </ImageView>
+                <Pane prefWidth="40.0" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="buttonLogout" onAction="#logout" alignment="CENTER" mnemonicParsing="false"
+                        text="Logout">
+                    <HBox.margin>
+                        <Insets right="10.0" top="10.0"/>
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+            <children>
+                <Pane fx:id="profilPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label layoutX="104.0" layoutY="83.0" text="Imie"/>
+                        <Label layoutX="104.0" layoutY="145.0" text="Nazwisko"/>
+                        <Label layoutX="104.0" layoutY="216.0" text="Login:"/>
+                        <Label layoutX="289.0" layoutY="82.0" text="Label" fx:id="imieLabel"/>
+                        <Label layoutX="289.0" layoutY="144.0" text="Label" fx:id="nazwiskoLabel"/>
+                        <Label layoutX="289.0" layoutY="216.0" text="Label" fx:id="loginLabel"/>
+
+                    </children>
+                </Pane>
+                <Pane fx:id="zleceniaPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1200.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableZlecenia">
+                            <columns>
+                                <TableColumn minWidth="4.0" prefWidth="250.0" text="Numer identyfikacyjny zlecenia"
+                                             fx:id="idColumn"/>
+                                <TableColumn prefWidth="400.0" text="Opis usterki" fx:id="opisUsterkaColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="100" layoutY="500" fx:id="buttonDoRealizacji" onAction="#zlecenieRezerwacja"
+                                alignment="CENTER" mnemonicParsing="false"
+                                text="Przyjmij zlecenie">
+                        </Button>
+                        <Label layoutX="100.0" layoutY="600.0" text="" fx:id="bladRealizacji"/>
+                    </children>
+                </Pane>
+                <Pane fx:id="mojeZleceniaPane" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label layoutX="50.0" layoutY="44.0" text="Twoje zlecenia"/>
+
+                        <TableView layoutX="50.0" layoutY="74.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="900.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableTwojeZlecenia">
+                            <columns>
+                                <TableColumn minWidth="4.0" prefWidth="250.0" text="Numer identyfikacyjny zlecenia"
+                                             fx:id="idZleceniaColumn"/>
+                                <TableColumn prefWidth="400.0" text="Opis usterki" fx:id="opisUsterkaZleceniaColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="50.0" layoutY="334.0" mnemonicParsing="false" onAction="#zlecenieZaladuj" text="Załaduj zlecenie"/>
+
+                        <Label layoutX="1000.0" layoutY="44.0" text="ID zlecenia:"/>
+                        <Label layoutX="1000.0" layoutY="74.0" text="" fx:id="idTwojeZlecenie"/>
+                        <Label layoutX="1000.0" layoutY="104.0" text="Opis usterki:"/>
+                        <Label layoutX="1000.0" layoutY="134.0" text="" fx:id="opisUsterkaZlecenia"/>
+                        <Label layoutX="1000.0" layoutY="164.0" text="Opis naprawy:"/>
+                        <TextArea layoutX="1000.0" layoutY="194.0" prefHeight="158.0" prefWidth="307.0"  fx:id="opisNaprawaZlecenia"/>
+                        <Label layoutX="1000.0" layoutY="354.0" text="Użyte części:"/>
+                        <Label layoutX="1000.0" layoutY="384.0" text="" fx:id="uzyteCzesci"/>
+                        <Button layoutX="1000.0" layoutY="444.0" mnemonicParsing="false" onAction="#zlecenieZakoncz" text="Zakończ zlecenie"/>
+                        <Label layoutX="1000.0" layoutY="484.0" text="" fx:id="bladZlecenie"/>
+
+                        <Label layoutX="50.0" layoutY="384.0" text="Dostępne części"/>
+                        <TextField layoutX="800.0" layoutY="384.0" promptText="Przeszukaj magazyn" fx:id="szukajNazwaCzesci"/>
+                        <TableView layoutX="50.0" layoutY="414.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="900.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableMagazyn">
+                            <columns>
+                                <TableColumn prefWidth="300.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
+                                <TableColumn prefWidth="400.0" text="Opis części" fx:id="opisColumn"/>
+                                <TableColumn prefWidth="100.0" text="Ilość" fx:id="iloscColumn"/>
+                                <TableColumn prefWidth="100.0" text="Cena" fx:id="cenaColumn"/>
+                            </columns>
+                        </TableView>
+                        <Button layoutX="50.0" layoutY="704.0" mnemonicParsing="false" onAction="#czescPrzypisz" text="Przypisz część do zlecenia"/>
+                    </children>
+                </Pane>
+                <Pane fx:id="czesciPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Button layoutX="196.0" layoutY="306.0" mnemonicParsing="false" onAction="#czesciWyslij"
+                                text="Wyślij"/>
+                        <TextField layoutX="79.0" layoutY="92.0" promptText="Nazwa części" prefWidth="284.0"
+                                   fx:id="nazwaCzesci"/>
+                        <TextArea layoutX="79.0" layoutY="130.0" prefHeight="155.0" prefWidth="298.0"
+                                  promptText="Komentarz" fx:id="komentarz"/>
+                        <Label layoutX="122.0" layoutY="51.0" text="Formularz zgłoszeniowy o braku części"/>
+                        <Label layoutX="122.0" layoutY="360.0" text="" fx:id="blad"/>
+
+                        <Label layoutX="450.0" layoutY="51.0" text="Twoje zamówienia"/>
+                        <TableView layoutX="450.0" layoutY="92.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0"
+                                   xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
+                                   fx:id="tableZamowienia">
+                            <columns>
+                                <TableColumn prefWidth="200.0" text="Nazwa Zamówienia" fx:id="nazwaZamowieniaColumn"/>
+                                <TableColumn prefWidth="300.0" text="Komemtarz" fx:id="komentarzColumn"/>
+                                <TableColumn prefWidth="200.0" text="Stan zamówienia" fx:id="stanColumn"/>
+                                <TableColumn prefWidth="200.0" text="Nazwa części w magazynie" fx:id="nazwaCzesciMagazynColumn"/>
+                            </columns>
+                        </TableView>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
