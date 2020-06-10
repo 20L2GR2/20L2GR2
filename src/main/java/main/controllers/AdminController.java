@@ -122,6 +122,7 @@ public class AdminController implements Initializable {
         System.out.println("otworzZlecenia");
         borderPane.setCenter(zleceniaPane);
         toggleButtonZlecenia.setSelected(true);
+        inicjalizujWidokAdminaZBazy();
     }
 
     /**
@@ -152,6 +153,7 @@ public class AdminController implements Initializable {
         System.out.println("otworzUzytkownicy");
         borderPane.setCenter(uzytkownicyPane);
         toggleButtonUzytkownicy.setSelected(true);
+        inicjalizujWidokAdminaZBazy();
     }
 
     /**
@@ -162,6 +164,7 @@ public class AdminController implements Initializable {
         System.out.println("otworzZamowienia");
         borderPane.setCenter(zamowieniaPane);
         toggleButtonZamowienia.setSelected(true);
+        inicjalizujWidokAdminaZBazy();
     }
 
     /**

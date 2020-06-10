@@ -6,7 +6,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.Integer?>
 <?import java.lang.String?>
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
@@ -69,18 +68,18 @@
                 <Pane fx:id="czesciPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <TableView layoutX="50.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0"
+                        <TableView layoutX="50.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1300.0"
                                    xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
                                    fx:id="czesci">
                             <columns>
-                                <TableColumn prefWidth="150.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
-                                <TableColumn prefWidth="100.0" text="Opis" fx:id="opisColumn"/>
+                                <TableColumn prefWidth="400.0" text="Nazwa części" fx:id="nazwaCzesciColumn"/>
+                                <TableColumn prefWidth="400.0" text="Opis" fx:id="opisColumn"/>
                                 <TableColumn prefWidth="100.0" text="Ilość sztuk" fx:id="iloscColumn"/>
-                                <TableColumn prefWidth="100.0" text="Cena" fx:id="cenaColumn"/>
+                                <TableColumn prefWidth="200.0" text="Cena" fx:id="cenaColumn"/>
                             </columns>
                         </TableView>
-                        <Button layoutX="50" layoutY="500" fx:id="buttonUsunczesc" alignment="CENTER"
+                        <Button layoutX="50" layoutY="670" fx:id="buttonUsunczesc" alignment="CENTER"
                                 mnemonicParsing="false"
                                 text="Usuń część" onAction="#usunCzesc">
                         </Button>
@@ -89,41 +88,50 @@
                 <Pane fx:id="zleceniaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label layoutX="14.0" layoutY="32.0" text="Zlecenia:"/>
-                        <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="1175.0" fx:id="zlecenia">
+                        <Label layoutX="50.0" layoutY="20.0" text="Zlecenia:"/>
+                        <TableView layoutX="50.0" layoutY="50.0" prefHeight="600.0" prefWidth="1350.0" fx:id="zlecenia">
                             <columns>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Id zlecenia" fx:id="idZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Stan zlecenia" fx:id="stanZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Klient" fx:id="klientZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Mechanik" fx:id="mechanikZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa s" fx:id="obslugaSZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Obsługa e" fx:id="obslugaEZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Opis" fx:id="opisZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Data rozp." fx:id="rozpZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Data zak." fx:id="zakZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Opis napr." fx:id="naprwZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Użyte części" fx:id="czesciZleceniaColumn"/>
-                                <TableColumn minWidth="75.0" prefWidth="100" text="Cena" fx:id="cenaZleceniaColumn"/>
+                                <TableColumn minWidth="50.0" text="Id" fx:id="idZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="200" text="Stan zlecenia"
+                                             fx:id="stanZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Klient"
+                                             fx:id="klientZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="100" text="Mechanik"
+                                             fx:id="mechanikZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="150" text="Obsługa start"
+                                             fx:id="obslugaSZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="150" text="Obsługa koniec"
+                                             fx:id="obslugaEZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="250" text="Opis" fx:id="opisZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="120" text="Data rozp."
+                                             fx:id="rozpZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="120" text="Data zak."
+                                             fx:id="zakZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="200" text="Opis napr."
+                                             fx:id="naprwZleceniaColumn"/>
+                                <TableColumn minWidth="75.0" prefWidth="200" text="Użyte części"
+                                             fx:id="czesciZleceniaColumn"/>
+                                <TableColumn minWidth="50.0" prefWidth="75" text="Cena" fx:id="cenaZleceniaColumn"/>
                             </columns>
                         </TableView>
-                        <Button layoutX="18.0" layoutY="274.0" mnemonicParsing="false" text="Usuń"
+                        <Button layoutX="50.0" layoutY="670.0" mnemonicParsing="false" text="Usuń"
                                 onAction="#usunZlecenie"/>
                     </children>
                 </Pane>
                 <Pane fx:id="uzytkownicyPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label layoutX="14.0" layoutY="32.0" text="Użtkownicy:"/>
-                        <TableView layoutX="16.0" layoutY="57.0" prefHeight="209.0" prefWidth="432.0"
+                        <Label layoutX="50.0" layoutY="20.0" text="Użytkownicy"/>
+                        <TableView layoutX="50.0" layoutY="50.0" prefHeight="600.0" prefWidth="1300.0"
                                    fx:id="uzytkownicy">
                             <columns>
-                                <TableColumn minWidth="75.0" prefWidth="75.0" text="Imie" fx:id="imieColumn"/>
-                                <TableColumn minWidth="100.0" prefWidth="100.0" text="Nazwisko" fx:id="nazwiskoColumn"/>
-                                <TableColumn minWidth="100.0" prefWidth="73.0" text="Login" fx:id="loginColumn"/>
-                                <TableColumn minWidth="76.0" prefWidth="77.0" text="Rola" fx:id="rolaColumn"/>
+                                <TableColumn minWidth="250" text="Imie" fx:id="imieColumn"/>
+                                <TableColumn minWidth="250" text="Nazwisko" fx:id="nazwiskoColumn"/>
+                                <TableColumn minWidth="250" text="Login" fx:id="loginColumn"/>
+                                <TableColumn minWidth="250" text="Rola" fx:id="rolaColumn"/>
                             </columns>
                         </TableView>
-                        <Button layoutX="18.0" layoutY="274.0" mnemonicParsing="false" text="Usuń"
+                        <Button layoutX="50.0" layoutY="670.0" mnemonicParsing="false" text="Usuń"
                                 onAction="#usunUzytkownika"/>
                     </children>
                 </Pane>
@@ -159,19 +167,19 @@
                 <Pane fx:id="zamowieniaPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <TableView layoutX="25.0" layoutY="51.0" prefHeight="200.0" prefWidth="600.0"
+                        <TableView layoutX="50.0" layoutY="50.0" prefHeight="600.0" prefWidth="1300.0"
                                    fx:id="zamowienia">
                             <columns>
                                 <TableColumn prefWidth="75.0" text="Id" fx:id="idColumn"/>
-                                <TableColumn prefWidth="75.0" text="Nazwa" fx:id="nazwaColumn"/>
-                                <TableColumn prefWidth="151.0" text="Komentarz" fx:id="komentarzColumn"/>
-                                <TableColumn prefWidth="151.0" text="Stan" fx:id="stanColumn"/>
-                                <TableColumn minWidth="7.0" prefWidth="96.0" text="Mechanik" fx:id="mechanikColumn"/>
+                                <TableColumn prefWidth="325.0" text="Nazwa" fx:id="nazwaColumn"/>
+                                <TableColumn prefWidth="300.0" text="Komentarz" fx:id="komentarzColumn"/>
+                                <TableColumn prefWidth="300.0" text="Stan" fx:id="stanColumn"/>
+                                <TableColumn minWidth="190.0" text="Mechanik" fx:id="mechanikColumn"/>
                             </columns>
                         </TableView>
-                        <Button layoutX="25.0" layoutY="271.0" mnemonicParsing="false" text="Usuń"
+                        <Button layoutX="50.0" layoutY="670.0" mnemonicParsing="false" text="Usuń"
                                 onAction="#usunZamowienie"/>
-                        <Label layoutX="25.0" layoutY="28.0" text="Zamówienia"/>
+                        <Label layoutX="50.0" layoutY="20.0" text="Zamówienia"/>
                     </children>
                 </Pane>
                 <Pane fx:id="profilPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"

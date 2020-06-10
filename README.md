@@ -14,19 +14,25 @@ W celu skorzystania z aplikacji wymagane będzie zalogowanie się. Zadania poszc
 
 1. Administrator 
 - zajmuje się tworzeniem kont pracowników (dlatego, iż to jest system działający w obrębie firmy)
-- ma możliwości modyfikacji wszystkich danych, które zostały wprowadzone w tym systemie
+- ma możliwości modyfikacji wszystkich danych, które zostały wprowadzone w tym systemie (konta użytkowników, zamówienia, zlecenia, części)
 
 2. Mechanik
-- przyjmowanie zleceń
+- przyjmowanie zleceń od dzialu obslugi klienta
 - wprowadzanie zapotrzebowania na daną część
-- raportowanie wykonanej pracy
+- wybieranie części potrzebnych do wykonania naprawy
+- raportowanie wykonanych napraw
 
 3. Pracownik działu obsługi
 - przyjmowanie zleceń od klientów
+- dodawanie nowych klientow do bazy
 - wycenianie wykonanych usług
+- wyszukiwanie zleceń
+- przeglądanie historii zleceń
 
 4. Magazynier
-- Sprawdzanie ilości towaru oraz wyszukiwanie konkretnych części
+- Sprawdzanie ilości dostępnych części
+- wyszukiwanie konkretnych części
+- Przyjmowanie zamówień na części od mechanika oraz określenie czy zamówienie na daną część zostało zrealizowane czy jest w trakcie realizacji
 
 Zlecenie może przyjąć 3 stany:
 - oczekiwaniu na realizację
@@ -74,7 +80,7 @@ Wykorzystane narzędzia i technologie:
 - Jira
 - JavaFx
 - Maven
-- MySQL (w przyszłości)
+- MySQL
 
 
 Twórcy:
@@ -84,6 +90,3 @@ Twórcy:
 - Borek Kamil
 - Cwynar Wiktor 
 - Kluk Paweł
-
-
-UWAGA! Projekt jest w trakcie realizacji - dokumentacja README.md będzie sukcesywnie aktualizowana!

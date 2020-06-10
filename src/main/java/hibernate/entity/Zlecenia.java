@@ -198,7 +198,12 @@ public class Zlecenia {
     }
 
     public String getMechanikLogin(){
-        return pracownikMechanik.getLogin();
+        try {
+            return pracownikMechanik.getLogin();
+        } catch (NullPointerException e) {
+            return "";
+        }
+
     }
 
     public String getSZleceniaLogin(){
@@ -206,7 +211,11 @@ public class Zlecenia {
     }
 
     public String getEZleceniaLogin(){
-        return pracownikObslugaKoniec.getLogin();
+        try {
+            return pracownikObslugaKoniec.getLogin();
+        } catch (NullPointerException e) {
+            return "";
+        }
     }
 
     public String getImieNazwiskoObslugaKoniec() {
