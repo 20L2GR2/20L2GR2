@@ -19,13 +19,14 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class MechanikController implements Initializable {
     LogowanieController mainController = new LogowanieController();
     List<Magazyn> magazyn;
-    List<Magazyn> uzyteCzesciList;
+    List<Magazyn> uzyteCzesciList = new ArrayList<>();
 
     @FXML
     private BorderPane borderPane;
@@ -147,6 +148,7 @@ public class MechanikController implements Initializable {
         tableMagazyn.getItems().clear();
         tableMagazyn.setEditable(true);
         bladRealizacji.setText("");
+        uzyteCzesciList.clear();
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
@@ -212,23 +214,21 @@ public class MechanikController implements Initializable {
         Zlecenia zlecenie = (Zlecenia) tableTwojeZlecenia.getSelectionModel().getSelectedItem();
         idTwojeZlecenie.setText(String.valueOf(zlecenie.getIdZlecenia()));
         opisUsterkaZlecenia.setText(String.valueOf(zlecenie.getOpisUsterki()));
-//        opisNaprawaZlecenia.setText("");
-//        uzyteCzesci.setText("");
     }
 
     public void czescPrzypisz() {
-        Magazyn magazyn = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
+        Magazyn magazynCzesc = (Magazyn) tableMagazyn.getSelectionModel().getSelectedItem();
         String czesci = uzyteCzesci.getText();
-        if (magazyn.getIlosc() == 0) {
+        if (magazynCzesc.getIlosc() == 0) {
             bladZlecenie.setStyle("-fx-text-fill: red;");
             bladZlecenie.setText("Ta część się już skończyła!");
         } else {
             bladZlecenie.setStyle("-fx-text-fill: white;");
             bladZlecenie.setText("");
-            uzyteCzesci.setText(czesci + magazyn.getNazwaCzesci() + " - " + magazyn.getCena() + "\n");
-            magazyn.setIlosc((int) (magazyn.getIlosc() - 1));
+            uzyteCzesci.setText(czesci + magazynCzesc.getNazwaCzesci() + " - " + magazynCzesc.getCena() + "\n");
+            magazynCzesc.setIlosc((int) (magazynCzesc.getIlosc() - 1));
+            uzyteCzesciList.add(magazynCzesc);
             tableMagazyn.refresh();
-            uzyteCzesciList.add(magazyn);
         }
     }
 
@@ -252,14 +252,9 @@ public class MechanikController implements Initializable {
 
                 session.update(zlecenie);
 
-//                for (Magazyn m : uzyteCzesciList) {
-//                    //Magazyn magazyn = (Magazyn) session.get(Magazyn.class, m.getIdCzesci());
-//                    //magazyn.setIlosc((int) m.getIlosc());
-//                    //session.update(magazyn);
-//                    session.update(m);
-//                }
-
-                //session.update(uzyteCzesciList);
+                for (Magazyn m : uzyteCzesciList) {
+                    session.update(m);
+                }
 
                 session.getTransaction().commit();
                 System.out.println("Updated");
@@ -275,26 +270,7 @@ public class MechanikController implements Initializable {
                 //if (transaction != null) transaction.rollback();
                 e.printStackTrace();
             }
-            for (Magazyn m : uzyteCzesciList) {
-                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                    transaction = session.beginTransaction();
 
-                    session.update(m);
-
-                    session.getTransaction().commit();
-                    System.out.println("Updated");
-                    tableZlecenia.refresh();
-                    otworzTwojeZlecenia();
-                    bladZlecenie.setStyle("-fx-text-fill: white;");
-                    bladZlecenie.setText(czyMozna);
-                    session.clear();
-                    session.disconnect();
-                    session.close();
-//                    System.out.println("Zlecenie zakończone");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         } else {
             bladZlecenie.setStyle("-fx-text-fill: red;");
             bladZlecenie.setText(czyMozna);
