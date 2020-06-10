@@ -162,7 +162,8 @@
                         <Label layoutX="700" layoutY="130" text="" fx:id="markaLabel"/>
                         <Label layoutX="700" layoutY="170" text="" fx:id="opisUsterkiLabel"/>
                         <Label layoutX="700" layoutY="210" text="" fx:id="opisNaprawyLabel"/>
-                        <Label layoutX="700" layoutY="250" text="" fx:id="uzyteCzesciLabel"/>
+                        <TextArea layoutX="500.0" layoutY="280.0" editable="false" wrapText="true" prefHeight="138.0"
+                                  prefWidth="307.0" fx:id="uzyteCzesciLabel"/>
                         <TextField layoutX="610" layoutY="435" prefWidth="50" fx:id="kwotaUslugi"/>
                         <Button layoutX="610" layoutY="480" mnemonicParsing="false" text="Zakończ"
                                 onAction="#zakonczZlecenieButton"/>
@@ -193,7 +194,7 @@
                         <Label layoutX="500" layoutY="210" text="Opis usterki"/>
                         <Label layoutX="500" layoutY="250" text="Opis naprawy"/>
                         <Label layoutX="500" layoutY="290" text="Użyte części"/>
-                        <Label layoutX="500" layoutY="330" text="Cena usługi"/>
+                        <Label layoutX="500" layoutY="470" text="Cena usługi"/>
                         <!--  <Label layoutX="500" layoutY="370" text="Data rozpoczecia zlecenia"/>
                           <Label layoutX="500" layoutY="410" text="Data zakonczenia zlecenia"/> -->
                         <Label layoutX="700" layoutY="50" text="" fx:id="mechanikHistoria"/>
@@ -202,11 +203,12 @@
                         <Label layoutX="700" layoutY="170" text="" fx:id="markaHistoria"/>
                         <Label layoutX="700" layoutY="210" text="" fx:id="opisUsterkiHistoria"/>
                         <Label layoutX="700" layoutY="250" text="" fx:id="opisNaprawyHistoria"/>
-                        <Label layoutX="700" layoutY="290" text="" fx:id="uzyteCzesciHistoria"/>
-                        <Label layoutX="700" layoutY="330" text="" fx:id="cenaHistoria"/>
+                        <TextArea layoutX="500.0" layoutY="320.0" editable="false" wrapText="true" prefHeight="138.0"
+                                  prefWidth="307.0" fx:id="uzyteCzesciHistoria"/>
+                        <Label layoutX="700" layoutY="470" text="" fx:id="cenaHistoria"/>
                         <!-- <Label layoutX="700" layoutY="370" text="" fx:id="dataPoczatekHistoria"/>
                          <Label layoutX="700" layoutY="410" text="" fx:id="dataKoniecHistoria"/> -->
-                        <Label layoutX="200" layoutY="500" text="" fx:id="bladHistoria"/>
+                        <Label layoutX="200" layoutY="520" text="" fx:id="bladHistoria"/>
                     </children>
                 </Pane>
 

@@ -61,11 +61,11 @@ public class ObslugaKlientaController implements Initializable {
     public TextField klientImie, klientNazwisko, klientTelefon, klientMarka, klientModel, klientRejestracja, kwotaUslugi, szukajZlecenia;
 
     @FXML
-    public TextArea klientOpis;
+    public TextArea klientOpis, uzyteCzesciLabel, uzyteCzesciHistoria;
 
     @FXML
-    public Label bladKlient, bladHistoria, imieLabel, nazwiskoLabel, loginLabel, bladUkonczone, mechanikLabel, obslugaLabel, markaLabel, opisUsterkiLabel, opisNaprawyLabel, uzyteCzesciLabel;
-    public Label mechanikHistoria, obslugaPoczatekHistoria, obslugaKoniecHistoria, markaHistoria, opisUsterkiHistoria, opisNaprawyHistoria, uzyteCzesciHistoria, cenaHistoria, dataPoczatekHistoria, dataKoniecHistoria;
+    public Label bladKlient, bladHistoria, imieLabel, nazwiskoLabel, loginLabel, bladUkonczone, mechanikLabel, obslugaLabel, markaLabel, opisUsterkiLabel, opisNaprawyLabel;
+    public Label mechanikHistoria, obslugaPoczatekHistoria, obslugaKoniecHistoria, markaHistoria, opisUsterkiHistoria, opisNaprawyHistoria, cenaHistoria, dataPoczatekHistoria, dataKoniecHistoria;
     @FXML
     public TableView tableUkonczone, tableHistoria, tableKlienci;
 
